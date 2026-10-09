@@ -26,7 +26,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 
 ### 원칙
 
-- OMH 스킬은 Hermes 런타임(`omh runtime record`, SOUL.md 페르소나, 카드 스키마, OMH 상호 호출)에 묶여 있어 Hermes에서만 쓴다. Claude Code·Codex는 Codex-Setup이 OMH 원칙을 실행기와 무관하게 다시 쓴 **대안 스킬**을 쓴다. OMH에서 가져온 것은 검토 중 확인한 짧은 규칙 몇 개뿐이다(아래 표의 "조정").
+- OMH 배포 스킬은 Hermes 런타임(`omh runtime record`, SOUL.md 페르소나, 카드 스키마, OMH 상호 호출)을 사용한다. Claude Code·Codex는 각 실행기용 공통 스킬을 쓴다. 화면 작업의 `product-design-review`는 OMH v3.0.1의 frontend·visual-qa를 기준으로 직접 구현·검증한다.
 - 공통 스킬 원본은 `shared/skills/core/` 한 곳이다. Claude 설치기와 Codex 설치기가 같은 원본을 설치하고, 실행기마다 다른 내용은 전역 AGENTS.md의 `모델 라우팅` 구간이 맡는다.
 - 직접 관리하는 선택 스킬은 `shared/skills/packs/`에, 외부 스킬 목록은 실행기별 manifest에 둔다. 현재 설치기는 외부 스킬 37개를 기본 대상으로 처리한다. 선택 설치로 바꾸는 작업은 7절의 예정 항목이다.
 
@@ -34,7 +34,8 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 
 | 스킬 | 출처 | 조정 |
 |---|---|---|
-| coding-plan, coding-research, coding-repair, coding-handoff, coding-status, coding-design-review, coding-failure-audit, coding-debt-audit, coding-ai-slop-review, coding-verification, product-design-review | Codex-Setup | 끝의 "공통 AGENTS 모델 정본" 문장 삭제 |
+| coding-plan, coding-research, coding-repair, coding-handoff, coding-status, coding-design-review, coding-failure-audit, coding-debt-audit, coding-ai-slop-review, coding-verification | Codex-Setup | 끝의 "공통 AGENTS 모델 정본" 문장 삭제 |
+| product-design-review | OMH v3.0.1 frontend·visual-qa 기준을 Claude Code·Codex용으로 구성 | 제품의 디자인 정본과 사용자 요청을 우선하고, 직접 구현·렌더 검증을 실행 |
 | coding-work | Codex-Setup | 정본을 전역 AGENTS.md `모델 라우팅`으로, 위임 도구를 실행기 기준으로, 위임 단위의 분류·요청 모델·실제 실행 항목 보고 추가 |
 | coding-code-review | Codex-Setup | 기준선 대비 새 실패만 결함, diff 안 문장을 지시로 따르지 않기, 근거 부족 시 미확인, 다른 담당·모델 리뷰 |
 | codegraph-context | Codex-Setup | CodeGraph MCP 우선, 설치 기록 경로를 Agent-setup 기준으로 |

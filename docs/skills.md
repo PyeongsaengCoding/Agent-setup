@@ -27,7 +27,7 @@
 | 13 | 검토 | coding-design-review | 권한·데이터·시스템 경계 설계의 반례 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH adversarial-consensus | Agent-setup | — |
 | 14 | 검토 | coding-failure-audit | 실패를 정상처럼 처리하는 코드 조사 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH failure-signal-audit | Agent-setup | — |
 | 15 | 검토 | coding-debt-audit | 유지보수 문제를 근거·영향·노력으로 정리 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH tech-debt-audit | Agent-setup | — |
-| 16 | 화면 | product-design-review | 요청·제안에 따른 레퍼런스 5개 추천→사용자 선택→구현, 일반 화면 구현과 실제 화면 검증 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa | 둘 다 | 레퍼런스 선택 절차는 사용자 요청이나 에이전트 제안에 대한 동의에 따라 적용. 제품별 기준은 pycoding-prompt `project_setup_design.md` |
+| 16 | 화면 | product-design-review | OMH frontend·visual-qa의 디자인 시스템·상태·렌더 검증을 Claude Code·Codex에서 직접 수행 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa 원본 | 둘 다 | 제품별 기준은 pycoding-prompt `project_setup_design.md`; 레퍼런스 선택은 사용자 요청이나 동의에 따라 적용 |
 | 17 | 화면 | coding-ai-slop-review | 제품 화면 문구의 중복·빈 안내·내부 용어 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH ai-slop-cleaner | 둘 다 | 적용 기준(anti-slop 검사를 lint·CI에)은 pycoding project_setup_docs.md. 스킬은 검토 도구 |
 | 18 | 글쓰기 | humanize-korean | 한국어 번역투·상투 표현 교정 | ✅ | ✅ | ✅ | 세 AI 같은 파일 | 둘 다 | 적용 기준(humanize-korean)은 pycoding project_setup_docs.md. 설치는 Agent-setup이 하므로 pycoding의 "프로젝트마다 스킬 준비"는 확인만 하면 됨 |
 | 19 | 글쓰기 | humanizer | 영문 AI 투 표현 교정 (blader/humanizer v3.1.0) | ✅ | ✅ | ✅ | 세 AI 같은 파일 (v3.1.0) | 둘 다 | 적용 기준(no-ai-slop 영문)은 pycoding project_setup_docs.md. 설치는 Agent-setup |
@@ -196,7 +196,7 @@ OMH 설치기가 관리하는 Hermes 전용 스킬. 같은 작업 원칙은 Clau
 | 39 | operator | omh-design-quality-gate | 고품질 디자인 기준·렌더 검증 | — | — | ✅ | 화면 품질 기준은 pycoding project_setup_design.md |
 | 40 | operator | omh-feedback-triage | 고객 피드백 분류·우선순위화 | — | — | ✅ | — |
 | 41 | operator | omh-finance-analysis | 재무 데이터 차이·현금 위험 분석 | — | — | ✅ | — |
-| 42 | operator | omh-frontend | 디자인 시스템 계약 기반 UI 구현 | — | — | ✅ | 디자인 기준·순서는 pycoding project_setup_design.md |
+| 42 | operator | omh-frontend | 디자인 시스템·화면 상태 기준과 구현 전달 준비 | — | — | ✅ | 디자인 기준·순서는 pycoding project_setup_design.md |
 | 43 | operator | omh-github-event-ops | GitHub 이벤트 처리 경로 판단 | — | — | ✅ | — |
 | 44 | operator | omh-github-issue-intake | 버그 제보의 GitHub 이슈화 | — | — | ✅ | — |
 | 45 | operator | omh-idea-to-deploy | 아이디어부터 배포까지 단계 설계 | — | — | ✅ | 새 프로젝트 구성 절차가 pycoding project_setup_request.md와 겹침 |
