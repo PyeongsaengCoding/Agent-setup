@@ -1,0 +1,344 @@
+{
+  "source": "hermes/routing-presets/claude-generous.json, hermes/routing-presets/gpt-generous.json (2026-10-08)",
+  "default_preset": "claude-generous",
+  "descriptions": {
+    "ultrabrain": "가장 깊은 추론이 필요한 모호한 문제",
+    "deep": "깊은 구현·디버깅",
+    "architect": "아키텍처·시스템 경계 설계",
+    "unspecified-high": "분류 밖의 복합 작업",
+    "unspecified-low": "분류 밖의 단순 작업",
+    "quick": "좁은 탐색·빠른 확인",
+    "writing": "문서 작성·편집",
+    "visual-engineering": "화면·프론트엔드 구현",
+    "artistry": "창의적 설계·시각 방향",
+    "capable": "일반 실행",
+    "simple-work": "단순 실행",
+    "deep-work": "길고 까다로운 복합 실행"
+  },
+  "presets": {
+    "claude-generous": {
+      "ultrabrain": [
+        {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "xhigh"
+        }
+      ],
+      "deep": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        }
+      ],
+      "architect": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "xhigh"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "xhigh"
+        }
+      ],
+      "unspecified-high": [
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        }
+      ],
+      "unspecified-low": [
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        }
+      ],
+      "quick": [
+        {
+          "model": "gpt-6-luna",
+          "effort": "low"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "low"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "low"
+        }
+      ],
+      "writing": [
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "medium"
+        }
+      ],
+      "visual-engineering": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        }
+      ],
+      "artistry": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        }
+      ],
+      "capable": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "medium"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "medium"
+        }
+      ],
+      "simple-work": [
+        {
+          "model": "gpt-6-luna",
+          "effort": "low"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "low"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        },
+        {
+          "model": "claude-haiku-4-5",
+          "effort": "low"
+        }
+      ],
+      "deep-work": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        }
+      ]
+    },
+    "gpt-generous": {
+      "ultrabrain": [
+        {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "xhigh"
+        }
+      ],
+      "deep": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        }
+      ],
+      "architect": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "xhigh"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "xhigh"
+        }
+      ],
+      "unspecified-high": [
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        }
+      ],
+      "unspecified-low": [
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        }
+      ],
+      "quick": [
+        {
+          "model": "gpt-6-luna",
+          "effort": "low"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "low"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "low"
+        }
+      ],
+      "writing": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "medium"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        }
+      ],
+      "visual-engineering": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        }
+      ],
+      "artistry": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        }
+      ],
+      "capable": [
+        {
+          "model": "claude-fable-5-1",
+          "effort": "medium"
+        },
+        {
+          "model": "gpt-6-astra",
+          "effort": "medium"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "medium"
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "effort": "medium"
+        }
+      ],
+      "simple-work": [
+        {
+          "model": "gpt-6-luna",
+          "effort": "low"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "low"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "low"
+        },
+        {
+          "model": "claude-haiku-4-5",
+          "effort": "low"
+        }
+      ],
+      "deep-work": [
+        {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        {
+          "model": "claude-fable-5-1",
+          "effort": "high"
+        },
+        {
+          "model": "claude-opus-5-5",
+          "effort": "high"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-08",
+  "method": "tracked working-tree snapshot, not Git history",
+  "executors": {
+    "codex": {
+      "original_location": "$HOME/Downloads/Codex-Setup",
+      "head": "a79dc12ed9be20eb82bf70a8cad71cafa66698d0",
+      "worktree_status": [],
+      "remote": "https://github.com/PyeongsaengCoding/Codex-Setup.git",
+      "files": [
+        {
+          "path": ".gitignore",
+          "sha256": "156f29b9b65c2e5887bb3621d6e0b989eabb6912b11ea42a057b35ff7eaf56dd",
+          "git_mode": "100644"
+        },
+        {
+          "path": "02-structure.md",
+          "sha256": "26e74f2ea169d00f5d881a4acedf4a10220260a665ce9fee4336aaef1274b0f3",
+          "git_mode": "100644"
+        },
+        {
+          "path": "03-skills.md",
+          "sha256": "371561c783ef7d72656ab8a5b5190006f3d2a179402a5fcc3c5ce25aa5e2a2a1",
+          "git_mode": "100644"
+        },
+        {
+          "path": "05-change-management.md",
+          "sha256": "2982e14542a75734fe43c17b65e462fc8fb5e062beeccce761a06adcf9fa29f3",
+          "git_mode": "100644"
+        },
+        {
+          "path": "06-managed-scope.md",
+          "sha256": "9855e8e524a51c07871ee254de16c4cd418ad3b6f8a8bf6dfc7b0897d9a74072",
+          "git_mode": "100644"
+        },
+        {
+          "path": "10-new-machine.md",
+          "sha256": "8380842dda1ebf0087a1de1cc2b4005d175de8791722cd8936ff4f8b8a2330ef",
+          "git_mode": "100644"
+        },
+        {
+          "path": "11-working-method.md",
+          "sha256": "9c4eff85bc78610e4a6dcd585059fcd5a619064393e010e6fa06d13ce86f39d6",
+          "git_mode": "100644"
+        },
+        {
+          "path": "12-skill-application.md",
+          "sha256": "8cb0f85673a2cd832aff141ef1ede698a8884023aa3c9b4c1a1c882c32be1853",
+          "git_mode": "100644"
+        },
+        {
+          "path": "13-environment-components.md",
+          "sha256": "ab9980445dd04c6b712d8703908cde6cc4d139514f57c44a85c16689e012dd55",
+          "git_mode": "100644"
+        },
+        {
+          "path": "15-local-task-readiness.md",
+          "sha256": "e151c74de5c13eb4ea7454ee13ba609d5745cc34904cc4c9acb13c1248a7dda5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "2bae6137bcab1ade8fe093016af57d5c97ebffd8bd637ef8451b0e9d5f8e82f5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha256": "f0903ad3f4507d4d2960182e541edd39923d227551dee5ce63e1f4ab923533b8",
+          "git_mode": "100644"
+        },
+        {
+          "path": "config/managed-settings.json",
+          "sha256": "3de8dc58f58f5f921293461f46ad687d6c678a39585061fca04809ed3822375c",
+          "git_mode": "100644"
+        },
+        {
+          "path": "config/models.json",
+          "sha256": "e0c6b4b23fd8410133a4bd1decfbab84e1f05a62d0d629496e402ad8f57fbbe0",
+          "git_mode": "100644"
+        },
+        {
+          "path": "config/retention.json",
+          "sha256": "804070390f7f1929a9ad149cdb30056ab1d2c80f8fdc3a8f0206b2db08f11fc6",
+          "git_mode": "100644"
+        },
+        {
+          "path": "config/skill-descriptions.json",
+          "sha256": "ce75114229f2b70f93535277d58f595a05f6a596ba4ce9a5efdf6b6d90281517",
+          "git_mode": "100644"
+        },
+        {
+          "path": "instructions/AGENTS.md",
+          "sha256": "1a418673b3535a25953161f1c15c61a5b196220d9917db055ba07b2aba841c7e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/codegraph-package-lock.json",
+          "sha256": "75f93d7e7b334fb34d49b0b9dc5f77989bf8451d4cd91ee2fe60c767a06c2658",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/codegraph-package.json",
+          "sha256": "a4cf23e2fb8b7727cc26807a272b6bfe30b08e5640421f5697b7448d67a69b8e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/coding-skills.json",
+          "sha256": "20c67aed0b8d3a77633d1b3c844f9cfffb38b768fe6690340e3cc1cae0a2da51",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/external-skills.json",
+          "sha256": "5839b3cb88df89c205cdc06eb3a7dd47580e97b86a7660c57974c29e262cf185",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/selected-skills.json",
+          "sha256": "0bf57c87f9aecac1f76649a5c570cb75de50932bd6ec9ae5fbd26dc67281fab8",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/skill-files.lock.json",
+          "sha256": "9d501d9847b9be15522987ebf03e415e35fea6fc41229872b0f7997ad944b640",
+          "git_mode": "100644"
+        },
+        {
+          "path": "inventories/tools.lock.json",
+          "sha256": "0d27c1d3a00e391f4680a60147f94656b3206c4351e3c70dba426051eb88897b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/apply_managed.py",
+          "sha256": "a33b8bde73107be69e1458651406ac84560333eb63992af6d3c1079dacd5f609",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/apply_skill_descriptions.py",
+          "sha256": "08b3a18e0979a897f7c6f934a2fc6cae284f6840856d123b159ac6089f0e231e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/audit_setup.py",
+          "sha256": "8f3130ca0f42c77341692b24db89f5c63db518df5c193d70a9d86127815fbfe8",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/evaluate_skills.py",
+          "sha256": "e29d4d618dd210b04a2b7063ba4df06dc1158c1e90115782d2cbbd65a135b890",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/init_gam.py",
+          "sha256": "8f68bc042dcbadc5236c1f674177517552ef3153b4879171d5e6d2ca60adf127",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/install_core_skills.py",
+          "sha256": "1cba03c2fe49dd015632a590856d2e634891112720fb27645140562f2ee6cc3d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/install_external_skills.py",
+          "sha256": "0f47488d59c1be81baf92ff8a058fb21e1cbd5a5b69065eee38011990527a00e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/maintain.py",
+          "sha256": "5a9f35d531fde883827eca8d5f99e8ca923a9bb04f9af37794b8dfe467bf001a",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/probe_gam_semantic.py",
+          "sha256": "f1a7b9d3d064e1091682c0c7d04a90cefd8193f5aef6a90590d6fa58235250d7",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/probe_routes.py",
+          "sha256": "136402718a313000ce08adc7e66340ad29c16766cbc70504f6409e030a05d35b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/probe_tools.py",
+          "sha256": "ded1b939511694093492e2124dfc5fea4f6736a8740ba04ee91b2836bf1c94ee",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/process_control.py",
+          "sha256": "4593a0eb1e93712453ea42cddd88db982d9d305cdeede1bfcf1a95c7cdbe2a1f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/route_task.py",
+          "sha256": "9ef5e7ad938f988b611dad315d8f97275086b61d40ef92e3db2c02dc5793a429",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/setup_runtime.py",
+          "sha256": "eb9d2339dac8a28fc8f9b07b968c36b58c66a022f63f8a02f1bb3952b303513e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/codegraph-context/SKILL.md",
+          "sha256": "43440919c736bf52397081fec921492a94bde3864ea4f16dc7cff3ee3d5e8b80",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/codex-setup-maintenance/SKILL.md",
+          "sha256": "01fb92dbd9c69b255161bfd7132d7e79349a7c0310e165317f823e24c72bbf32",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-ai-slop-review/SKILL.md",
+          "sha256": "3eb0f3174d832c790fd0e914609fa1cc75cf839ff669adc64695cebe7146cdb5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-code-review/SKILL.md",
+          "sha256": "72544ccebcffef0ace8a98e6012bfbf2b978e70e4c8e63ab3a2e9939b378f81f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-debt-audit/SKILL.md",
+          "sha256": "ec6636fac5f40a71aac7f9823e6151badf89ba0e36993de00fb94d0f0afae2b9",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-design-review/SKILL.md",
+          "sha256": "e5dbd178aa4d6de9e209085d80f7eceb25943a21f30bfa157286aed7232bc0f9",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-failure-audit/SKILL.md",
+          "sha256": "f57fc2c48345c9ef0aa8977399c7c2e37aa2c38f8103dea7abfa93085275e831",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-handoff/SKILL.md",
+          "sha256": "1a2ccd9e96a89715216e453033b797b363728e773c112d254114d228e1576442",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-maintenance/SKILL.md",
+          "sha256": "0b5eb0b681ebe4cd84aefcd856602302fd56b8d9b2e30a1bc059a7335b23a43f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-plan/SKILL.md",
+          "sha256": "2d5b3079b84ab5db957fc312ed6735b988e75200fda91cf1703680bcd6da03eb",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-repair/SKILL.md",
+          "sha256": "0d20b0ff52dc54b4eb0d07574323cf3ed2743d649ca5647f5208dcd5243ff047",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-research/SKILL.md",
+          "sha256": "70c82c155000f083d61cf6fd68f62bf2c5414a4dd35b315740a3dd5e7ecf4dff",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-status/SKILL.md",
+          "sha256": "f8e05ce712dd33f23cc76265b9a797fb2d0b5987138bc19a06d51d99b027a7fa",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-verification/SKILL.md",
+          "sha256": "90d6d6fd643d1c6f9f6ab4f97399048bb76692f613d36d0a239d6ab8c580eb74",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/coding-work/SKILL.md",
+          "sha256": "ed0c302688fc55b237ccc0a7c1c66ff9a6d5cf018228acbd2924ce18b89e48d4",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/diagnosing-bugs/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/diagnosing-bugs/SKILL.md",
+          "sha256": "cdf4c0cf487e3c85446c39c78b94c874f6a94d54f83ebfb7525f2529a8d5b5d2",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/diagnosing-bugs/agents/openai.yaml",
+          "sha256": "3e430dbe4334a87597488c060cb3dc3786bb00c9182877d6f5ec41f62490e90b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/diagnosing-bugs/scripts/hitl-loop.template.sh",
+          "sha256": "35103539fc36873eea36074769ad454f9379d6fc8b2dc0e26ce987fd3bfe5503",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/gam-memory/SKILL.md",
+          "sha256": "2962b041ce08c1714cf532b23c8ce5c5810bf758f47c7326d589d09fd314bc83",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/ponytail/LICENSE",
+          "sha256": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/ponytail/SKILL.md",
+          "sha256": "1f92992c795f352a27bf441da2d077359bbf6a65149299d52d4209c197da3c3d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/product-design-review/SKILL.md",
+          "sha256": "7046752ebd2264a222d368378ccea047551c6fbd23cc536b37ca00304179f3df",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/tdd/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/tdd/SKILL.md",
+          "sha256": "b353cf331426ef01c8f42ceb8f43288e2ca7770d613be30c959e22a5c520d44f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/tdd/agents/openai.yaml",
+          "sha256": "ea6f01cf1b8c06a4b0f5b649d74b1b8ce8685e72af1b38d70d877693e092af0b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/tdd/mocking.md",
+          "sha256": "3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/tdd/tests.md",
+          "sha256": "859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/writing-for-agents/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/writing-for-agents/SKILL-MECHANICS.md",
+          "sha256": "c768e6307c7c10728c401c213f2c4ba71c542127eeb7ad2956aabd15a0fa0059",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/writing-for-agents/SKILL.md",
+          "sha256": "d72f895f5c2309c0f428c03e415fbf4acd49553a51675c447b053089e3ff91a2",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/writing-for-agents/agents/openai.yaml",
+          "sha256": "eacb24b2a618cfb81dacb0416f4fdd75ddf3a8060f8ddb99aae1b1e301907e4b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_apply_managed.py",
+          "sha256": "e44d809d76bb369427f7535ed1bc6dd244edbdd9390b0fd7231a88be0bb5f8de",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_clean_install.py",
+          "sha256": "002c180801ea270b1820943a1417cc2fbfc225cae052bac00904705625998dc1",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_core_skills.py",
+          "sha256": "e5c50ab53d24d023a4fe15826cd491ad6b095e85a5e4139c71bf188a98bb2be5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_external_skills.py",
+          "sha256": "c618ac83183a2684ae37209874534fe12eb4121de390894c441694e267824962",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_ollama_setup.py",
+          "sha256": "41fddd89276bc724427bbfd51b1c4abe4b4e281ba889c3699bfb44c71cd3b654",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_public_source.py",
+          "sha256": "dc536fff264066cee32416d0dc297e8a083e5705556a1963a3bef0a14554e2e1",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_review_regressions.py",
+          "sha256": "a9b37798f42cbd9ff4d43b063e68726369c6255797865af1923ef459770c1138",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_runtime.py",
+          "sha256": "05ef47bcc0d32b08d2cadf42b3f5805e7cda93d0a1943b30b26f030a036d29b7",
+          "git_mode": "100644"
+        },
+        {
+          "path": "upstream-LICENSE-OMH",
+          "sha256": "51a61c8602b3b1ae26985cc16b90adfe3f98c9791b7d22e296f385aa6c85971a",
+          "git_mode": "100644"
+        },
+        {
+          "path": "upstream/README.md",
+          "sha256": "7ff59930011742297b44615a3c042cfc73bc63b24fe7702b6ced11a118786e22",
+          "git_mode": "100644"
+        }
+      ],
+      "excluded": []
+    },
+    "claude": {
+      "original_location": "$HOME/Documents/Codex/2026-10-06/Claude-Setup",
+      "head": "25115dbbb10f9e2edecd5b0e6981de221f850521",
+      "worktree_status": [],
+      "remote": null,
+      "files": [
+        {
+          "path": ".claude/agents/route-architect.md",
+          "sha256": "aeaccad4cfa70d5418488e8f8872c4187b13af6c8b2a7e6924d285a6a206359a",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-artistry.md",
+          "sha256": "6e67dd70204082fa21ab53ec04f9cb3c64c0590b613cca79ae575d425226edcf",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-capable.md",
+          "sha256": "f6c83339f1538794131eaf92b4666d715988bb6e224ccd4bf160355eead7b78b",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-deep-work.md",
+          "sha256": "5abbb4a47ded743669436a7463219afdb89c87302d32ad67ae151955b7983082",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-deep.md",
+          "sha256": "8b9109a39da477c02e284a21e2cb5a6d5a362233707e2d69c98fa9a87426e3d5",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-quick.md",
+          "sha256": "0072cb722dcfaea2ade8915db9d15d7ff6759bfb1520e975436e95048f98d883",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-simple-work.md",
+          "sha256": "7e0ffa6019629cd9344cff93d9865af1a902e6b76788a3782b42c2d4bdabdbb1",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-ultrabrain.md",
+          "sha256": "48966c8480330451716de915f2e54f64c8c7fa5ceef39d54b77ceb9d5a1ca87d",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-unspecified-high.md",
+          "sha256": "ae71e3179844a506881b56df282f50a03bb96470f36cb91943796ea3b3bb6c1d",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-unspecified-low.md",
+          "sha256": "cbe67e319d5b907ffe74f421ad0de01f3b545d020d937e08d2bad6fb7bccec21",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-visual-engineering.md",
+          "sha256": "daa8353e63f5c716c8e1474b036ad068cafe90ef373fa0c28bba5dfe4956924d",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/agents/route-writing.md",
+          "sha256": "2a7c3025f31cde633d4f2c10539886be2ef980c7f70d6c6b67e5fc6ada7e2f9c",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/skills/codex-cli-bridge/SKILL.md",
+          "sha256": "93fb5e54f55e5654a314cb22808852ddefb164fb26d05d001e81d13238e1951a",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/skills/coding-code-review/SKILL.md",
+          "sha256": "b91a74a395ee2cbe90b08bc3edf2af725bb21365ddfc624d51b090490f859959",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/skills/coding-plan/SKILL.md",
+          "sha256": "b43b22d1a2bbefe519948b26304cda08fed26a388eea6f8f89bc527226c7eea8",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/skills/coding-verification/SKILL.md",
+          "sha256": "d7f28201fedf16108204e43800c57c88f929a84db88f01a7e5a619d10ebc218b",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".claude/skills/coding-work/SKILL.md",
+          "sha256": "0b5dccdbcfb1befad89f92c1c0bade82a80cdf7b7ffe570d34f9931d6d33ebf9",
+          "git_mode": "100644"
+        },
+        {
+          "path": ".gitignore",
+          "sha256": "4a68ecf6b028b6afaa83525b8b1a22162fa2b26b2f1eddf0b882ef2974d5edbd",
+          "git_mode": "100644"
+        },
+        {
+          "path": "CLAUDE.md",
+          "sha256": "3cf9e62f185a2900dcc47d6f9ef5af4004f391a59cdf9e337b3f3ecd8a0ff61d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha256": "79227c9106b805f4ac95980030a041546fba887e9a8f9e92de08cbd33cba8cdd",
+          "git_mode": "100644"
+        },
+        {
+          "path": "routes/claude-code.json",
+          "sha256": "077460619238f9f042d0861e7c17ecbae7274d481457961d6a70c796ee84a544",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/build_agents.py",
+          "sha256": "4d5e0d8bf86c9c93e916fb0a4de26c798be4cfac2c854511d1c9979f5766ab1b",
+          "git_mode": "100644"
+        }
+      ],
+      "excluded": []
+    },
+    "hermes": {
+      "original_location": "$HOME/Downloads/Coding/personal/Hermes-Setup",
+      "head": "2cc58b527842bd8dbf0d8d53f70fc58ae3f1ea14",
+      "worktree_status": [
+        " M README.md",
+        " M docs/browsers.md"
+      ],
+      "remote": "https://github.com/PyeongsaengCoding/Hermes-Setup.git",
+      "files": [
+        {
+          "path": ".gitignore",
+          "sha256": "8b3528563bac584a7a1bdf07105480657959f3b2338c432efa8522590dbbb366",
+          "git_mode": "100644"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "b630fdf8053482f5fb77c9fe5241dcf4c1af1250dbcb56e689b006a37d677720",
+          "git_mode": "100644"
+        },
+        {
+          "path": "INSTALL-LIST.md",
+          "sha256": "8c270c19e119b858daf749735cedd8485be3d61be091d61fd87493fb4d9428fe",
+          "git_mode": "100644"
+        },
+        {
+          "path": "INSTALL_FOR_AGENTS.md",
+          "sha256": "faeb336b1d2bffc451e1cb3b3b68b727cc40f598bf3a3a4a6c266ebeb0af664d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "64646f12918705b64346f33ce47b2a21afdd12ac1b6ab1b23c8fa621e110e2e4",
+          "git_mode": "100644"
+        },
+        {
+          "path": "README.md",
+          "sha256": "92fb54ac43d66dd129316fc0811ac3690a802c8e1590a50f3b726acbdf25adca",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/browsers.md",
+          "sha256": "710a881b7c3450c1196e0085dd55630446d8ec29375179a908a4b01fc3e2722e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/desktop-ui.md",
+          "sha256": "7ae7e38c5b43fda1937d9993f8c6dc07b02540716e246c3cfb36baf60637811a",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/global-rules.md",
+          "sha256": "a4e73189567577049c1ec92afffa45df65f5f6f11e3336b612188b751c20371c",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/model-routing.md",
+          "sha256": "6c3a3f4b7ac3efac640e694e979149ef72410baa3dc89a776d85cf6d76e8d166",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/provider-usage.md",
+          "sha256": "3891c5697ed34cf0d47e31cd49a9a1557c9b34835c53b233a33416eb70dedef0",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/sources.md",
+          "sha256": "7c19af530faf890741db8afe104ef534dfb650d0f8047039792984794c116bdb",
+          "git_mode": "100644"
+        },
+        {
+          "path": "docs/verification.md",
+          "sha256": "ed16d0078adad65d61106881034a239ce59d1353d8dacc333bba991029161650",
+          "git_mode": "100644"
+        },
+        {
+          "path": "manifest.json",
+          "sha256": "774412da735d4e4c77901aa4efd52f4ac67f62f1eabe6940374372a8fb79ea54",
+          "git_mode": "100644"
+        },
+        {
+          "path": "routing-presets/claude-generous.json",
+          "sha256": "1e003ee9173d23dc34f9171ca4c42015cd8616ce0d21e154a15cb9ba9bf98b12",
+          "git_mode": "100644"
+        },
+        {
+          "path": "routing-presets/gpt-generous.json",
+          "sha256": "5c4f59500539da8a2cef21e08146c9ca2d8ee6c37536306213a36a4533a02f7d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "routing-snapshot.json",
+          "sha256": "6b3461212c5c811dada5555046db662dec69a23dd70a3f459daa2c70145b20a8",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/check.py",
+          "sha256": "98c943501461c35b24cb1220822ccc93a8eb1d6b74dc85f7e5b43b0c65e70bc1",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/configure_delegation_reasoning.py",
+          "sha256": "43dfc62ea8955049b087d13f08e1c010d5196a6d87318c842ce692c7acb291b8",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/configure_gpt_fallback.py",
+          "sha256": "fee0838504dba85a5c0e6990312ff2c9528d4fec7dad8de2e32275a66e5417c4",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/configure_provider_usage.py",
+          "sha256": "05417ed6eb3328b50184746893c0ff7c2f750d2b9fdf629b4398fb28d1aa8f59",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/install_global_rules.py",
+          "sha256": "7cdc08f32f0839fc97b556247ae8de3dfb2c1d33a4ebc6a84745d72f8a3dbf6d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "scripts/install_skills.py",
+          "sha256": "2ddf1e49dcd10cbb69f5df12a2ee0d0297b3fb4cdfa57356aebe2cb721086a41",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/desktop-app-provisioning/SKILL.md",
+          "sha256": "077350707728ad2032e9b10611e7c9766bed3ce4768c5592f26c784a8801eeb9",
+          "git_mode": "100644"
+        },
+        {
+          "path": "skills/read-model-performance-safety/SKILL.md",
+          "sha256": "a83d8f82c02e7e3092607450503dd427355d1121dba814044fa34a070e981e6f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "templates/aside-browser.md",
+          "sha256": "f59d1d666a6516689a802d569138c9f382e4c1e2794eb12824e3f25f2597b22b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "templates/document-delivery.md",
+          "sha256": "6c495b605a12fee144ee506e132f34f673321445eb571987441f3e1782e8f88e",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/provider_usage_dom.mjs",
+          "sha256": "22f7a285dd503151e14a4f6114bc648d2630a5107cc7f767f80595b7f8dfde70",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_configure_delegation_reasoning.py",
+          "sha256": "f2a3e89380d349b57f3cace87d203ff8c7fc8c8a7ebbc7c6137fc091b7a19482",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_configure_gpt_fallback.py",
+          "sha256": "39074a062545fd68ae7c6124ff8567daa10f40a4a6149628f4f22293c106a7c5",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_configure_provider_usage.py",
+          "sha256": "2b4e5859244357a09244e45ac0dbe13c3975a92e7b7ad49a7fc46e9f437b271f",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_install_global_rules.py",
+          "sha256": "c48461cef88fe5f3fddbe574c41402ada63f31277d7fc2eaf5c51a6c6798d10b",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_install_skills.py",
+          "sha256": "7e1ffebf6d515dae8663db29a58dcab4f198f493ca37ae3d1c4717f64f934d5d",
+          "git_mode": "100644"
+        },
+        {
+          "path": "tests/test_routing_presets.py",
+          "sha256": "d631ff90fa3eed92ad9aecfd75497c4a1ead6c4527facd72235e8c0e0dee23aa",
+          "git_mode": "100644"
+        }
+      ],
+      "excluded": [
+        ".github/workflows/check.yml",
+        "project-records/2026-10-07-provider-usage-filter.json",
+        "project-records/2026-10-08-category-routing.json",
+        "project-records/2026-10-08-direction-review.json",
+        "project-records/2026-10-08-document-skills-checks.json",
+        "project-records/2026-10-08-full-review.json",
+        "project-records/2026-10-08-gpt-claude-only.json",
+        "project-records/2026-10-08-gpt-fallback.json",
+        "project-records/2026-10-08-model-routing.json",
+        "project-records/2026-10-08-opus-final.json",
+        "project-records/2026-10-08-routing-candidate-cleanup.json",
+        "project-records/2026-10-08-routing-presets.json",
+        "project-records/2026-10-08-user-intent-checks.json",
+        "project-records/2026-10-08-user-intent-profile.json",
+        "project-records/document-verification-history.md",
+        "reports/2026-10-08-direction-review.md",
+        "reports/2026-10-08-document-skills.md",
+        "reports/2026-10-08-full-review.md",
+        "reports/2026-10-08-user-intent.md"
+      ]
+    }
+  }
+}

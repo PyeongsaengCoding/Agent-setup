@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-08",
+  "python": "3.13",
+  "checks": {
+    "codex_unittest": 40,
+    "claude_agents": 23,
+    "claude_unittest": 12,
+    "hermes_check_and_unittest": 58,
+    "root_unittest": 6,
+    "all_exit": "0"
+  },
+  "isolated_installs": {
+    "codex": "apply_managed rendered Aside rule into temp ~/.codex/AGENTS.md; install_core_skills installed 23 core skills incl. 2 Hermes custom skills",
+    "claude": "temp ~/.claude: preview -> apply (23 agents, 6 skills, routing.json, CLAUDE.md block appended after existing text) -> repeat unchanged -> gpt-generous switch applied"
+  },
+  "real_home": "not changed; ~/.claude has no codex@openai-codex plugin installed",
+  "not_run": [
+    "Claude Code /agents discovery of generated agents",
+    "real Claude and Codex-plugin model calls",
+    "aside repl in Codex/Claude sessions"
+  ]
+}
