@@ -10,6 +10,8 @@ python3 scripts/check.py --executor hermes
 
 ## 실제 환경 완료 기준
 
+[공통 설치 완료 기준](../../docs/verification.md)의 원본·적용·발견·동작 결과를 구분해 기록한다.
+
 - 라우팅은 선택한 [프리셋](model-routing.md)으로 맞춘다.
 - Aside·문서 전달 규칙은 [전역 규칙 안내](global-rules.md)대로 선택한 프로필에 적용하고 새 세션에서 동작을 확인한다.
 - [설치 완료 기준](../INSTALL_FOR_AGENTS.md)에 따라 설치·로그인·실제 위임·fallback·추론·사용량 UI·Aside 프로필과 포커스·Desktop UI 크기를 각각 확인한다.

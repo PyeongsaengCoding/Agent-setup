@@ -40,5 +40,5 @@ AI별 스킬은 [스킬 표](docs/skills.md), 자세한 구성과 이유는 [구
 ## 저장소 관리
 
 - 공통 원본: 전역 지침 `shared/rules/`, 공통 스킬 `shared/skills/`. 지침을 고치면 `scripts/build_rules.py`로 각 AI용 파일을 다시 만든다.
-- 검사: Python 3.12 이상에서 `scripts/check.py`(세 AI 검사)와 `tests/` 단위시험을 실행한다. 로그인·모델 호출·실제 설치는 각 설치 안내의 완료 기준으로 확인한다.
+- 검사: Python 3.12 이상에서 `scripts/check.py`(세 AI 원본 검사)와 `tests/` 단위시험을 실행한다. 실제 컴퓨터의 설치 완료는 [설치 완료 기준](docs/verification.md)과 각 실행기 설치 안내의 결과로 판정한다.
 - 출처와 라이선스: [이관 목록](docs/import-manifest.json), [출처 안내](docs/provenance.md), [스킬 출처](shared/skills/SOURCES.md).
