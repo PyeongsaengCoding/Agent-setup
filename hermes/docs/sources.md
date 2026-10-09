@@ -2,7 +2,7 @@
 
 - [Hermes 공식 문서](https://hermes-agent.nousresearch.com/docs/): 설치·스킬·플러그인·브라우저·설정
 - [Hermes 원본](https://github.com/NousResearch/hermes-agent/tree/b2860025adc1478eca63a0b2a82440798eadbfd1): 이 목록의 공식 스킬 57개 기준
-- [OMH 설치 안내](https://github.com/rlaope/oh-my-hermes/blob/4575d7fb64e2d931ee238a10c918a2e5e83f5b97/INSTALL_FOR_AGENTS.md): 조사 시점의 설치 기준
+- [OMH v3.0.1 설치 안내](https://github.com/rlaope/oh-my-hermes/blob/532cc8f1a2b8d27c86a1b57f89448a976c7cde6e/INSTALL_FOR_AGENTS.md): Hermes용 검토 기준
 - [Provider Usage](https://github.com/PhoeniXAbhisheK/hermes-plugin-provider-usage/tree/753dfbd35c9ed8fec3127ce48e5521d986d3aabe): 필수 사용량 플러그인 v0.2.0
 - [Aside 개발자 안내](https://docs.aside.com/help/developers): CLI·REPL·MCP
 - [Agent-setup 공통 스킬 출처](../../shared/skills/SOURCES.md): 공통 스킬 10개의 원본과 고정 버전

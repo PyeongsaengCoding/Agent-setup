@@ -8,7 +8,7 @@
 | claude/ | Claude-Setup (로컬) | routes/claude-code.json의 OMH 출처, upstream-LICENSE-OMH (OMH MIT 사본) |
 | hermes/ | Hermes-Setup | LICENSE (MIT), docs/sources.md, manifest.json의 원본·플러그인 커밋 |
 
-OMH 참조 커밋은 Codex·Claude가 c8b94d0, Hermes가 4575d7f다.
+OMH 참조 커밋은 Codex·Claude가 c8b94d0, Hermes가 v3.0.1의 532cc8f다.
 
 외부 공개 전에 확인할 항목:
 

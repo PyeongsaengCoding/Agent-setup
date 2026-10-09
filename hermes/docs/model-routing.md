@@ -119,11 +119,8 @@ omh model-chains show --json
 
 ## 업데이트
 
-```sh
-hermes update --check
-hermes update --backup
-omh update --dry-run --no-omh-tui
-omh update --no-omh-tui
-```
+`manifest.json`이 가리키는 OMH v3.0.1 안정 릴리스를 기준으로 한다. 공식 설치기로 명령 패키지를 갱신한 뒤 같은 태그의 스킬·플러그인을 갱신한다. `omh update`만 실행하면 명령 패키지는 그대로 유지된다.
 
-`--no-omh-tui`는 OMH 업데이트 때 기존 화면·스킨을 유지한다. 업데이트 후 fallback 설정과 OMH 후보를 다시 읽고 소스 호환 패치 두 개를 미리보기·검증한다. 호환될 때만 적용한 뒤 Desktop을 재시작한다.
+갱신 전 `omh doctor --json`으로 관리 스킬의 로컬 수정을 확인하고 비공개 백업에 보존한다. 설치기와 `omh update`의 미리보기를 확인한 뒤, 수정된 스킬은 새 원본과 병합한다. 기존 `setup-profile.json`의 메모리 승인 방식과 선택한 프로필을 확인해 `omh setup`에 그대로 전달한다. `--no-omh-tui`로 화면·스킨을 유지한다.
+
+갱신 후 `omh --version`, `omh doctor --json`, `omh model-chains show --json`과 Hermes 설정의 fallback·스킬 폴더 등록을 확인한다. 소스 호환 패치 두 개는 미리보기로 확인하고 필요한 경우에만 적용한다. Hermes Desktop 새 세션에서 플러그인 로딩과 실제 위임을 확인한다.

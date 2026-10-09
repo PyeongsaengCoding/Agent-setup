@@ -81,7 +81,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 
 - `~/.hermes/skills/aside-browser`에 개인 Aside 프로필 이름이 들어 있다. 공개 원본에는 `shared/skills/core/aside-browser`를 쓴다.
 - OMH는 전체 프로필(142개)로 설치되어 있다. OMH 공식 core 프로필(`omh skill-profile reconcile --to core`)로 줄이면 매 요청에 올라가는 스킬 목록이 줄어든다.
-- omh-web-research, omh-iac-change, omh-code-review에 다른 작업에서 섞여 들어간 문단이 있다.
+- OMH 관리 스킬 7개에 기존 작업에서 추가한 로컬 지침이 있다. v3.0.1 업데이트 때 병합해 유지했으며 대상과 처리 결과는 [업데이트 점검](../reports/2026-10-09-omh-3.0.1-review.md)에 기록했다.
 
 ## 4. AGENTS.md 구성
 
@@ -140,5 +140,6 @@ Agent-setup/
 | 전역 AGENTS 원본(`shared/rules/`)과 실행기별 라우팅 조각, Claude AGENTS.md 로딩 시험 | 원본 생성·검사 완료 (2026-10-09). `scripts/build_rules.py`가 Codex AGENTS.md·Claude 규칙·Hermes 공통 구간을 생성하고 검사기가 일치를 확인. 실제 로딩은 사용하는 Claude Code 화면에서 별도로 확인 |
 | CodeGraph·GAM을 세 AI 공통 도구로 (Claude·Hermes는 설치 안내에 포함, 실제 연결 미확인) | 안내 완료, 실제 설치 확인 예정 |
 | README 요청문, AI용 설치 안내(공통 기준 + AI별), 스킬 표 | 완료 (2026-10-09) |
+| Hermes OMH v3.0.1 참조·로컬 설치 갱신 | 완료 (2026-10-09). 관리 스킬 142개·플러그인 갱신, 로컬 지침 7개 병합. 새 Hermes 세션의 실제 위임 검증은 후속 확인 |
 | 선택 묶음 설치 방법, Codex 외부 스킬의 선택 설치화 | 예정 |
 | 빈 홈 폴더에서 세 실행기 설치·재실행·스킬 발견 시험 | 예정 |
