@@ -24,7 +24,7 @@
     "../shared/skills/core/humanize-korean/SKILL.md": "9efee80cdb28e4e3ba0f57b57250c1df1a5388d9695294a872703260af5c3557",
     "../shared/skills/core/ponytail/LICENSE": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
     "../shared/skills/core/ponytail/SKILL.md": "d4a3497f169cac7f56f6e3f6bddebb62f370ddc2b2f6fd97b3b81c862ce653a0",
-    "../shared/skills/core/product-design-review/SKILL.md": "9afe088734b5863bad484c6637ee192411064a82abb6d8665832bcfed079c6a5",
+    "../shared/skills/core/product-design-review/SKILL.md": "645be4bdb03c19106fb1e36540488006949144321ffeb0509a486b81bfe573de",
     "../shared/skills/core/tdd/LICENSE": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
     "../shared/skills/core/tdd/SKILL.md": "e0e09cbfeb0cebc9c48d3579e822a38903bc2f837c97caa9168e4effecf9f169",
     "../shared/skills/core/tdd/agents/openai.yaml": "ea6f01cf1b8c06a4b0f5b649d74b1b8ce8685e72af1b38d70d877693e092af0b",
@@ -34,6 +34,7 @@
     "../shared/skills/core/writing-for-agents/SKILL-MECHANICS.md": "c768e6307c7c10728c401c213f2c4ba71c542127eeb7ad2956aabd15a0fa0059",
     "../shared/skills/core/writing-for-agents/SKILL.md": "985c74a46e75c8b5e10024d6967f5feb838c421163c3fd027e0bd41c3f38ef42",
     "../shared/skills/core/writing-for-agents/agents/openai.yaml": "eacb24b2a618cfb81dacb0416f4fdd75ddf3a8060f8ddb99aae1b1e301907e4b",
-    "../shared/skills/core/shadcn-lint/SKILL.md": "ac7dc513e04604a1d382ba4dc6440605f027f02ab8839efa1fd30f9bec9d28be"
+    "../shared/skills/core/shadcn-lint/SKILL.md": "ac7dc513e04604a1d382ba4dc6440605f027f02ab8839efa1fd30f9bec9d28be",
+    "../shared/skills/core/product-design-review/references/omh-frontend-practices.md": "d4ecd61dc30ae9a81e3639e8795c8d1e3716920b3d1fdbab615dda018fa194f0"
   }
 }

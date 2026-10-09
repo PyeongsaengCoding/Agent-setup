@@ -27,11 +27,11 @@
 | 13 | 검토 | coding-design-review | 권한·데이터·시스템 경계 설계의 반례 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH adversarial-consensus | Agent-setup | — |
 | 14 | 검토 | coding-failure-audit | 실패를 정상처럼 처리하는 코드 조사 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH failure-signal-audit | Agent-setup | — |
 | 15 | 검토 | coding-debt-audit | 유지보수 문제를 근거·영향·노력으로 정리 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH tech-debt-audit | Agent-setup | — |
-| 16 | 화면 | product-design-review | OMH frontend·visual-qa의 디자인 시스템·상태·렌더 검증을 Claude Code·Codex에서 직접 수행 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa 원본 | 둘 다 | 제품별 기준은 pycoding-prompt `project_setup_design.md`; 레퍼런스 선택은 사용자 요청이나 동의에 따라 적용 |
+| 16 | 화면 | product-design-review | OMH frontend·visual-qa의 디자인 시스템·컴포넌트 도입·차트·스타일·렌더 검증을 직접 수행 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa 원본 | 둘 다 | 제품별 디자인 계약은 pycoding-prompt `project_setup_design.md`; 레퍼런스 선택은 사용자 요청이나 동의에 따라 적용 |
 | 17 | 화면 | coding-ai-slop-review | 제품 화면 문구의 중복·빈 안내·내부 용어 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH ai-slop-cleaner | 둘 다 | 적용 기준(anti-slop 검사를 lint·CI에)은 pycoding project_setup_docs.md. 스킬은 검토 도구 |
 | 18 | 글쓰기 | humanize-korean | 한국어 번역투·상투 표현 교정 | ✅ | ✅ | ✅ | 세 AI 같은 파일 | 둘 다 | 적용 기준(humanize-korean)은 pycoding project_setup_docs.md. 설치는 Agent-setup이 하므로 pycoding의 "프로젝트마다 스킬 준비"는 확인만 하면 됨 |
 | 19 | 글쓰기 | humanizer | 영문 AI 투 표현 교정 (blader/humanizer v3.1.0) | ✅ | ✅ | ✅ | 세 AI 같은 파일 (v3.1.0) | 둘 다 | 적용 기준(no-ai-slop 영문)은 pycoding project_setup_docs.md. 설치는 Agent-setup |
-| 20 | 화면 | shadcn | shadcn/ui 컴포넌트 추가·검색·구성·스타일 (shadcn 공식 스킬) | ✅ | ✅ | ✅ | 세 AI 같은 파일 (공식 원본) | 둘 다 | shadcn/ui를 쓸지·테마 순서는 pycoding project_setup_design.md·tech_stack.md. 스킬 설치는 Agent-setup (pycoding은 "준비·로드 확인"만) |
+| 20 | 화면 | shadcn | shadcn/ui를 채택한 제품의 컴포넌트 추가·검색·구성·스타일 (shadcn 공식 스킬) | ✅ | ✅ | ✅ | 세 AI 같은 파일 (공식 원본) | 둘 다 | 라이브러리 선택은 제품 요구와 OMH frontend 기준. 스킬 설치는 Agent-setup, 제품 컴포넌트 선택은 pycoding-prompt와 해당 제품 |
 | 21 | 화면 | shadcn-lint | @shadcn/lint 설치·등록과 프로젝트가 선택한 규칙 적용 | ✅ | ✅ | ✅ | 세 AI 같은 파일 (SETUP.md 기반) | 둘 다 | Agent-setup은 에이전트용 설치·설정 절차를 제공한다. 제품의 규칙·토큰·lint·CI는 pycoding-prompt 기준과 해당 프로젝트에서 결정·검증한다 |
 | 22 | 글쓰기 | writing-for-agents | AGENTS.md·스킬 문서 작성법 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH agent-instructions | Agent-setup | 프로젝트 AGENTS.md 내용은 pycoding 템플릿, 작성 방법은 이 스킬 |
 | 23 | 도구 | aside-browser | Aside를 `repl`로 직접 조작 | ✅ | ✅ | ✅ | 세 AI 같은 파일. Hermes는 SOUL.md Aside 규칙도 있음 | Agent-setup | 프로젝트별 Aside 프로필은 프로젝트 AGENTS.md에 적음 |
