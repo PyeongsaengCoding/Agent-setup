@@ -27,7 +27,7 @@
 | 13 | 검토 | coding-design-review | 권한·데이터·시스템 경계 설계의 반례 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH adversarial-consensus | Agent-setup | — |
 | 14 | 검토 | coding-failure-audit | 실패를 정상처럼 처리하는 코드 조사 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH failure-signal-audit | Agent-setup | — |
 | 15 | 검토 | coding-debt-audit | 유지보수 문제를 근거·영향·노력으로 정리 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH tech-debt-audit | Agent-setup | — |
-| 16 | 화면 | product-design-review | 새 시각 방향은 레퍼런스 5개 추천·사용자 선택 후 구현, 기존 방향의 화면 수정과 실제 화면 검증 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa | 둘 다 | 새 방향의 레퍼런스 선택 기준은 pycoding-prompt `project_setup_design.md`; 스킬은 선택 결과를 구현·검증할 때 적용 |
+| 16 | 화면 | product-design-review | 요청·제안에 따른 레퍼런스 5개 추천→사용자 선택→구현, 일반 화면 구현과 실제 화면 검증 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH frontend·visual-qa | 둘 다 | 레퍼런스 선택 절차는 사용자 요청이나 에이전트 제안에 대한 동의에 따라 적용. 제품별 기준은 pycoding-prompt `project_setup_design.md` |
 | 17 | 화면 | coding-ai-slop-review | 제품 화면 문구의 중복·빈 안내·내부 용어 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH ai-slop-cleaner | 둘 다 | 적용 기준(anti-slop 검사를 lint·CI에)은 pycoding project_setup_docs.md. 스킬은 검토 도구 |
 | 18 | 글쓰기 | humanize-korean | 한국어 번역투·상투 표현 교정 | ✅ | ✅ | ✅ | 세 AI 같은 파일 | 둘 다 | 적용 기준(humanize-korean)은 pycoding project_setup_docs.md. 설치는 Agent-setup이 하므로 pycoding의 "프로젝트마다 스킬 준비"는 확인만 하면 됨 |
 | 19 | 글쓰기 | humanizer | 영문 AI 투 표현 교정 (blader/humanizer v3.1.0) | ✅ | ✅ | ✅ | 세 AI 같은 파일 (v3.1.0) | 둘 다 | 적용 기준(no-ai-slop 영문)은 pycoding project_setup_docs.md. 설치는 Agent-setup |
@@ -302,7 +302,7 @@ OMH 설치기가 관리하는 Hermes 전용 스킬. 같은 작업 원칙은 Clau
 
 | 항목 | 현재 상태 | 경계와 후속 작업 |
 |---|---|---|
-| 새 시각 방향의 레퍼런스 선택 | Agent-setup 스킬은 최소 5개 추천과 사용자 선택을 요구한다. pycoding-prompt의 현재 `project_setup_design.md`는 선택 없이 진행하는 경로도 둔다 | 사용자가 확정한 선택 선행 기준에 맞추는 pycoding-prompt 변경이 남아 있다. 이 저장소의 설치 작업은 pycoding-prompt 파일을 고치지 않는다 |
+| 새 시각 방향의 레퍼런스 선택 | 사용자가 선택 절차를 요청하거나 에이전트의 제안에 동의하면 최소 5개 추천→사용자 선택→구현을 따른다 | 일반 화면 요청은 제품 목적·기존 브랜드·현재 디자인 기준으로 구현한다. pycoding-prompt도 사용자 선택이 없는 구현 경로를 둔다 |
 | @shadcn/lint | Agent-setup `shadcn-lint` 스킬은 설치·설정 방법을 제공한다 | 규칙 선택, 제품 토큰, 프로젝트 의존성과 lint·CI는 pycoding-prompt 기준 및 대상 프로젝트가 소유한다 |
 | 문장·코드 정리 스킬 준비 (Humanizer 등) | Agent-setup은 전역 스킬을 설치한다. pycoding-prompt는 현재 부족한 스킬의 설치도 요청한다 | Agent-setup으로 먼저 준비한 환경에서는 pycoding-prompt가 스킬 로드를 확인한다. 설치 책임을 완전히 분리하는 pycoding-prompt 문구 변경이 남아 있다 |
 | shadcn 공식 스킬 | Agent-setup은 전역 스킬을 설치한다 | pycoding-prompt는 프로젝트 작업에서 로드된 스킬을 사용하고, 제품의 shadcn/ui 구성은 대상 프로젝트에 적용한다 |
