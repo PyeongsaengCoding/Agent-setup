@@ -45,7 +45,7 @@ python3 ../codex/scripts/install_external_skills.py --all --skills-dir ~/.claude
 python3 ../codex/scripts/install_external_skills.py --all --skills-dir ~/.claude/skills --apply
 python3 ../codex/scripts/apply_skill_descriptions.py --skill-root ~/.claude/skills
 python3 ../codex/scripts/apply_skill_descriptions.py --skill-root ~/.claude/skills --backup-root ~/.claude/agent-setup/backups --apply
-python3 scripts/install.py --verify-loading         # 설치 후: Claude Code가 전역 규칙을 읽는지 확인 (모델 1회 호출)
+python3 scripts/install.py --verify-loading         # 터미널 Claude Code의 전역 규칙 로딩 확인 (모델 1회 호출)
 ```
 
 전역 규칙은 `~/.claude/AGENTS.md`의 관리 구간에 들어간다. Claude Code가 이 파일을 읽도록 `~/.claude/CLAUDE.md`에 `@AGENTS.md` 한 줄짜리 관리 구간을 둔다. 사용 중인 Claude Code가 AGENTS.md를 직접 읽는다면 `--no-claude-md-pointer`로 그 줄을 빼거나 지운다. 예전 설치가 CLAUDE.md에 넣은 규칙 구간은 다음 적용 때 이 한 줄로 바뀐다. 규칙 원본은 `../shared/rules/`이고 `python3 ../scripts/build_rules.py`가 `templates/global-rules.md`를 만든다.
@@ -58,7 +58,7 @@ Claude Code에서 `/codex:setup`으로 Codex 설치·로그인을 확인한다. 
 
 1. Claude Code `/agents`에서 `route-*` 23개와 Codex 플러그인을 설치했다면 `codex:codex-rescue`를 확인한다.
 2. 작은 읽기 전용 작업을 Claude 항목 하나(예: `route-quick-fable`)와 GPT를 사용한다면 GPT 항목 하나(`--model gpt-6-luna --effort low`)로 위임해 실제 실행 모델을 확인한다.
-3. `python3 scripts/install.py --verify-loading` 결과가 `loaded`인지 확인한다.
+3. 사용하는 Claude Code 화면에서 전역 규칙 로딩을 확인한다. 터미널 CLI는 `python3 scripts/install.py --verify-loading`의 `loaded` 결과를, Claude 앱 Code 탭은 새 Code 세션의 실제 응답을 확인한다.
 4. Aside를 설치한 OS에서 `aside repl`로 선택한 프로필의 페이지를 열고 결과를 읽는다.
 
 ## 검사

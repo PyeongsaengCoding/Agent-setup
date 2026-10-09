@@ -97,7 +97,7 @@ Codex·Claude 전역 지침은 각 설치기가 관리하는 구간에 쓰고, H
 
 ### Claude Code의 AGENTS.md 읽기
 
-Claude 설치기는 전역 규칙을 `~/.claude/AGENTS.md` 관리 구간에 쓰고, `~/.claude/CLAUDE.md`에 `@AGENTS.md` 한 줄짜리 관리 구간을 둔다. 사용자가 관리하는 파일은 AGENTS.md 하나다. `install.py --verify-loading`은 Claude Code에 전역 규칙의 첫 제목을 물어 실제 로딩을 확인한다(모델 1회 호출). Claude Code가 AGENTS.md를 직접 읽는 것이 확인되면 `--no-claude-md-pointer`로 그 줄을 지운다. 예전 설치가 CLAUDE.md에 넣은 규칙 구간은 다음 적용 때 이 한 줄로 바뀐다.
+Claude 설치기는 전역 규칙을 `~/.claude/AGENTS.md` 관리 구간에 쓰고, `~/.claude/CLAUDE.md`에 `@AGENTS.md` 한 줄짜리 관리 구간을 둔다. 사용자가 관리하는 파일은 AGENTS.md 하나다. `install.py --verify-loading`은 터미널 Claude Code의 로딩을 확인한다(모델 1회 호출). Claude 앱 Code 탭은 새 Code 세션의 실제 응답으로 확인한다. Claude Code가 AGENTS.md를 직접 읽는 것이 확인되면 `--no-claude-md-pointer`로 그 줄을 지운다. 예전 설치가 CLAUDE.md에 넣은 규칙 구간은 다음 적용 때 이 한 줄로 바뀐다.
 
 Codex 설치기는 예전에 배포한 전역 지침(`codex/instructions/history/`)과 같은 설치본만 새 버전으로 바꾸고, 사용자가 고친 설치본은 보존한다. Hermes는 SOUL.md에 `agent-setup:common` 구간(공통 작업 원칙)을 추가하고 기존 Aside·문서 전달 구간은 그대로 둔다.
 
@@ -137,7 +137,7 @@ Agent-setup/
 | 단계 | 상태 |
 |---|---|
 | 공통 스킬 `shared/skills/core/` 정리, Claude·Codex 설치기 연결, Hermes 커스텀 정리 | 완료 (2026-10-09). 이 Mac의 작업 셸에서 Python 3.13으로 세 실행기 검사·루트 시험 통과 |
-| 전역 AGENTS 원본(`shared/rules/`)과 실행기별 라우팅 조각, Claude AGENTS.md 로딩 시험 | 완료 (2026-10-09). `scripts/build_rules.py`가 Codex AGENTS.md·Claude 규칙·Hermes 공통 구간을 생성하고 검사기가 일치를 확인. Claude는 `~/.claude/AGENTS.md` + CLAUDE.md `@AGENTS.md`, 실제 로딩은 `install.py --verify-loading`으로 확인 |
+| 전역 AGENTS 원본(`shared/rules/`)과 실행기별 라우팅 조각, Claude AGENTS.md 로딩 시험 | 원본 생성·검사 완료 (2026-10-09). `scripts/build_rules.py`가 Codex AGENTS.md·Claude 규칙·Hermes 공통 구간을 생성하고 검사기가 일치를 확인. 실제 로딩은 사용하는 Claude Code 화면에서 별도로 확인 |
 | CodeGraph·GAM을 세 AI 공통 도구로 (Claude·Hermes는 설치 안내에 포함, 실제 연결 미확인) | 안내 완료, 실제 설치 확인 예정 |
 | README 요청문, AI용 설치 안내(공통 기준 + AI별), 스킬 표 | 완료 (2026-10-09) |
 | 선택 묶음 설치 방법, Codex 외부 스킬의 선택 설치화 | 예정 |

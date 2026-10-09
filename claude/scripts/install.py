@@ -233,7 +233,7 @@ def main():
     parser.add_argument("--no-claude-md-pointer", action="store_true",
                         help="leave ~/.claude/CLAUDE.md without the @AGENTS.md import")
     parser.add_argument("--verify-loading", action="store_true",
-                        help="ask Claude Code (one model call) whether the global rules are loaded")
+                        help="ask terminal Claude Code (one model call) whether the global rules are loaded")
     args = parser.parse_args()
     if args.verify_loading:
         result = verify_loading(home=args.home)
