@@ -6,7 +6,8 @@ import shlex
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-CHANGED = {'visual-engineering', 'artistry', 'capable', 'deep-work', 'writing'}
+CHANGED = {'deep', 'architect', 'unspecified-high', 'unspecified-low', 'quick',
+           'writing', 'visual-engineering', 'artistry', 'capable', 'simple-work', 'deep-work'}
 
 
 class RoutingPresetTests(unittest.TestCase):
@@ -16,14 +17,11 @@ class RoutingPresetTests(unittest.TestCase):
         self.chains = {name: {item['category']: item['chain'] for item in preset['categories']}
                        for name, preset in self.presets.items()}
 
-    def test_only_five_category_orders_differ(self):
+    def test_presets_have_independent_category_policies(self):
         a, b = self.chains['claude-generous'], self.chains['gpt-generous']
         self.assertEqual(len(a), 12)
         self.assertEqual(set(a), set(b))
         self.assertEqual({key for key in a if a[key] != b[key]}, CHANGED)
-        for key in a:
-            self.assertEqual(sorted((x['model'], x['reasoning_effort']) for x in a[key]),
-                             sorted((x['model'], x['reasoning_effort']) for x in b[key]))
 
     def test_gpt_restores_previous_astra_positions(self):
         chains = self.chains['gpt-generous']
@@ -47,9 +45,9 @@ class RoutingPresetTests(unittest.TestCase):
             for chain in chains.values():
                 self.assertTrue(all(item['model'].startswith(('gpt-', 'claude-'))
                                     for item in chain))
-            expected = ['claude-opus-5-5', 'gpt-6.1-sol']
+            expected = ['claude-opus-5-5', 'claude-sonnet-5-5', 'gpt-6.1-sol']
             if name == 'gpt-generous':
-                expected.reverse()
+                expected = ['gpt-6.1-sol', 'claude-opus-5-5']
             self.assertEqual([item['model'] for item in chains['writing']], expected)
             self.assertTrue(all(item['reasoning_effort'] == 'medium'
                                 for item in chains['writing']))

@@ -1,6 +1,5 @@
 {
-  "observed_on": "2026-10-08",
-  "scope": "Hermes-native GPT and Claude candidates only; preset-specific ordering and efforts preserved; common fallbacks unchanged",
+  "scope": "Approved Hermes-native GPT and Claude category routing; task-specific efforts; main fallback Opus and shared child fallback ending in Opus",
   "categories": [
     {
       "category": "ultrabrain",
@@ -29,22 +28,17 @@
       "category": "deep",
       "chain": [
         {
-          "model": "gpt-6.1-sol",
-          "reasoning_effort": "high",
-          "served": true
-        },
-        {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "high",
-          "served": true
-        },
-        {
           "model": "claude-opus-5-5",
+          "reasoning_effort": "high",
+          "served": true
+        },
+        {
+          "model": "gpt-6.1-sol",
           "reasoning_effort": "high",
           "served": true
         }
       ],
-      "chain_text": "gpt-6.1-sol:high, claude-fable-5-1:high, claude-opus-5-5:high",
+      "chain_text": "claude-opus-5-5:high, gpt-6.1-sol:high",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -52,7 +46,7 @@
       "category": "architect",
       "chain": [
         {
-          "model": "claude-fable-5-1",
+          "model": "claude-opus-5-5",
           "reasoning_effort": "xhigh",
           "served": true
         },
@@ -62,12 +56,12 @@
           "served": true
         },
         {
-          "model": "claude-opus-5-5",
+          "model": "claude-fable-5-1",
           "reasoning_effort": "xhigh",
           "served": true
         }
       ],
-      "chain_text": "claude-fable-5-1:xhigh, gpt-6-astra:xhigh, claude-opus-5-5:xhigh",
+      "chain_text": "claude-opus-5-5:xhigh, gpt-6-astra:xhigh, claude-fable-5-1:xhigh",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -75,12 +69,17 @@
       "category": "unspecified-high",
       "chain": [
         {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "medium",
+          "served": true
+        },
+        {
           "model": "claude-opus-5-5",
           "reasoning_effort": "medium",
           "served": true
         }
       ],
-      "chain_text": "claude-opus-5-5:medium",
+      "chain_text": "gpt-6.1-sol:medium, claude-opus-5-5:medium",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -88,12 +87,17 @@
       "category": "unspecified-low",
       "chain": [
         {
-          "model": "claude-opus-5-5",
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "low",
+          "served": true
+        },
+        {
+          "model": "claude-sonnet-5-5",
           "reasoning_effort": "low",
           "served": true
         }
       ],
-      "chain_text": "claude-opus-5-5:low",
+      "chain_text": "gpt-6.1-sol:low, claude-sonnet-5-5:low",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -114,14 +118,9 @@
           "model": "claude-opus-5-5",
           "reasoning_effort": "low",
           "served": true
-        },
-        {
-          "model": "gpt-6-astra",
-          "reasoning_effort": "low",
-          "served": true
         }
       ],
-      "chain_text": "gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low, gpt-6-astra:low",
+      "chain_text": "gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -134,12 +133,17 @@
           "served": true
         },
         {
+          "model": "claude-sonnet-5-5",
+          "reasoning_effort": "medium",
+          "served": true
+        },
+        {
           "model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "served": true
         }
       ],
-      "chain_text": "claude-opus-5-5:medium, gpt-6.1-sol:medium",
+      "chain_text": "claude-opus-5-5:medium, claude-sonnet-5-5:medium, gpt-6.1-sol:medium",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -147,22 +151,17 @@
       "category": "visual-engineering",
       "chain": [
         {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "high",
-          "served": true
-        },
-        {
           "model": "claude-opus-5-5",
           "reasoning_effort": "high",
           "served": true
         },
         {
-          "model": "gpt-6-astra",
+          "model": "claude-fable-5-1",
           "reasoning_effort": "high",
           "served": true
         }
       ],
-      "chain_text": "claude-fable-5-1:high, claude-opus-5-5:high, gpt-6-astra:high",
+      "chain_text": "claude-opus-5-5:high, claude-fable-5-1:high",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -170,22 +169,17 @@
       "category": "artistry",
       "chain": [
         {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "high",
-          "served": true
-        },
-        {
           "model": "claude-opus-5-5",
           "reasoning_effort": "high",
           "served": true
         },
         {
-          "model": "gpt-6-astra",
+          "model": "claude-fable-5-1",
           "reasoning_effort": "high",
           "served": true
         }
       ],
-      "chain_text": "claude-fable-5-1:high, claude-opus-5-5:high, gpt-6-astra:high",
+      "chain_text": "claude-opus-5-5:high, claude-fable-5-1:high",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -193,27 +187,22 @@
       "category": "capable",
       "chain": [
         {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "medium",
-          "served": true
-        },
-        {
           "model": "claude-opus-5-5",
           "reasoning_effort": "medium",
           "served": true
         },
         {
-          "model": "claude-sonnet-5-5",
+          "model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "served": true
         },
         {
-          "model": "gpt-6-astra",
+          "model": "claude-fable-5-1",
           "reasoning_effort": "medium",
           "served": true
         }
       ],
-      "chain_text": "claude-fable-5-1:medium, claude-opus-5-5:medium, claude-sonnet-5-5:medium, gpt-6-astra:medium",
+      "chain_text": "claude-opus-5-5:medium, gpt-6.1-sol:medium, claude-fable-5-1:medium",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -226,22 +215,12 @@
           "served": true
         },
         {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "low",
-          "served": true
-        },
-        {
-          "model": "claude-opus-5-5",
-          "reasoning_effort": "low",
-          "served": true
-        },
-        {
-          "model": "claude-haiku-4-5",
+          "model": "claude-haiku-5-5",
           "reasoning_effort": "low",
           "served": true
         }
       ],
-      "chain_text": "gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low, claude-haiku-4-5:low",
+      "chain_text": "gpt-6-luna:low, claude-haiku-5-5:low",
       "entitlement_shaped": false,
       "origin": "override"
     },
@@ -249,22 +228,17 @@
       "category": "deep-work",
       "chain": [
         {
-          "model": "claude-fable-5-1",
-          "reasoning_effort": "high",
-          "served": true
-        },
-        {
           "model": "claude-opus-5-5",
-          "reasoning_effort": "high",
+          "reasoning_effort": "max",
           "served": true
         },
         {
-          "model": "gpt-6-astra",
-          "reasoning_effort": "high",
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "max",
           "served": true
         }
       ],
-      "chain_text": "claude-fable-5-1:high, claude-opus-5-5:high, gpt-6-astra:high",
+      "chain_text": "claude-opus-5-5:max, gpt-6.1-sol:max",
       "entitlement_shaped": false,
       "origin": "override"
     }
@@ -294,5 +268,6 @@
       "provider": "anthropic",
       "model": "claude-opus-5-5"
     }
-  ]
+  ],
+  "configured_on": "2026-10-14"
 }

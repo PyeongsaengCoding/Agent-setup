@@ -1,4 +1,4 @@
-"""Claude routing keeps the Hermes presets' order and reasoning."""
+"""Executor-scoped routing and shared-tool contracts."""
 import json
 from pathlib import Path
 import unittest
@@ -7,15 +7,25 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PortedRoutingTests(unittest.TestCase):
-    def test_claude_presets_match_hermes_presets(self):
+    def test_external_claude_presets_preserve_their_approved_policy(self):
         claude = json.loads((ROOT / "claude/routes/claude-code.json").read_text())["presets"]
-        for name in ("claude-generous", "gpt-generous"):
-            hermes = json.loads((ROOT / f"hermes/routing-presets/{name}.json").read_text())
-            expected = {
-                item["category"]: [{"model": e["model"], "effort": e["reasoning_effort"]} for e in item["chain"]]
-                for item in hermes["categories"]
-            }
-            self.assertEqual(claude[name], expected, name)
+        gpt = json.loads((ROOT / "hermes/routing-presets/gpt-generous.json").read_text())
+        base = {
+            item["category"]: [{"model": e["model"], "effort": e["reasoning_effort"]} for e in item["chain"]]
+            for item in gpt["categories"]
+        }
+        self.assertEqual(claude["gpt-generous"], base)
+        expected = dict(base)
+        historical = {
+            "visual-engineering": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
+            "artistry": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
+            "capable": ("claude-fable-5-1 claude-opus-5-5 claude-sonnet-5-5 gpt-6-astra", "medium"),
+            "deep-work": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
+            "writing": ("claude-opus-5-5 gpt-6.1-sol", "medium"),
+        }
+        for category, (models, effort) in historical.items():
+            expected[category] = [{"model": m, "effort": effort} for m in models.split()]
+        self.assertEqual(claude["claude-generous"], expected)
 
     def test_aside_rule_is_present_for_codex_and_claude(self):
         for path in ("codex/instructions/AGENTS.md", "claude/templates/global-rules.md"):
