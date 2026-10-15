@@ -22,6 +22,11 @@ logger = logging.getLogger(__name__)
 
 MIN_SECONDS = 0  # report every finished Desktop turn, like the Desktop app's own notification
 API = "https://discord.com/api/v10"
+_NOT_DESKTOP = {
+    "cron", "kanban", "subagent", "oneshot", "acp", "api", "batch", "cli", "tui",
+    "discord", "telegram", "slack", "whatsapp", "signal", "teams", "google_chat",
+    "qqbot", "email", "sms", "matrix", "mattermost", "homeassistant", "webhook", "raft",
+}
 _starts: dict[str, float] = {}
 _lock = threading.Lock()
 
@@ -88,8 +93,13 @@ def _chunks(text: str, size: int = 1900) -> list[str]:
 def _report(session_id: str, response: str, seconds: float) -> None:
     from hermes_state import SessionDB
     row = SessionDB()._read_one(
-        "SELECT source, cwd, title, COALESCE(hidden, 0) AS hidden FROM sessions WHERE id = ?", (session_id,))
-    if row is None or row["source"] != "desktop" or row["hidden"]:
+        "SELECT source, created_source, cwd, title, COALESCE(hidden, 0) AS hidden FROM sessions WHERE id = ?",
+        (session_id,))
+    # Surface labels change across Hermes updates (v0.22 moved Desktop chats from source='desktop'
+    # to source='local'/created_source='desktop'). Exclude known non-Desktop surfaces instead of
+    # allow-listing one label, so a future rename still reports rather than silently dropping.
+    labels = {str(v or "").lower() for v in (row["source"], row["created_source"])} if row else set()
+    if row is None or row["hidden"] or labels & _NOT_DESKTOP:
         return
     channel = _channel_for(row["cwd"])
     if not channel:
