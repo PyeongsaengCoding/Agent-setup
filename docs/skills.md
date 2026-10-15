@@ -4,11 +4,11 @@
 
 | AI | 기본 설치 | 구성 |
 |---|---|---|
-| Claude Code | 64 | 공통 26 + codex + 외부 37 |
-| Codex | 63 | 공통 26 + 외부 37 |
-| Hermes | 104 + OMH 142 | Hermes 공식 57 + 공통 10 + 외부 37 + OMH 142 |
+| Claude Code | 228 | 공통 48 + OMH 142 + codex + 외부 37 |
+| Codex | 227 | 공통 48 + OMH 142 + 외부 37 |
+| Hermes | 126 + OMH 142 | Hermes 공식 57 + 공통 32 + 외부 37 + OMH 142 |
 
-## 1. 공통 스킬과 AI 전용 스킬 (28)
+## 1. 공통 스킬과 AI 전용 스킬 (50)
 
 | # | 구분 | 스킬 | 하는 일 | Claude | Codex | Hermes | 세 AI 비교 | 둘 곳 | pycoding-prompt 관계 |
 |---|---|---|---|---|---|---|---|---|---|
@@ -40,6 +40,28 @@
 | 26 | 환경 | agent-setup-maintenance | 이 작업 환경(지침·스킬·도구) 변경 절차 | ✅ | ✅ | ✅ | 세 AI 같은 파일 | Agent-setup | — |
 | 27 | 선택 | desktop-app-provisioning | 앱 설치, 브라우저 프로필 가져오기 | ◻️ | ◻️ | ✅ | 같은 파일. Claude·Codex는 요청 시, Hermes는 기본 | Agent-setup | — |
 | 28 | Claude 전용 | codex | GPT 항목을 Codex 플러그인으로 넘기고 결과 회수 | ✅ | — | — | Claude 전용 (Codex 플러그인) | Agent-setup | — |
+| 29 | 코딩 | bounded-resource-usage-ledgers | 실행 단위 자원 사용 기록에 상한 두기 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 30 | 코딩 | durable-sqlite-test-ledger | 중단에도 안전한 SQLite 시험 기록 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 31 | 코딩 | isolated-read-batch-fences | 가변 상태가 있는 읽기 도구 병렬화 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 32 | 코딩 | saved-source-contention-fences | 저장 원본 경합 재시도 보호 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 33 | 코딩 | read-model-performance-safety | 느린 읽기 모델 개선 시 접근 검사 유지 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 34 | 코딩 | semantic-knowledge-lifecycle | LLM 기억·지식 보존 범위 설계 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 35 | 운영 | production-failure-diagnosis | 저장된 운영 실패의 원인 추적 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 36 | 운영 | production-admin-api-operations | 운영 관리 API 일괄 작업 작성 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 37 | 제품 | product-monetization-requirements | 유료 이용·광고 제거·갱신 요구 정의 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 38 | 설계 | service-infrastructure-design | 서비스 인프라 재설계 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 39 | 환경 | setup-repository-authoring | 재현 가능한 환경 설정 저장소 작성 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 40 | 제품 | mobile-app-portfolio-delivery | 여러 모바일 앱을 베타까지 진행 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 41 | 미디어 | media-production-orchestration | 생성 미디어 일괄 제작 조율 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 42 | 미디어 | blog-motion-preview-pillow-ffmpeg | 블로그용 짧은 GIF/MP4 만들기 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 43 | 검증 | android-device-validation | Android 기기 설치·동작 확인 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 44 | 검증 | atomic-firewall-bootstrap-tests | 방화벽 부트스트랩 스크립트 오프라인 수정 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 45 | 검토 | backend-independent-rereview | 수정된 Python 백엔드를 실제 요청으로 재검토 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 46 | 보안 | bounded-private-evidence-reads | 비공개 근거 읽기·업로드 감사 범위 제한 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 47 | 코딩 | bounded-subprocess-pipe-io | Popen 파이프 입출력에 기한 적용 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 48 | 검증 | clock-fenced-offline-integration | 시각 기준 오프라인 통합 확인 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 49 | 코딩 | future-effective-memory-tdd | 미래 시점 적용 기억 갱신을 TDD로 수정 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 50 | 조사 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
 
 ## 2. 외부 스킬 (37)
 
@@ -151,152 +173,152 @@ Hermes 원본 고정 커밋에서 받는다. Hermes 도구 기준으로 쓰여 H
 
 ## 4. OMH 스킬 (142)
 
-OMH 설치기가 관리하는 Hermes 전용 스킬. 같은 작업 원칙은 Claude·Codex에서 1절 공통 스킬이 맡는다. 둘 곳은 모두 Agent-setup(Hermes·OMH)이고, 아래 "pycoding-prompt 관계"가 있는 18개는 프로젝트 기준과 겹치므로 프로젝트에서는 pycoding-prompt 기준을 우선한다.
+Hermes는 OMH 설치기로, Claude Code·Codex는 Agent-setup의 `shared/skills/omh/` 사본(OMH 3.0.2, `scripts/import_omh_skills.py`로 갱신)으로 같은 스킬을 받는다. Claude·Codex에서는 전역 지침의 `OMH 워크플로 스킬` 절이 `omh_*` 도구를 실행기 도구로 대응시킨다. 아래 "pycoding-prompt 관계"가 있는 18개는 프로젝트 기준과 겹치므로 프로젝트에서는 pycoding-prompt 기준을 우선한다.
 
 | # | 역할 폴더 | 스킬 | 하는 일 | Claude | Codex | Hermes | pycoding-prompt 관계 |
 |---|---|---|---|---|---|---|---|
-| 1 | guide | omh-apps | 앱 연동 작업 카드·전송 전 확인 | — | — | ✅ | — |
-| 2 | guide | omh-browser | 브라우저 작업 범위·권한 통제 | — | — | ✅ | — |
-| 3 | guide | omh-content-operator | 게시용 콘텐츠 작성·검토 관리 | — | — | ✅ | — |
-| 4 | guide | omh-data-analysis | 제공 데이터 분석·근거 기반 보고 | — | — | ✅ | — |
-| 5 | guide | omh-external-connector-readiness | 외부 커넥터 도입 준비도 평가 | — | — | ✅ | — |
-| 6 | guide | omh-files | 로컬 파일 작업 범위·확인 통제 | — | — | ✅ | — |
-| 7 | guide | omh-gateway-intent-card | 메신저 게이트웨이 세션 정규화 | — | — | ✅ | — |
-| 8 | guide | omh-jev-ask | Jev 판정 서비스 질의·결과 보고 | — | — | ✅ | — |
-| 9 | guide | omh-jev-route | 라우팅 미결정 시 Jev 추천 활용 | — | — | ✅ | — |
-| 10 | guide | omh-live-info | 실시간 정보 조회·출처 명시 | — | — | ✅ | — |
-| 11 | guide | omh-media-input | 전사·OCR 등 미디어 텍스트 추출 | — | — | ✅ | — |
-| 12 | guide | omh-meta-router | /omh 명령 워크플로 선택·연결 | — | — | ✅ | — |
-| 13 | guide | omh-model-setup | Hermes 모델 설정 진단·구성 | — | — | ✅ | — |
-| 14 | guide | omh-morning-brief | 모닝 브리프용 메일·캘린더 설정 | — | — | ✅ | — |
-| 15 | guide | omh-parallel-tools | 병렬 도구 호출 지원 점검 | — | — | ✅ | — |
-| 16 | guide | omh-prompt-import-readiness | 외부 에이전트 프롬프트 이식성 점검 | — | — | ✅ | — |
-| 17 | guide | omh-routing | OMH 요청 라우팅·우선순위 규칙 | — | — | ✅ | — |
-| 18 | guide | omh-terminal | 셸 명령 안전 등급·실행 통제 | — | — | ✅ | — |
-| 19 | guide | omh-voice-input | 음성 요청 해석·단일 행동 변환 | — | — | ✅ | — |
-| 20 | guide | omh-websearch-setup | Hermes 웹 검색 진단·설정 | — | — | ✅ | — |
-| 21 | handoff-guide | omh-ai-slop-cleaner | 동작 보존 코드 정리·군더더기 제거 | — | — | ✅ | — |
-| 22 | handoff-guide | omh-executor-runtime-readiness | 코딩 실행 런타임 준비 점검 | — | — | ✅ | — |
-| 23 | handoff-guide | omh-frontend-refactor | 동작 고정 UI 리팩터링 | — | — | ✅ | — |
-| 24 | memory-keeper | omh-decision-recall | 기각된 결정 기억 조회 | — | — | ✅ | — |
-| 25 | memory-keeper | omh-memory-new | 신규 프로젝트 사실 기억 평가 | — | — | ✅ | — |
-| 26 | memory-keeper | omh-memory-sync | Hermes 메모리 파일 검토·정리 | — | — | ✅ | — |
-| 27 | memory-keeper | omh-rules-distill | 반복 교훈의 규칙 후보화 | — | — | ✅ | — |
-| 28 | memory-keeper | omh-wiki | 대상 독자별 위키 설계 | — | — | ✅ | — |
-| 29 | operator | omh-agent-debug | 멈춘 에이전트 실행 진단 | — | — | ✅ | — |
-| 30 | operator | omh-agent-evaluation | 공정한 에이전트 비교 평가 설계 | — | — | ✅ | — |
-| 31 | operator | omh-apple-design | 애플 플랫폼 디자인 방향·검토 | — | — | ✅ | Apple 화면 기준은 pycoding project_setup_design.md |
-| 32 | operator | omh-automation-blueprint | 반복 요청 자동화 일정 설계 | — | — | ✅ | — |
-| 33 | operator | omh-award-bar-score | 웹 디자인 어워드 기준 채점 | — | — | ✅ | 디자인 레퍼런스 기준은 pycoding project_setup_design.md |
-| 34 | operator | omh-cto-loop | CTO 관점 운영 판단 루프 | — | — | ✅ | — |
-| 35 | operator | omh-decide | 의사결정 브리프 작성 | — | — | ✅ | 결정 기록(ADR) 위치·형식은 pycoding project_setup_docs.md 문서 구조 |
-| 36 | operator | omh-deliverable-package | 첨부 산출물 상태 추적 | — | — | ✅ | 산출물·보고 위치는 pycoding project_setup_docs.md |
-| 37 | operator | omh-deploy-and-monitor | 배포·모니터링·롤백 체크리스트 | — | — | ✅ | 배포 권한·절차는 프로젝트 AGENTS.md (pycoding 템플릿) |
-| 38 | operator | omh-design-orchestration | 디자인 방향·하위 레인 연계 | — | — | ✅ | 디자인 방향 결정은 pycoding project_setup_design.md |
-| 39 | operator | omh-design-quality-gate | 고품질 디자인 기준·렌더 검증 | — | — | ✅ | 화면 품질 기준은 pycoding project_setup_design.md |
-| 40 | operator | omh-feedback-triage | 고객 피드백 분류·우선순위화 | — | — | ✅ | — |
-| 41 | operator | omh-finance-analysis | 재무 데이터 차이·현금 위험 분석 | — | — | ✅ | — |
-| 42 | operator | omh-frontend | 디자인 시스템·화면 상태 기준과 구현 전달 준비 | — | — | ✅ | 디자인 기준·순서는 pycoding project_setup_design.md |
-| 43 | operator | omh-github-event-ops | GitHub 이벤트 처리 경로 판단 | — | — | ✅ | — |
-| 44 | operator | omh-github-issue-intake | 버그 제보의 GitHub 이슈화 | — | — | ✅ | — |
-| 45 | operator | omh-idea-to-deploy | 아이디어부터 배포까지 단계 설계 | — | — | ✅ | 새 프로젝트 구성 절차가 pycoding project_setup_request.md와 겹침 |
-| 46 | operator | omh-image-cards | 이미지 생성 프롬프트 카드 작성 | — | — | ✅ | — |
-| 47 | operator | omh-inference-serving | LLM 서빙 엔진 선택·배포·벤치마크 | — | — | ✅ | — |
-| 48 | operator | omh-lifecycle-growth | 활성화·리텐션 성장 실험 설계 | — | — | ✅ | — |
-| 49 | operator | omh-live-incident-response | 진행 중 장애 대응 지휘 | — | — | ✅ | — |
-| 50 | operator | omh-llm-app-dev | LLM 기능 개발·출력 검증 설계 | — | — | ✅ | — |
-| 51 | operator | omh-materials-package | 문서·자료 산출물 구성 계획 | — | — | ✅ | 문서 산출물 위치는 pycoding project_setup_docs.md |
-| 52 | operator | omh-meeting-brief | 회의 안건·준비 자료 작성 | — | — | ✅ | — |
-| 53 | operator | omh-operating-rhythm | 정기 회의록·결정 로그 관리 | — | — | ✅ | — |
-| 54 | operator | omh-ops-review | 운영 현황·위험·후속 조치 요약 | — | — | ✅ | — |
-| 55 | operator | omh-people-ops | 공정한 채용 평가 자료 준비 | — | — | ✅ | — |
-| 56 | operator | omh-physical-device-readiness | 물리 장치 제어 전 안전 점검 | — | — | ✅ | — |
-| 57 | operator | omh-provider-profile-posture | 제공자 프로필 역량 메타데이터 기록 | — | — | ✅ | — |
-| 58 | operator | omh-reliability-review | 종료 장애 사후 검토·SLO 점검 | — | — | ✅ | — |
-| 59 | operator | omh-report-package | 정기·임원 보고서 작성 | — | — | ✅ | 보고서 문체·저장 위치는 pycoding project_setup_docs.md |
-| 60 | operator | omh-sales-development | 영업 계정 탐색·자격 검증 브리프 | — | — | ✅ | — |
-| 61 | operator | omh-sales-pipeline-review | 영업 파이프라인 건전성 검토 | — | — | ✅ | — |
-| 62 | operator | omh-skill-health | 스킬 포트폴리오 상태 대시보드 | — | — | ✅ | — |
-| 63 | operator | omh-skill-scout | 기존 스킬 탐색·재사용 판단 | — | — | ✅ | — |
-| 64 | operator | omh-support-operations | 지원 티켓 답변 초안·에스컬레이션 | — | — | ✅ | — |
-| 65 | operator | omh-visual-qa | 화면 캡처 기반 시각 품질 검증 | — | — | ✅ | 실제 화면 검증 기준은 pycoding project_setup_design.md |
-| 66 | operator | omh-workspace-audit | 작업 공간 구성 읽기 전용 점검 | — | — | ✅ | — |
-| 67 | planner | omh-adversarial-consensus | 제안 레드팀 검토·합의 도출 | — | — | ✅ | — |
-| 68 | planner | omh-agent-instructions | 에이전트 지침 파일 작성·갱신 | — | — | ✅ | 프로젝트 AGENTS.md 내용은 pycoding 템플릿 |
-| 69 | planner | omh-backend | 서버·API 설계 전 경계·오류 정리 | — | — | ✅ | — |
-| 70 | planner | omh-codebase-onboarding | 코드베이스 구조 파악·온보딩 | — | — | ✅ | — |
-| 71 | planner | omh-codebase-uml | 코드베이스 UML 다이어그램 생성 | — | — | ✅ | — |
-| 72 | planner | omh-codegraph-refresh | 코드그래프 갱신 실행·보고 | — | — | ✅ | — |
-| 73 | planner | omh-curriculum-design | 학습 목표 기반 커리큘럼 설계 | — | — | ✅ | — |
-| 74 | planner | omh-data-pipelines | 데이터 파이프라인 멱등성 설계 | — | — | ✅ | — |
-| 75 | planner | omh-decision-prototype | 결정용 소규모 스파이크 실행 | — | — | ✅ | — |
-| 76 | planner | omh-iac-change | 인프라 코드 변경 계획·영향 검토 | — | — | ✅ | — |
-| 77 | planner | omh-mobile-release | 모바일 앱 스토어 출시 계획 | — | — | ✅ | — |
-| 78 | planner | omh-model-finetuning | 모델 파인튜닝 여부·방식 결정 | — | — | ✅ | — |
-| 79 | planner | omh-plan | 목표·수용 기준 중심 작업 계획 | — | — | ✅ | — |
-| 80 | planner | omh-product-brief | PRD·로드맵 우선순위 브리프 | — | — | ✅ | 제품 기획 의도 정리는 pycoding project_setup_request.md 1단계 |
-| 81 | planner | omh-product-discovery-validation | 초기 제품 아이디어 근거 검증 | — | — | ✅ | 제품 기획 의도 정리는 pycoding project_setup_request.md 1단계 |
-| 82 | planner | omh-refactor-plan | 대규모 리팩터링 단계별 계획 | — | — | ✅ | — |
-| 83 | planner | omh-relational-db | 관계형 DB 인덱스·마이그레이션 계획 | — | — | ✅ | — |
-| 84 | planner | omh-release-cut | 버전 릴리스 범위·카나리 계획 | — | — | ✅ | — |
-| 85 | planner | omh-rust | Rust 변경 설계·검증 게이트 | — | — | ✅ | — |
-| 86 | researcher | omh-docs | OMH 공식 문서 기반 질의응답 | — | — | ✅ | — |
-| 87 | researcher | omh-jit-learn | 현재 막힌 지점 즉시 학습 | — | — | ✅ | — |
-| 88 | researcher | omh-long-document-reading | 대용량 PDF 구간별 정독 | — | — | ✅ | — |
-| 89 | researcher | omh-paper-learning | 논문 수준별 섹션 해설 | — | — | ✅ | — |
-| 90 | researcher | omh-research-brief | 시장·경쟁 조사 근거 브리프 | — | — | ✅ | — |
-| 91 | researcher | omh-research-department | 정기 리서치 운영 체계 구성 | — | — | ✅ | — |
-| 92 | researcher | omh-source-finder | 연구 자료 후보 목록 작성 | — | — | ✅ | — |
-| 93 | researcher | omh-web-research | 최신 사실 웹 조사·출처 명시 | — | — | ✅ | — |
-| 94 | reviewer | omh-accessibility-audit | WCAG 접근성 감사 | — | — | ✅ | 접근성 기준은 pycoding project_setup_design.md |
-| 95 | reviewer | omh-app-debugging | 재현 기반 앱 버그 디버깅 | — | — | ✅ | — |
-| 96 | reviewer | omh-application-threat-model | 애플리케이션 위협 모델링 | — | — | ✅ | — |
-| 97 | reviewer | omh-ask | 외부 자문 모델 비평 요청 | — | — | ✅ | — |
-| 98 | reviewer | omh-build-failure-triage | 빌드·CI 실패 원인 분류 | — | — | ✅ | — |
-| 99 | reviewer | omh-code-review | 버그 우선 코드 리뷰 | — | — | ✅ | — |
-| 100 | reviewer | omh-commit-pr-authoring | 커밋 메시지·PR 본문 작성 | — | — | ✅ | — |
-| 101 | reviewer | omh-failure-signal-audit | 숨은 오류·거짓 성공 신호 감사 | — | — | ✅ | — |
-| 102 | reviewer | omh-git-workflow | 병합 충돌·이력 재작성 계획 | — | — | ✅ | — |
-| 103 | reviewer | omh-internal-audit | 내부통제 테스트·감사 | — | — | ✅ | — |
-| 104 | reviewer | omh-jev-action-check | 위험 명령 Jev 보류 점검 | — | — | ✅ | — |
-| 105 | reviewer | omh-jev-done-check | 완료 주장 Jev 검증 | — | — | ✅ | — |
-| 106 | reviewer | omh-jev-failure-triage | 실패 명령 Jev 대응 제안 | — | — | ✅ | — |
-| 107 | reviewer | omh-jev-review-gate | Jev 기반 diff 위험 플래그 검토 | — | — | ✅ | — |
-| 108 | reviewer | omh-legal-compliance-review | 법률·컴플라이언스 쟁점 검토 | — | — | ✅ | — |
-| 109 | reviewer | omh-localization-review | 현지화 번역 품질 검토 | — | — | ✅ | 현지화 기준은 pycoding project_setup_aso.md |
-| 110 | reviewer | omh-native-debugging | 네이티브 크래시 가설 기반 디버깅 | — | — | ✅ | — |
-| 111 | reviewer | omh-production-audit | 출시 준비도 점검·판정 | — | — | ✅ | — |
-| 112 | reviewer | omh-security-event-response | 출시 코드 보안 이벤트 대응 | — | — | ✅ | — |
-| 113 | reviewer | omh-security-safety-review | 에이전트 실행 전 보안 검토 | — | — | ✅ | — |
-| 114 | reviewer | omh-tech-debt-audit | 기술 부채 감사·개선 대장 | — | — | ✅ | — |
-| 115 | reviewer | omh-verification-gate | 관찰 결과 기반 검증 판정 | — | — | ✅ | — |
-| 116 | tracker | omh-achievements | 업적 배지·등급 요약 | — | — | ✅ | — |
-| 117 | tracker | omh-agent-board | 다중 에이전트 칸반 작업 조율 | — | — | ✅ | — |
-| 118 | tracker | omh-agent-ops-review | 에이전트 진행 현황 관리 카드 | — | — | ✅ | — |
-| 119 | tracker | omh-buzz | Buzz 커뮤니티 연결·릴레이 진단 | — | — | ✅ | — |
-| 120 | tracker | omh-cancel | 활성 워크플로 중단·상태 정리 | — | — | ✅ | — |
-| 121 | tracker | omh-capability-toggle | OMH 기능군 활성화 전환 | — | — | ✅ | — |
-| 122 | tracker | omh-context-budget-review | 장기 작업 컨텍스트 예산 계획 | — | — | ✅ | — |
-| 123 | tracker | omh-doctor | OMH 설치 상태 진단 | — | — | ✅ | — |
-| 124 | tracker | omh-harness-session-inventory | 에이전트 세션 메타데이터 통합 | — | — | ✅ | — |
-| 125 | tracker | omh-instinct-ledger | 반복 교훈의 직관 후보 관리 | — | — | ✅ | — |
-| 126 | tracker | omh-model-optimization | 신규 모델 출시 대응 최적화 | — | — | ✅ | — |
-| 127 | tracker | omh-ops-observability-card | 토큰·비용·지연 운영 현황판 | — | — | ✅ | — |
-| 128 | tracker | omh-run-efficiency | 실행 효율 지표 보고 | — | — | ✅ | — |
-| 129 | tracker | omh-running-work-board | 실행 중 코딩 작업 현황판 | — | — | ✅ | — |
-| 130 | tracker | omh-skill | 로컬 OMH 스킬 관리 | — | — | ✅ | — |
-| 131 | tracker | omh-todo-checklist | 계획 체크리스트 선언·진행 | — | — | ✅ | — |
-| 132 | tracker | omh-toolbelt-readiness | 워크플로 필요 도구 준비 점검 | — | — | ✅ | — |
-| 133 | tracker | omh-workflow-learning | 워크플로 시도 기록·개선 학습 | — | — | ✅ | — |
-| 134 | ultrawork | ulw-context | 저장소 용어 정렬·결정 | — | — | ✅ | — |
-| 135 | ultrawork | ulw-interview | 모호한 요청 단계별 명확화 | — | — | ✅ | — |
-| 136 | ultrawork | ulw-loop | 장기 목표 반복 실행 엔진 | — | — | ✅ | — |
-| 137 | ultrawork | ulw-maestro | 외부 코딩 CLI 핸드오프 프롬프트 작성 | — | — | ✅ | — |
-| 138 | ultrawork | ulw-perf | 성능 저하·누수 원인 국소화 | — | — | ✅ | — |
-| 139 | ultrawork | ulw-plan | 실행 전 검토된 계획 수립 | — | — | ✅ | 계획 파일을 `.omh/plans`에 씀. 프로젝트 문서 위치는 pycoding project_setup_docs.md |
-| 140 | ultrawork | ulw-qa | 적대적 QA 시나리오 생성 | — | — | ✅ | — |
-| 141 | ultrawork | ulw-research | 의사결정 전 심층 리서치 | — | — | ✅ | — |
-| 142 | ultrawork | ulw-work | 승인 계획 의존성 기반 실행 | — | — | ✅ | — |
+| 1 | guide | omh-apps | 앱 연동 작업 카드·전송 전 확인 | ✅ | ✅ | ✅ | — |
+| 2 | guide | omh-browser | 브라우저 작업 범위·권한 통제 | ✅ | ✅ | ✅ | — |
+| 3 | guide | omh-content-operator | 게시용 콘텐츠 작성·검토 관리 | ✅ | ✅ | ✅ | — |
+| 4 | guide | omh-data-analysis | 제공 데이터 분석·근거 기반 보고 | ✅ | ✅ | ✅ | — |
+| 5 | guide | omh-external-connector-readiness | 외부 커넥터 도입 준비도 평가 | ✅ | ✅ | ✅ | — |
+| 6 | guide | omh-files | 로컬 파일 작업 범위·확인 통제 | ✅ | ✅ | ✅ | — |
+| 7 | guide | omh-gateway-intent-card | 메신저 게이트웨이 세션 정규화 | ✅ | ✅ | ✅ | — |
+| 8 | guide | omh-jev-ask | Jev 판정 서비스 질의·결과 보고 | ✅ | ✅ | ✅ | — |
+| 9 | guide | omh-jev-route | 라우팅 미결정 시 Jev 추천 활용 | ✅ | ✅ | ✅ | — |
+| 10 | guide | omh-live-info | 실시간 정보 조회·출처 명시 | ✅ | ✅ | ✅ | — |
+| 11 | guide | omh-media-input | 전사·OCR 등 미디어 텍스트 추출 | ✅ | ✅ | ✅ | — |
+| 12 | guide | omh-meta-router | /omh 명령 워크플로 선택·연결 | ✅ | ✅ | ✅ | — |
+| 13 | guide | omh-model-setup | Hermes 모델 설정 진단·구성 | ✅ | ✅ | ✅ | — |
+| 14 | guide | omh-morning-brief | 모닝 브리프용 메일·캘린더 설정 | ✅ | ✅ | ✅ | — |
+| 15 | guide | omh-parallel-tools | 병렬 도구 호출 지원 점검 | ✅ | ✅ | ✅ | — |
+| 16 | guide | omh-prompt-import-readiness | 외부 에이전트 프롬프트 이식성 점검 | ✅ | ✅ | ✅ | — |
+| 17 | guide | omh-routing | OMH 요청 라우팅·우선순위 규칙 | ✅ | ✅ | ✅ | — |
+| 18 | guide | omh-terminal | 셸 명령 안전 등급·실행 통제 | ✅ | ✅ | ✅ | — |
+| 19 | guide | omh-voice-input | 음성 요청 해석·단일 행동 변환 | ✅ | ✅ | ✅ | — |
+| 20 | guide | omh-websearch-setup | Hermes 웹 검색 진단·설정 | ✅ | ✅ | ✅ | — |
+| 21 | handoff-guide | omh-ai-slop-cleaner | 동작 보존 코드 정리·군더더기 제거 | ✅ | ✅ | ✅ | — |
+| 22 | handoff-guide | omh-executor-runtime-readiness | 코딩 실행 런타임 준비 점검 | ✅ | ✅ | ✅ | — |
+| 23 | handoff-guide | omh-frontend-refactor | 동작 고정 UI 리팩터링 | ✅ | ✅ | ✅ | — |
+| 24 | memory-keeper | omh-decision-recall | 기각된 결정 기억 조회 | ✅ | ✅ | ✅ | — |
+| 25 | memory-keeper | omh-memory-new | 신규 프로젝트 사실 기억 평가 | ✅ | ✅ | ✅ | — |
+| 26 | memory-keeper | omh-memory-sync | Hermes 메모리 파일 검토·정리 | ✅ | ✅ | ✅ | — |
+| 27 | memory-keeper | omh-rules-distill | 반복 교훈의 규칙 후보화 | ✅ | ✅ | ✅ | — |
+| 28 | memory-keeper | omh-wiki | 대상 독자별 위키 설계 | ✅ | ✅ | ✅ | — |
+| 29 | operator | omh-agent-debug | 멈춘 에이전트 실행 진단 | ✅ | ✅ | ✅ | — |
+| 30 | operator | omh-agent-evaluation | 공정한 에이전트 비교 평가 설계 | ✅ | ✅ | ✅ | — |
+| 31 | operator | omh-apple-design | 애플 플랫폼 디자인 방향·검토 | ✅ | ✅ | ✅ | Apple 화면 기준은 pycoding project_setup_design.md |
+| 32 | operator | omh-automation-blueprint | 반복 요청 자동화 일정 설계 | ✅ | ✅ | ✅ | — |
+| 33 | operator | omh-award-bar-score | 웹 디자인 어워드 기준 채점 | ✅ | ✅ | ✅ | 디자인 레퍼런스 기준은 pycoding project_setup_design.md |
+| 34 | operator | omh-cto-loop | CTO 관점 운영 판단 루프 | ✅ | ✅ | ✅ | — |
+| 35 | operator | omh-decide | 의사결정 브리프 작성 | ✅ | ✅ | ✅ | 결정 기록(ADR) 위치·형식은 pycoding project_setup_docs.md 문서 구조 |
+| 36 | operator | omh-deliverable-package | 첨부 산출물 상태 추적 | ✅ | ✅ | ✅ | 산출물·보고 위치는 pycoding project_setup_docs.md |
+| 37 | operator | omh-deploy-and-monitor | 배포·모니터링·롤백 체크리스트 | ✅ | ✅ | ✅ | 배포 권한·절차는 프로젝트 AGENTS.md (pycoding 템플릿) |
+| 38 | operator | omh-design-orchestration | 디자인 방향·하위 레인 연계 | ✅ | ✅ | ✅ | 디자인 방향 결정은 pycoding project_setup_design.md |
+| 39 | operator | omh-design-quality-gate | 고품질 디자인 기준·렌더 검증 | ✅ | ✅ | ✅ | 화면 품질 기준은 pycoding project_setup_design.md |
+| 40 | operator | omh-feedback-triage | 고객 피드백 분류·우선순위화 | ✅ | ✅ | ✅ | — |
+| 41 | operator | omh-finance-analysis | 재무 데이터 차이·현금 위험 분석 | ✅ | ✅ | ✅ | — |
+| 42 | operator | omh-frontend | 디자인 시스템·화면 상태 기준과 구현 전달 준비 | ✅ | ✅ | ✅ | 디자인 기준·순서는 pycoding project_setup_design.md |
+| 43 | operator | omh-github-event-ops | GitHub 이벤트 처리 경로 판단 | ✅ | ✅ | ✅ | — |
+| 44 | operator | omh-github-issue-intake | 버그 제보의 GitHub 이슈화 | ✅ | ✅ | ✅ | — |
+| 45 | operator | omh-idea-to-deploy | 아이디어부터 배포까지 단계 설계 | ✅ | ✅ | ✅ | 새 프로젝트 구성 절차가 pycoding project_setup_request.md와 겹침 |
+| 46 | operator | omh-image-cards | 이미지 생성 프롬프트 카드 작성 | ✅ | ✅ | ✅ | — |
+| 47 | operator | omh-inference-serving | LLM 서빙 엔진 선택·배포·벤치마크 | ✅ | ✅ | ✅ | — |
+| 48 | operator | omh-lifecycle-growth | 활성화·리텐션 성장 실험 설계 | ✅ | ✅ | ✅ | — |
+| 49 | operator | omh-live-incident-response | 진행 중 장애 대응 지휘 | ✅ | ✅ | ✅ | — |
+| 50 | operator | omh-llm-app-dev | LLM 기능 개발·출력 검증 설계 | ✅ | ✅ | ✅ | — |
+| 51 | operator | omh-materials-package | 문서·자료 산출물 구성 계획 | ✅ | ✅ | ✅ | 문서 산출물 위치는 pycoding project_setup_docs.md |
+| 52 | operator | omh-meeting-brief | 회의 안건·준비 자료 작성 | ✅ | ✅ | ✅ | — |
+| 53 | operator | omh-operating-rhythm | 정기 회의록·결정 로그 관리 | ✅ | ✅ | ✅ | — |
+| 54 | operator | omh-ops-review | 운영 현황·위험·후속 조치 요약 | ✅ | ✅ | ✅ | — |
+| 55 | operator | omh-people-ops | 공정한 채용 평가 자료 준비 | ✅ | ✅ | ✅ | — |
+| 56 | operator | omh-physical-device-readiness | 물리 장치 제어 전 안전 점검 | ✅ | ✅ | ✅ | — |
+| 57 | operator | omh-provider-profile-posture | 제공자 프로필 역량 메타데이터 기록 | ✅ | ✅ | ✅ | — |
+| 58 | operator | omh-reliability-review | 종료 장애 사후 검토·SLO 점검 | ✅ | ✅ | ✅ | — |
+| 59 | operator | omh-report-package | 정기·임원 보고서 작성 | ✅ | ✅ | ✅ | 보고서 문체·저장 위치는 pycoding project_setup_docs.md |
+| 60 | operator | omh-sales-development | 영업 계정 탐색·자격 검증 브리프 | ✅ | ✅ | ✅ | — |
+| 61 | operator | omh-sales-pipeline-review | 영업 파이프라인 건전성 검토 | ✅ | ✅ | ✅ | — |
+| 62 | operator | omh-skill-health | 스킬 포트폴리오 상태 대시보드 | ✅ | ✅ | ✅ | — |
+| 63 | operator | omh-skill-scout | 기존 스킬 탐색·재사용 판단 | ✅ | ✅ | ✅ | — |
+| 64 | operator | omh-support-operations | 지원 티켓 답변 초안·에스컬레이션 | ✅ | ✅ | ✅ | — |
+| 65 | operator | omh-visual-qa | 화면 캡처 기반 시각 품질 검증 | ✅ | ✅ | ✅ | 실제 화면 검증 기준은 pycoding project_setup_design.md |
+| 66 | operator | omh-workspace-audit | 작업 공간 구성 읽기 전용 점검 | ✅ | ✅ | ✅ | — |
+| 67 | planner | omh-adversarial-consensus | 제안 레드팀 검토·합의 도출 | ✅ | ✅ | ✅ | — |
+| 68 | planner | omh-agent-instructions | 에이전트 지침 파일 작성·갱신 | ✅ | ✅ | ✅ | 프로젝트 AGENTS.md 내용은 pycoding 템플릿 |
+| 69 | planner | omh-backend | 서버·API 설계 전 경계·오류 정리 | ✅ | ✅ | ✅ | — |
+| 70 | planner | omh-codebase-onboarding | 코드베이스 구조 파악·온보딩 | ✅ | ✅ | ✅ | — |
+| 71 | planner | omh-codebase-uml | 코드베이스 UML 다이어그램 생성 | ✅ | ✅ | ✅ | — |
+| 72 | planner | omh-codegraph-refresh | 코드그래프 갱신 실행·보고 | ✅ | ✅ | ✅ | — |
+| 73 | planner | omh-curriculum-design | 학습 목표 기반 커리큘럼 설계 | ✅ | ✅ | ✅ | — |
+| 74 | planner | omh-data-pipelines | 데이터 파이프라인 멱등성 설계 | ✅ | ✅ | ✅ | — |
+| 75 | planner | omh-decision-prototype | 결정용 소규모 스파이크 실행 | ✅ | ✅ | ✅ | — |
+| 76 | planner | omh-iac-change | 인프라 코드 변경 계획·영향 검토 | ✅ | ✅ | ✅ | — |
+| 77 | planner | omh-mobile-release | 모바일 앱 스토어 출시 계획 | ✅ | ✅ | ✅ | — |
+| 78 | planner | omh-model-finetuning | 모델 파인튜닝 여부·방식 결정 | ✅ | ✅ | ✅ | — |
+| 79 | planner | omh-plan | 목표·수용 기준 중심 작업 계획 | ✅ | ✅ | ✅ | — |
+| 80 | planner | omh-product-brief | PRD·로드맵 우선순위 브리프 | ✅ | ✅ | ✅ | 제품 기획 의도 정리는 pycoding project_setup_request.md 1단계 |
+| 81 | planner | omh-product-discovery-validation | 초기 제품 아이디어 근거 검증 | ✅ | ✅ | ✅ | 제품 기획 의도 정리는 pycoding project_setup_request.md 1단계 |
+| 82 | planner | omh-refactor-plan | 대규모 리팩터링 단계별 계획 | ✅ | ✅ | ✅ | — |
+| 83 | planner | omh-relational-db | 관계형 DB 인덱스·마이그레이션 계획 | ✅ | ✅ | ✅ | — |
+| 84 | planner | omh-release-cut | 버전 릴리스 범위·카나리 계획 | ✅ | ✅ | ✅ | — |
+| 85 | planner | omh-rust | Rust 변경 설계·검증 게이트 | ✅ | ✅ | ✅ | — |
+| 86 | researcher | omh-docs | OMH 공식 문서 기반 질의응답 | ✅ | ✅ | ✅ | — |
+| 87 | researcher | omh-jit-learn | 현재 막힌 지점 즉시 학습 | ✅ | ✅ | ✅ | — |
+| 88 | researcher | omh-long-document-reading | 대용량 PDF 구간별 정독 | ✅ | ✅ | ✅ | — |
+| 89 | researcher | omh-paper-learning | 논문 수준별 섹션 해설 | ✅ | ✅ | ✅ | — |
+| 90 | researcher | omh-research-brief | 시장·경쟁 조사 근거 브리프 | ✅ | ✅ | ✅ | — |
+| 91 | researcher | omh-research-department | 정기 리서치 운영 체계 구성 | ✅ | ✅ | ✅ | — |
+| 92 | researcher | omh-source-finder | 연구 자료 후보 목록 작성 | ✅ | ✅ | ✅ | — |
+| 93 | researcher | omh-web-research | 최신 사실 웹 조사·출처 명시 | ✅ | ✅ | ✅ | — |
+| 94 | reviewer | omh-accessibility-audit | WCAG 접근성 감사 | ✅ | ✅ | ✅ | 접근성 기준은 pycoding project_setup_design.md |
+| 95 | reviewer | omh-app-debugging | 재현 기반 앱 버그 디버깅 | ✅ | ✅ | ✅ | — |
+| 96 | reviewer | omh-application-threat-model | 애플리케이션 위협 모델링 | ✅ | ✅ | ✅ | — |
+| 97 | reviewer | omh-ask | 외부 자문 모델 비평 요청 | ✅ | ✅ | ✅ | — |
+| 98 | reviewer | omh-build-failure-triage | 빌드·CI 실패 원인 분류 | ✅ | ✅ | ✅ | — |
+| 99 | reviewer | omh-code-review | 버그 우선 코드 리뷰 | ✅ | ✅ | ✅ | — |
+| 100 | reviewer | omh-commit-pr-authoring | 커밋 메시지·PR 본문 작성 | ✅ | ✅ | ✅ | — |
+| 101 | reviewer | omh-failure-signal-audit | 숨은 오류·거짓 성공 신호 감사 | ✅ | ✅ | ✅ | — |
+| 102 | reviewer | omh-git-workflow | 병합 충돌·이력 재작성 계획 | ✅ | ✅ | ✅ | — |
+| 103 | reviewer | omh-internal-audit | 내부통제 테스트·감사 | ✅ | ✅ | ✅ | — |
+| 104 | reviewer | omh-jev-action-check | 위험 명령 Jev 보류 점검 | ✅ | ✅ | ✅ | — |
+| 105 | reviewer | omh-jev-done-check | 완료 주장 Jev 검증 | ✅ | ✅ | ✅ | — |
+| 106 | reviewer | omh-jev-failure-triage | 실패 명령 Jev 대응 제안 | ✅ | ✅ | ✅ | — |
+| 107 | reviewer | omh-jev-review-gate | Jev 기반 diff 위험 플래그 검토 | ✅ | ✅ | ✅ | — |
+| 108 | reviewer | omh-legal-compliance-review | 법률·컴플라이언스 쟁점 검토 | ✅ | ✅ | ✅ | — |
+| 109 | reviewer | omh-localization-review | 현지화 번역 품질 검토 | ✅ | ✅ | ✅ | 현지화 기준은 pycoding project_setup_aso.md |
+| 110 | reviewer | omh-native-debugging | 네이티브 크래시 가설 기반 디버깅 | ✅ | ✅ | ✅ | — |
+| 111 | reviewer | omh-production-audit | 출시 준비도 점검·판정 | ✅ | ✅ | ✅ | — |
+| 112 | reviewer | omh-security-event-response | 출시 코드 보안 이벤트 대응 | ✅ | ✅ | ✅ | — |
+| 113 | reviewer | omh-security-safety-review | 에이전트 실행 전 보안 검토 | ✅ | ✅ | ✅ | — |
+| 114 | reviewer | omh-tech-debt-audit | 기술 부채 감사·개선 대장 | ✅ | ✅ | ✅ | — |
+| 115 | reviewer | omh-verification-gate | 관찰 결과 기반 검증 판정 | ✅ | ✅ | ✅ | — |
+| 116 | tracker | omh-achievements | 업적 배지·등급 요약 | ✅ | ✅ | ✅ | — |
+| 117 | tracker | omh-agent-board | 다중 에이전트 칸반 작업 조율 | ✅ | ✅ | ✅ | — |
+| 118 | tracker | omh-agent-ops-review | 에이전트 진행 현황 관리 카드 | ✅ | ✅ | ✅ | — |
+| 119 | tracker | omh-buzz | Buzz 커뮤니티 연결·릴레이 진단 | ✅ | ✅ | ✅ | — |
+| 120 | tracker | omh-cancel | 활성 워크플로 중단·상태 정리 | ✅ | ✅ | ✅ | — |
+| 121 | tracker | omh-capability-toggle | OMH 기능군 활성화 전환 | ✅ | ✅ | ✅ | — |
+| 122 | tracker | omh-context-budget-review | 장기 작업 컨텍스트 예산 계획 | ✅ | ✅ | ✅ | — |
+| 123 | tracker | omh-doctor | OMH 설치 상태 진단 | ✅ | ✅ | ✅ | — |
+| 124 | tracker | omh-harness-session-inventory | 에이전트 세션 메타데이터 통합 | ✅ | ✅ | ✅ | — |
+| 125 | tracker | omh-instinct-ledger | 반복 교훈의 직관 후보 관리 | ✅ | ✅ | ✅ | — |
+| 126 | tracker | omh-model-optimization | 신규 모델 출시 대응 최적화 | ✅ | ✅ | ✅ | — |
+| 127 | tracker | omh-ops-observability-card | 토큰·비용·지연 운영 현황판 | ✅ | ✅ | ✅ | — |
+| 128 | tracker | omh-run-efficiency | 실행 효율 지표 보고 | ✅ | ✅ | ✅ | — |
+| 129 | tracker | omh-running-work-board | 실행 중 코딩 작업 현황판 | ✅ | ✅ | ✅ | — |
+| 130 | tracker | omh-skill | 로컬 OMH 스킬 관리 | ✅ | ✅ | ✅ | — |
+| 131 | tracker | omh-todo-checklist | 계획 체크리스트 선언·진행 | ✅ | ✅ | ✅ | — |
+| 132 | tracker | omh-toolbelt-readiness | 워크플로 필요 도구 준비 점검 | ✅ | ✅ | ✅ | — |
+| 133 | tracker | omh-workflow-learning | 워크플로 시도 기록·개선 학습 | ✅ | ✅ | ✅ | — |
+| 134 | ultrawork | ulw-context | 저장소 용어 정렬·결정 | ✅ | ✅ | ✅ | — |
+| 135 | ultrawork | ulw-interview | 모호한 요청 단계별 명확화 | ✅ | ✅ | ✅ | — |
+| 136 | ultrawork | ulw-loop | 장기 목표 반복 실행 엔진 | ✅ | ✅ | ✅ | — |
+| 137 | ultrawork | ulw-maestro | 외부 코딩 CLI 핸드오프 프롬프트 작성 | ✅ | ✅ | ✅ | — |
+| 138 | ultrawork | ulw-perf | 성능 저하·누수 원인 국소화 | ✅ | ✅ | ✅ | — |
+| 139 | ultrawork | ulw-plan | 실행 전 검토된 계획 수립 | ✅ | ✅ | ✅ | 계획 파일을 `.omh/plans`에 씀. 프로젝트 문서 위치는 pycoding project_setup_docs.md |
+| 140 | ultrawork | ulw-qa | 적대적 QA 시나리오 생성 | ✅ | ✅ | ✅ | — |
+| 141 | ultrawork | ulw-research | 의사결정 전 심층 리서치 | ✅ | ✅ | ✅ | — |
+| 142 | ultrawork | ulw-work | 승인 계획 의존성 기반 실행 | ✅ | ✅ | ✅ | — |
 
 ## 5. pycoding-prompt와의 적용 경계
 

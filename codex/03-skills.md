@@ -62,6 +62,7 @@ MacBook 설정에서 아래 스킬 63개를 **모두 설치**한다. 표의 구�
 | 핵심 | `humanizer` | 완성 문서의 반복·부풀린 표현 교정 | `~/.agents/skills/humanizer/SKILL.md` | Agent-setup `shared/skills/core/humanizer` 복사 ([Humanizer](https://github.com/blader/humanizer) v3.1.0 원본 그대로) |
 | 핵심 | `shadcn` | shadcn/ui 컴포넌트 추가·검색·구성·스타일 | `~/.agents/skills/shadcn/SKILL.md` | Agent-setup `shared/skills/core/shadcn` 복사 ([shadcn-ui/ui](https://github.com/shadcn-ui/ui) 공식 스킬 원본) |
 | 핵심 | `shadcn-lint` | @shadcn/lint 설치·등록·규칙 안내 | `~/.agents/skills/shadcn-lint/SKILL.md` | Agent-setup `shared/skills/core/shadcn-lint` 복사 ([shadcn-ui/lint](https://github.com/shadcn-ui/lint) SETUP.md 기반) |
+| 핵심 | Hermes 작업 교훈 22개·OMH 142개 | 운영 진단·인프라 설계·미디어·검증 교훈과 OMH 계획·검토·운영 워크플로 | `~/.agents/skills/<이름>/SKILL.md` | Agent-setup `shared/skills/core`·`shared/skills/omh` 복사; 목록은 [스킬 표](../docs/skills.md) |
 | 업무 | `iterative-retrieval` | 이미 배정한 하위 작업의 부족한 맥락 보완 | `~/.agents/skills/iterative-retrieval/SKILL.md` | [ECC](https://github.com/affaan-m/ECC) 원본 복사 |
 | 업무 | `cost-analysis` | 실제 Azure 비용·청구 변화 분석 | `~/.agents/skills/cost-analysis/SKILL.md` | Microsoft 원본 복사 |
 | 업무 | `cost-estimation` | 계획 중인 Azure 사용료 추정 | `~/.agents/skills/cost-estimation/SKILL.md` | Microsoft 원본 복사 |

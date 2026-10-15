@@ -11,9 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 RULES = ROOT / "shared" / "rules"
 OUTPUTS = {
     # Installed to ~/.codex/AGENTS.md by codex/scripts/apply_managed.py ({{...}} rendered there).
-    "codex/instructions/AGENTS.md": ("# 전역 작업 지침 (Agent-setup · Codex)", ["common", "skills", "aside", "routing-codex"]),
+    "codex/instructions/AGENTS.md": ("# 전역 작업 지침 (Agent-setup · Codex)", ["common", "skills", "omh", "aside", "routing-codex"]),
     # Installed as the managed block of ~/.claude/AGENTS.md by claude/scripts/install.py.
-    "claude/templates/global-rules.md": (None, ["common", "skills", "aside", "routing-claude"]),
+    "claude/templates/global-rules.md": (None, ["common", "skills", "omh", "aside", "routing-claude"]),
     # Added to the selected Hermes profile's SOUL.md by hermes/scripts/install_global_rules.py.
     # Hermes keeps its own Aside and document-delivery blocks and uses OMH for routing and skills.
     "hermes/templates/common-rules.md": (None, ["common"]),

@@ -8,6 +8,105 @@
 | Codex | ChatGPT·Codex(GPT)만 쓴다 | macOS (Windows는 WSL2) | [codex/INSTALL_FOR_AGENTS.md](codex/INSTALL_FOR_AGENTS.md) |
 | Hermes | Hermes Desktop에서 GPT·Claude를 함께 쓴다 | Apple Silicon Mac | [hermes/INSTALL_FOR_AGENTS.md](hermes/INSTALL_FOR_AGENTS.md) |
 
+**바로 보기:** [Codex 라우팅](#codex--gpt-전용) · [Claude Code 라우팅](#claude-code--claudegpt-혼합) · [Hermes 라우팅](#hermes--omh-분류별-위임) · [설치 요청](#ai에게-보낼-요청) · [설치 구성](#설치되는-것)
+
+## 모델 라우팅
+
+작업을 12개 분류로 나누고, 분류에 맞는 모델과 추론 강도로 실행한다. 아래 표는 **이 저장소의 설치 원본**을 보여준다. 기본 프리셋은 Claude Code·Hermes 모두 `claude-generous`이며, 실행기별 모델 순서와 추론은 각 원본에서 독립적으로 관리한다.
+
+### 표 읽는 법
+
+- **모델 순서**: 왼쪽 모델을 먼저 사용하고, 사용 불가·한도·인증 등의 실패가 발생하면 해당 실행기의 fallback 절차로 다음 후보를 시도한다.
+- **추론 강도**: `low`는 단순 확인, `medium`은 일반 작업·문서, `high`는 깊은 구현, `xhigh`는 복잡한 추론·설계에 배정한다. Hermes Claude 넉넉형의 `deep-work`는 `max`를 사용한다. 표의 추론 값은 같은 행의 모든 후보에 적용한다.
+- **적용 대상**: 현재 대화의 주 에이전트가 목표·범위·결과를 관리하고, 중요한 작업 단위에 실행기별 모델·추론을 배정한다. 작은 문서 수정과 일반 답변은 주 에이전트가 직접 처리한다.
+- **프리셋 선택**: Claude 넉넉형과 GPT 넉넉형의 실제 차이는 아래 후보 순서에 있다. 작업별로 GPT와 Claude를 함께 사용한다.
+
+| 표의 이름 | 정확한 모델 ID |
+|---|---|
+| Astra | `gpt-6-astra` |
+| Sol | `gpt-6.1-sol` |
+| Luna | `gpt-6-luna` |
+| Fable | `claude-fable-5-1` |
+| Opus | `claude-opus-5-5` |
+| Sonnet | `claude-sonnet-5-5` |
+| Haiku 4.5 | `claude-haiku-4-5` |
+| Haiku 5.5 | `claude-haiku-5-5` |
+
+### Codex — GPT 전용
+
+Codex 네이티브 위임에 모델 ID와 `reasoning_effort`를 지정한다. 사용자가 모델을 지정하면 그 지시가 우선하며, 지정 조합을 사용할 수 없으면 제약을 보고한다.
+
+| 작업 분류 | 적용 작업 | 모델 | 추론 |
+|---|---|---|---|
+| `ultrabrain` | 복잡한 추론·불확실한 문제 | Astra | `xhigh` |
+| `deep` | 깊은 구현·디버깅 | Sol | `high` |
+| `architect` | 시스템 설계 | Astra | `xhigh` |
+| `unspecified-high` | 분류 외 복합 작업 | Sol | `medium` |
+| `unspecified-low` | 분류 외 단순 작업 | Luna | `low` |
+| `quick` | 좁은 탐색·빠른 확인 | Luna | `low` |
+| `writing` | 문서 작성 | Sol | `medium` |
+| `visual-engineering` | 화면 구현 | Sol | `high` |
+| `artistry` | 창의적 설계 | Astra | `high` |
+| `capable` | 일반 실행 | Sol | `medium` |
+| `simple-work` | 단순 실행 | Luna | `low` |
+| `deep-work` | 복합 실행 | Astra | `high` |
+
+원본: [작업 분류·추론·위임 기준](codex/11-working-method.md), [계열별 모델 ID](codex/config/models.json).
+
+### Claude Code — Claude·GPT 혼합
+
+Claude 후보는 `route-<분류>-<계열>` 하위 에이전트로 실행한다. GPT 후보는 Codex 플러그인 `codex:codex-rescue`에 모델·추론을 지정해 실행하며, 해당 컴퓨터의 Codex 로그인과 사용 한도를 쓴다. 후보 실행이 실패하면 주 에이전트가 같은 작업을 다음 후보에 넘긴다. GPT 사용이 어려운 환경은 GPT 항목을 뺀 Claude 전용 순서를 사용한다.
+
+| 작업 분류 | 적용 작업 | Claude 넉넉형 · 기본 | GPT 넉넉형 | 추론 |
+|---|---|---|---|---|
+| `ultrabrain` | 가장 깊은 추론이 필요한 모호한 문제 | Astra → Fable → Opus | Astra → Fable → Opus | `xhigh` |
+| `deep` | 깊은 구현·디버깅 | Sol → Fable → Opus | Sol → Fable → Opus | `high` |
+| `architect` | 아키텍처·시스템 경계 설계 | Fable → Astra → Opus | Fable → Astra → Opus | `xhigh` |
+| `unspecified-high` | 분류 밖의 복합 작업 | Opus | Opus | `medium` |
+| `unspecified-low` | 분류 밖의 단순 작업 | Opus | Opus | `low` |
+| `quick` | 좁은 탐색·빠른 확인 | Luna → Fable → Opus → Astra | Luna → Fable → Opus → Astra | `low` |
+| `writing` | 문서 작성·편집 | Opus → Sol | Sol → Opus | `medium` |
+| `visual-engineering` | 화면·프론트엔드 구현 | Fable → Opus → Astra | Fable → Astra → Opus | `high` |
+| `artistry` | 창의적 설계·시각 방향 | Fable → Opus → Astra | Fable → Astra → Opus | `high` |
+| `capable` | 일반 실행 | Fable → Opus → Sonnet → Astra | Fable → Astra → Opus → Sonnet | `medium` |
+| `simple-work` | 단순 실행 | Luna → Fable → Opus → Haiku 4.5 | Luna → Fable → Opus → Haiku 4.5 | `low` |
+| `deep-work` | 길고 까다로운 복합 실행 | Fable → Opus → Astra | Astra → Fable → Opus | `high` |
+
+원본: [두 프리셋의 모델·순서·추론](claude/routes/claude-code.json). 설치와 실제 호출 확인은 [Claude Code 안내](claude/README.md#모델-라우팅)를 따른다.
+
+### Hermes — OMH 분류별 위임
+
+OMH에서 작업 분류를 선택한 직후 `delegate_task`로 위임한다. GPT 후보는 `openai-codex`, Claude 후보는 `anthropic` 제공자에 연결한다. 선택한 Hermes 프로필의 라우팅을 적용하며, 외부 Codex·Claude Code 프로세스를 실행할 때는 해당 실행기의 정책을 따른다.
+
+| 작업 분류 | 적용 작업 | Claude 넉넉형 · 기본 | 추론 | GPT 넉넉형 | 추론 |
+|---|---|---|---|---|---|
+| `ultrabrain` | 가장 깊은 추론이 필요한 모호한 문제 | Astra → Fable → Opus | `xhigh` | Astra → Fable → Opus | `xhigh` |
+| `deep` | 깊은 구현·디버깅 | Opus → Sol | `high` | Sol → Fable → Opus | `high` |
+| `architect` | 아키텍처·시스템 경계 설계 | Opus → Astra → Fable | `xhigh` | Fable → Astra → Opus | `xhigh` |
+| `unspecified-high` | 분류 밖의 복합 작업 | Sol → Opus | `medium` | Opus | `medium` |
+| `unspecified-low` | 분류 밖의 단순 작업 | Sol → Sonnet | `low` | Opus | `low` |
+| `quick` | 좁은 탐색·빠른 확인 | Luna → Fable → Opus | `low` | Luna → Fable → Opus → Astra | `low` |
+| `writing` | 문서 작성·편집 | Opus → Sonnet → Sol | `medium` | Sol → Opus | `medium` |
+| `visual-engineering` | 화면·프론트엔드 구현 | Opus → Fable | `high` | Fable → Astra → Opus | `high` |
+| `artistry` | 창의적 설계·시각 방향 | Opus → Fable | `high` | Fable → Astra → Opus | `high` |
+| `capable` | 일반 실행 | Opus → Sol → Fable | `medium` | Fable → Astra → Opus → Sonnet | `medium` |
+| `simple-work` | 단순 실행 | Luna → Haiku 5.5 | `low` | Luna → Fable → Opus → Haiku 4.5 | `low` |
+| `deep-work` | 길고 까다로운 복합 실행 | Opus → Sol | `max` | Astra → Fable → Opus | `high` |
+
+Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각각 설정한다.
+
+| fallback 적용 대상 | 순서 | 동작 |
+|---|---|---|
+| 주 에이전트 | Opus | 현재 주 모델에서 fallback이 필요할 때 사용 |
+| 위임 자식 공통 | Fable → Astra → Sonnet → Opus | 이미 시도한 모델·사용 불가능한 후보를 건너뛰고, 배정한 추론 강도를 유지 |
+| GPT로 시작한 자식 | Fable 우선, Opus 마지막 | 소스 호환 패치로 순서를 보존 |
+
+원본: [Claude 넉넉형](hermes/routing-presets/claude-generous.json), [GPT 넉넉형](hermes/routing-presets/gpt-generous.json). 프리셋 적용 요청·전환 명령·fallback 검증은 [Hermes 라우팅 안내](hermes/docs/model-routing.md)에 있다.
+
+### 실제 적용 확인
+
+설치 후에는 저장한 설정과 실제 실행 모델을 각각 확인한다. Codex는 위임 결과의 모델·추론, Claude Code는 Claude 하위 에이전트와 GPT 플러그인 호출 결과, Hermes는 `omh model-chains show --json`과 실제 자식 실행 결과를 대조한다. 호스트가 반환한 모델·제공자·추론을 근거로 보고하며, 관측되지 않은 항목은 미확인으로 남긴다. [설치 완료 기준](docs/verification.md)에 실행기별 확인 범위가 있다.
+
 ## AI에게 보낼 요청
 
 파일과 명령을 쓸 수 있는 AI 대화에 하나를 골라 보낸다. 무엇을 어떻게 설치할지는 AI가 이 저장소의 설치 안내와 그 컴퓨터 상태를 보고 정한다.
@@ -25,13 +124,51 @@
 | 항목 | Claude Code | Codex | Hermes |
 |---|---|---|---|
 | 모델 라우팅 | 12개 분류별 Claude 하위 에이전트 + GPT는 Codex 플러그인 | 12개 분류별 GPT 모델·추론 | OMH 프리셋 |
-| 스킬 | 공통 26개 + codex + 외부 37개 | 공통 26개 + 외부 37개 | Hermes 공식 57개 + 공통 10개 + 외부 37개 + OMH 142개 |
+| 스킬 | 228개 (공통 48 + OMH 142 + codex + 외부 37) | 227개 (공통 48 + OMH 142 + 외부 37) | 126개 (공식 57 + 공통 32 + 외부 37) + OMH 142 |
 | 전역 지침 | `~/.claude/AGENTS.md` | `~/.codex/AGENTS.md` | `SOUL.md` 관리 구간 |
 | 코드 탐색 | CodeGraph | CodeGraph | CodeGraph |
 | 기억 | GAM | GAM | GAM + Hermes 메모리 |
 | 브라우저 | Aside | Aside | Aside |
+| 보존 정리 | 주 1회 자동 (아래 [저장 데이터 보존](#저장-데이터-보존)) | 같음 | 같음 + Hermes 내장 정리 |
 
-AI별 스킬은 [스킬 표](docs/skills.md), 자세한 구성과 이유는 [구성 설계](docs/setup-design.md), 세 AI의 차이는 [비교](docs/comparison.md)에 있다.
+## 스킬
+
+세 AI가 같은 작업 절차를 쓰도록 맞춘다. Hermes에서 쓰는 OMH 워크플로와 Hermes가 작업 중 만든 교훈 스킬을 Claude Code·Codex에도 설치한다. 스킬별 상세는 [스킬 표](docs/skills.md)에 있다.
+
+| 묶음 | 개수 | 내용 | Claude Code | Codex | Hermes |
+|---|---|---|---|---|---|
+| 작업 원칙 | 16 | coding-plan·coding-work·coding-handoff·coding-status·coding-research·coding-repair·coding-code-review·coding-verification·coding-design-review·coding-failure-audit·coding-debt-audit·coding-ai-slop-review·diagnosing-bugs·tdd·ponytail·product-design-review | ✅ | ✅ | OMH가 같은 일 |
+| 도구·글쓰기 | 10 | codegraph-context·gam-memory·coding-maintenance·agent-setup-maintenance·aside-browser·humanize-korean·humanizer·writing-for-agents·shadcn·shadcn-lint | ✅ | ✅ | ✅ (writing-for-agents 제외) |
+| Hermes 작업 교훈 | 22 | 운영 실패 진단·관리 API 일괄 작업·서비스 인프라 설계·읽기 모델 성능·SQLite 시험 기록·서브프로세스 기한·미디어 제작·모바일 앱 베타·Android 기기 검증·참고 링크 도입 검토 등 | ✅ | ✅ | ✅ |
+| OMH 워크플로 | 142 | 계획(planner 19)·검토(reviewer 22)·운영(operator 38)·안내(guide 20)·추적(tracker 18)·ultrawork 9·조사(researcher 8)·기억(memory-keeper 5)·인계(handoff-guide 3) | ✅ 사본 | ✅ 사본 | ✅ OMH 설치기 |
+| 외부 업무 | 37 | Azure·Entra 26, Azure 비용 4, 마케팅 5 (seo-audit·aso·analytics·cro·copywriting), archify, iterative-retrieval | ✅ | ✅ | ✅ |
+| Hermes 공식 | 57 | Hermes 내장 도구용 스킬 (메일·문서·미디어·연구 등) | — | — | ✅ |
+| 실행기 전용 | 1 | codex: GPT 항목을 Codex 플러그인으로 넘기고 결과 회수 | ✅ | — | — |
+
+Claude Code·Codex의 전역 지침은 OMH 스킬이 쓰는 Hermes 도구 이름(`omh_todo`, `omh_memory`, `delegate_task` 등)을 각 실행기의 할 일 목록·GAM·위임으로 대응시킨다.
+
+## 저장 데이터 보존
+
+대화 기록은 세 AI 모두 90일, 재생성 가능한 자료와 생성물은 더 짧게 보존한다. 모든 항목은 기간이 지나도 **최신 3개**를 남기고, 그 뒤 새로 생긴 항목이 기간을 넘기면 다음 정리 때 지운다. 정책 원본은 [`shared/retention/policy.json`](shared/retention/policy.json), 실행은 [`scripts/retention.py`](scripts/retention.py)다.
+
+| 대상 | 저장 형식 | 보존 | 정리 방식 |
+|---|---|---|---|
+| Hermes 대화 (`state.db`) | SQLite | 90일 | Hermes 내장 자동 정리 (`sessions.retention_days`) |
+| Claude Code 대화 | JSONL | 90일 | Claude Code 내장 (`cleanupPeriodDays`) |
+| Codex 대화 (`~/.codex/sessions`, `archived_sessions`) | JSONL | 90일 | 주간 정리 |
+| Codex 생성 이미지 | PNG 폴더 | 30일 | 주간 정리 |
+| Hermes 백업 (`backups/`) | 폴더 | 30일 | 주간 정리 |
+| Hermes 명령 출력·화면 캡처·위임 기록 (`cache/`) | 파일 | 14일 | 주간 정리 (`cache/scratch`는 Hermes가 24시간마다 정리) |
+| CodeGraph 색인 (저장소별 `.codegraph/`) | SQLite | 30일 미사용 | 주간 정리. 필요할 때 다시 색인 |
+| GAM 임시 기억 (`temporary` + `expires:` 태그) | Markdown 원본 + SQLite 색인 | 만료일까지 | 주간 보관 처리 (영구 삭제 없음) |
+
+```sh
+python3 scripts/retention.py              # 미리보기
+python3 scripts/retention.py configure    # Hermes·Claude 내장 보존 기간 설정
+python3 scripts/retention.py schedule     # macOS launchd 주간 작업 등록 (일요일 04:30)
+```
+
+CodeGraph 색인을 찾을 폴더는 컴퓨터마다 `~/Library/Application Support/agent-setup/retention.json`의 `codegraph_roots`에 적는다. 주간 작업은 이 저장소 체크아웃 경로의 스크립트를 실행하므로, 저장소를 옮기면 `schedule`을 다시 실행한다.
 
 ## 설치 뒤
 

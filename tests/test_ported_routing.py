@@ -48,10 +48,22 @@ class PortedRoutingTests(unittest.TestCase):
                 self.assertEqual((hermes / rel).read_bytes(), (shared / rel).read_bytes(), f"{name}/{rel}")
 
     def test_shared_core_has_no_personal_or_executor_paths(self):
+        omh = ROOT / "shared/skills/omh"
         for path in (ROOT / "shared/skills").rglob("*.md"):
             text = path.read_text()
-            for bad in ("/Users/", "~/.hermes", "omh runtime", "Codex-Setup/03-skills"):
+            # OMH skills are upstream copies; executor mapping lives in shared/rules/omh.md.
+            checks = ("/Users/",) if omh in path.parents else ("/Users/", "~/.hermes", "omh runtime", "Codex-Setup/03-skills")
+            for bad in checks:
                 self.assertNotIn(bad, text, f"{path}: {bad}")
+
+    def test_omh_copy_records_its_upstream_version(self):
+        source = json.loads((ROOT / "shared/skills/omh/SOURCE.json").read_text())
+        skills = list((ROOT / "shared/skills/omh").glob("*/SKILL.md"))
+        self.assertEqual(source["skills"], len(skills))
+        self.assertTrue(source["version"])
+        for skill in skills:
+            head = skill.read_text().split("---")[1]
+            self.assertIn("\ndescription: \"", head, str(skill))
 
 
 if __name__ == "__main__":

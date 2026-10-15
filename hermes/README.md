@@ -31,6 +31,7 @@ GPT 넉넉형을 원하면 위 요청의 모델 라우팅 줄만 다음으로 �
 - [Desktop UI 크기](docs/desktop-ui.md): 기존 ChatGPT·Claude 앱 기준으로 창·글자·UI 배율 맞춤
 - [사용량 표시 제한](docs/provider-usage.md): GPT·Claude만 상태바·패널·알림에 표시
 - [브라우저](docs/browsers.md): Aside·Chrome·Edge·Safari 연결과 프로필 가져오기
+- [Discord 연동 (선택)](docs/discord.md): 프로젝트별 채널, Desktop 작업 결과 보고, 3일 경과 스레드·채팅 정리
 - [검증 상태](docs/verification.md): 확인한 결과와 남은 검사
 
 스킬은 작업 방법을 가르치는 문서와 보조 파일이다. `AGENTS.md`는 프로젝트 규칙이다. 플러그인은 특정 프로그램의 확장이다. 여기의 `provider-usage`는 Hermes용이므로 Codex나 Claude Code에 그대로 설치하지 않는다. 외부 CLI·MCP는 지원하는 다른 프로그램에서도 사용할 수 있다.

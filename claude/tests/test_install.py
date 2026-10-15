@@ -36,7 +36,7 @@ class InstallTests(unittest.TestCase):
         self.assertTrue((self.home / "skills/coding-work/SKILL.md").is_file())
         self.assertTrue((self.home / "skills/aside-browser/SKILL.md").is_file())
         self.assertTrue((self.home / "skills/codex/SKILL.md").is_file())
-        self.assertFalse((self.home / "skills/read-model-performance-safety").exists())
+        self.assertTrue((self.home / "skills/read-model-performance-safety/SKILL.md").is_file())
         routing = json.loads((self.home / "agent-setup/routing.json").read_text())
         self.assertEqual(routing["preset"], "claude-generous")
         first = routing["categories"]["ultrabrain"]["chain"][0]

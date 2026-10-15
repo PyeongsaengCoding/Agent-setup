@@ -26,11 +26,11 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 
 ### 원칙
 
-- OMH 배포 스킬은 Hermes 런타임(`omh runtime record`, SOUL.md 페르소나, 카드 스키마, OMH 상호 호출)을 사용한다. Claude Code·Codex는 각 실행기용 공통 스킬을 쓴다. 화면 작업의 `product-design-review`는 OMH frontend·visual-qa를 기준으로 직접 구현·검증한다. 레지스트리·차트·스타일 세부 기준은 OMH `main`의 2026-10-09 고정 커밋을 참고한다.
+- OMH 스킬 142개는 Hermes에서는 OMH 설치기로, Claude Code·Codex에서는 `shared/skills/omh/` 사본으로 설치한다. 사본은 `scripts/import_omh_skills.py`가 설치된 OMH에서 가져와 frontmatter만 정리하고 버전을 `SOURCE.json`에 남긴다. Claude Code·Codex 전역 지침의 `OMH 워크플로 스킬` 절이 `omh_*` 도구를 각 실행기의 할 일 목록·GAM·위임·CodeGraph·파일 기록으로 대응시킨다. 화면 작업의 `product-design-review`는 OMH frontend·visual-qa를 기준으로 직접 구현·검증한다. 레지스트리·차트·스타일 세부 기준은 OMH `main`의 2026-10-09 고정 커밋을 참고한다.
 - 공통 스킬 원본은 `shared/skills/core/` 한 곳이다. Claude 설치기와 Codex 설치기가 같은 원본을 설치하고, 실행기마다 다른 내용은 전역 AGENTS.md의 `모델 라우팅` 구간이 맡는다.
 - 직접 관리하는 선택 스킬은 `shared/skills/packs/`에, 외부 스킬 목록은 실행기별 manifest에 둔다. 현재 설치기는 외부 스킬 37개를 기본 대상으로 처리한다. 선택 설치로 바꾸는 작업은 7절의 예정 항목이다.
 
-### 공통 핵심 26개 (`shared/skills/core/`, Claude Code·Codex)
+### 공통 핵심 48개 (`shared/skills/core/`, Claude Code·Codex·Hermes)
 
 | 스킬 | 출처 | 조정 |
 |---|---|---|
@@ -47,6 +47,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | humanize-korean | 새로 작성 | 한국어 번역투·상투 표현 교정. 영문은 외부 humanizer |
 | agent-setup-maintenance | codex-setup-maintenance 재작성 | 세 실행기 공통 설정 변경 절차 |
 | gam-memory, coding-maintenance | Codex-Setup | Codex 전용에서 공통으로 이동. GAM은 세 AI 공통 기억 도구 |
+| Hermes 작업 교훈 22개 (bounded-*, production-*, service-infrastructure-design 등) | Hermes가 작업 중 만든 스킬 | 개인 경로·계정·프로젝트 이름과 Hermes 도구 이름을 걷어낸 공개본. 세 AI 모두 기본 설치 |
 
 출처·라이선스는 [shared/skills/SOURCES.md](../shared/skills/SOURCES.md)에 있다.
 
@@ -55,10 +56,10 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | 실행기 | 위치 | 스킬 |
 |---|---|---|
 | Claude Code | `claude/skills/` | `codex`: GPT 항목·사용자 지정·독립 리뷰 때 Codex 플러그인으로 넘기고 결과 회수, 실패 시 다음 항목 |
-| Codex | — | 전용 스킬 없음 (공통 26개 + 외부 37개) |
-| Hermes | `hermes/manifest.json` | Hermes 공식 스킬 57개 + 공통 10개(shadcn, shadcn-lint, gam-memory, coding-maintenance, codegraph-context, aside-browser, agent-setup-maintenance, humanize-korean, humanizer, desktop-app-provisioning), OMH |
+| Codex | — | 전용 스킬 없음 (공통 48개 + OMH 142개 + 외부 37개) |
+| Hermes | `hermes/manifest.json` | Hermes 공식 스킬 57개 + 공통 32개(도구·기준 10개와 Hermes 작업 교훈 공개본 22개), OMH |
 
-설치 결과: Claude Code 64개(공통 26 + codex + 외부 37), Codex 63개(공통 26 + 외부 37), Hermes 104개(공식 57 + 공통 10 + 외부 37) + OMH 142개. 스킬별 표는 [스킬 표](skills.md).
+설치 결과: Claude Code 228개(공통 48 + OMH 142 + codex + 외부 37), Codex 227개(공통 48 + OMH 142 + 외부 37), Hermes 126개(공식 57 + 공통 32 + 외부 37) + OMH 142개. 스킬별 표는 [스킬 표](skills.md).
 
 ### 선택 묶음
 

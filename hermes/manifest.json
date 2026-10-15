@@ -754,6 +754,248 @@
       "extra_install": "Node.js; 대상 프로젝트의 ESLint/Oxlint",
       "extra_path": "shadcn-ui/lint SETUP.md 기반",
       "local_modified": false
+    },
+    {
+      "name": "bounded-resource-usage-ledgers",
+      "description": "실행 단위 자원 사용 기록에 상한 두기",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/bounded-resource-usage-ledgers",
+      "install_path": "skills/bounded-resource-usage-ledgers",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "durable-sqlite-test-ledger",
+      "description": "중단에도 안전한 SQLite 시험 기록",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/durable-sqlite-test-ledger",
+      "install_path": "skills/durable-sqlite-test-ledger",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "isolated-read-batch-fences",
+      "description": "가변 상태가 있는 읽기 도구 병렬화",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/isolated-read-batch-fences",
+      "install_path": "skills/isolated-read-batch-fences",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "saved-source-contention-fences",
+      "description": "저장 원본 경합 재시도 보호",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/saved-source-contention-fences",
+      "install_path": "skills/saved-source-contention-fences",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "read-model-performance-safety",
+      "description": "느린 읽기 모델 개선 시 접근 검사 유지",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/read-model-performance-safety",
+      "install_path": "skills/read-model-performance-safety",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "semantic-knowledge-lifecycle",
+      "description": "LLM 기억·지식 보존 범위 설계",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/semantic-knowledge-lifecycle",
+      "install_path": "skills/semantic-knowledge-lifecycle",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "production-failure-diagnosis",
+      "description": "저장된 운영 실패의 원인 추적",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/production-failure-diagnosis",
+      "install_path": "skills/production-failure-diagnosis",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "production-admin-api-operations",
+      "description": "운영 관리 API 일괄 작업 작성",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/production-admin-api-operations",
+      "install_path": "skills/production-admin-api-operations",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "product-monetization-requirements",
+      "description": "유료 이용·광고 제거·갱신 요구 정의",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/product-monetization-requirements",
+      "install_path": "skills/product-monetization-requirements",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "service-infrastructure-design",
+      "description": "서비스 인프라 재설계",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/service-infrastructure-design",
+      "install_path": "skills/service-infrastructure-design",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "setup-repository-authoring",
+      "description": "재현 가능한 환경 설정 저장소 작성",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/setup-repository-authoring",
+      "install_path": "skills/setup-repository-authoring",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "mobile-app-portfolio-delivery",
+      "description": "여러 모바일 앱을 베타까지 진행",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/mobile-app-portfolio-delivery",
+      "install_path": "skills/mobile-app-portfolio-delivery",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "media-production-orchestration",
+      "description": "생성 미디어 일괄 제작 조율",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/media-production-orchestration",
+      "install_path": "skills/media-production-orchestration",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "blog-motion-preview-pillow-ffmpeg",
+      "description": "블로그용 짧은 GIF/MP4 만들기",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/blog-motion-preview-pillow-ffmpeg",
+      "install_path": "skills/blog-motion-preview-pillow-ffmpeg",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "android-device-validation",
+      "description": "Android 기기 설치·동작 확인",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/android-device-validation",
+      "install_path": "skills/android-device-validation",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "atomic-firewall-bootstrap-tests",
+      "description": "방화벽 부트스트랩 스크립트 오프라인 수정",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/atomic-firewall-bootstrap-tests",
+      "install_path": "skills/atomic-firewall-bootstrap-tests",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "backend-independent-rereview",
+      "description": "수정된 Python 백엔드를 실제 요청으로 재검토",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/backend-independent-rereview",
+      "install_path": "skills/backend-independent-rereview",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "bounded-private-evidence-reads",
+      "description": "비공개 근거 읽기·업로드 감사 범위 제한",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/bounded-private-evidence-reads",
+      "install_path": "skills/bounded-private-evidence-reads",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "bounded-subprocess-pipe-io",
+      "description": "Popen 파이프 입출력에 기한 적용",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/bounded-subprocess-pipe-io",
+      "install_path": "skills/bounded-subprocess-pipe-io",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "clock-fenced-offline-integration",
+      "description": "시각 기준 오프라인 통합 확인",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/clock-fenced-offline-integration",
+      "install_path": "skills/clock-fenced-offline-integration",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "future-effective-memory-tdd",
+      "description": "미래 시점 적용 기억 갱신을 TDD로 수정",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/future-effective-memory-tdd",
+      "install_path": "skills/future-effective-memory-tdd",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
+    },
+    {
+      "name": "project-reference-adoption",
+      "description": "참고 링크의 프로젝트 도입 검토",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/project-reference-adoption",
+      "install_path": "skills/project-reference-adoption",
+      "extra_install": "",
+      "extra_path": "Hermes 작업 교훈 공개본",
+      "local_modified": false
     }
   ]
 }

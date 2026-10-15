@@ -4,9 +4,9 @@ import argparse,datetime,hashlib,json,os,re,shutil,subprocess,sys,tempfile,time,
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def skill_sources(root=None):
- # Shared core skills (Agent-setup/shared/skills/core) first, then Codex-only skills.
+ # Shared core skills, OMH workflow skills (Hermes has them natively), then Codex-only skills.
  root=Path(root or ROOT)
- return [p for p in (root.parent/'shared'/'skills'/'core',root/'skills') if p.is_dir()]
+ return [p for p in (root.parent/'shared'/'skills'/'core',root.parent/'shared'/'skills'/'omh',root/'skills') if p.is_dir()]
 def skill_dir(name,root=None):
  for base in skill_sources(root):
   if (base/name/'SKILL.md').is_file():return base/name

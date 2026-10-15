@@ -2,7 +2,7 @@
 
 `H`는 `${HERMES_HOME:-$HOME/.hermes}`다. 기본은 `~/.hermes/`, 이름 있는 프로필은 `~/.hermes/profiles/<이름>/`이다. `$(brew --prefix)`는 설치 대상인 Apple Silicon에서 보통 `/opt/homebrew`다. npm·uv·Go 실행 파일 위치는 각 관리자의 설정을 따른다.
 
-비-OMH 스킬 67개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 10개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint)다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
+비-OMH 스킬 89개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 32개다. 공통 스킬은 도구·기준 10개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint)와 Hermes 작업 교훈 공개본 22개다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
 
 | 종류 | 항목 | 용도 | 설치 기준·추가 준비 | 일반 설치 경로 | 추가 도구·설정 경로 |
 |---|---|---|---|---|---|
@@ -13,6 +13,9 @@
 | 확장·스킬팩 | OMH | 작업 분류·라우팅·검증 지침 | 필수; 공식 install·setup | `~/.omh/`; `~/.local/share/omh/` | Hermes 등록 `H/plugins/omh/`; 스킬 실제 경로는 `skills.external_dirs` 확인 |
 | 런타임 호환 패치 | 자식 fallback 순서·추론 | Fable 시작·GPT 시작 경로의 순서와 작업별 추론 유지 | 설치본에 순서·추론 보완이 필요할 때만 미리보기·적용·새 프로세스 검증 | 실제 소스의 `agent/chat_completion_helpers.py`, `tools/delegate_tool_config.py` | `scripts/configure_delegation_reasoning.py`, `scripts/configure_gpt_fallback.py`; [적용 기준](docs/model-routing.md) |
 | Hermes 플러그인 | provider-usage | GPT·Claude 사용량·잔여 한도·리셋 시간 | 필수; 설치·활성화·[GPT·Claude만 표시](docs/provider-usage.md)·실제 조회 | `H/plugins/provider-usage/` | Desktop UI `H/desktop-plugins/provider-usage/`; 표시 어댑터 `scripts/configure_provider_usage.py`; 인증은 사용자의 로컬 저장소 |
+| Hermes 플러그인 | discord-project-sidebar | Discord 세션을 Desktop 프로젝트 아래에 표시 | 선택; Discord 사용 시 [연동 안내](docs/discord.md) | `H/plugins/discord-project-sidebar/` | 원본 `discord/plugins/`; 프로젝트 지도는 `discord.channel_prompts` |
+| Hermes 플러그인 | desktop-discord-reports | Desktop 작업 결과를 프로젝트 채널 스레드로 보고 | 선택; Discord 사용 시 | `H/plugins/desktop-discord-reports/` | 원본 `discord/plugins/`; 스레드 대응 `H/state/desktop-discord-threads.json` |
+| 예약 스크립트 | discord-project-hygiene | 3일 경과 스레드·Desktop 채팅 삭제(그룹별 최근 3개 유지) | 선택; Discord 사용 시 no-agent cron | `H/scripts/discord-project-hygiene.py` | 원본 `discord/scripts/`; 봇 스레드 관리 권한 |
 | Hermes UI 확장 | OMH Desktop·TUI | 상태·작업 표시 | OMH setup에서 선택한 UI 연결 | `H/desktop-plugins/omh/`; `H/tui-widgets/omh-status.mjs` | 설치 여부·표시는 별도 확인 |
 | 프로젝트 지침 | AGENTS.md | 저장소 작업 규칙 | Agent-setup 루트와 Hermes 폴더 지침 | `Agent-setup/AGENTS.md`, `Agent-setup/hermes/AGENTS.md` | 다른 프로젝트는 각 프로젝트 루트 |
 | 전역 규칙 | 공통 작업 원칙, Aside 브라우저 직접 조작, 문서 전달 | 작업 원칙·표현·프로젝트 지침·CodeGraph; Aside `repl` 직접 조작; 문서 전달 시 폴더 카드 제공·앱 자동 실행 금지 | `scripts/install_global_rules.py`로 중복 없이 추가; 기존 규칙 충돌 시 보존·확인 | `H/SOUL.md` | 원본 `templates/common-rules.md`(Agent-setup `shared/rules/`에서 생성), `templates/aside-browser.md`, `templates/document-delivery.md`; 브라우저 프로필은 프로젝트 규칙 |
@@ -83,6 +86,28 @@
 | 스킬 | blocked-page-recovery | 차단·로그인 벽 페이지 접근 복구 | 공식 원본; 허용된 브라우저/검색 경로 | `H/skills/web/blocked-page-recovery/` | Hermes 브라우저·제공자 설정 |
 | 스킬 | shadcn | shadcn/ui 컴포넌트 추가·검색·구성·스타일 (공식 스킬) | Agent-setup 공통 스킬; Node.js; 프로젝트 패키지 실행기(npx 등) | `H/skills/shadcn/` | shadcn-ui/ui 공식 스킬 원본 |
 | 스킬 | shadcn-lint | @shadcn/lint 설치·등록·규칙 안내 | Agent-setup 공통 스킬; Node.js; 대상 프로젝트의 ESLint/Oxlint | `H/skills/shadcn-lint/` | shadcn-ui/lint SETUP.md 기반 |
+| 스킬 | bounded-resource-usage-ledgers | 실행 단위 자원 사용 기록에 상한 두기 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/bounded-resource-usage-ledgers/` | — |
+| 스킬 | durable-sqlite-test-ledger | 중단에도 안전한 SQLite 시험 기록 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/durable-sqlite-test-ledger/` | — |
+| 스킬 | isolated-read-batch-fences | 가변 상태가 있는 읽기 도구 병렬화 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/isolated-read-batch-fences/` | — |
+| 스킬 | saved-source-contention-fences | 저장 원본 경합 재시도 보호 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/saved-source-contention-fences/` | — |
+| 스킬 | read-model-performance-safety | 느린 읽기 모델 개선 시 접근 검사 유지 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/read-model-performance-safety/` | — |
+| 스킬 | semantic-knowledge-lifecycle | LLM 기억·지식 보존 범위 설계 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/semantic-knowledge-lifecycle/` | — |
+| 스킬 | production-failure-diagnosis | 저장된 운영 실패의 원인 추적 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/production-failure-diagnosis/` | — |
+| 스킬 | production-admin-api-operations | 운영 관리 API 일괄 작업 작성 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/production-admin-api-operations/` | — |
+| 스킬 | product-monetization-requirements | 유료 이용·광고 제거·갱신 요구 정의 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/product-monetization-requirements/` | — |
+| 스킬 | service-infrastructure-design | 서비스 인프라 재설계 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/service-infrastructure-design/` | — |
+| 스킬 | setup-repository-authoring | 재현 가능한 환경 설정 저장소 작성 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/setup-repository-authoring/` | — |
+| 스킬 | mobile-app-portfolio-delivery | 여러 모바일 앱을 베타까지 진행 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/mobile-app-portfolio-delivery/` | — |
+| 스킬 | media-production-orchestration | 생성 미디어 일괄 제작 조율 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/media-production-orchestration/` | — |
+| 스킬 | blog-motion-preview-pillow-ffmpeg | 블로그용 짧은 GIF/MP4 만들기 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/blog-motion-preview-pillow-ffmpeg/` | — |
+| 스킬 | android-device-validation | Android 기기 설치·동작 확인 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/android-device-validation/` | — |
+| 스킬 | atomic-firewall-bootstrap-tests | 방화벽 부트스트랩 스크립트 오프라인 수정 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/atomic-firewall-bootstrap-tests/` | — |
+| 스킬 | backend-independent-rereview | 수정된 Python 백엔드를 실제 요청으로 재검토 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/backend-independent-rereview/` | — |
+| 스킬 | bounded-private-evidence-reads | 비공개 근거 읽기·업로드 감사 범위 제한 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/bounded-private-evidence-reads/` | — |
+| 스킬 | bounded-subprocess-pipe-io | Popen 파이프 입출력에 기한 적용 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/bounded-subprocess-pipe-io/` | — |
+| 스킬 | clock-fenced-offline-integration | 시각 기준 오프라인 통합 확인 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/clock-fenced-offline-integration/` | — |
+| 스킬 | future-effective-memory-tdd | 미래 시점 적용 기억 갱신을 TDD로 수정 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/future-effective-memory-tdd/` | — |
+| 스킬 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/project-reference-adoption/` | — |
 | 외부 스킬 | Azure·Entra 26, Azure 비용 4, 마케팅 5, archify, iterative-retrieval (37개) | Codex·Claude Code와 같은 업무 스킬 | Agent-setup 외부 목록 `codex/inventories/external-skills.json`의 고정 원본; 설명 조정 `codex/config/skill-descriptions.json` | `H/skills/<스킬명>/` | 설치 기록은 Agent-setup 상태 경로의 별도 잠금 파일 |
 
 출처와 설치 기준은 [manifest.json](manifest.json), 실행 방법은 [설치 안내](INSTALL_FOR_AGENTS.md)에 있다. Hermes 기본 내장 플러그인을 전부 복제하지 않는다.

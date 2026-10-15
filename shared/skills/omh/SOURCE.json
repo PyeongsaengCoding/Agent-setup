@@ -1,0 +1,11 @@
+{
+  "package": "oh-my-hermes",
+  "upstream": "https://github.com/rlaope/oh-my-hermes",
+  "version": "3.0.2",
+  "license": "MIT (../LICENSE-OMH)",
+  "skills": 142,
+  "installed_for": [
+    "codex",
+    "claude"
+  ]
+}

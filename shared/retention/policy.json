@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "conversation_days": 90,
+  "keep_latest_default": 3,
+  "schedule": {"weekday": 0, "hour": 4, "minute": 30},
+  "builtin": [
+    {"id": "hermes-sessions", "executor": "hermes", "setting": "sessions.retention_days", "value": 90, "also": {"sessions.auto_prune": true}},
+    {"id": "claude-transcripts", "executor": "claude", "setting": "cleanupPeriodDays", "value": 90},
+    {"id": "hermes-scratch", "executor": "hermes", "setting": "built-in 24h prune of {hermes_home}/cache/scratch", "value": 1}
+  ],
+  "items": [
+    {"id": "codex-sessions", "executor": "codex", "root": "{codex_home}/sessions", "select": "files", "glob": "**/rollout-*.jsonl", "days": 90, "keep_latest": 3},
+    {"id": "codex-archived-sessions", "executor": "codex", "root": "{codex_home}/archived_sessions", "select": "files", "glob": "**/*.jsonl", "days": 90, "keep_latest": 3},
+    {"id": "codex-generated-images", "executor": "codex", "root": "{codex_home}/generated_images", "select": "entries", "glob": "*", "days": 30, "keep_latest": 3},
+    {"id": "hermes-backups", "executor": "hermes", "root": "{hermes_home}/backups", "select": "entries", "glob": "*", "days": 30, "keep_latest": 3},
+    {"id": "hermes-terminal-output", "executor": "hermes", "root": "{hermes_home}/cache/terminal-output", "select": "files", "glob": "*", "days": 14, "keep_latest": 3},
+    {"id": "hermes-exec-output", "executor": "hermes", "root": "{hermes_home}/cache/exec", "select": "files", "glob": "*", "days": 14, "keep_latest": 3},
+    {"id": "hermes-screen-captures", "executor": "hermes", "root": "{hermes_home}/cache/images", "select": "files", "glob": "*", "days": 14, "keep_latest": 3},
+    {"id": "hermes-computer-use", "executor": "hermes", "root": "{hermes_home}/cache/computer_use", "select": "files", "glob": "*", "days": 14, "keep_latest": 3},
+    {"id": "hermes-delegation-transcripts", "executor": "hermes", "root": "{hermes_home}/cache/delegation/live", "select": "entries", "glob": "*", "days": 14, "keep_latest": 3},
+    {"id": "hermes-blocked-scripts", "executor": "hermes", "root": "{hermes_home}/cache/blocked-scripts", "select": "files", "glob": "*", "days": 30, "keep_latest": 3},
+    {"id": "codegraph-indexes", "executor": "shared", "select": "codegraph", "days": 30, "keep_latest": 3}
+  ],
+  "gam": {"temporary_expiry_archive": true, "hard_delete": false}
+}

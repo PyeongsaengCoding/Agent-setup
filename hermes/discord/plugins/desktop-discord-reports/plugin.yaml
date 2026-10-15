@@ -1,0 +1,4 @@
+name: desktop-discord-reports
+version: "0.1.0"
+requires_hermes: ">=0.21.0"
+description: Posts results of long Desktop chat turns to the project's Discord channel thread.

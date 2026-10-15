@@ -122,7 +122,7 @@ class SourceTests(unittest.TestCase):
         self.assertIn('coding-plan', result)
         self.assertIn('aside-browser', result)
         self.assertIn('gam-memory', result)
-        self.assertNotIn('read-model-performance-safety', result)
+        self.assertIn('read-model-performance-safety', result)
         self.assertNotIn('codex-setup-maintenance', result)
 
     def test_duplicate_names_across_sources_are_refused(self):

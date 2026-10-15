@@ -9,7 +9,7 @@
 | 라우팅 원본 | codex/11-working-method.md, codex/config/models.json | claude/routes/claude-code.json (실행기별 정책을 시험으로 대조) | hermes/routing-presets/*.json |
 | 위임 | Codex 네이티브 위임의 model·reasoning_effort (GPT 모델) | Claude 모델은 route-<분류>-<계열> 에이전트, GPT 모델은 Codex 플러그인 codex:codex-rescue | OMH 라우팅 + delegate_task |
 | fallback | 지정 조합을 쓸 수 없으면 제약 보고 | 전역 규칙에 따라 주 에이전트가 다음 항목으로 넘김 | 분류별 후보·전역·자식 공통 fallback + 소스 호환 패치 |
-| 스킬 | 63개 (공통 26 + 외부 37), ~/.agents/skills/ | 64개 (공통 26 + codex + 외부 37), ~/.claude/skills/ | 104개 (공식 57 + 공통 10 + 외부 37) + OMH, $HERMES_HOME/skills/ |
+| 스킬 | 227개 (공통 48 + OMH 142 + 외부 37), ~/.agents/skills/ | 228개 (공통 48 + OMH 142 + codex + 외부 37), ~/.claude/skills/ | 126개 (공식 57 + 공통 32 + 외부 37) + OMH, $HERMES_HOME/skills/ |
 | 기억·코드 탐색 | GAM·CodeGraph MCP, Ollama 임베딩 | GAM·CodeGraph MCP | GAM·CodeGraph MCP + Hermes 메모리 |
 | 전역 지침 | $CODEX_HOME/AGENTS.md·working-method.md·models.json | ~/.claude/AGENTS.md 관리 구간(+ CLAUDE.md의 `@AGENTS.md`), ~/.claude/agent-setup/routing.json | $HERMES_HOME/SOUL.md 관리 구간 |
 | 브라우저 | Aside repl 직접 조작 규칙 | Aside repl 직접 조작 규칙 | Aside repl 직접 조작 규칙 |
@@ -20,7 +20,7 @@
 ## 모델
 
 - Codex: Astra·Sol·Luna 계열 (gpt-6-astra, gpt-6.1-sol, gpt-6-luna)
-- Claude Code: Hermes와 같은 GPT·Claude 혼합 순서. Claude 항목은 claude-fable-5-1·claude-opus-5-5·claude-sonnet-5-5·claude-haiku-4-5, GPT 항목은 gpt-6-astra·gpt-6.1-sol·gpt-6-luna
+- Claude Code: `claude/routes/claude-code.json`의 GPT·Claude 혼합 순서. Claude 항목은 claude-fable-5-1·claude-opus-5-5·claude-sonnet-5-5·claude-haiku-4-5, GPT 항목은 gpt-6-astra·gpt-6.1-sol·gpt-6-luna. Hermes 프리셋에서 가져온 정책을 Claude Code 원본에서 독립적으로 관리한다.
 - Hermes: GPT·Claude 혼합 후보, Claude 넉넉형·GPT 넉넉형 프리셋
 
 ## Hermes에서 옮긴 기능

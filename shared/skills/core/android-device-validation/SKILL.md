@@ -1,0 +1,31 @@
+---
+name: android-device-validation
+description: Use when installing and checking Android apps on devices.
+---
+
+# Android device validation
+
+## Procedure
+
+1. Classify the current request as a connection question, installation, or device-flow verification before selecting commands. For a connection question, inspect `adb devices -l` and explain the observed connection; keep builds, asset sync, source edits, installation, and UI inspection scoped to an explicit task that needs them. Read the project's device, signing, and data-preservation contract when installation or verification is requested. Resolve the selected device from the current request and prior explicit selection, then confirm its model with `adb -s "$SERIAL" shell getprop ro.product.model` before targeting it. If the user reserves screen verification for themselves, perform the approved installation and artifact readback and leave screen navigation and capture to them.
+2. Interpret informal remote-connection terms using the intended task and the project's documented connection method. Run `adb devices -l` first and reuse a connected intended device. When reconnection is needed, run `adb mdns services` and try discovered `_adb-tls-connect._tcp` endpoints with a bounded subprocess timeout, then refresh devices and verify the model. Discovery can contain multiple endpoints for one device; try the other discovered endpoint after a connection timeout before asking for an address. Use `adb pair "$PAIR_ENDPOINT"` for registration and `adb connect "$CONNECT_ENDPOINT"` for connection, taking each endpoint from its corresponding device screen or discovery result. Keep these endpoints distinct because pairing and connection use separate ports. Reuse an existing pairing registration; request a fresh pairing code when registration needs to be established again. If discovery fails and the previous connection endpoint has changed, request the current connection address. For questions about sending the address every time, give a short answer covering registration reuse, the condition that requires a new address, and the currently observed connection.
+3. Inspect the current installation and the candidate artifact. Establish that the artifact contains the requested change; a repeated version number alone cannot establish freshness. For a 'latest?' question, pull the installed APK, compare its hash with the candidate, compare bundled entry bytes with the current frontend build, and check whether relevant source changes remain outside that build. Report each boundary separately. For bundled-web updates, build the frontend, run the project's asset-sync command, then build the signed release. Compare the APK's actual bundled entry bytes with the current frontend build and record the APK hash. When a dirty workspace contains other features, distinguish the installed workspace artifact from the scoped commit, because these can contain different changes. Keep an accepted installation task open until the final requested UI revision reaches the device: pairing, local build success and local screenshots each establish only their own stage. After mid-task UI corrections, rebuild and repeat exact installed-artifact readback rather than relying on the preceding installation.
+4. Verify the existing and candidate APK signatures using `apksigner verify --verbose --print-certs`. For an authorized data-preserving update, run `adb -s "$SERIAL" install -r "$APK"`. Pause for explicit approval if satisfying installation would require removing the existing app and its data.
+5. Read back the installed package's version and update time with `adb -s "$SERIAL" shell dumpsys package "$PACKAGE"`. For bundled-web updates, pull the installed APK and compare its hash with the candidate to establish which artifact reached the device. When device-flow verification is requested, launch the known activity with `adb -s "$SERIAL" shell am start -n "$ACTIVITY"` and continue through steps 6–7. When the user owns screen verification, finish with installation and readback evidence.
+6. Exercise the requested user flow on that exact device. When the user asks to see the result, select the relevant feature and leave its controls and changed content visible. Scroll past fixed playback controls as needed; an app launch alone provides weaker evidence than the requested screen.
+7. Capture and inspect the final device screen. Read `references/screenshot-capture.md` for binary-safe capture and foldable-display handling. Perform coordinate taps only from a current inspected screenshot; re-capture after every transition before choosing the next target. After installation, wait for the observed loading state to settle before judging the screen. Keep foldable inner-display evidence separate from cover-display and narrow web viewport evidence, because a wide physical phone screen can activate the desktop layout. Bind every screenshot claim to the final installed revision and identify earlier-build captures as earlier evidence.
+8. Report the target device, installation evidence, and the actual visible result briefly. Separate successful update installation from observed login/data preservation: claim the latter only after checking the corresponding user state. If installation was completed earlier, say that it is already installed and describe the new verification accurately.
+
+## Completion gates
+
+Apply the gates for the requested scope:
+
+- Connection question: the answer distinguishes registration and connection endpoints and reflects live ADB observations when a current connection is claimed.
+- Installation: the intended device model is confirmed, the candidate artifact is tied to the requested change, and installation plus package/artifact readback succeed.
+- Device-flow verification: the requested feature is visible on the intended device and the final screenshot is inspected.
+- User-owned screen verification: report installation evidence and identify screen behavior as awaiting the user's check.
+- Data and session claims reflect observed checks, with unverified state stated plainly.
+
+## Scope
+
+Use this workflow for local Android installation, remote device inspection, and user-visible feature verification. Store submission and staged rollout planning belong in the mobile-release workflow.

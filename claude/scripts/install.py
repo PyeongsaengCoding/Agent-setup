@@ -29,8 +29,8 @@ RULES_END = "<!-- agent-setup:rules:end -->"
 POINTER = "@AGENTS.md"
 BLOCK_FILES = ("AGENTS.md", "CLAUDE.md")
 STATE = "agent-setup/installed.json"
-# Shared core skills for every executor, then Claude-only skills.
-SKILL_SOURCES = [ROOT.parent / "shared" / "skills" / "core", ROOT / "skills"]
+# Shared core skills, OMH workflow skills (Hermes has them natively), then Claude-only skills.
+SKILL_SOURCES = [ROOT.parent / "shared" / "skills" / "core", ROOT.parent / "shared" / "skills" / "omh", ROOT / "skills"]
 
 
 class Conflict(RuntimeError):

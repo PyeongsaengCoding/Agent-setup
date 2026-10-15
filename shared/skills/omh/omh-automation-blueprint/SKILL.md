@@ -1,0 +1,142 @@
+---
+name: omh-automation-blueprint
+description: "[omh] Recurring Hermes job on a schedule (cron, digests): design recurring Hermes operations with schedule, delivery, silence policy, context chain, and prepared-vs-observed status."
+---
+# Automation Blueprint
+
+This is a Hermes-native `automation-blueprint` workflow skill.
+
+## Why This Exists
+
+`automation-blueprint` exists so Hermes can make recurring operational work feel native and scheduled without OMH becoming a hidden cron runner, transport bot, source retriever, or executor.
+
+## Do Not Use When
+
+- An undecided lifecycle journey or growth experiment needs audience, consent, and measurement design before any schedule; use `lifecycle-growth` first.
+- The user needs a one-off report or deck; use `report-package` or `materials-package`.
+- The user asks to review incident metrics once; use `reliability-review`.
+- The user needs actual code changes; prepare a selected executor/runtime handoff after the blueprint or plan is accepted.
+
+## Examples
+
+Good example:
+
+- Prompt: automation-blueprint every weekday run an uptime check and send a Slack digest only if status changes.
+- Expected behavior: Prepare hermes_ops_blueprint/v1 with schedule intent, Slack delivery policy, silence rule, research/report skills, missing evidence, and next confirmation.
+- Why: The request is recurring, delivery-shaped, and must stay prepared until host automation and gateway delivery are observed.
+
+Bad example:
+
+- Prompt: automation-blueprint prove the Slack digest was delivered this morning.
+- Expected behavior: Ask for observed Hermes/gateway delivery evidence or report the delivery as not_observed instead of claiming it happened.
+- Why: A blueprint can prepare the scheduled operation, but it cannot prove runtime execution or delivery.
+
+## Procedure: recurring work with completion messages
+
+1. Read the current production and approval contracts before proposing unattended work. Resolve superseding delegation rules first; an older selection gate can otherwise introduce unnecessary daily user waits.
+2. Establish schedule, timezone, batch scope, and conversation grouping together. For this user's next-day production, prefer a late-evening preparation window and confirm the exact time once. Use one new user-visible session per production batch, keep that batch's next-day publication tasks and completion messages associated with it, and start another session for the next batch. Keep previous-output continuity off when fresh execution context is requested; reconnect durable state through project ledgers. Distinguish the execution session from the conversation that receives results; verify conversation placement separately. Anchor the target publication date to the scheduled occurrence and preserve it through midnight and delayed execution.
+3. Check the actual delivery route before promising notifications. List existing jobs, inspect the saved destination and origin, and use the current Hermes documentation and installed tool contract. Treat `deliver=origin` and `attach_to_session=true` as requested settings until a concrete target and observed delivery establish the result; an unset origin can resolve through a home-channel fallback or leave output stored locally. Ask for a destination decision only when the available route changes the user's requested audience or conversation.
+4. Preserve the user's notification shape: after each task finishes, report its actual completion time, product name, and verified result in one short message, such as `nn시 nn분 [제품명] 업로드했습니다. [공개 확인 플랫폼].` Keep each publication's report separate. For partial failures, name the successful platforms and remaining work. Report preparation, native scheduling, and public visibility as distinct states.
+5. Save the approved scope and failure policy, register paused when required, then read back the exact job's schedule, timezone, lifecycle, continuity, workdir, and resolved delivery configuration. Match local-only delivery with local reports in both the prompt and completion message. Use `hermes cron status` and `hermes cron doctor` to check the active scheduler before changing services. Activate and exercise the approved path once prerequisites are verified; an unresolved browser/account blocker requires a verified repair or an explicitly approved readiness gate that keeps side effects paused. A recovery recipe in the prompt establishes preparation. When today's start time has passed, inspect existing progress and actual saved state, then apply the accepted missed-run policy before dispatching a catch-up; announce a start only after dispatch is observed.
+6. Verify user-visible session grouping and delivery separately from job registration. Record an unresolved connection as a blocker with the precise missing acceptance criterion. Keep unverified routing attempts as investigation findings, and preserve existing approved publication schedules while repairing the new recurring workflow.
+
+## Completion Checklist
+
+- Confirm the workflow target, evidence boundary, and stop condition are named.
+- Report which outputs are prepared, observed, blocked, or missing.
+- Name the smallest next verification or handoff instead of claiming completion from narration.
+
+## Recovery Notes
+
+- If required context is missing, ask one blocking question or route back to the narrower workflow.
+- If runtime or wrapper evidence is unavailable, keep the status as not_observed and expose the next observable action.
+
+## Workflow Lane
+
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
+- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+
+## Use When
+
+Use when Hermes should turn a natural recurring/cron-like request into a scheduled ops blueprint without claiming host automation, platform delivery, source retrieval, or no-agent execution.
+
+    Strong routing signals: `automation-blueprint`, `scheduled ops`, `scheduled operation`, `scheduled operations`, `automation blueprint`, `cron blueprint`, `cron-ready`, `recurring ops`, `recurring workflow`, `keep watching`, `keep monitoring`, `watch continuously`, `monitor continuously`, `every morning`, `every day`, `daily digest`, `weekly digest`, `automate this`, `automate workflow`, `send to slack`, `send to discord`, `post to telegram`, `only if changed`, `silent if nothing changed`, `schedule this`, `ずっと監視`, `監視し続け`, `継続的に監視`, `매일`, `매주`, `정기`, `예약`, `반복`, `자동화`, `자동화해줘`, `스케줄`, `슬랙`, `디스코드`, `텔레그램`, `보내`, `공유`, `변화 없으면`, `조용히`, `계속 감시`, `계속 모니터링`, `계속 지켜봐`, `持续监控`, `持續監控`, `一直监控`
+
+## Catalog Metadata
+
+Category: `operations`
+Phase: `scheduled-ops-blueprint`
+Hermes role: `operator`
+Quality tier: `ops-blueprint-gated`
+Reasoning demand: `light`
+
+Quality bar:
+
+- Recommend one of cron, heartbeat, loop, and native goal, say why the other three lost, and carry its stop condition; a recommendation with no stop condition is not an answer, because what ends it is the only thing that separates the four — load `references/recurring-surface-choice.md` for the comparison, retry, and delivery rules.
+- Name cadence/timezone uncertainty, delivery target, silence/no-change rule, selected skills, and context chain.
+- When the recurring work is saved, say it is paused and name what activation needs: explicit overlap, missed-run, retry, backfill, and failure-pause decisions, an approval reference, and an observer from the approved runtime surface.
+- Before activation, say what the policy does when a prior run is still active, when a window is missed, and when failures repeat; after a safety pause, report the applied policy and that resuming needs a policy revision.
+- Expose whether a no-agent watchdog is a candidate without claiming it exists or ran.
+- List host automation, gateway delivery, source retrieval, and no-agent execution as not evidence until observed.
+
+Handoff policy:
+
+Keep schedule intent, delivery policy, silence rules, context-chain selection, and status narration in Hermes; prepare host automation or no-agent follow-up only after an operator/wrapper records observed runtime evidence.
+
+Required inputs:
+
+- recurring request
+- schedule or cadence hint
+- delivery target or current-thread default
+- silence/no-change preference
+
+Expected outputs:
+
+- hermes_ops_blueprint/v1 projection
+- recurring_surface_comparison/v1 naming the recommended surface and why the other three lost
+- hermes_recurring_intent/v1 paused lifecycle record when the user wants the recurring work saved
+- schedule/delivery/silence confirmation needs
+- status-card boundary
+- not-evidence list
+
+Artifact expectations:
+
+- hermes_ops_blueprint/v1 under .omh/hermes-ops/blueprints when a wrapper or CLI records it
+- recurring_surface_comparison/v1 with the recommended surface among cron, heartbeat, loop, and native goal, its stop condition, and a per-surface reason the other three were not chosen
+- hermes_recurring_intent/v1 under .omh/hermes-ops/recurring-intents when the user asks to save the recurring work
+
+Safety rules:
+
+- Do not claim host cron, Hermes automation, gateway delivery, source retrieval, no-agent execution, plugin load, or connector work from a prepared blueprint.
+- Keep scheduled operations as projection metadata until the host runtime supplies observed evidence.
+- A saved recurring intent is paused; never report that an occurrence ran without a runtime run reference recorded against that exact intent revision.
+- A prepared failure policy is not enforcement: OMH never starts, skips, queues, retries, or backfills an occurrence, and a policy decision is not proof the runtime honoured it.
+- Route later coding, material generation, or report delivery into separate accepted handoffs when needed.
+
+## Runtime Evidence
+
+Preferred harness for this skill: `scheduled-ops-blueprint`.
+
+```sh
+omh runtime record --skill automation-blueprint --harness scheduled-ops-blueprint --status started
+```
+
+Record observed delegation results; otherwise return `not_available` or `not_observed`.
+Prepared OMH routing is not execution, review, CI, merge-readiness, or merge evidence.
+- Treat wrapper memory/context summaries as advisory local context, not proof of opaque Hermes memory reads or changes.
+Preserve workflow intent and stop conditions; verify before claiming completion.
+Reply in the user's own words and the host's own voice: its SOUL.md persona owns reply language, tone, speech level, and sentence endings, progress updates included (where it sets no language, use the one the user wrote in), and OMH shapes structure and content only; OMH's record terms (surface, lane, wrapper, handoff, evidence boundary, not_observed) stay in records and tool calls, never in the sentence the user reads unless they ask about one; and when a stop condition or a decision the user owns ends the turn, offer the next action as a question rather than declaring what will not be done.
+
+Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
+
+Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
+
+## Hermes Compatibility Contract
+
+This skill was imported by `omh` from a local skill source.
+
+- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
+- Do not require runtime features that Hermes Agent does not expose.
+- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
+

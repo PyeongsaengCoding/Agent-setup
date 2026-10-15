@@ -1,0 +1,4 @@
+name: discord-project-sidebar
+version: "0.1.0"
+requires_hermes: ">=0.21.0"
+description: Files Discord project-channel sessions under their Desktop project in the sidebar.

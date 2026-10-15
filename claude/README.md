@@ -12,7 +12,7 @@ Claude Code의 전역 지침·라우팅·스킬 설치 원본을 이 폴더에�
 
 ## 모델 라우팅
 
-Hermes의 두 프리셋을 그대로 옮겼다. 기본은 Claude 넉넉형이다. `claude-*` 항목은 같은 이름의 Claude 하위 에이전트(`route-<분류>-<계열>`)로, `gpt-*` 항목은 Codex 플러그인의 `codex:codex-rescue`에 `--model`·`--effort`를 붙여 실행한다. GPT 실행은 이 컴퓨터의 Codex CLI 로그인과 Codex 사용 한도를 쓴다.
+Hermes에서 가져온 두 프리셋을 `routes/claude-code.json`에서 Claude Code 정책으로 독립적으로 관리한다. 기본은 Claude 넉넉형이다. `claude-*` 항목은 같은 이름의 Claude 하위 에이전트(`route-<분류>-<계열>`)로, `gpt-*` 항목은 Codex 플러그인의 `codex:codex-rescue`에 `--model`·`--effort`를 붙여 실행한다. GPT 실행은 이 컴퓨터의 Codex CLI 로그인과 Codex 사용 한도를 쓴다.
 
 | 분류 | 용도 | Claude 넉넉형 | GPT 넉넉형 | 추론 |
 |---|---|---|---|---|
