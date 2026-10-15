@@ -7,7 +7,7 @@ Hermes를 Discord로 쓸 때의 구성이다. Desktop 왼쪽의 프로젝트마�
 | 상황 | 동작 |
 |---|---|
 | Discord 프로젝트 채널·스레드에서 명령 | 해당 프로젝트 폴더 기준으로 작업하고 그 스레드에 답한다. Desktop 왼쪽의 같은 프로젝트 아래 채팅으로 보인다 |
-| Desktop 채팅에서 작업이 끝남 | 결과를 그 프로젝트 채널의 채팅별 스레드로 보낸다. 프로젝트 밖 채팅은 홈 채널로 보낸다 |
+| Desktop 채팅에서 턴이 끝남 | 턴마다 결과를 그 프로젝트 채널의 채팅별 스레드로 보낸다. 프로젝트 밖 채팅은 홈 채널로 보낸다 |
 | 예약 작업 결과 | 프로젝트 채널의 알림 전용 스레드로 보낸다 (`--deliver discord:<채널>:<스레드>`) |
 | 매일 04:30 정리 | 프로젝트 채널·홈 채널의 스레드와 Desktop 채팅 중 3일 넘게 쓰지 않은 것을 삭제한다. 그룹마다 최근 3개, 고정 채팅, 예약 알림 스레드와 그 대화는 남긴다. 결과는 홈 채널로 보낸다 |
 
@@ -41,6 +41,8 @@ Hermes를 Discord로 쓸 때의 구성이다. Desktop 왼쪽의 프로젝트마�
    hermes plugins enable desktop-discord-reports
    ```
 
+   플러그인은 실행 중인 프로세스가 시작할 때 한 번 읽힌다. 설치하거나 플러그인 파일을 고친 뒤에는 Desktop 앱을 완전히 종료(⌘Q)했다가 다시 열어 `desktop-discord-reports`를 반영하고, `hermes gateway restart`로 `discord-project-sidebar`를 반영한다.
+
 5. **정리 작업:** 스크립트를 `H/scripts/`에 복사하고 미리보기로 대상 수를 확인한 뒤 예약한다. Python은 Hermes가 쓰는 인터프리터를 지정한다.
 
    ```sh
@@ -62,4 +64,6 @@ Hermes를 Discord로 쓸 때의 구성이다. Desktop 왼쪽의 프로젝트마�
 ## 알려진 동작
 
 - 보고 스레드에 답하면 Discord 쪽 새 대화로 이어진다. 보고 끝의 Desktop 채팅 ID로 앞선 맥락을 찾는다.
+- Desktop 채팅 판별은 `sessions.source`·`created_source`로 한다. Hermes v0.22부터 Desktop 채팅은 `source='local'`·`created_source='desktop'`으로 저장되므로, 플러그인은 cron·kanban·subagent·메신저 등 Desktop 밖 출처를 제외하는 방식으로 판별한다.
+- 보고가 오지 않으면 `H/state/desktop-discord-threads.json`에 해당 채팅이 있는지, Desktop 백엔드 시작 시각(`ps -eo lstart,command | grep hermes`)이 플러그인 파일 수정 시각보다 뒤인지 확인한다.
 - 삭제된 보고 스레드는 다음 보고 때 새로 만든다. 채팅과 스레드의 대응은 `H/state/desktop-discord-threads.json`에 둔다.

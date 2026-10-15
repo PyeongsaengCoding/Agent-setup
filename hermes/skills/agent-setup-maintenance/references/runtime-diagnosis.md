@@ -25,5 +25,5 @@
 1. 작업 ID로 보드를 찾는다. `hermes kanban show <id>`가 "no such task"를 반환하면 다른 보드에 있는 작업이다. `grep -rl <id> $HERMES_HOME/kanban/boards`로 보드를 찾은 뒤 `hermes kanban --board <slug> show <id>`로 생성 시각·생성자·본문을 본다.
 2. 이 작업을 만든 채팅을 `$HERMES_HOME/state.db`에서 찾는다.
    `select s.id,s.title,s.source,datetime(s.started_at,'unixepoch','localtime') from sessions s where s.id in (select distinct session_id from messages where content like '%<id>%' or content like '%<카드 제목>%')`
-   `source='kanban'` 세션은 작업자 실행이고, `desktop`·`discord` 세션이 작업을 만든 채팅이다. 생성 시각 직전의 user 메시지를 조회하면 어느 지시에서 나온 작업인지 알 수 있다.
+   `source='kanban'` 세션은 작업자 실행이고, Desktop 채팅(v0.22부터 `source='local'`·`created_source='desktop'`, 이전 `source='desktop'`)과 `discord` 세션이 작업을 만든 채팅이다. 생성 시각 직전의 user 메시지를 조회하면 어느 지시에서 나온 작업인지 알 수 있다.
 3. 사용자에게는 채팅 제목, 보드 이름, 생성 시각과 직전 지시, 그리고 사용자가 직접 만든 작업인지 에이전트가 작업을 나눠 만든 것인지(`created_by`)를 보고한다.

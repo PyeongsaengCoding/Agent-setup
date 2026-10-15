@@ -1,10 +1,10 @@
-"""Desktop -> Discord reports: post the result of long Desktop turns to the project's Discord channel.
+"""Desktop -> Discord reports: post the result of every finished Desktop turn to the project's Discord channel.
 
-When a Desktop chat turn runs for at least MIN_SECONDS, its final reply is posted to a Discord
+When a Desktop chat turn runs for at least MIN_SECONDS (0 = every turn), its final reply is posted to a Discord
 thread for that chat, under the project channel that matches the chat's folder (from
 ``discord.channel_prompts`` "(folder: ...)"); chats outside a project go to the home channel.
 One thread per Desktop chat, created on first report and reused (recreated if deleted).
-Short Q&A turns are not posted.
+Plugins load once at backend start: after installing or editing this file, fully quit and reopen Desktop.
 """
 from __future__ import annotations
 
