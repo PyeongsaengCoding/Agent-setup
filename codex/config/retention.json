@@ -12,6 +12,7 @@
     "not decision/preference/convention"
   ],
   "memory_hard_delete": false,
+  "stale_review_days": 180,
   "protect_tags": [
     "pinned",
     "important",

@@ -21,5 +21,5 @@
     {"id": "hermes-blocked-scripts", "executor": "hermes", "root": "{hermes_home}/cache/blocked-scripts", "select": "files", "glob": "*", "days": 30, "keep_latest": 3},
     {"id": "codegraph-indexes", "executor": "shared", "select": "codegraph", "days": 30, "keep_latest": 3}
   ],
-  "gam": {"temporary_expiry_archive": true, "hard_delete": false}
+  "gam": {"temporary_expiry_archive": true, "stale_review_days": 180, "stale_action": "report", "hard_delete": false}
 }

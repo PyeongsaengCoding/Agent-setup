@@ -14,6 +14,14 @@ def expired_memory(meta,now,policy):
    except ValueError:return False
  return len(dates)==1 and dates[0]<now.date()
 
+def stale_memory(meta,now,policy):
+ # Report only: active project notes not updated for stale_review_days. Never archived automatically.
+ if meta.get('scope')!='project' or meta.get('status')!='active' or set(meta.get('tags',[])).intersection(policy['protect_tags']):return False
+ try:updated=datetime.datetime.fromisoformat(str(meta.get('updated_at')).replace('Z','+00:00'))
+ except ValueError:return False
+ if updated.tzinfo is None:updated=updated.replace(tzinfo=datetime.timezone.utc)
+ return (now-updated).days>=policy.get('stale_review_days',180)
+
 def log_candidates(state,now,policy):
  state=Path(state).resolve();out=[]
  for sub,days in [('logs',policy['owned_log_days']),('receipts',policy['receipt_days'])]:
@@ -59,6 +67,7 @@ async def maintain(state,vault,apply=False,config=None,gam_state=None):
  from global_memory.config import load_settings,get_platform_paths
  config=Path(config) if config else get_platform_paths().config_file
  if load_settings(config).vault_path.resolve()!=vault:raise RuntimeError('Requested vault does not match GAM configuration')
+ stale=[]
  args=['--direct','--token-file',str(get_platform_paths().auth_token),'--config',str(config)]
  if gam_state:args += ['--state',str(gam_state)]
  for path in vault.rglob('*.md'):
@@ -68,7 +77,8 @@ async def maintain(state,vault,apply=False,config=None,gam_state=None):
   try:meta=yaml.safe_load(text.split('---',2)[1])
   except (yaml.YAMLError,IndexError):continue
   if isinstance(meta,dict) and expired_memory(meta,now,policy):candidates.append((meta['id'],meta.get('updated_at')))
- logs=log_candidates(state,now,policy);result={'apply':apply,'memory_archive_candidates':len(candidates),'log_candidates':len(logs),'archived':0,'logs_deleted':0}
+  elif isinstance(meta,dict) and stale_memory(meta,now,policy):stale.append(meta.get('id'))
+ logs=log_candidates(state,now,policy);result={'apply':apply,'memory_archive_candidates':len(candidates),'memory_review_candidates':stale,'log_candidates':len(logs),'archived':0,'logs_deleted':0}
  if apply:
   async with connect(tools['gam_mcp'],args) as s:
    for ident,version in candidates:

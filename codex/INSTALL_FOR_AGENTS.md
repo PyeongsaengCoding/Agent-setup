@@ -19,4 +19,4 @@ Agent-setup 전체 체크아웃을 사용한다. 이 문서의 `scripts/`, `conf
 
 ## 완료 기준
 
-[공통 검증 기준](../docs/verification.md), [macOS 완료 기준](10-new-machine.md), [앱 작업 준비](15-local-task-readiness.md)를 따른다. 사용자가 작업할 Codex 앱 또는 CLI의 새 작업에서 스킬·GAM·CodeGraph가 보이고 실제로 응답하는지, 분류별 모델 위임이 실제로 실행되는지 확인한다. 사용자 홈의 보존된 지침·스킬 차이를 대조한 결과와 함께 항목별 통과·실패·미확인을 보고한다.
+[공통 검증 기준](../docs/verification.md), [macOS 완료 기준](10-new-machine.md), [앱 작업 준비](15-local-task-readiness.md)를 따른다. 사용자가 작업할 Codex 앱 또는 CLI의 새 작업에서 스킬·GAM·CodeGraph가 보이고 실제로 응답하는지, 실제 코드 저장소 하나에서 CodeGraph 색인 생성 후 심볼 조회와 GAM 시험 기억의 저장·활성화·프로젝트 범위 회수가 되는지(시험 기억은 확인 후 보관 처리), 분류별 모델 위임이 실제로 실행되는지 확인한다. 사용자 홈의 보존된 지침·스킬 차이를 대조한 결과와 함께 항목별 통과·실패·미확인을 보고한다.
