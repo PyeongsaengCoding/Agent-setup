@@ -27,3 +27,6 @@ description: 이 컴퓨터의 AI 작업 환경(Claude Code·Codex·Hermes의 전
 - `web.search_backend`가 비었거나 `openai-native`면 웹 검색은 openai-codex 메인 모델에서만 동작한다. 메인 모델을 다른 제공자로 바꿀 때는 키가 있는 검색 백엔드나 검색 중계 플러그인을 지정하고, 페이지 본문 읽기는 Aside로 한다.
 - 갑작스러운 macOS 권한 팝업의 원인 프로세스 추적, `hermes update` 뒤 깨진 플러그인 복구(로컬 본체 수정 autostash), 칸반·cron 작업을 지시한 채팅 추적은 [런타임 이상 추적](references/runtime-diagnosis.md)을 따른다.
 - 원본·호환 사본·문서 명령·회귀 시험을 함께 갱신하는 절차는 [모델 라우팅 원본 동기화](references/model-routing-maintenance.md), 실제 사용 모델·구독 사용량 감사와 기본 모델 전환은 [모델 사용량 감사](references/model-usage-audit.md)를 따른다.
+
+- Aside CLI 업데이트는 `~/.claude/skills/aside-browser`·`~/.agents/skills/aside-browser`를 Aside 공식 진입 스킬로 덮어쓴다. 설치기 충돌이 나면 백업 후 공통 원본으로 다시 설치한다.
+- Claude Code·Codex의 OMH 스킬은 `shared/skills/omh/` 사본이다. OMH를 올린 뒤 `scripts/import_omh_skills.py`로 다시 가져온다. 보존 정리는 `scripts/retention.py`(정책 `shared/retention/policy.json`, launchd 주간 작업)다.
