@@ -154,6 +154,7 @@ Claude Code·Codex의 전역 지침은 OMH 스킬이 쓰는 Hermes 도구 이름
 | 대상 | 저장 형식 | 보존 | 정리 방식 |
 |---|---|---|---|
 | Hermes 대화 (`state.db`) | SQLite | 90일 | Hermes 내장 자동 정리 (`sessions.retention_days`) |
+| Hermes 왼쪽 채팅 목록 | SQLite | 프로젝트별 직접 대화 최근 4개, 30일 (보관 포함) | 매일 04:30 [Discord 연동 정리](hermes/docs/discord.md). 실행 기록·빈 대화는 2시간 뒤 삭제 |
 | Claude Code 대화 | JSONL | 90일 | Claude Code 내장 (`cleanupPeriodDays`) |
 | Codex 대화 (`~/.codex/sessions`, `archived_sessions`) | JSONL | 90일 | 주간 정리 |
 | Codex 생성 이미지 | PNG 폴더 | 30일 | 주간 정리 |

@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import os
+import re
 import tempfile
 import time
 import unittest
@@ -109,6 +110,20 @@ class RetentionTests(unittest.TestCase):
         builtin = {b["id"]: b["value"] for b in policy["builtin"]}
         self.assertEqual(builtin["hermes-sessions"], policy["conversation_days"])
         self.assertEqual(builtin["claude-transcripts"], policy["conversation_days"])
+
+    def test_desktop_chat_script_matches_policy(self):
+        policy = json.loads(retention.POLICY.read_text())["hermes_desktop_chats"]
+        source = (ROOT / policy["script"]).read_text()
+
+        def const(name):
+            return re.search(rf"^{name} = (.+?)(?:\s+#|$)", source, re.M).group(1).strip()
+
+        self.assertEqual(int(const("CHAT_KEEP")), policy["keep_latest_per_project"])
+        self.assertEqual(int(const("CHAT_MAX_DAYS")), policy["max_days"])
+        self.assertEqual(eval(const("RECENT_GRACE")), policy["run_records_grace_hours"] * 3600)
+        self.assertEqual(eval(const("AUTOMATED_SOURCES")), set(policy["run_record_sources"]))
+        self.assertEqual(int(const("IDLE_DAYS")), policy["discord_thread_idle_days"])
+        self.assertEqual(int(const("KEEP")), policy["discord_thread_keep_latest"])
 
 
 if __name__ == "__main__":

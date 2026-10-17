@@ -9,7 +9,7 @@ Hermes를 Discord로 쓸 때의 구성이다. Desktop 왼쪽의 프로젝트마�
 | Discord 프로젝트 채널·스레드에서 명령 | 해당 프로젝트 폴더 기준으로 작업하고 그 스레드에 답한다. Desktop 왼쪽의 같은 프로젝트 아래 채팅으로 보인다 |
 | Desktop 채팅에서 턴이 끝남 | 턴마다 결과를 그 프로젝트 채널의 채팅별 스레드로 보낸다. 프로젝트 밖 채팅은 홈 채널로 보낸다 |
 | 예약 작업 결과 | 프로젝트 채널의 알림 전용 스레드로 보낸다 (`--deliver discord:<채널>:<스레드>`) |
-| 매일 04:30 정리 | 프로젝트 채널·홈 채널의 스레드와 Desktop 채팅 중 3일 넘게 쓰지 않은 것을 삭제한다. 그룹마다 최근 3개, 고정 채팅, 예약 알림 스레드와 그 대화는 남긴다. 결과는 홈 채널로 보낸다 |
+| 매일 04:30 정리 | 왼쪽 채팅은 프로젝트마다 직접 나눈 대화 최근 4개만 남기고 영구 삭제한다. 30일 넘게 쓰지 않은 대화는 보관된 것까지 삭제한다. 예약 작업·칸반·일회성 실행 기록, `Subagent:` 대화, 빈 대화는 남길 4개에 넣지 않고 마지막 활동 2시간 뒤 삭제한다. Discord 스레드는 3일 넘게 쓰지 않은 것을 삭제하고 채널마다 최근 3개를 남긴다. 고정 채팅, 예약 알림 스레드와 그 대화는 남긴다. 결과는 홈 채널로 보낸다. 기준값 원본은 `shared/retention/policy.json`의 `hermes_desktop_chats`다 |
 
 모든 구성 요소는 모델을 호출하지 않는다. 채널에서 답하는 모델은 선택한 Hermes 프로필의 라우팅을 따른다.
 
@@ -51,6 +51,8 @@ Hermes를 Discord로 쓸 때의 구성이다. Desktop 왼쪽의 프로젝트마�
      --script discord-project-hygiene.py --no-agent \
      --interpreter <Hermes Python> --deliver discord:<홈 채널ID>
    ```
+
+   스크립트는 cron의 기본 Python에 없는 Hermes 패키지를 `H/installs/*/environments/*/venv`에서 찾아 쓴다. Hermes 업데이트 뒤 `ruamel` 가져오기 오류가 나면 이 경로를 확인한다.
 
    Desktop 채팅 삭제는 되돌릴 수 없다. 처음 적용할 때는 `sqlite3 H/state.db ".backup <백업 경로>"`로 대화 기록을 먼저 백업한다.
 

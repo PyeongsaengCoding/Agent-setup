@@ -29,4 +29,4 @@ description: 이 컴퓨터의 AI 작업 환경(Claude Code·Codex·Hermes의 전
 - 원본·호환 사본·문서 명령·회귀 시험을 함께 갱신하는 절차는 [모델 라우팅 원본 동기화](references/model-routing-maintenance.md), 실제 사용 모델·구독 사용량 감사와 기본 모델 전환은 [모델 사용량 감사](references/model-usage-audit.md)를 따른다.
 
 - Aside CLI 업데이트는 `~/.claude/skills/aside-browser`·`~/.agents/skills/aside-browser`를 Aside 공식 진입 스킬로 덮어쓴다. 설치기 충돌이 나면 백업 후 공통 원본으로 다시 설치한다.
-- Claude Code·Codex의 OMH 스킬은 `shared/skills/omh/` 사본이다. OMH를 올린 뒤 `scripts/import_omh_skills.py`로 다시 가져온다. 보존 정리는 `scripts/retention.py`(정책 `shared/retention/policy.json`, launchd 주간 작업)다.
+- Claude Code·Codex의 OMH 스킬은 `shared/skills/omh/` 사본이다. OMH를 올린 뒤 `scripts/import_omh_skills.py`로 다시 가져온다. 보존 정리는 `scripts/retention.py`(정책 `shared/retention/policy.json`, launchd 주간 작업)다. Hermes 왼쪽 채팅 목록 정리 기준은 같은 정책의 `hermes_desktop_chats`이고, 실행은 `hermes/discord/scripts/discord-project-hygiene.py`(Hermes cron 매일 04:30)다. 기준을 바꾸면 두 파일을 함께 고치고 `tests/test_retention.py`로 일치를 확인한 뒤 설치본 `~/.hermes/scripts/`에 복사한다.

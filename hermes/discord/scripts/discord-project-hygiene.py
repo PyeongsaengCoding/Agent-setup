@@ -4,8 +4,11 @@
    groups them under the project instead of Home).
 2. Discord: in each project channel, delete threads idle > IDLE_DAYS, keeping the newest
    KEEP threads. Threads used as cron delivery targets are never deleted.
-3. Hermes: per sidebar group (each project + Home), permanently delete chats idle > IDLE_DAYS,
-   keeping the newest KEEP. Pinned chats and cron-alarm thread sessions are skipped.
+3. Hermes: per sidebar group (each project + Home), permanently delete every chat beyond the
+   newest CHAT_KEEP, and any chat (archived included) idle > CHAT_MAX_DAYS. Only chats the user
+   actually had count toward CHAT_KEEP: cron/kanban/oneshot run records, delegated "Subagent:" chats and empty (0-message) chats are deleted
+   once idle > RECENT_GRACE.
+   Pinned chats and cron-alarm thread sessions are skipped.
 
 Usage: python3 discord-project-hygiene.py [--dry-run]
 Prints nothing when there is nothing to do (silent cron run).
@@ -24,9 +27,21 @@ from pathlib import Path
 
 HOME = Path(os.environ.get("HERMES_HOME") or Path.home() / ".hermes")
 sys.path.insert(0, str(HOME / "hermes-agent"))
+# The cron interpreter is the bare bundled Python; borrow the Hermes venv's packages
+# (the install hash changes on update, so pick the newest venv that has ruamel).
+_venvs = sorted(HOME.glob("installs/*/environments/*/venv/lib/python3*/site-packages"),
+                key=lambda p: p.stat().st_mtime, reverse=True)
+for _sp in _venvs:
+    if (_sp / "ruamel").is_dir():
+        sys.path.insert(1, str(_sp))
+        break
 
-IDLE_DAYS = 3
-KEEP = 3
+IDLE_DAYS = 3        # Discord threads: idle days before deletion
+KEEP = 3             # Discord threads kept per channel
+CHAT_KEEP = 4        # sidebar chats kept per project (newest), the rest are deleted
+CHAT_MAX_DAYS = 30   # sidebar chats older than this are deleted, even top-4 and archived
+RECENT_GRACE = 2 * 3600  # automated runs / empty chats active this recently are left alone
+AUTOMATED_SOURCES = {"cron", "kanban", "oneshot"}  # run records, not chats the user had
 DRY = "--dry-run" in sys.argv
 DISCORD_EPOCH_MS = 1420070400000
 API = "https://discord.com/api/v10"
@@ -158,28 +173,38 @@ def main() -> None:
         lines.append(f"- 디스코드 스레드 삭제 실패: {len(failed)}개 ({', '.join(failed[:10])})"
                      " — 봇 역할에 '스레드 관리' 권한이 필요합니다.")
 
-    # 3. Hermes sidebar cleanup: permanently delete chats idle > IDLE_DAYS beyond the newest KEEP
-    #    per group, plus anything an earlier archive-based sweep hid (auto_archived = 1).
+    # 3. Hermes sidebar cleanup: per group keep the newest CHAT_KEEP visible chats; delete the rest,
+    #    and delete any chat (archived included) idle > CHAT_MAX_DAYS.
+    chat_cutoff = now - CHAT_MAX_DAYS * 86400
     protected_sessions = {r[0] for r in db._read_all(
         "SELECT id FROM sessions WHERE source = 'discord' AND thread_id IN (%s)" % ",".join("?" * len(keep_ids)),
         tuple(keep_ids))} if keep_ids else set()
     rows = db._read_all(
-        f"""SELECT s.id, s.cwd, {_LAST_ACTIVE_SQL} AS last_active FROM sessions s
-            WHERE s.archived = 0 AND COALESCE(s.end_reason, '') <> 'compression'
+        f"""SELECT s.id, s.cwd, {_LAST_ACTIVE_SQL} AS last_active, s.archived, s.source,
+                   COALESCE(s.message_count, 0) AS msgs, COALESCE(s.title, '') AS title FROM sessions s
+            WHERE COALESCE(s.end_reason, '') <> 'compression'
               AND s.source <> 'subagent'
               AND COALESCE(s.hidden, 0) = 0 AND {_not_pinned_sql()}""")
     groups: dict[str, list] = {}
+    doomed: list[str] = []
     with sqlite3.connect(HOME / "projects.db") as pconn:
         pconn.row_factory = sqlite3.Row
-        for sid, cwd, last in rows:
-            proj = pdb.project_for_path(pconn, cwd) if cwd else None
-            groups.setdefault(proj.id if proj else "home", []).append((float(last or 0), sid))
-    doomed = [sid for (sid,) in db._read_all(
-        "SELECT id FROM sessions WHERE archived = 1 AND COALESCE(auto_archived, 0) = 1"
-        " AND COALESCE(end_reason, '') <> 'compression'")]
+        for sid, cwd, last, archived, source, msgs, title in rows:
+            last = float(last or 0)
+            if source in AUTOMATED_SOURCES or msgs == 0 or title.startswith("Subagent:"):
+                if last < now - RECENT_GRACE:   # recent ones may still be running or just opened
+                    doomed.append(sid)          # scheduled-run records and empty chats are never kept
+                continue                        # either way they never take a keep slot
+            if last < chat_cutoff:
+                doomed.append(sid)          # older than CHAT_MAX_DAYS, archived or not
+            elif archived:
+                doomed.append(sid)          # archived and not among the visible newest
+            else:
+                proj = pdb.project_for_path(pconn, cwd) if cwd else None
+                groups.setdefault(proj.id if proj else "home", []).append((last, sid))
     for items in groups.values():
         items.sort(reverse=True)
-        doomed += [sid for last, sid in items[KEEP:] if last < cutoff]
+        doomed += [sid for last, sid in items[CHAT_KEEP:]]
     doomed = [s for s in dict.fromkeys(doomed) if s not in protected_sessions]
     removed, busy = 0, 0
     for sid in doomed:
@@ -192,12 +217,12 @@ def main() -> None:
         except Exception:
             busy += 1  # mid-turn or locked: retried on the next run
     if removed:
-        lines.append(f"- 왼쪽 채팅 삭제{' 예정' if DRY else ''}: {removed}개 (프로젝트별 최근 {KEEP}개 유지)")
+        lines.append(f"- 왼쪽 채팅 삭제{' 예정' if DRY else ''}: {removed}개 (프로젝트별 최근 {CHAT_KEEP}개 유지, {CHAT_MAX_DAYS}일 경과분 보관 포함 삭제)")
     if busy:
         lines.append(f"- 사용 중이라 다음에 삭제: {busy}개")
 
     if lines:
-        print(("[미리보기] " if DRY else "") + f"채널·채팅 정리 ({IDLE_DAYS}일 경과, 최근 {KEEP}개 유지)")
+        print(("[미리보기] " if DRY else "") + "채널·채팅 정리")
         print("\n".join(lines))
 
 
