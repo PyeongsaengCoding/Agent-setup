@@ -690,6 +690,17 @@
       "local_modified": false
     },
     {
+      "name": "coding-code-review",
+      "description": "변경 코드 결함과 파일·모듈 목적별 구조 점검",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/coding-code-review",
+      "install_path": "skills/coding-code-review",
+      "extra_install": "없음",
+      "extra_path": "Agent-setup `shared/skills/core/coding-code-review`",
+      "local_modified": false
+    },
+    {
       "name": "coding-maintenance",
       "description": "기억·기록의 보존 정책과 승인된 정리",
       "kind": "skill",

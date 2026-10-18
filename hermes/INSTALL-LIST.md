@@ -2,7 +2,7 @@
 
 `H`는 `${HERMES_HOME:-$HOME/.hermes}`다. 기본은 `~/.hermes/`, 이름 있는 프로필은 `~/.hermes/profiles/<이름>/`이다. `$(brew --prefix)`는 설치 대상인 Apple Silicon에서 보통 `/opt/homebrew`다. npm·uv·Go 실행 파일 위치는 각 관리자의 설정을 따른다.
 
-비-OMH 스킬 89개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 32개다. 공통 스킬은 도구·기준 10개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint)와 Hermes 작업 교훈 공개본 22개다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
+비-OMH 스킬 90개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 33개다. 공통 스킬은 도구·기준 11개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-code-review, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint)와 Hermes 작업 교훈 공개본 22개다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
 
 | 종류 | 항목 | 용도 | 설치 기준·추가 준비 | 일반 설치 경로 | 추가 도구·설정 경로 |
 |---|---|---|---|---|---|
@@ -41,6 +41,7 @@
 | 스킬 | gam-memory | 과거 결정 회수·승인된 지식 저장 | Agent-setup 공통 스킬; GAM MCP 연결 필요 | `H/skills/gam-memory/` | GAM 공식 설치 경로; 기억 원본은 GAM Vault |
 | 스킬 | codegraph-context | CodeGraph로 코드 위치·호출 관계 좁히기 | Agent-setup 공통 스킬; CodeGraph MCP 연결 (Agent-setup 공통 도구) | `H/skills/codegraph-context/` | CodeGraph 공식 설치 경로; 색인은 각 Git 저장소 `.codegraph/` |
 | 스킬 | aside-browser | Aside를 repl로 직접 조작하는 절차 | Agent-setup 공통 스킬; Aside 앱·CLI (공통 도구) | `H/skills/aside-browser/` | `/Applications/Aside.app`; CLI는 공식 설치 경로 |
+| 스킬 | coding-code-review | 변경 코드 결함과 파일·모듈 목적별 구조 점검 | Agent-setup 공통 스킬 | `H/skills/coding-code-review/` | Agent-setup `shared/skills/core/coding-code-review` |
 | 스킬 | coding-maintenance | 기억·기록의 보존 정책과 승인된 정리 | Agent-setup 공통 스킬; GAM 연결 시 사용 | `H/skills/coding-maintenance/` | Agent-setup `codex/config/retention.json` 정책 |
 | 스킬 | agent-setup-maintenance | AI 작업 환경(지침·스킬·도구) 변경 절차 | Agent-setup 공통 스킬; Agent-setup 체크아웃 | `H/skills/agent-setup-maintenance/` | Agent-setup 저장소 |
 | 스킬 | humanize-korean | 한국어 번역투·상투 표현 교정 | Agent-setup 공통 스킬; 별도 설치 없음 | `H/skills/humanize-korean/` | — |

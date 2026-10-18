@@ -22,7 +22,7 @@
 | 8 | 구현 | tdd | 실패 테스트부터 작성 | ✅ | ✅ | — | 같은 파일. Hermes는 공식 test-driven-development | Agent-setup | — |
 | 9 | 구현 | diagnosing-bugs | 작은 재현 → 가설 → 수정으로 원인 불명 버그 진단 | ✅ | ✅ | — | 같은 파일. Hermes는 공식 systematic-debugging | Agent-setup | — |
 | 10 | 구현 | coding-repair | 실패한 검증 수정, 중단된 구현 이어가기 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH build-failure-triage | Agent-setup | — |
-| 11 | 검토 | coding-code-review | 변경 코드의 재현 가능한 결함 찾기 | ✅ | ✅ | — | 같은 파일. 다른 모델 리뷰는 Claude가 /codex:review, Codex는 다른 GPT 담당. Hermes는 OMH code-review | Agent-setup | — |
+| 11 | 검토 | coding-code-review | 변경 코드의 재현 가능한 결함 찾기, 파일·모듈 목적별 구조 점검 | ✅ | ✅ | ✅ | 같은 파일. 다른 모델 리뷰는 Claude가 /codex:review, Codex는 다른 GPT 담당. Hermes는 구조 점검에 이 스킬, 결함 리뷰에 OMH code-review도 사용 | Agent-setup | — |
 | 12 | 검토 | coding-verification | 요구사항별 실제 검증 증거로 완료 판단 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH verification-gate | Agent-setup | — |
 | 13 | 검토 | coding-design-review | 권한·데이터·시스템 경계 설계의 반례 검토 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH adversarial-consensus | Agent-setup | — |
 | 14 | 검토 | coding-failure-audit | 실패를 정상처럼 처리하는 코드 조사 | ✅ | ✅ | — | 같은 파일. Hermes는 OMH failure-signal-audit | Agent-setup | — |
