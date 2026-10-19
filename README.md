@@ -8,7 +8,7 @@
 | Codex | ChatGPT·Codex(GPT)만 쓴다 | macOS (Windows는 WSL2) | [codex/INSTALL_FOR_AGENTS.md](codex/INSTALL_FOR_AGENTS.md) |
 | Hermes | Hermes Desktop에서 GPT·Claude를 함께 쓴다 | Apple Silicon Mac | [hermes/INSTALL_FOR_AGENTS.md](hermes/INSTALL_FOR_AGENTS.md) |
 
-**바로 보기:** [Codex 라우팅](#codex--gpt-전용) · [Claude Code 라우팅](#claude-code--claudegpt-혼합) · [Hermes 라우팅](#hermes--omh-분류별-위임) · [설치 요청](#ai에게-보낼-요청) · [설치 구성](#설치되는-것)
+**바로 보기:** [네 가지 라우팅 비교](docs/model-routing-comparison.md) · [Codex 라우팅](#codex--gpt-전용) · [Claude Code 라우팅](#claude-code--claudegpt-혼합) · [Hermes 라우팅](#hermes--omh-분류별-위임) · [설치 요청](#ai에게-보낼-요청) · [설치 구성](#설치되는-것)
 
 ## 모델 라우팅
 
