@@ -24,7 +24,7 @@ class RuntimeTests(unittest.TestCase):
    self.assertEqual(p.read_text(),'user change')
    p.write_text('after');s.restore(backup);self.assertEqual(p.read_text(),'before')
  def test_routes_all_exact_effort(self):
-  expected={'ultrabrain':'xhigh','architect':'xhigh','deep':'high','visual-engineering':'high','artistry':'high','deep-work':'high','writing':'medium','capable':'medium','unspecified-high':'medium','quick':'low','simple-work':'low','unspecified-low':'low'}
+  expected={'ultrabrain':'xhigh','architect':'xhigh','deep':'high','visual-engineering':'high','artistry':'high','deep-work':'max','writing':'medium','capable':'medium','unspecified-high':'medium','quick':'low','simple-work':'low','unspecified-low':'low'}
   self.assertEqual({k:v['effort'] for k,v in s.routes().items()},expected)
   for k,e in expected.items():self.assertIn('model_reasoning_effort='+json.dumps(e),command(k,'test-model','/repo'))
  def test_expiry_protects_valuable_memories(self):

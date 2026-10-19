@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Compare Agent-setup's pinned external components with their latest stable releases.
 
-Reads the pins in hermes/manifest.json, codex/inventories/tools.lock.json and
-shared/skills/omh/SOURCE.json, asks GitHub for each repository's latest
+Reads the pins in hermes/manifest.json, codex/inventories/tools.lock.json,
+shared/skills/omh/SOURCE.json and codex/inventories/external-skills.json (one
+row per external skill source repository), asks GitHub for each repository's latest
 published release (drafts and pre-releases excluded), and resolves the release
 tag to a commit with `git ls-remote`. Prints one row per pin and exits 1 when
 any pin is behind its latest stable release. Needs network access.
@@ -30,6 +31,23 @@ def slug(url):
     return url.rstrip('/').removesuffix('.git').split('github.com/')[1]
 
 
+def external_skill_pins(catalog):
+    """Group the external skill catalog by source repository.
+
+    Every skill from one repository must share the same `ref`; a repository whose
+    skills disagree is reported with pinned value 'mixed' so it never shows as current.
+    """
+    groups = {}
+    for name, item in catalog['skills'].items():
+        groups.setdefault(slug(item['sourceUrl']), []).append((name, item.get('ref')))
+    rows = []
+    for repo, items in groups.items():
+        refs = {ref for _, ref in items}
+        pinned = refs.pop() if len(refs) == 1 else 'mixed'
+        rows.append((f'외부 스킬 {repo} {len(items)}개 (codex/inventories/external-skills.json)', repo, 'commit', pinned))
+    return rows
+
+
 def pins():
     hermes = load('hermes/manifest.json')
     lock = load('codex/inventories/tools.lock.json')
@@ -42,6 +60,7 @@ def pins():
     rows.append(('OMH 스킬 사본 (shared/skills/omh/SOURCE.json)', slug(omh_copy['upstream']), 'version', omh_copy['version']))
     for key in ('codegraph', 'gam'):
         rows.append((f'{key} (codex/inventories/tools.lock.json)', slug(lock[key]['source']), 'commit', lock[key]['commit']))
+    rows.extend(external_skill_pins(load('codex/inventories/external-skills.json')))
     return rows
 
 
@@ -93,8 +112,8 @@ def main():
         print(json.dumps(results, ensure_ascii=False, indent=2))
     else:
         for row in results:
-            pinned = row['pinned'][:12]
-            latest = f"{row['latest_tag']} ({(row['latest_commit'] or '')[:12]})" if row['latest_tag'] else '정식 릴리스 없음'
+            pinned = (row['pinned'] or '기본 브랜치')[:12]
+            latest = f"{row['latest_tag']} ({(row['latest_commit'] or '')[:12]})" if row['latest_tag'] else '없음'
             print(f"{row['status']:<10} {row['component']}: 고정 {pinned} / 최신 정식 {latest}")
     return 1 if any(row['status'] == 'behind' for row in results) else 0
 

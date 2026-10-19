@@ -60,7 +60,7 @@ class DelegationReasoningTests(unittest.TestCase):
             chain = categories[category]
             self.assertEqual([item['model'] for item in chain], models.split())
             self.assertTrue(all(item['reasoning_effort'] == effort for item in chain))
-        self.assertEqual(snapshot['delegation_fallback_providers'][-1]['model'], 'claude-opus-5-5')
+        self.assertEqual(snapshot['delegation_fallback_providers'][0]['model'], 'claude-opus-5-5')
         self.assertEqual(snapshot['fallback_providers'],
                          [{'provider': 'anthropic', 'model': 'claude-opus-5-5'}])
 

@@ -7,7 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CHANGED = {'deep', 'architect', 'unspecified-high', 'unspecified-low', 'quick',
-           'writing', 'visual-engineering', 'artistry', 'capable', 'simple-work', 'deep-work'}
+           'writing', 'visual-engineering', 'artistry', 'capable', 'simple-work'}
 
 
 class RoutingPresetTests(unittest.TestCase):
@@ -23,20 +23,28 @@ class RoutingPresetTests(unittest.TestCase):
         self.assertEqual(set(a), set(b))
         self.assertEqual({key for key in a if a[key] != b[key]}, CHANGED)
 
-    def test_gpt_restores_previous_astra_positions(self):
+    def test_gpt_keeps_astra_first_and_deep_work_follows_omh(self):
         chains = self.chains['gpt-generous']
         for key in ['visual-engineering', 'artistry', 'capable']:
-            self.assertEqual([x['model'] for x in chains[key]][:3],
-                             ['claude-fable-5-1', 'gpt-6-astra', 'claude-opus-5-5'])
-        self.assertEqual([x['model'] for x in chains['deep-work']],
-                         ['gpt-6-astra', 'claude-fable-5-1', 'claude-opus-5-5'])
+            self.assertEqual([x['model'] for x in chains[key]][:2],
+                             ['gpt-6-astra', 'claude-opus-5-5'])
+        for name in self.chains:
+            self.assertEqual([(x['model'], x['reasoning_effort']) for x in self.chains[name]['deep-work']],
+                             [('claude-opus-5-5', 'max'), ('gpt-6.1-sol', 'max')])
+
+    def test_fable_is_absent_from_both_presets(self):
+        for name, preset in self.presets.items():
+            self.assertNotIn('claude-fable-5-1', json.dumps(preset), name)
+            for item in preset['categories']:
+                self.assertEqual(item['chain_text'], ', '.join(
+                    x['model'] + ':' + x['reasoning_effort'] for x in item['chain']))
 
     def test_shared_fallbacks_are_identical_and_opus_last(self):
         a, b = self.presets.values()
         for key in ['fallback_providers', 'delegation_fallback_providers', 'gpt_child_fallback_adapter']:
             self.assertEqual(a[key], b[key])
         self.assertEqual([x['model'] for x in a['delegation_fallback_providers']],
-                         ['claude-fable-5-1', 'gpt-6-astra', 'claude-sonnet-5-5', 'claude-opus-5-5'])
+                         ['claude-opus-5-5', 'gpt-6-astra', 'claude-sonnet-5-5'])
         self.assertEqual(a['fallback_providers'],
                          [{'provider': 'anthropic', 'model': 'claude-opus-5-5'}])
 

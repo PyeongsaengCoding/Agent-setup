@@ -17,9 +17,9 @@
 | `artistry` | `astra` | `high` | 창의적 설계 |
 | `capable` | `sol` | `medium` | 일반 실행 |
 | `simple-work` | `luna` | `low` | 단순 실행 |
-| `deep-work` | `astra` | `high` | 복합 실행 |
+| `deep-work` | `sol` | `max` | 복합 실행 |
 
-`deep-work`는 OMH v4.0.0에서 Claude Opus 5.5 → GPT-6.1 Sol, `max`로 바뀌었다. Codex 값은 사용자 결정 전까지 `astra`/`high`를 유지한다.
+`deep-work`는 OMH v4.0.0의 GPT 후보(GPT-6.1 Sol, `max`)를 따른다.
 
 사용자가 모델을 지정하면 그 지시가 우선한다. 지정 조합을 사용할 수 없으면 제약을 보고하고 임의 대체하지 않는다. 최신 버전은 공식 모델 목록과 계정 지원을 확인해 `{{CODEX_HOME}}/models.json`을 갱신하고 각 계열/추론 조합을 실행 검증한다. 실행할 때마다 무조건 최신 버전을 다운로드하지 않는다.
 

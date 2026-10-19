@@ -11,25 +11,25 @@ Hermes 내부 위임에 적용하는 사용자 지정 정책이다. 외부 Claud
 
 | 분류 | Claude 넉넉형 | 추론 | GPT 넉넉형 | 추론 |
 |---|---|---|---|---|
-| ultrabrain | Astra → Fable → Opus | xhigh | Astra → Fable → Opus | xhigh |
-| deep | Opus → Sol | high | Sol → Fable → Opus | high |
-| architect | Opus → Astra → Fable | xhigh | Fable → Astra → Opus | xhigh |
+| ultrabrain | Astra → Opus | xhigh | Astra → Opus | xhigh |
+| deep | Opus → Sol | high | Sol → Opus | high |
+| architect | Opus → Astra | xhigh | Astra → Opus | xhigh |
 | unspecified-high | Sol → Opus | medium | Opus | medium |
 | unspecified-low | Sol → Sonnet | low | Opus | low |
-| quick | Luna → Fable → Opus | low | Luna → Fable → Opus → Astra | low |
+| quick | Luna → Opus | low | Luna → Opus → Astra | low |
 | writing | Opus → Sonnet → Sol | medium | Sol → Opus | medium |
-| visual-engineering | Opus → Fable | high | Fable → Astra → Opus | high |
-| artistry | Opus → Fable | high | Fable → Astra → Opus | high |
-| capable | Opus → Sol → Fable | medium | Fable → Astra → Opus → Sonnet | medium |
-| simple-work | Luna → Haiku 5.5 | low | Luna → Fable → Opus → Haiku 4.5 | low |
-| deep-work | Opus → Sol | max | Astra → Fable → Opus | high |
+| visual-engineering | Opus | high | Astra → Opus | high |
+| artistry | Opus | high | Astra → Opus | high |
+| capable | Opus → Sol | medium | Astra → Opus → Sonnet | medium |
+| simple-work | Luna → Haiku 5.5 | low | Luna → Opus → Haiku 4.5 | low |
+| deep-work | Opus → Sol | max | Opus → Sol | max |
 
-Claude 넉넉형은 GPT·Claude 후보로 작업별 순서를 구성하고, 최종 fallback을 Opus로 유지한다. Sol은 GPT-6.1 Sol, Luna·Astra는 GPT-6, Fable은 Claude Fable 5.1, Opus·Sonnet은 Claude 5.5다. 각 실행기의 정책은 해당 폴더에서 독립적으로 관리한다.
+Claude 넉넉형은 GPT·Claude 후보로 작업별 순서를 구성하고, 최종 fallback을 Opus로 유지한다. Sol은 GPT-6.1 Sol, Luna·Astra는 GPT-6, Opus·Sonnet은 Claude 5.5다. 두 프리셋의 deep-work는 OMH 4.0.0 기본값(Opus → Sol, `max`)을 따른다. 각 실행기의 정책은 해당 폴더에서 독립적으로 관리한다.
 
 ## 적용 기준
 
 - GPT·Claude 후보만 사용한다. Kimi·Qwen·Gemini·GLM·DeepSeek를 추가하지 않으며 계정·인증·제공자 연결은 보존한다.
-- OMH 분류별 후보와 Hermes 실행 fallback은 별개다. 전역 fallback은 Opus, 자식 공통 fallback은 Fable → Astra → Sonnet → Opus이며 분류 변경으로 공통 순서를 바꾸지 않는다.
+- OMH 분류별 후보와 Hermes 실행 fallback은 별개다. 전역 fallback은 Opus, 자식 공통 fallback은 Opus → Astra → Sonnet이며(2026-10-15 결정: Anthropic 계정 사용량이 모두 소진되면 GPT로 넘어감) 분류 변경으로 공통 순서를 바꾸지 않는다.
 - 주 모델이 사용 가능하면 유지한다. 이미 시도한 모델·사용 불가능한 후보는 건너뛴다. 모델별 제한·계정 전체 제한·인증·통신 오류를 구분하고 사용 제한 기록은 초기화하지 않는다.
 - 추론은 작업 분류별로 유지하며 전역 모델별 고정으로 대체하지 않는다. 이 프리셋을 최신 모델 목록으로 취급하지 않는다.
 
@@ -43,7 +43,7 @@ omh model-chains show --json
 
 ```sh
 hermes config set fallback_providers '[{"provider":"anthropic","model":"claude-opus-5-5"}]'
-hermes config set delegation.fallback_providers '[{"provider":"anthropic","model":"claude-fable-5-1"},{"provider":"openai-codex","model":"gpt-6-astra"},{"provider":"anthropic","model":"claude-sonnet-5-5"},{"provider":"anthropic","model":"claude-opus-5-5"}]'
+hermes config set delegation.fallback_providers '[{"provider":"anthropic","model":"claude-opus-5-5"},{"provider":"openai-codex","model":"gpt-6-astra"},{"provider":"anthropic","model":"claude-sonnet-5-5"}]'
 ```
 
 ## fallback 순서·추론 보존
@@ -51,7 +51,7 @@ hermes config set delegation.fallback_providers '[{"provider":"anthropic","model
 설치된 소스에서 fallback 순서·추론 보존이 필요한지 확인한다. 아래는 소스 호환 패치다. `scripts/` 명령은 Agent-setup의 `hermes/`에서 실행한다.
 
 - `configure_delegation_reasoning.py`: fallback 시 자식에게 배정한 추론을 유지한다.
-- `configure_gpt_fallback.py`: GPT 시작 자식에서 Fable을 처음, Opus를 마지막에 둔다. Claude 시작 자식과 공통 설정은 보존한다.
+- `configure_gpt_fallback.py`: GPT 시작 자식에서 Opus를 마지막에 두고 나머지 공통 순서(Astra → Sonnet)를 유지한다. 이전 버전 패치가 설치돼 있으면 같은 명령이 새 순서로 갱신한다. Claude 시작 자식과 공통 설정은 보존한다.
 
 ```sh
 python3 scripts/configure_delegation_reasoning.py --source-root <확인한-Hermes-소스-루트>
@@ -91,16 +91,16 @@ https://github.com/PyeongsaengCoding/Agent-setup 의 main에서 hermes/docs/mode
 ### claude-generous CLI
 
 ```sh
-omh model-chains set ultrabrain 'gpt-6-astra:xhigh, claude-fable-5-1:xhigh, claude-opus-5-5:xhigh'
+omh model-chains set ultrabrain 'gpt-6-astra:xhigh, claude-opus-5-5:xhigh'
 omh model-chains set deep 'claude-opus-5-5:high, gpt-6.1-sol:high'
-omh model-chains set architect 'claude-opus-5-5:xhigh, gpt-6-astra:xhigh, claude-fable-5-1:xhigh'
+omh model-chains set architect 'claude-opus-5-5:xhigh, gpt-6-astra:xhigh'
 omh model-chains set unspecified-high 'gpt-6.1-sol:medium, claude-opus-5-5:medium'
 omh model-chains set unspecified-low 'gpt-6.1-sol:low, claude-sonnet-5-5:low'
-omh model-chains set quick 'gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low'
+omh model-chains set quick 'gpt-6-luna:low, claude-opus-5-5:low'
 omh model-chains set writing 'claude-opus-5-5:medium, claude-sonnet-5-5:medium, gpt-6.1-sol:medium'
-omh model-chains set visual-engineering 'claude-opus-5-5:high, claude-fable-5-1:high'
-omh model-chains set artistry 'claude-opus-5-5:high, claude-fable-5-1:high'
-omh model-chains set capable 'claude-opus-5-5:medium, gpt-6.1-sol:medium, claude-fable-5-1:medium'
+omh model-chains set visual-engineering 'claude-opus-5-5:high'
+omh model-chains set artistry 'claude-opus-5-5:high'
+omh model-chains set capable 'claude-opus-5-5:medium, gpt-6.1-sol:medium'
 omh model-chains set simple-work 'gpt-6-luna:low, claude-haiku-5-5:low'
 omh model-chains set deep-work 'claude-opus-5-5:max, gpt-6.1-sol:max'
 omh model-chains show --json
@@ -109,18 +109,18 @@ omh model-chains show --json
 ### gpt-generous CLI
 
 ```sh
-omh model-chains set ultrabrain 'gpt-6-astra:xhigh, claude-fable-5-1:xhigh, claude-opus-5-5:xhigh'
-omh model-chains set deep 'gpt-6.1-sol:high, claude-fable-5-1:high, claude-opus-5-5:high'
-omh model-chains set architect 'claude-fable-5-1:xhigh, gpt-6-astra:xhigh, claude-opus-5-5:xhigh'
+omh model-chains set ultrabrain 'gpt-6-astra:xhigh, claude-opus-5-5:xhigh'
+omh model-chains set deep 'gpt-6.1-sol:high, claude-opus-5-5:high'
+omh model-chains set architect 'gpt-6-astra:xhigh, claude-opus-5-5:xhigh'
 omh model-chains set unspecified-high 'claude-opus-5-5:medium'
 omh model-chains set unspecified-low 'claude-opus-5-5:low'
-omh model-chains set quick 'gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low, gpt-6-astra:low'
+omh model-chains set quick 'gpt-6-luna:low, claude-opus-5-5:low, gpt-6-astra:low'
 omh model-chains set writing 'gpt-6.1-sol:medium, claude-opus-5-5:medium'
-omh model-chains set visual-engineering 'claude-fable-5-1:high, gpt-6-astra:high, claude-opus-5-5:high'
-omh model-chains set artistry 'claude-fable-5-1:high, gpt-6-astra:high, claude-opus-5-5:high'
-omh model-chains set capable 'claude-fable-5-1:medium, gpt-6-astra:medium, claude-opus-5-5:medium, claude-sonnet-5-5:medium'
-omh model-chains set simple-work 'gpt-6-luna:low, claude-fable-5-1:low, claude-opus-5-5:low, claude-haiku-4-5:low'
-omh model-chains set deep-work 'gpt-6-astra:high, claude-fable-5-1:high, claude-opus-5-5:high'
+omh model-chains set visual-engineering 'gpt-6-astra:high, claude-opus-5-5:high'
+omh model-chains set artistry 'gpt-6-astra:high, claude-opus-5-5:high'
+omh model-chains set capable 'gpt-6-astra:medium, claude-opus-5-5:medium, claude-sonnet-5-5:medium'
+omh model-chains set simple-work 'gpt-6-luna:low, claude-opus-5-5:low, claude-haiku-4-5:low'
+omh model-chains set deep-work 'claude-opus-5-5:max, gpt-6.1-sol:max'
 omh model-chains show --json
 ```
 

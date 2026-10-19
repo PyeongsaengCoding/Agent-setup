@@ -21,7 +21,7 @@ def run(argv,**kw):
  return subprocess.run([str(x) for x in argv],check=True,text=True,**kw)
 def routes():
  text=(ROOT/'11-working-method.md').read_text(); result={}
- for category,family,effort in re.findall(r'^\| `([a-z-]+)` \| `(sol|astra|luna)` \| `(low|medium|high|xhigh)` \|',text,re.M):
+ for category,family,effort in re.findall(r'^\| `([a-z-]+)` \| `(sol|astra|luna)` \| `(low|medium|high|xhigh|max)` \|',text,re.M):
   result[category]={'family':family,'effort':effort}
  if len(result)!=12:raise RuntimeError('Expected 12 canonical routing rows in 11-working-method.md')
  return result

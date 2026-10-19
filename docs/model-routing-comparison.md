@@ -28,7 +28,7 @@ Codex·Claude Code 열은 설치 원본의 정책을 보여준다. Hermes 커스
 | `artistry` | Astra (`high`) | Fable → Opus → Astra (`high`) | Opus (`high`) | Gemini 3.1 Pro → Opus → Fable → Kimi K3 (`high`) |
 | `capable` | Sol (`medium`) | Fable → Opus → Sonnet → Astra (`medium`) | Opus → Sol (`medium`) | Opus → Sol → Fable → Kimi K3 (`medium`) |
 | `simple-work` | Luna (`low`) | Luna → Fable → Opus → Haiku 4.5 (`low`) | Luna → Haiku 5.5 (`low`) | Luna → Haiku 5.5 → DeepSeek Flash (`low`) |
-| `deep-work` | Astra (`high`) | Fable → Opus → Astra (`high`) | Opus → Sol (`max`) | Opus → Sol (`max`) |
+| `deep-work` | Sol (`max`) | Opus → Sol (`max`) | Opus → Sol (`max`) | Opus → Sol (`max`) |
 
 ## 두 설치 프리셋 비교
 
@@ -47,20 +47,11 @@ Codex·Claude Code 열은 설치 원본의 정책을 보여준다. Hermes 커스
 | `artistry` | Fable → Opus → Astra (`high`) | Fable → Astra → Opus (`high`) |
 | `capable` | Fable → Opus → Sonnet → Astra (`medium`) | Fable → Astra → Opus → Sonnet (`medium`) |
 | `simple-work` | Luna → Fable → Opus → Haiku 4.5 (`low`) | Luna → Fable → Opus → Haiku 4.5 (`low`) |
-| `deep-work` | Fable → Opus → Astra (`high`) | Astra → Fable → Opus (`high`) |
+| `deep-work` | Opus → Sol (`max`) | Opus → Sol (`max`) |
 
-## Hermes 설치 원본과 현재 적용값 차이
+## Hermes 설치 원본과 현재 적용값
 
-저장소의 `hermes/routing-presets/claude-generous.json`과 현재 적용값 사이에 다음 차이가 있다. 여섯 분류 모두 현재 적용값에서 Fable만 빠졌다. 2026-10-15 사용자 결정(Fable을 대체하고 기본 fallback을 Opus 5.5로 둠)이 실행 환경에만 반영되고 설치 원본에는 반영되지 않은 상태다. 설치 원본을 다시 적용하면 Fable이 되살아나므로, 재적용 전에 설치 원본을 현재 적용값으로 맞춘다.
-
-| 분류 | 저장소 설치 원본 | 현재 적용값 |
-|---|---|---|
-| `ultrabrain` | Astra → Fable → Opus (`xhigh`) | Astra → Opus (`xhigh`) |
-| `architect` | Opus → Astra → Fable (`xhigh`) | Opus → Astra (`xhigh`) |
-| `quick` | Luna → Fable → Opus (`low`) | Luna → Opus (`low`) |
-| `visual-engineering` | Opus → Fable (`high`) | Opus (`high`) |
-| `artistry` | Opus → Fable (`high`) | Opus (`high`) |
-| `capable` | Opus → Sol → Fable (`medium`) | Opus → Sol (`medium`) |
+2026-10-20 기준 `hermes/routing-presets/claude-generous.json`의 12개 분류 체인은 `omh model-chains show --json`의 현재 적용값과 같다. 2026-10-15 사용자 결정에 따라 두 Hermes 프리셋과 자식 공통 fallback(Opus → Astra → Sonnet)에서 Fable을 뺐고, 두 프리셋의 deep-work는 OMH 4.0.0 기본값(Opus → Sol, `max`)을 따른다.
 
 ## 정확한 모델 ID
 

@@ -6,26 +6,40 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 
+CLAUDE_COMMON = {
+    "ultrabrain": ("gpt-6-astra claude-fable-5-1 claude-opus-5-5", "xhigh"),
+    "deep": ("gpt-6.1-sol claude-fable-5-1 claude-opus-5-5", "high"),
+    "architect": ("claude-fable-5-1 gpt-6-astra claude-opus-5-5", "xhigh"),
+    "unspecified-high": ("claude-opus-5-5", "medium"),
+    "unspecified-low": ("claude-opus-5-5", "low"),
+    "quick": ("gpt-6-luna claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "low"),
+    "simple-work": ("gpt-6-luna claude-fable-5-1 claude-opus-5-5 claude-haiku-4-5", "low"),
+    # OMH v4.0.0 deep-work head (Opus 5.5 -> GPT-6.1 Sol, max), applied 2026-10-20.
+    "deep-work": ("claude-opus-5-5 gpt-6.1-sol", "max"),
+}
+CLAUDE_PRESETS = {
+    "claude-generous": {
+        "writing": ("claude-opus-5-5 gpt-6.1-sol", "medium"),
+        "visual-engineering": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
+        "artistry": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
+        "capable": ("claude-fable-5-1 claude-opus-5-5 claude-sonnet-5-5 gpt-6-astra", "medium"),
+    },
+    "gpt-generous": {
+        "writing": ("gpt-6.1-sol claude-opus-5-5", "medium"),
+        "visual-engineering": ("claude-fable-5-1 gpt-6-astra claude-opus-5-5", "high"),
+        "artistry": ("claude-fable-5-1 gpt-6-astra claude-opus-5-5", "high"),
+        "capable": ("claude-fable-5-1 gpt-6-astra claude-opus-5-5 claude-sonnet-5-5", "medium"),
+    },
+}
+
+
 class PortedRoutingTests(unittest.TestCase):
     def test_external_claude_presets_preserve_their_approved_policy(self):
         claude = json.loads((ROOT / "claude/routes/claude-code.json").read_text())["presets"]
-        gpt = json.loads((ROOT / "hermes/routing-presets/gpt-generous.json").read_text())
-        base = {
-            item["category"]: [{"model": e["model"], "effort": e["reasoning_effort"]} for e in item["chain"]]
-            for item in gpt["categories"]
-        }
-        self.assertEqual(claude["gpt-generous"], base)
-        expected = dict(base)
-        historical = {
-            "visual-engineering": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
-            "artistry": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
-            "capable": ("claude-fable-5-1 claude-opus-5-5 claude-sonnet-5-5 gpt-6-astra", "medium"),
-            "deep-work": ("claude-fable-5-1 claude-opus-5-5 gpt-6-astra", "high"),
-            "writing": ("claude-opus-5-5 gpt-6.1-sol", "medium"),
-        }
-        for category, (models, effort) in historical.items():
-            expected[category] = [{"model": m, "effort": effort} for m in models.split()]
-        self.assertEqual(claude["claude-generous"], expected)
+        for preset, own in CLAUDE_PRESETS.items():
+            rows = {**CLAUDE_COMMON, **own}
+            expected = {k: [{"model": m, "effort": e} for m in models.split()] for k, (models, e) in rows.items()}
+            self.assertEqual(claude[preset], expected, preset)
 
     def test_aside_rule_is_present_for_codex_and_claude(self):
         for path in ("codex/instructions/AGENTS.md", "claude/templates/global-rules.md"):

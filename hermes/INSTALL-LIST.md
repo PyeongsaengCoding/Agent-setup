@@ -11,7 +11,7 @@
 | 앱 | Aside | 로그인 브라우저 작업·프로필 가져오기 | 필수; 공식 앱·CLI·자신의 로그인 | `/Applications/Aside.app` | CLI는 공식 설치기 경로 확인; macOS 프로필은 `~/Library/Application Support/Aside/` |
 | 앱 | Chrome·Edge·Safari | 기존 로그인 브라우저 활용 | 사용하는 브라우저만; 프로필 가져오기는 지원 여부 확인 | `/Applications/` | `~/Library/Application Support/Google/Chrome/`, `~/Library/Application Support/Microsoft Edge/`, Safari는 OS 관리 |
 | 확장·스킬팩 | OMH | 작업 분류·라우팅·검증 지침 | 필수; 공식 install·setup | `~/.omh/`; `~/.local/share/omh/` | Hermes 등록 `H/plugins/omh/`; 스킬 실제 경로는 `skills.external_dirs` 확인 |
-| 런타임 호환 패치 | 자식 fallback 순서·추론 | Fable 시작·GPT 시작 경로의 순서와 작업별 추론 유지 | 설치본에 순서·추론 보완이 필요할 때만 미리보기·적용·새 프로세스 검증 | 실제 소스의 `agent/chat_completion_helpers.py`, `tools/delegate_tool_config.py` | `scripts/configure_delegation_reasoning.py`, `scripts/configure_gpt_fallback.py`; [적용 기준](docs/model-routing.md) |
+| 런타임 호환 패치 | 자식 fallback 순서·추론 | GPT 시작 자식의 Opus 마지막 순서와 작업별 추론 유지 | 설치본에 순서·추론 보완이 필요할 때만 미리보기·적용·새 프로세스 검증 | 실제 소스의 `agent/chat_completion_helpers.py`, `tools/delegate_tool_config.py` | `scripts/configure_delegation_reasoning.py`, `scripts/configure_gpt_fallback.py`; [적용 기준](docs/model-routing.md) |
 | Hermes 플러그인 | provider-usage | GPT·Claude 사용량·잔여 한도·리셋 시간 | 필수; 설치·활성화·[GPT·Claude만 표시](docs/provider-usage.md)·실제 조회 | `H/plugins/provider-usage/` | Desktop UI `H/desktop-plugins/provider-usage/`; 표시 어댑터 `scripts/configure_provider_usage.py`; 인증은 사용자의 로컬 저장소 |
 | Hermes 플러그인 | discord-project-sidebar | Discord 세션을 Desktop 프로젝트 아래에 표시 | 선택; Discord 사용 시 [연동 안내](docs/discord.md) | `H/plugins/discord-project-sidebar/` | 원본 `discord/plugins/`; 프로젝트 지도는 `discord.channel_prompts` |
 | Hermes 플러그인 | desktop-discord-reports | Desktop 작업 결과를 프로젝트 채널 스레드로 보고 | 선택; Discord 사용 시 | `H/plugins/desktop-discord-reports/` | 원본 `discord/plugins/`; 스레드 대응 `H/state/desktop-discord-threads.json` |
@@ -110,6 +110,6 @@
 | 스킬 | clock-fenced-offline-integration | 시각 기준 오프라인 통합 확인 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/clock-fenced-offline-integration/` | — |
 | 스킬 | future-effective-memory-tdd | 미래 시점 적용 기억 갱신을 TDD로 수정 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/future-effective-memory-tdd/` | — |
 | 스킬 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/project-reference-adoption/` | — |
-| 외부 스킬 | Azure·Entra 26, Azure 비용 4, 마케팅 5, archify, iterative-retrieval (37개) | Codex·Claude Code와 같은 업무 스킬 | Agent-setup 외부 목록 `codex/inventories/external-skills.json`의 고정 원본; 설명 조정 `codex/config/skill-descriptions.json` | `H/skills/<스킬명>/` | 설치 기록은 Agent-setup 상태 경로의 별도 잠금 파일 |
+| 외부 스킬 | Azure·Entra 26, Azure 비용 4, 마케팅 5, archify, iterative-retrieval (37개) | Codex·Claude Code와 같은 업무 스킬 | Agent-setup 외부 목록 `codex/inventories/external-skills.json`의 고정 원본(원본별 최신 정식 릴리스 태그의 커밋); 설명 조정 `codex/config/skill-descriptions.json` | `H/skills/<스킬명>/` | 설치 기록은 Agent-setup 상태 경로의 별도 잠금 파일 |
 
 출처와 설치 기준은 [manifest.json](manifest.json), 실행 방법은 [설치 안내](INSTALL_FOR_AGENTS.md)에 있다. Hermes 기본 내장 플러그인을 전부 복제하지 않는다.

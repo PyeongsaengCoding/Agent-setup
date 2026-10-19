@@ -14,7 +14,7 @@
 | MCP | CodeGraph, GAM (사용자 범위) |
 | Aside | 공통 기준대로 |
 
-외부 스킬 37개(Azure·마케팅 등)는 Codex와 같은 목록(`../codex/inventories/external-skills.json`)과 설명 조정(`../codex/config/skill-descriptions.json`)을 사용한다.
+외부 스킬 37개(Azure·마케팅 등)는 Codex와 같은 목록(`../codex/inventories/external-skills.json`)과 설명 조정(`../codex/config/skill-descriptions.json`)을 사용한다. 목록의 각 항목은 원본 저장소의 최신 정식 릴리스 태그 커밋(`ref`)에 고정되어 있다.
 
 설치 대상은 사용자가 실제 사용하는 Claude Code 설정 폴더다. 제공된 설치기와 [구성 안내](README.md)는 참고 자료로 사용한다. 사용자 설정을 보존하고 변경 전 백업을 남기며, 충돌한 파일은 차이를 확인해 처리한다.
 

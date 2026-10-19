@@ -27,7 +27,7 @@ Hermes에서 가져온 두 프리셋을 `routes/claude-code.json`에서 Claude C
 | `artistry` | 창의적 설계·시각 방향 | claude-fable-5-1 → claude-opus-5-5 → gpt-6-astra | claude-fable-5-1 → gpt-6-astra → claude-opus-5-5 | high |
 | `capable` | 일반 실행 | claude-fable-5-1 → claude-opus-5-5 → claude-sonnet-5-5 → gpt-6-astra | claude-fable-5-1 → gpt-6-astra → claude-opus-5-5 → claude-sonnet-5-5 | medium |
 | `simple-work` | 단순 실행 | gpt-6-luna → claude-fable-5-1 → claude-opus-5-5 → claude-haiku-4-5 | 같음 | low |
-| `deep-work` | 길고 까다로운 복합 실행 | claude-fable-5-1 → claude-opus-5-5 → gpt-6-astra | gpt-6-astra → claude-fable-5-1 → claude-opus-5-5 | high |
+| `deep-work` | 길고 까다로운 복합 실행 | claude-opus-5-5 → gpt-6.1-sol | claude-opus-5-5 → gpt-6.1-sol | max |
 
 Claude Code에는 하위 에이전트 단위 모델 자동 대체가 없다. 전역 규칙에 따라 주 에이전트가 항목 실패(모델 사용 불가·한도·인증 오류, 빈 Codex 결과)를 보고 같은 작업을 다음 항목에 넘긴다. Fable은 요금제에 따라 별도 사용 크레딧을 쓴다.
 

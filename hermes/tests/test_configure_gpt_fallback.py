@@ -3,7 +3,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 
-from scripts.configure_gpt_fallback import LEGACY_REPLACEMENT, adapt, install
+from scripts.configure_gpt_fallback import PREVIOUS_REPLACEMENTS, adapt, install
 
 SOURCE = '''def _resolve_child_fallback_chain(parent_agent, routing_cfg, pinned):
     return scoped_fallback_chain(
@@ -12,8 +12,8 @@ SOURCE = '''def _resolve_child_fallback_chain(parent_agent, routing_cfg, pinned)
         pinned=pinned, owner="delegation")
 '''
 CHAIN = [{'provider': provider, 'model': model} for provider, model in (
-    ('anthropic', 'claude-fable-5-1'), ('openai-codex', 'gpt-6-astra'),
-    ('anthropic', 'claude-opus-5-5'), ('anthropic', 'claude-sonnet-5-5'))]
+    ('anthropic', 'claude-opus-5-5'), ('openai-codex', 'gpt-6-astra'),
+    ('anthropic', 'claude-sonnet-5-5'))]
 
 
 class GPTFallbackTests(unittest.TestCase):
@@ -23,24 +23,24 @@ class GPTFallbackTests(unittest.TestCase):
         return namespace['_resolve_child_fallback_chain'](SimpleNamespace(_fallback_chain=[]),
             {'provider': provider, 'model': model, 'fallback_providers': chain}, pinned)
 
-    def test_gpt_route_prioritizes_claude_without_mutating_config(self):
+    def test_gpt_route_moves_opus_last_without_mutating_config(self):
         before = [dict(entry) for entry in CHAIN]
         for model in ('gpt-6-astra', 'gpt-6.1-sol', 'gpt-6-luna'):
             result = self.resolve('openai-codex', model)
             self.assertEqual([entry['model'] for entry in result],
-                             ['claude-fable-5-1', 'gpt-6-astra',
-                              'claude-sonnet-5-5', 'claude-opus-5-5'])
+                             ['gpt-6-astra', 'claude-sonnet-5-5', 'claude-opus-5-5'])
             self.assertEqual(CHAIN, before)
 
-    def test_exact_legacy_adapter_upgrades_idempotently(self):
+    def test_previous_adapters_upgrade_idempotently(self):
         from scripts.configure_gpt_fallback import ANCHOR
-        legacy = SOURCE.replace(ANCHOR, LEGACY_REPLACEMENT)
-        upgraded = adapt(legacy)
-        self.assertEqual(upgraded, adapt(SOURCE))
-        self.assertEqual(adapt(upgraded), upgraded)
+        for previous in PREVIOUS_REPLACEMENTS:
+            upgraded = adapt(SOURCE.replace(ANCHOR, previous))
+            self.assertEqual(upgraded, adapt(SOURCE))
+            self.assertEqual(adapt(upgraded), upgraded)
+            self.assertNotIn('claude-fable-5-1', upgraded)
 
     def test_claude_and_unpinned_routes_unchanged(self):
-        self.assertEqual(self.resolve('anthropic', 'claude-fable-5-1'), CHAIN)
+        self.assertEqual(self.resolve('anthropic', 'claude-opus-5-5'), CHAIN)
         self.assertEqual(self.resolve('openai-codex', 'gpt-6-astra', pinned=False), CHAIN)
         self.assertEqual(self.resolve('custom', 'gpt-6-astra'), CHAIN)
         self.assertEqual(self.resolve('openai-codex', 'gpt-6-astra', chain=[]), [])

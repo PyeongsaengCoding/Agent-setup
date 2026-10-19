@@ -17,7 +17,7 @@
 ### 표 읽는 법
 
 - **모델 순서**: 왼쪽 모델을 먼저 사용하고, 사용 불가·한도·인증 등의 실패가 발생하면 해당 실행기의 fallback 절차로 다음 후보를 시도한다.
-- **추론 강도**: `low`는 단순 확인, `medium`은 일반 작업·문서, `high`는 깊은 구현, `xhigh`는 복잡한 추론·설계에 배정한다. Hermes Claude 넉넉형의 `deep-work`는 `max`를 사용한다. 표의 추론 값은 같은 행의 모든 후보에 적용한다.
+- **추론 강도**: `low`는 단순 확인, `medium`은 일반 작업·문서, `high`는 깊은 구현, `xhigh`는 복잡한 추론·설계에 배정한다. `deep-work`는 OMH v4.0.0을 따라 세 AI 모두 `max`를 사용한다. 표의 추론 값은 같은 행의 모든 후보에 적용한다.
 - **적용 대상**: 현재 대화의 주 에이전트가 목표·범위·결과를 관리하고, 중요한 작업 단위에 실행기별 모델·추론을 배정한다. 작은 문서 수정과 일반 답변은 주 에이전트가 직접 처리한다.
 - **프리셋 선택**: Claude 넉넉형과 GPT 넉넉형의 실제 차이는 아래 후보 순서에 있다. 작업별로 GPT와 Claude를 함께 사용한다.
 
@@ -49,7 +49,7 @@ Codex 네이티브 위임에 모델 ID와 `reasoning_effort`를 지정한다. �
 | `artistry` | 창의적 설계 | Astra | `high` |
 | `capable` | 일반 실행 | Sol | `medium` |
 | `simple-work` | 단순 실행 | Luna | `low` |
-| `deep-work` | 복합 실행 | Astra | `high` |
+| `deep-work` | 복합 실행 | Sol | `max` |
 
 원본: [작업 분류·추론·위임 기준](codex/11-working-method.md), [계열별 모델 ID](codex/config/models.json).
 
@@ -70,7 +70,7 @@ Claude 후보는 `route-<분류>-<계열>` 하위 에이전트로 실행한다. 
 | `artistry` | 창의적 설계·시각 방향 | Fable → Opus → Astra | Fable → Astra → Opus | `high` |
 | `capable` | 일반 실행 | Fable → Opus → Sonnet → Astra | Fable → Astra → Opus → Sonnet | `medium` |
 | `simple-work` | 단순 실행 | Luna → Fable → Opus → Haiku 4.5 | Luna → Fable → Opus → Haiku 4.5 | `low` |
-| `deep-work` | 길고 까다로운 복합 실행 | Fable → Opus → Astra | Astra → Fable → Opus | `high` |
+| `deep-work` | 길고 까다로운 복합 실행 | Opus → Sol | Opus → Sol | `max` |
 
 원본: [두 프리셋의 모델·순서·추론](claude/routes/claude-code.json). 설치와 실제 호출 확인은 [Claude Code 안내](claude/README.md#모델-라우팅)를 따른다.
 
@@ -80,26 +80,26 @@ OMH에서 작업 분류를 선택한 직후 `delegate_task`로 위임한다. GPT
 
 | 작업 분류 | 적용 작업 | Claude 넉넉형 · 기본 | 추론 | GPT 넉넉형 | 추론 |
 |---|---|---|---|---|---|
-| `ultrabrain` | 가장 깊은 추론이 필요한 모호한 문제 | Astra → Fable → Opus | `xhigh` | Astra → Fable → Opus | `xhigh` |
-| `deep` | 깊은 구현·디버깅 | Opus → Sol | `high` | Sol → Fable → Opus | `high` |
-| `architect` | 아키텍처·시스템 경계 설계 | Opus → Astra → Fable | `xhigh` | Fable → Astra → Opus | `xhigh` |
+| `ultrabrain` | 가장 깊은 추론이 필요한 모호한 문제 | Astra → Opus | `xhigh` | Astra → Opus | `xhigh` |
+| `deep` | 깊은 구현·디버깅 | Opus → Sol | `high` | Sol → Opus | `high` |
+| `architect` | 아키텍처·시스템 경계 설계 | Opus → Astra | `xhigh` | Astra → Opus | `xhigh` |
 | `unspecified-high` | 분류 밖의 복합 작업 | Sol → Opus | `medium` | Opus | `medium` |
 | `unspecified-low` | 분류 밖의 단순 작업 | Sol → Sonnet | `low` | Opus | `low` |
-| `quick` | 좁은 탐색·빠른 확인 | Luna → Fable → Opus | `low` | Luna → Fable → Opus → Astra | `low` |
+| `quick` | 좁은 탐색·빠른 확인 | Luna → Opus | `low` | Luna → Opus → Astra | `low` |
 | `writing` | 문서 작성·편집 | Opus → Sonnet → Sol | `medium` | Sol → Opus | `medium` |
-| `visual-engineering` | 화면·프론트엔드 구현 | Opus → Fable | `high` | Fable → Astra → Opus | `high` |
-| `artistry` | 창의적 설계·시각 방향 | Opus → Fable | `high` | Fable → Astra → Opus | `high` |
-| `capable` | 일반 실행 | Opus → Sol → Fable | `medium` | Fable → Astra → Opus → Sonnet | `medium` |
-| `simple-work` | 단순 실행 | Luna → Haiku 5.5 | `low` | Luna → Fable → Opus → Haiku 4.5 | `low` |
-| `deep-work` | 길고 까다로운 복합 실행 | Opus → Sol | `max` | Astra → Fable → Opus | `high` |
+| `visual-engineering` | 화면·프론트엔드 구현 | Opus | `high` | Astra → Opus | `high` |
+| `artistry` | 창의적 설계·시각 방향 | Opus | `high` | Astra → Opus | `high` |
+| `capable` | 일반 실행 | Opus → Sol | `medium` | Astra → Opus → Sonnet | `medium` |
+| `simple-work` | 단순 실행 | Luna → Haiku 5.5 | `low` | Luna → Opus → Haiku 4.5 | `low` |
+| `deep-work` | 길고 까다로운 복합 실행 | Opus → Sol | `max` | Opus → Sol | `max` |
 
 Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각각 설정한다.
 
 | fallback 적용 대상 | 순서 | 동작 |
 |---|---|---|
 | 주 에이전트 | Opus | 현재 주 모델에서 fallback이 필요할 때 사용 |
-| 위임 자식 공통 | Fable → Astra → Sonnet → Opus | 이미 시도한 모델·사용 불가능한 후보를 건너뛰고, 배정한 추론 강도를 유지 |
-| GPT로 시작한 자식 | Fable 우선, Opus 마지막 | 소스 호환 패치로 순서를 보존 |
+| 위임 자식 공통 | Opus → Astra → Sonnet | 이미 시도한 모델·사용 불가능한 후보를 건너뛰고, 배정한 추론 강도를 유지 |
+| GPT로 시작한 자식 | 공통 순서와 같음. 선택 호환 패치를 적용하면 Astra → Sonnet → Opus | `configure_gpt_fallback.py` 적용 시에만 바뀜 (2026-10-20 이 Mac 미적용) |
 
 원본: [Claude 넉넉형](hermes/routing-presets/claude-generous.json), [GPT 넉넉형](hermes/routing-presets/gpt-generous.json). 프리셋 적용 요청·전환 명령·fallback 검증은 [Hermes 라우팅 안내](hermes/docs/model-routing.md)에 있다.
 
