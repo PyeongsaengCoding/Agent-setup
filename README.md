@@ -158,7 +158,7 @@ Hermes에는 Agent-setup이 설치한 구성과 OMH가 설치한 구성이 함�
 | 모델 라우팅 | 설치 프리셋, 메인 대화 기본 모델 | 분류별 기본 체인, 실행값 `~/.omh/routing/model-chains.json` | 프리셋을 넣은 분류는 `override`로 OMH 기본값보다 우선하고 업데이트 뒤에도 유지된다. 하위 에이전트에만 적용되고 메인 대화·cron은 Hermes 기본 모델 |
 | 기억 | GAM: 프로젝트 결정·해결 경험 | OMH 기억: Hermes 작업 교훈 | 프로젝트 지식은 GAM에 두어 세 AI가 함께 쓴다 |
 | 코드 탐색·브라우저 | CodeGraph, Aside 조작 규칙 | 색인 갱신·브라우저 범위 안내 워크플로 | 실제 도구는 CodeGraph·Aside, 범위 확인은 OMH 안내를 함께 따른다 |
-| 플러그인·본체 | 사용량 표시·웹 검색 중계·Discord 보고, Hermes 본체 호환 패치 | `omh` 플러그인 | 이름이 달라 함께 등록된다. 본체 수정은 업데이트 때 보관 후 다시 적용한다 |
+| 플러그인·본체 | 사용량 표시·웹 검색 중계·Discord 보고, Hermes 본체·provider-usage 수정 묶음(`hermes/patches/`: 계정 선택·사용량 표시·모델별 계정 쿨다운 등), fallback 호환 패치 | `omh` 플러그인 | 이름이 달라 함께 등록된다. Hermes 본체와 provider-usage는 최신 정식 릴리스 위에 수정 묶음을 적용해 쓰고, `hermes/scripts/apply_local_patches.py`로 적용 상태를 확인한다 |
 | 프로젝트 식별 | 없음 | Git 원격 주소로 프로젝트 자동 식별 | 프로젝트마다 할 초기화는 없다. `omh memory project-identity show`가 `unresolved`인 프로젝트만 `omh memory project-identity init`을 실행한다. OMH 4.0.0에는 `omh init` 명령이 없다 |
 | 업데이트 | 외부 구성요소를 최신 정식 릴리스로 고정, `scripts/check_releases.py`로 확인 | `omh update`가 자기 패키지·스킬 갱신 | [업데이트 절차](hermes/docs/model-routing.md#업데이트) 한 블록으로 함께 올린다 |
 

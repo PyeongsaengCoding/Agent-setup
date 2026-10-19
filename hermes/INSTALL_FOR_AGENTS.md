@@ -13,7 +13,8 @@
 | OMH | `manifest.json`의 v4.0.0 참조 커밋 기준으로 설치·setup, 연결한 GPT·Claude 제공자 반영 | [OMH 공식 안내](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/INSTALL_FOR_AGENTS.md) |
 | 모델 라우팅 | Claude 넉넉형 (사용자가 원하면 GPT 넉넉형), 필요한 호환 패치 | [모델 라우팅](docs/model-routing.md) |
 | 전역 규칙 | 선택한 프로필의 `SOUL.md`에 공통 작업 원칙·Aside·문서 전달 구간 | [전역 규칙](docs/global-rules.md), `scripts/install_global_rules.py` |
-| 사용량 플러그인 | `PhoeniXAbhisheK/hermes-plugin-provider-usage` 고정 ref `023e7e54d6f6c5ec55314f7603ed5b80af81cd54`, GPT·Claude만 표시 | [사용량 표시](docs/provider-usage.md), `scripts/configure_provider_usage.py` |
+| 사용량 플러그인 | `PhoeniXAbhisheK/hermes-plugin-provider-usage` 고정 ref `023e7e54d6f6c5ec55314f7603ed5b80af81cd54`, GPT·Claude만 표시, 수정 묶음 `patches/provider-usage/<태그>.patch` 적용 | [사용량 표시](docs/provider-usage.md), `scripts/configure_provider_usage.py` |
+| 본체 수정 묶음 | 최신 정식 Hermes 체크아웃에 `patches/hermes-agent/<태그>.patch`(계정 선택·사용량 표시·모델별 계정 쿨다운·턴 복구) 적용 | `scripts/apply_local_patches.py` (기본 보고, `--apply`로 적용) |
 | MCP | CodeGraph, GAM | 공통 기준 |
 | 브라우저 | Aside 설치, 사용자가 고른 프로필 가져오기, Hermes에서 `repl` 직접 조작 | [브라우저](docs/browsers.md), [배포 규칙](templates/aside-browser.md) |
 | Discord (선택) | 사용자가 Discord를 쓰면 프로젝트별 채널·결과 보고 플러그인·매일 정리 작업 구성 | [Discord 연동](docs/discord.md), `discord/` |

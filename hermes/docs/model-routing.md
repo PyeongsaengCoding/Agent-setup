@@ -126,11 +126,12 @@ omh model-chains show --json
 
 ## 업데이트
 
-Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱신한다. Hermes 공식 설치본은 `stable` 채널(최신 `vX.Y.Z` 릴리스 커밋)을 따르고, `hermes update --check`의 `Update channel: stable`로 확인한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다.
+Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱신하고, Hermes 본체·provider-usage에는 이 사용자의 수정 묶음(`hermes/patches/`)을 다시 적용한다. Hermes 공식 설치본은 `stable` 채널(최신 `vX.Y.Z` 릴리스 커밋)을 따르고, `hermes update --check`의 `Update channel: stable`로 확인한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다.
 
 ```bash
 (
   set -e
+  AGENT_SETUP="$HOME/Downloads/Coding/personal/Agent-setup"   # 이 컴퓨터의 Agent-setup 체크아웃
 
   printf '\n[1/5] 업데이트 예정 확인\n'
   hermes update --check
@@ -144,7 +145,8 @@ Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱�
   printf 'OMH %s\n' "$OMH_LATEST"
   omh update --channel stable --version "$OMH_LATEST"
 
-  printf '\n[4/5] 설치 상태 점검\n'
+  printf '\n[4/5] 우리 수정 묶음 확인·설치 상태 점검\n'
+  python3 "$AGENT_SETUP/hermes/scripts/apply_local_patches.py" --apply
   omh doctor
   hermes doctor
 
@@ -159,6 +161,13 @@ Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱�
 ```
 
 - `hermes update --backup`은 설정·대화 백업을 만들고, Hermes 본체의 로컬 수정을 stash에 보관한 뒤 새 버전 위에 재적용한다. 재적용 질문에는 사용자가 동의한다. 재적용 충돌이 나면 멈추고 stash를 보존한 채 충돌 파일을 검토한다.
+- `apply_local_patches.py --apply`는 각 체크아웃의 릴리스 태그에 맞는 패치(`hermes/patches/<대상>/<태그>.patch`)를 확인한다. `applied`면 수정이 들어 있는 상태이고, `applicable`이면 적용한다. `no_patch`(새 태그용 패치 없음)나 `conflict`가 나오면 블록이 멈춘다. 이때 AI에게 "Agent-setup 수정 묶음을 새 Hermes 버전에 옮겨줘"라고 요청한다. AI는 이전 태그 패치를 새 버전에 맞춰 적용·시험한 뒤 아래 명령으로 새 태그 패치를 저장한다.
+
+  ```bash
+  cd ~/.hermes/hermes-agent && cp .git/index "$TMPDIR/idx" && GIT_INDEX_FILE="$TMPDIR/idx" git add -A && GIT_INDEX_FILE="$TMPDIR/idx" git diff --cached --binary HEAD > "$AGENT_SETUP/hermes/patches/hermes-agent/$(git describe --tags --exact-match).patch"
+  ```
+
+  provider-usage는 `dashboard/`·`tests/` 경로만 같은 방식으로 저장한다(`desktop/plugin.js`는 `configure_provider_usage.py`가 따로 맞춘다).
 - `--keep-stash`는 재적용을 건너뛰고 수정을 stash에 남긴다. 로컬 수정을 새 버전에 맞춰 직접 다시 합칠 때만 쓴다.
 - `omh update --channel stable --version <최신>`은 GitHub 최신 정식 릴리스의 wheel로 명령 패키지와 워크플로를 함께 갱신하고 설치 기록을 `stable` 채널로 남긴다. 옵션 없는 `omh update`는 설치 기록의 패키지 주소를 다시 쓰므로, 기록이 main 브랜치 zip이면 preview 빌드를 받는다. `~/.omh/routing/model-chains.json`의 사용자 지정 분류는 유지되고, 기본값을 쓰는 분류는 새 기본 체인을 따른다.
 - 갱신 뒤 Agent-setup 루트에서 `python3 scripts/check_releases.py`로 저장소 고정값이 최신 정식 릴리스와 같은지 확인한다. `behind`가 나온 항목은 고정값·사본·문서를 함께 올린다.

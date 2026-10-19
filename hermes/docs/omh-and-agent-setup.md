@@ -15,7 +15,7 @@ Hermes에서는 Agent-setup이 설치한 구성과 OMH가 설치한 구성이 �
 | 코드 탐색 | CodeGraph MCP와 `codegraph-context` 스킬(코드 작업 시작 시 상시 사용) | `omh-codegraph-refresh` 워크플로 | 공통 지침이 CodeGraph MCP 사용을 정하고, OMH 워크플로는 색인 갱신 계획이 필요할 때 쓴다 |
 | 브라우저 | Aside 설치와 `repl` 직접 조작 규칙 | `omh-browser` 정책 안내(로그인·클릭·폼 작업 범위) | 조작 도구는 Aside 규칙을 따르고, 권한·확인 범위는 OMH 안내를 함께 적용한다 |
 | 플러그인 | `provider-usage`, `web-codex-search`, `desktop-discord-reports`, `discord-project-sidebar` | `omh` 플러그인(`omh_*` 도구·턴 훅) | 이름이 달라 각자 등록된다. 같은 이벤트를 쓰는 훅은 모두 실행된다 |
-| Hermes 본체 | 런타임 호환 패치 2개, 계정 선택·사용량 표시 로컬 수정 | 없음 | `hermes update --backup`이 로컬 수정을 stash에 보관하고 새 버전에 다시 적용한다 |
+| Hermes 본체 | 최신 정식 릴리스 + 수정 묶음 `hermes/patches/hermes-agent/<태그>.patch`(계정 선택·사용량 표시·모델별 계정 쿨다운·턴 복구 등), provider-usage 수정 묶음, fallback 호환 패치 | 없음 | `hermes update --backup`이 로컬 수정을 stash에 보관하고 새 버전에 다시 적용한다. `apply_local_patches.py`가 태그별 패치 적용 상태를 확인하고, 새 태그용 패치가 없으면 수정을 옮겨 저장할 때까지 업데이트 절차를 멈춘다 |
 | 프로젝트 식별 | 없음 | OMH 기억이 프로젝트를 구분하는 식별자(Git 원격 주소로 자동 결정) | 프로젝트마다 할 초기화는 없다. 식별이 `unresolved`인 프로젝트만 그 폴더에서 `omh memory project-identity init`을 실행한다. OMH 4.0.0에는 `omh init` 명령이 없다 |
 | 업데이트 | 외부 구성요소를 최신 정식 릴리스 태그로 고정하고 `scripts/check_releases.py`로 확인 | `omh update`가 자기 명령 패키지·워크플로를 갱신 | [업데이트 절차](model-routing.md#업데이트)의 한 블록으로 Hermes·OMH를 함께 올리고, 저장소 고정값을 맞춘다 |
 | Claude Code·Codex | OMH 스킬 사본, 실행기별 라우팅·지침 | 실행 런타임 없음 | Claude·Codex 전역 지침의 `OMH 워크플로 스킬` 절이 `omh_*` 도구를 각 실행기 도구로 대응시킨다 |
