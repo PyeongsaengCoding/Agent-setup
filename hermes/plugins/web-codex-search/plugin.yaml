@@ -1,0 +1,7 @@
+name: web-codex-search
+version: 0.1.0
+description: "GPT web search relay — runs each web_search query through the signed-in openai-codex (ChatGPT) account's server-side web_search, so search quality stays the same while the main model is Claude or any other provider."
+author: Agent-setup
+kind: backend
+provides_web_providers:
+  - codex-search
