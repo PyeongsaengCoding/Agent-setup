@@ -124,7 +124,7 @@ Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각�
 | 항목 | Claude Code | Codex | Hermes |
 |---|---|---|---|
 | 모델 라우팅 | 12개 분류별 Claude 하위 에이전트 + GPT는 Codex 플러그인 | 12개 분류별 GPT 모델·추론 | OMH 프리셋 |
-| 스킬 | 228개 (공통 48 + OMH 142 + codex + 외부 37) | 227개 (공통 48 + OMH 142 + 외부 37) | 126개 (공식 57 + 공통 32 + 외부 37) + OMH 142 |
+| 스킬 | 229개 (공통 49 + OMH 142 + codex + 외부 37) | 228개 (공통 49 + OMH 142 + 외부 37) | 128개 (공식 57 + 공통 34 + 외부 37) + OMH 142 |
 | 전역 지침 | `~/.claude/AGENTS.md` | `~/.codex/AGENTS.md` | `SOUL.md` 관리 구간 |
 | 코드 탐색 | CodeGraph | CodeGraph | CodeGraph |
 | 기억 | GAM | GAM | GAM + Hermes 메모리 |
@@ -138,7 +138,7 @@ Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각�
 | 묶음 | 개수 | 내용 | Claude Code | Codex | Hermes |
 |---|---|---|---|---|---|
 | 작업 원칙 | 16 | coding-plan·coding-work·coding-handoff·coding-status·coding-research·coding-repair·coding-code-review·coding-verification·coding-design-review·coding-failure-audit·coding-debt-audit·coding-ai-slop-review·diagnosing-bugs·tdd·ponytail·product-design-review | ✅ | ✅ | OMH가 같은 일 |
-| 도구·글쓰기 | 10 | codegraph-context·gam-memory·coding-maintenance·agent-setup-maintenance·aside-browser·humanize-korean·humanizer·writing-for-agents·shadcn·shadcn-lint | ✅ | ✅ | ✅ (writing-for-agents 제외) |
+| 도구·글쓰기·디자인 | 11 | codegraph-context·gam-memory·coding-maintenance·agent-setup-maintenance·aside-browser·humanize-korean·humanizer·writing-for-agents·shadcn·shadcn-lint·logo-design | ✅ | ✅ | ✅ (writing-for-agents 제외) |
 | Hermes 작업 교훈 | 22 | 운영 실패 진단·관리 API 일괄 작업·서비스 인프라 설계·읽기 모델 성능·SQLite 시험 기록·서브프로세스 기한·미디어 제작·모바일 앱 베타·Android 기기 검증·참고 링크 도입 검토 등 | ✅ | ✅ | ✅ |
 | OMH 워크플로 | 142 | 계획(planner 19)·검토(reviewer 22)·운영(operator 38)·안내(guide 20)·추적(tracker 18)·ultrawork 9·조사(researcher 8)·기억(memory-keeper 5)·인계(handoff-guide 3) | ✅ 사본 | ✅ 사본 | ✅ OMH 설치기 |
 | 외부 업무 | 37 | Azure·Entra 26, Azure 비용 4, 마케팅 5 (seo-audit·aso·analytics·cro·copywriting), archify, iterative-retrieval | ✅ | ✅ | ✅ |

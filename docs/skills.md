@@ -4,11 +4,11 @@
 
 | AI | 기본 설치 | 구성 |
 |---|---|---|
-| Claude Code | 228 | 공통 48 + OMH 142 + codex + 외부 37 |
-| Codex | 227 | 공통 48 + OMH 142 + 외부 37 |
-| Hermes | 126 + OMH 142 | Hermes 공식 57 + 공통 32 + 외부 37 + OMH 142 |
+| Claude Code | 229 | 공통 49 + OMH 142 + codex + 외부 37 |
+| Codex | 228 | 공통 49 + OMH 142 + 외부 37 |
+| Hermes | 128 + OMH 142 | Hermes 공식 57 + 공통 34 + 외부 37 + OMH 142 |
 
-## 1. 공통 스킬과 AI 전용 스킬 (50)
+## 1. 공통 스킬과 AI 전용 스킬 (51)
 
 | # | 구분 | 스킬 | 하는 일 | Claude | Codex | Hermes | 세 AI 비교 | 둘 곳 | pycoding-prompt 관계 |
 |---|---|---|---|---|---|---|---|---|---|
@@ -62,6 +62,7 @@
 | 48 | 검증 | clock-fenced-offline-integration | 시각 기준 오프라인 통합 확인 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
 | 49 | 코딩 | future-effective-memory-tdd | 미래 시점 적용 기억 갱신을 TDD로 수정 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
 | 50 | 조사 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
+| 51 | 디자인 | logo-design | 로고·브랜드 마크의 브리프·컨셉·SVG 제작·16px 시험·전달 파일 (kaankiziltug/logo-design-skill @ 0ecf52e) | ✅ | ✅ | ✅ | 세 AI 같은 파일. 상표 로고 SVG 묶음은 MIT 밖이라 제외하고 메타데이터 catalog로 검색 | Agent-setup | 제품 브랜드·아이콘 결정은 해당 프로젝트 문서에 둠 |
 
 ## 2. 외부 스킬 (37)
 

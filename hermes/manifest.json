@@ -767,6 +767,17 @@
       "local_modified": false
     },
     {
+      "name": "logo-design",
+      "description": "로고·브랜드 마크 브리프·컨셉·SVG 제작·16px 시험·전달 파일",
+      "kind": "skill",
+      "source_kind": "local",
+      "source_path": "skills/logo-design",
+      "install_path": "skills/logo-design",
+      "extra_install": "Python 3 표준 라이브러리; PNG 렌더링은 cairosvg·rsvg-convert·Inkscape·Chrome·Quick Look 중 하나",
+      "extra_path": "kaankiziltug/logo-design-skill @ 0ecf52e (상표 로고 SVG 묶음 제외)",
+      "local_modified": false
+    },
+    {
       "name": "bounded-resource-usage-ledgers",
       "description": "실행 단위 자원 사용 기록에 상한 두기",
       "kind": "skill",

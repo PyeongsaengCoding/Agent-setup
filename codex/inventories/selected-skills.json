@@ -50,6 +50,14 @@
         "skills/iterative-retrieval"
       ],
       "adaptations": "12-skill-application.md"
+    },
+    {
+      "repo": "kaankiziltug/logo-design-skill",
+      "selected_paths": [
+        "skills/logo-design"
+      ],
+      "adaptations": "12-skill-application.md",
+      "note": "Vendored into Agent-setup shared/skills/core/logo-design at 0ecf52e9a4b3ac92b714f7cc6e3148ab8c774134; trademark SVG corpus (assets/library/svg, gallery.html, classifications.json, build_catalog.py) excluded per upstream TRADEMARKS.md"
     }
   ],
   "mcp": "chrome-devtools",

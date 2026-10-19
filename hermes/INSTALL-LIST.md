@@ -2,7 +2,7 @@
 
 `H`는 `${HERMES_HOME:-$HOME/.hermes}`다. 기본은 `~/.hermes/`, 이름 있는 프로필은 `~/.hermes/profiles/<이름>/`이다. `$(brew --prefix)`는 설치 대상인 Apple Silicon에서 보통 `/opt/homebrew`다. npm·uv·Go 실행 파일 위치는 각 관리자의 설정을 따른다.
 
-비-OMH 스킬 90개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 33개다. 공통 스킬은 도구·기준 11개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-code-review, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint)와 Hermes 작업 교훈 공개본 22개다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
+비-OMH 스킬 91개를 기준으로 한다. 공식 원본 57개와 Agent-setup 공통 스킬 34개다. 공통 스킬은 도구·기준 12개(desktop-app-provisioning, gam-memory, codegraph-context, aside-browser, coding-code-review, coding-maintenance, agent-setup-maintenance, humanize-korean, humanizer, shadcn, shadcn-lint, logo-design)와 Hermes 작업 교훈 공개본 22개다. 공통 스킬은 `skills/`에 Agent-setup `shared/skills/`와 같은 내용으로 둔다. 스킬 문서는 설치하지만 CLI·라이브러리·서비스 권한은 해당 작업을 사용할 때 준비한다. 공식 스킬은 로컬 수정본이 아니라 고정 공식 원본을 설치한다. OMH 스킬은 OMH 설치기로 별도 관리한다.
 
 | 종류 | 항목 | 용도 | 설치 기준·추가 준비 | 일반 설치 경로 | 추가 도구·설정 경로 |
 |---|---|---|---|---|---|
@@ -87,6 +87,7 @@
 | 스킬 | blocked-page-recovery | 차단·로그인 벽 페이지 접근 복구 | 공식 원본; 허용된 브라우저/검색 경로 | `H/skills/web/blocked-page-recovery/` | Hermes 브라우저·제공자 설정 |
 | 스킬 | shadcn | shadcn/ui 컴포넌트 추가·검색·구성·스타일 (공식 스킬) | Agent-setup 공통 스킬; Node.js; 프로젝트 패키지 실행기(npx 등) | `H/skills/shadcn/` | shadcn-ui/ui 공식 스킬 원본 |
 | 스킬 | shadcn-lint | @shadcn/lint 설치·등록·규칙 안내 | Agent-setup 공통 스킬; Node.js; 대상 프로젝트의 ESLint/Oxlint | `H/skills/shadcn-lint/` | shadcn-ui/lint SETUP.md 기반 |
+| 스킬 | logo-design | 로고·브랜드 마크 브리프·컨셉·SVG 제작·16px 시험·전달 파일 | Agent-setup 공통 스킬; Python 3 표준 라이브러리; PNG 렌더링은 cairosvg·rsvg-convert·Inkscape·Chrome·Quick Look 중 하나 | `H/skills/logo-design/` | kaankiziltug/logo-design-skill @ 0ecf52e (상표 로고 SVG 묶음 제외) |
 | 스킬 | bounded-resource-usage-ledgers | 실행 단위 자원 사용 기록에 상한 두기 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/bounded-resource-usage-ledgers/` | — |
 | 스킬 | durable-sqlite-test-ledger | 중단에도 안전한 SQLite 시험 기록 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/durable-sqlite-test-ledger/` | — |
 | 스킬 | isolated-read-batch-fences | 가변 상태가 있는 읽기 도구 병렬화 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/isolated-read-batch-fences/` | — |

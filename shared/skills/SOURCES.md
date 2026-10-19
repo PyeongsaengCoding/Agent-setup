@@ -1,6 +1,6 @@
 # 공통 스킬 출처
 
-`core/`는 Claude Code·Codex 기본 설치, `omh/`는 Claude Code·Codex용 OMH 사본, `packs/`는 요청할 때 설치하는 묶음이다. Hermes는 작업 원칙을 OMH가 맡고, 이 폴더에서는 세 AI가 같은 도구·기준을 쓰는 스킬 10개(gam-memory, coding-maintenance, codegraph-context, aside-browser, agent-setup-maintenance, humanize-korean, humanizer, desktop-app-provisioning, shadcn, shadcn-lint)를 `hermes/skills/`에 같은 내용으로 받는다.
+`core/`는 Claude Code·Codex 기본 설치, `omh/`는 Claude Code·Codex용 OMH 사본, `packs/`는 요청할 때 설치하는 묶음이다. Hermes는 작업 원칙을 OMH가 맡고, 이 폴더에서는 세 AI가 같은 도구·기준을 쓰는 스킬 12개(gam-memory, coding-maintenance, codegraph-context, aside-browser, agent-setup-maintenance, coding-code-review, humanize-korean, humanizer, desktop-app-provisioning, shadcn, shadcn-lint, logo-design)와 Hermes 작업 교훈 22개를 `hermes/skills/`에 같은 내용으로 받는다.
 
 | 스킬 | 출처 | 라이선스 | Agent-setup 조정 |
 |---|---|---|---|
@@ -14,6 +14,7 @@
 | agent-setup-maintenance | Codex-Setup의 codex-setup-maintenance를 Agent-setup 기준으로 재작성 | 이 저장소 | 세 실행기 공통 |
 | shadcn | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) `skills/shadcn` @ 6ea0900 | MIT (폴더 LICENSE) | 원본 그대로 |
 | shadcn-lint | [shadcn-ui/lint](https://github.com/shadcn-ui/lint) `SETUP.md`·`docs/` @ ee93910 | MIT (폴더 LICENSE) | @shadcn/lint는 lint 플러그인 패키지라 공식 SKILL.md가 없음. 공식 에이전트 설치 지침 SETUP.md를 본문으로, 규칙 문서를 references/로 묶음 |
+| logo-design | [kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill/tree/0ecf52e9a4b3ac92b714f7cc6e3148ab8c774134/skills/logo-design) `skills/logo-design` @ 0ecf52e (2026-09-30 `main`) | MIT (폴더 LICENSE). 원본 TRADEMARKS.md가 `assets/library/svg/`의 상표 로고 1,432개를 MIT 적용 범위 밖으로 정한다 | 상표 로고 SVG와 그 관리용 `classifications.json`·`gallery.html`·`scripts/build_catalog.py`를 제외하고 MIT 메타데이터 `catalog.json`·`stats.json`은 유지. SKILL.md description을 catalog 기준으로 고치고 제외 범위 안내를 추가, library-guide.md에 같은 안내 한 줄, `preview_sheet.py`가 없는 참고 파일을 건너뛰고 안내하도록 추가 |
 | Hermes 작업 교훈 22개 (bounded-resource-usage-ledgers, durable-sqlite-test-ledger, isolated-read-batch-fences, saved-source-contention-fences, read-model-performance-safety, semantic-knowledge-lifecycle, production-failure-diagnosis, production-admin-api-operations, bounded-subprocess-pipe-io, clock-fenced-offline-integration, future-effective-memory-tdd, product-monetization-requirements, service-infrastructure-design, setup-repository-authoring, mobile-app-portfolio-delivery, media-production-orchestration, blog-motion-preview-pillow-ffmpeg, android-device-validation, atomic-firewall-bootstrap-tests, backend-independent-rereview, bounded-private-evidence-reads, project-reference-adoption) | Hermes가 작업 중 만든 스킬 | 이 저장소 | 개인 경로·계정·프로젝트 이름과 Hermes 도구 이름 제거. 세 AI 기본 설치 (Hermes는 `hermes/skills/` 같은 내용) |
 | omh/ (142개) | [OMH](https://github.com/rlaope/oh-my-hermes) 3.0.2 설치본 | OMH MIT ([LICENSE-OMH](LICENSE-OMH)) | Claude Code·Codex용 사본. frontmatter를 name·description으로 정리. `scripts/import_omh_skills.py`로 갱신 |
 | packs/mac/desktop-app-provisioning | Hermes-Setup 일반화 커스텀 스킬 | 이 저장소 | references/ 두 파일 포함 |

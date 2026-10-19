@@ -30,7 +30,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 - 공통 스킬 원본은 `shared/skills/core/` 한 곳이다. Claude 설치기와 Codex 설치기가 같은 원본을 설치하고, 실행기마다 다른 내용은 전역 AGENTS.md의 `모델 라우팅` 구간이 맡는다.
 - 직접 관리하는 선택 스킬은 `shared/skills/packs/`에, 외부 스킬 목록은 실행기별 manifest에 둔다. 현재 설치기는 외부 스킬 37개를 기본 대상으로 처리한다. 선택 설치로 바꾸는 작업은 7절의 예정 항목이다.
 
-### 공통 핵심 48개 (`shared/skills/core/`, Claude Code·Codex·Hermes)
+### 공통 핵심 49개 (`shared/skills/core/`, Claude Code·Codex·Hermes)
 
 | 스킬 | 출처 | 조정 |
 |---|---|---|
@@ -48,6 +48,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | agent-setup-maintenance | codex-setup-maintenance 재작성 | 세 실행기 공통 설정 변경 절차 |
 | gam-memory, coding-maintenance | Codex-Setup | Codex 전용에서 공통으로 이동. GAM은 세 AI 공통 기억 도구 |
 | Hermes 작업 교훈 22개 (bounded-*, production-*, service-infrastructure-design 등) | Hermes가 작업 중 만든 스킬 | 개인 경로·계정·프로젝트 이름과 Hermes 도구 이름을 걷어낸 공개본. 세 AI 모두 기본 설치 |
+| logo-design | kaankiziltug/logo-design-skill @ 0ecf52e | MIT 밖의 상표 로고 SVG 묶음과 그 관리 파일을 제외하고 MIT catalog·stats만 유지. 제외 안내와 없는 참고 파일 건너뛰기 추가 |
 
 출처·라이선스는 [shared/skills/SOURCES.md](../shared/skills/SOURCES.md)에 있다.
 
@@ -56,10 +57,10 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | 실행기 | 위치 | 스킬 |
 |---|---|---|
 | Claude Code | `claude/skills/` | `codex`: GPT 항목·사용자 지정·독립 리뷰 때 Codex 플러그인으로 넘기고 결과 회수, 실패 시 다음 항목 |
-| Codex | — | 전용 스킬 없음 (공통 48개 + OMH 142개 + 외부 37개) |
-| Hermes | `hermes/manifest.json` | Hermes 공식 스킬 57개 + 공통 32개(도구·기준 10개와 Hermes 작업 교훈 공개본 22개), OMH |
+| Codex | — | 전용 스킬 없음 (공통 49개 + OMH 142개 + 외부 37개) |
+| Hermes | `hermes/manifest.json` | Hermes 공식 스킬 57개 + 공통 34개(도구·기준 12개와 Hermes 작업 교훈 공개본 22개), OMH |
 
-설치 결과: Claude Code 228개(공통 48 + OMH 142 + codex + 외부 37), Codex 227개(공통 48 + OMH 142 + 외부 37), Hermes 126개(공식 57 + 공통 32 + 외부 37) + OMH 142개. 스킬별 표는 [스킬 표](skills.md).
+설치 결과: Claude Code 229개(공통 49 + OMH 142 + codex + 외부 37), Codex 228개(공통 49 + OMH 142 + 외부 37), Hermes 128개(공식 57 + 공통 34 + 외부 37) + OMH 142개. 스킬별 표는 [스킬 표](skills.md).
 
 ### 선택 묶음
 
