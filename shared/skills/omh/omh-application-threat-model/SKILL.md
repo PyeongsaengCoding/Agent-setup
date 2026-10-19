@@ -1,6 +1,6 @@
 ---
-name: omh-application-threat-model
-description: "[omh] Attack paths into an operated system: turn a system's components and data flows into assets, trust boundaries, attack scenarios, controls, and the security test that proves each control holds."
+name: "omh-application-threat-model"
+description: "[omh] Attack paths into an operated system: turn a system's components and data flows into assets, trust boundaries, attack scenarios, controls, and the security test that proves each control holds. Use when the user says: application-threat-model, application threat model, threat model, threat modeling, threat modelling, threat modeling session, threat modeling workshop, security threat model."
 ---
 # Application Threat Model
 
@@ -12,11 +12,11 @@ This is a Hermes-native `application-threat-model` workflow skill.
 
 ## Do Not Use When
 
-- The subject is the agent's own prompts, tools, files, credentials, dependencies, or destructive actions; use `security-safety-review`, which maps that runtime surface.
-- The user wants defects found in a diff or a file; use `code-review`.
-- The user asks whether a release is ready across rollout, rollback, and observability; use `production-audit`.
-- The user asks which commands prove a merge is safe; use `verification-gate`.
-- The user asks for a contractual or regulatory obligation rather than an attacker; use `legal-compliance-review`.
+- The subject is the agent's own prompts, tools, files, credentials, dependencies, or destructive actions; use `omh-security-safety-review`, which maps that runtime surface.
+- The user wants defects found in a diff or a file; use `omh-code-review`.
+- The user asks whether a release is ready across rollout, rollback, and observability; use `omh-production-audit`.
+- The user asks which commands prove a merge is safe; use `omh-verification-gate`.
+- The user asks for a contractual or regulatory obligation rather than an attacker; use `omh-legal-compliance-review`.
 
 ## Examples
 
@@ -51,9 +51,9 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes must model the security of an application, service, or deployed system the user operates: which assets are worth taking, where trust changes hands, how an attacker reaches each asset, which control stops them, and which security test fails when that control is removed. The subject is the modeled system, never the agent's own runtime.
 
@@ -127,13 +127,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

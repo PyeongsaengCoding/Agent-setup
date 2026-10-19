@@ -1,6 +1,6 @@
 ---
-name: omh-llm-app-dev
-description: "[omh] LLM-powered feature to build: LLM app development: prepare a build handoff for an LLM-powered feature with a pinned provider boundary, schema-first outputs, versioned prompt files, grounded retrieval, and an eval suite as a shipped deliverable."
+name: "omh-llm-app-dev"
+description: "[omh] LLM-powered feature to build: LLM app development: prepare a build handoff for an LLM-powered feature with a pinned provider boundary, schema-first outputs, versioned prompt files, grounded retrieval, and an eval suite as a shipped deliverable. Use when the user says: llm-app-dev, llm app development, llm application development, build an llm app, build an llm feature, llm feature development, build a rag pipeline, rag pipeline."
 ---
 # Llm App Dev
 
@@ -12,12 +12,12 @@ This is a Hermes-native `llm-app-dev` workflow skill.
 
 ## Do Not Use When
 
-- The subject is comparing executors or agent harnesses - Codex against Claude Code against Hermes coding - rather than evaluating the product's own model calls; use `agent-evaluation`.
-- An agent run is already stuck, looping, or drifting and needs diagnosis; use `agent-debug`.
-- The subject is the harness's own context window, prompt caching, or token budget rather than the application being built; use `context-budget-review`.
-- The request is a prompt-injection, secret-handling, or dependency risk gate on work that already exists; use `security-safety-review`.
+- The subject is comparing executors or agent harnesses - Codex against Claude Code against Hermes coding - rather than evaluating the product's own model calls; use `omh-agent-evaluation`.
+- An agent run is already stuck, looping, or drifting and needs diagnosis; use `omh-agent-debug`.
+- The subject is the harness's own context window, prompt caching, or token budget rather than the application being built; use `omh-context-budget-review`.
+- The request is a prompt-injection, secret-handling, or dependency risk gate on work that already exists; use `omh-security-safety-review`.
 - The feature makes no model call - the LLM is only mentioned as the subject being discussed - so this is a direct answer, not a build handoff.
-- The ask is training the weights themselves on your own data -- SFT, DPO, RLVR, or a LoRA adapter; use `model-finetuning`.
+- The ask is training the weights themselves on your own data -- SFT, DPO, RLVR, or a LoRA adapter; use `omh-model-finetuning`.
 
 ## Examples
 
@@ -58,13 +58,13 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when the work is building or hardening an LLM-powered feature - provider calls, structured outputs, prompt files, retrieval grounding, a user-requested public-board communication path, or the eval suite that guards a prompt or model swap - and the request needs engineering discipline before a coding handoff.
 
-    Strong routing signals: `llm-app-dev`, `$llm-app-dev`, `llm app development`, `llm application development`, `build an llm app`, `build an llm feature`, `llm feature development`, `build a rag pipeline`, `rag pipeline`, `retrieval augmented generation`, `structured output schema`, `json schema output`, `prompt versioning`, `llm eval suite`, `golden set`, `LLMアプリ開発`, `LLM機能開発`, `RAGパイプライン構築`, `構造化出力スキーマ`, `プロンプトのバージョン管理`, `LLM評価セット`, `llm 앱 개발`, `llm 애플리케이션 개발`, `llm 기능 개발`, `rag 파이프라인`, `rag 파이프라인 구축`, `구조화된 출력 스키마`, `프롬프트 버전 관리`, `llm 평가셋`, `골든셋`, `大模型应用开发`, `检索增强生成`, `结构化输出模式`, `提示词版本管理`, `评测集`
+    Strong routing signals: `llm-app-dev`, `$llm-app-dev`, `llm app development`, `llm application development`, `build an llm app`, `build an llm feature`, `llm feature development`, `build a rag pipeline`, `rag pipeline`, `retrieval augmented generation`, `structured output schema`, `json schema output`, `prompt versioning`, `llm eval suite`, `golden set`, `LLMアプリ開発`, `LLM機能開発`, `RAGパイプライン構築`, `構造化出力スキーマ`, `プロンプトのバージョン管理`, `LLM評価セット`, `llm 앱 개발`, `llm 애플리케이션 개발`, `llm 기능 개발`, `rag 파이프라인`, `rag 파이프라인 구축`, `구조화된 출력 스키마`, `프롬프트 버전 관리`, `llm 평가셋`, `골든셋`, `大模型应用开发`, `检索增强生成`, `结构化输出模式`, `提示词版本管理`, `评测集`, `bangun aplikasi berbasis LLM`, `bantu buat fitur dengan LLM`, `buat pipeline RAG`, `rancang chatbot dengan retrieval`, `siapkan evaluasi untuk fitur LLM`, `buat keluaran terstruktur dari LLM`
 
 ## Catalog Metadata
 
@@ -84,8 +84,6 @@ Quality bar:
 - For retrieval, fix chunking and citation grounding first and evaluate retrieval before evaluating generation: a generation score on top of unmeasured retrieval cannot tell a bad answer from a bad document set.
 - Ship the eval suite as a deliverable, not a follow-up: golden set, task-level validators, baseline-vs-candidate comparison, with deterministic validators wherever the task allows one. Load `references/eval-harness.md` for the golden-set shape, the corpus-hygiene checks that run before a score is quoted, the validator ladder, and the comparison record.
 - Run the regression before a prompt or model swap, not after, and compare baseline against candidate on the same golden set with token and cost capture. Report only what the run reported; a metric the harness did not emit stays null.
-- For this user's conversational question-answering features, answer the question directly, then supply explanation and grounded sources proportional to its complexity. Treat GPT-like answering as a target for relevance, clarity, natural dialogue and sufficient depth; apply decision criteria, option evaluation and verdict framing when the user requests a judgment or choice. Trace this distinction through the actual outbound model payload, evidence-plan answer policy, required-field schema, repair loop, completion formatting and selected UI action, because any shared layer can reintroduce unsolicited assessments after the conversational prompt is corrected. Scope next-action advice and missing-condition notices to the user's requested task; allow stable-knowledge answers to complete without citations when no source lookup is needed. Keep explanatory headings available for complex answers and test for unsolicited judgment framing rather than banning every heading. Test ordinary questions, same-conversation follow-ups and explicit judgment requests separately; keep complex answers adequately detailed.
-- When the user refers to an existing scenario set, recover its canonical registry before preparing an evaluation. Preserve exact case IDs, prompts, flow selection, fixture scope and existing outcome rules; verify the count and a prompt-set hash programmatically. Compare prior and candidate results case by case, with separate question-answering and judgment groups, because replacement examples can hide regressions in the original user journey. Record model, prompt and deployed revision for observed comparisons; describe GPT-reference quality only from actual reference outputs. Verify submitted text against each canonical prompt before counting the run, and retain typo submissions as separate attempts, because input-method changes can alter a condition or entity while the case ID stays unchanged. Treat model-reported requirement coverage as a diagnostic; independently compare the answer and cited source with the requested outcome before assigning case satisfaction. Distinguish truthful failure, dated published values, conditional room prices and verified all-in totals, because honest wording and successful fetching each cover only part of the user's task.
 - Give every agentic loop its budgets as product features, not prompt advice: step, time, token, cost, and tool-call budgets each with a recorded termination reason, and for recursive delegation the budgets bind the whole tree, not each node separately.
 - Separate draft from commit for risky side effects: reads and drafts may run autonomously when scoped and labeled, but external writes, deletions, and communications need an approval record outside the prompt - a model's stated intention is never the authorization.
 - When the user asks for communication through a public board, treat the destination as a public external disclosure even when the account is authenticated: give read, search, register, profile, reply, publish their own authority and outbound-data expectation, show the exact destination, the public-audience label, and the complete outbound payload before a host-recorded approval, and reconcile an ambiguous send by read-back or receipt before any retry. Load `references/public-board.md` for the per-action authority table, the untrusted-peer rules, and what survives compaction and handoff.
@@ -136,13 +134,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

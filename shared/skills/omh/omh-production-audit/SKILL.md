@@ -1,6 +1,6 @@
 ---
-name: omh-production-audit
-description: "[omh] Imminent production launch or release: evaluate release, deploy, security, observability, rollback, docs, and support readiness without claiming production access."
+name: "omh-production-audit"
+description: "[omh] Imminent production launch or release: evaluate release, deploy, security, observability, rollback, docs, and support readiness without claiming production access. Use when the user says: production-audit, production audit, production readiness, prod audit, prod readiness, ready for production, ready to ship, ship readiness."
 ---
 # Production Audit
 
@@ -13,8 +13,8 @@ This is a Hermes-native `production-audit` workflow skill.
 ## Do Not Use When
 
 - The user wants to implement a feature or fix; prepare a coding handoff first.
-- The user wants incident/SLO analysis after production behavior; use `reliability-review`.
-- The user wants a narrow code diff review; use `code-review`.
+- The user wants incident/SLO analysis after production behavior; use `omh-reliability-review`.
+- The user wants a narrow code diff review; use `omh-code-review`.
 
 ## Examples
 
@@ -36,29 +36,18 @@ Bad example:
 - Open questions, residual risk, and missing verification are named.
 - Fixes or follow-up work are separate handoffs unless the user explicitly asked to implement them.
 
-## Production-targeted delivery sequence
-
-1. Establish the intended production user flow and inspect its actual runtime composition and deployment entry point before expanding QA. For this user, a launch request sets production delivery as the endpoint; carry that endpoint through implementation handoffs and acceptance criteria.
-2. Compare the tested execution path with the production path. Identify test-only environment gates, parent-owned descriptors, manually started processes, single-use sessions, and provisioning dependencies; assign each missing operational connection an implementation owner and a concrete completion check.
-3. Separate launch-critical work from follow-up improvements. Prioritize the actual request-to-worker-to-evidence-to-answer path, authority isolation, bounded failure cleanup, restart behavior, and rollback. Schedule broader quality comparisons and new semantic roles after the required release slice is working.
-4. Route authorized implementation and deployment work to the execution workflow immediately after identifying a concrete gap. Keep the audit bounded to decisions that change the delivery path; repeat a check when source, environment, or a relevant failure changes.
-5. Treat a QA harness recovery problem as a separate dependency. Before requesting another infrastructure change, determine whether recovering that harness proves a required production property or whether the production-aligned validation path supplies the evidence. Preserve required safety checks and name the remaining gap.
-6. Report launch timing from the remaining implementation, deployment, and live-verification work. Give a conditional estimate only when the work and dependencies support it; otherwise name the exact blockers and the next decision point. Keep routine chat short and concrete, with formal matrices in the artifact.
-
-A development-only adapter is an intermediate validation mechanism. Complete the production runtime connection as part of the release scope; merely admitting the production environment string leaves lifecycle and deployment dependencies unresolved.
-
 ## Recovery Notes
 
 - If the reviewed target is missing, inspect the requested artifact or ask one target question.
-- If independent verification is unavailable, report the gap, identify its effect on the release-critical path, and route the smallest authorized recovery or production-aligned alternative.
+- If independent verification is unavailable, report the gap and avoid an approval-style claim.
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use before launch, deploy, release, or public delivery when Hermes should check operational readiness and expose missing production evidence.
 
@@ -133,13 +122,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

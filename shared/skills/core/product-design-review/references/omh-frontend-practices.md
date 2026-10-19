@@ -1,6 +1,6 @@
 # OMH 프론트엔드 적용 기준
 
-OMH [컴포넌트 도입](https://github.com/rlaope/oh-my-hermes/blob/41de9dc5d00956f052e1863d8e1b58eaeef544cb/skills/omh-frontend/references/component-registry-adoption.md), [차트](https://github.com/rlaope/oh-my-hermes/blob/41de9dc5d00956f052e1863d8e1b58eaeef544cb/skills/omh-frontend/references/chart-styling.md), [스타일·푸터](https://github.com/rlaope/oh-my-hermes/blob/41de9dc5d00956f052e1863d8e1b58eaeef544cb/skills/omh-frontend/references/taste-foundations.md)를 Claude Code·Codex의 직접 구현에 적용한다. 해당 요소를 실제로 쓰는 작업에서 필요한 항목만 확인한다.
+OMH [컴포넌트 도입](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/skills/omh-frontend/references/component-registry-adoption.md), [차트](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/skills/omh-frontend/references/chart-styling.md), [스타일·푸터](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/skills/omh-frontend/references/taste-foundations.md)를 Claude Code·Codex의 직접 구현에 적용한다. 해당 요소를 실제로 쓰는 작업에서 필요한 항목만 확인한다.
 
 ## 컴포넌트와 라이브러리 선택
 

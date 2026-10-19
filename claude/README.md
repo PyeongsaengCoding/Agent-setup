@@ -7,7 +7,7 @@ Claude Code의 전역 지침·라우팅·스킬 설치 원본을 이 폴더에�
 | 라우팅 에이전트 23개 | `~/.claude/agents/route-<분류>-<계열>.md` | [routes/claude-code.json](routes/claude-code.json) → `scripts/build_agents.py` |
 | 라우팅 표 | `~/.claude/agent-setup/routing.json` | 선택한 프리셋 |
 | 전역 규칙: 작업 원칙, 스킬 흐름, Aside, 모델 라우팅 | `~/.claude/AGENTS.md` 관리 구간 + `~/.claude/CLAUDE.md`의 `@AGENTS.md` 한 줄 | [templates/global-rules.md](templates/global-rules.md) (`../shared/rules/`에서 생성) |
-| 스킬 229개 | `~/.claude/skills/` | 공통 `../shared/skills/core/` 49개 + OMH 사본 `../shared/skills/omh/` 142개 + Claude 전용 `skills/codex` + Codex와 같은 외부 스킬 37개(`../codex/inventories/external-skills.json`) |
+| 스킬 231개 | `~/.claude/skills/` | 공통 `../shared/skills/core/` 49개 + OMH 사본 `../shared/skills/omh/` 144개 + Claude 전용 `skills/codex` + Codex와 같은 외부 스킬 37개(`../codex/inventories/external-skills.json`) |
 | Codex 플러그인 | Claude Code 플러그인 `codex@openai-codex` | [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc) |
 
 ## 모델 라우팅

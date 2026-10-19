@@ -5,7 +5,7 @@
 | 영역 | Codex | Claude Code | Hermes |
 |---|---|---|---|
 | 형태 | 사용자 홈 전역 설치기 | `~/.claude` 전역 설치기 | 선택한 Hermes 프로필 설치기 |
-| OMH | 12개 분류·작업 원칙을 Codex용으로 재작성 (OMH c8b94d0) | Claude Code 전용 12개 분류 순서·추론을 사용 | OMH v3.0.1 설치·연결 (manifest 참조 532cc8f) |
+| OMH | 12개 분류·작업 원칙을 Codex용으로 재작성 (OMH v4.0.0, 36e96fe) | Claude Code 전용 12개 분류 순서·추론을 사용 | OMH v4.0.0 설치·연결 (manifest 참조 36e96fe) |
 | 라우팅 원본 | codex/11-working-method.md, codex/config/models.json | claude/routes/claude-code.json (실행기별 정책을 시험으로 대조) | hermes/routing-presets/*.json |
 | 위임 | Codex 네이티브 위임의 model·reasoning_effort (GPT 모델) | Claude 모델은 route-<분류>-<계열> 에이전트, GPT 모델은 Codex 플러그인 codex:codex-rescue | OMH 라우팅 + delegate_task |
 | fallback | 지정 조합을 쓸 수 없으면 제약 보고 | 전역 규칙에 따라 주 에이전트가 다음 항목으로 넘김 | 분류별 후보·전역·자식 공통 fallback + 소스 호환 패치 |

@@ -1,5 +1,5 @@
 ---
-name: omh-routing
+name: "omh-routing"
 description: "[omh] Choosing among OMH skills for a request: router guidance for using oh-my-hermes workflow skills inside Hermes Agent."
 ---
 # Oh My Hermes Router
@@ -146,12 +146,3 @@ Load these only when exact detail matters:
 - If the right skill was not loaded, call `skills_list` or `skill_view`.
 - If a slash command exists, use the explicit slash skill such as `/ulw-work`.
 - If a skill name collides, keep the OMH-selected policy in control and present the Hermes-native skill only as an explicit recommendation; do not let a native candidate override routing.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-

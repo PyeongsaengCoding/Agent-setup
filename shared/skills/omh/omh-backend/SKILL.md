@@ -1,6 +1,6 @@
 ---
-name: omh-backend
-description: "[omh] Designing an API, server, or data-layer change: prepare server, API, and data-layer contracts — auth boundary, error paths, response shape, and schema/migration discipline — before implementation."
+name: "omh-backend"
+description: "[omh] Designing an API, server, or data-layer change: prepare server, API, and data-layer contracts — auth boundary, error paths, response shape, and schema/migration discipline — before implementation. Use when the user says: backend, back-end, back end, backend skill, server side, server-side, api design, api contract."
 ---
 # Backend
 
@@ -12,12 +12,12 @@ This is a Hermes-native `backend` workflow skill.
 
 ## Do Not Use When
 
-- The work is the database itself -- a slow query and the index that fixes it, DDL that locks a live table, N+1 queries, or when to partition or shard; use `relational-db`, which owns the lock behaviour and rollback of each statement.
-- The request is about web UI, layout, or a design system; use `frontend`.
-- The request is a security posture or threat review rather than a service design; use `security-safety-review`.
-- The request is to run or judge the verification of an already-built service; use `verification-gate`.
-- The request is a Rust-language change whose risk is compiler, ownership, or `unsafe` discipline; use `rust`.
-- The work is a batch or streaming job's rerun, backfill, duplicate rows, or a warehouse table's downstream readers; use `data-pipelines`.
+- The work is the database itself -- a slow query and the index that fixes it, DDL that locks a live table, N+1 queries, or when to partition or shard; use `omh-relational-db`, which owns the lock behaviour and rollback of each statement.
+- The request is about web UI, layout, or a design system; use `omh-frontend`.
+- The request is a security posture or threat review rather than a service design; use `omh-security-safety-review`.
+- The request is to run or judge the verification of an already-built service; use `omh-verification-gate`.
+- The request is a Rust-language change whose risk is compiler, ownership, or `unsafe` discipline; use `omh-rust`.
+- The work is a batch or streaming job's rerun, backfill, duplicate rows, or a warehouse table's downstream readers; use `omh-data-pipelines`.
 
 ## Examples
 
@@ -46,8 +46,6 @@ Bad example:
 
 ## Recovery Notes
 
-- For a new model-provider connection, verify the configured model against the authenticated account's current model listing before a paid smoke. Documentation examples can name versions outside that account's offered list. Record the validated response model separately from the requested alias in provider usage evidence.
-- Verify the provider from the process-scoped runtime composition and approved secret-injection path. Keep live transport evidence distinct from fixture inputs, in-memory journal stores, user-account UI flows and production activation.
 - If the stack or datastore is unknown, prepare the contract stack-neutral and name the stack as the one blocking input.
 - If the auth model cannot be established, stop at the auth boundary gap instead of designing endpoints that assume a trust level.
 
@@ -55,13 +53,13 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should shape a server, API, or data-layer change before implementation: authentication boundary, contract error paths, response consistency, schema and migration discipline, and the per-stack reference the executor loads first.
 
-    Strong routing signals: `backend`, `back-end`, `back end`, `backend skill`, `server side`, `server-side`, `api design`, `api contract`, `rest api`, `graphql api`, `grpc service`, `endpoint design`, `auth boundary`, `authentication flow`, `authorization rules`, `idempotency key`, `pagination contract`, `database schema`, `postgres schema`, `schema migration`, `db migration`, `orm mapping`, `connection pool`, `message queue`, `webhook handler`, `openapi`, `openapi spec`, `deprecate endpoint`, `deprecate this endpoint`, `deprecation window`, `sunset date`, `sunset schedule`, `api versioning`, `breaking api change`, `バックエンド`, `エンドポイント設計`, `認証フロー`, `スキーマ移行`, `백엔드`, `서버 개발`, `서버 api`, `api 설계`, `인증 흐름`, `권한 체크`, `디비 스키마`, `db 스키마`, `스키마 마이그레이션`, `엔드포인트 설계`, `后端`, `後端`, `接口设计`, `认证流程`, `数据库迁移`
+    Strong routing signals: `backend`, `back-end`, `back end`, `backend skill`, `server side`, `server-side`, `api design`, `api contract`, `rest api`, `graphql api`, `grpc service`, `endpoint design`, `auth boundary`, `authentication flow`, `authorization rules`, `idempotency key`, `pagination contract`, `database schema`, `postgres schema`, `schema migration`, `db migration`, `orm mapping`, `connection pool`, `message queue`, `webhook handler`, `openapi`, `openapi spec`, `deprecate endpoint`, `deprecate this endpoint`, `deprecation window`, `sunset date`, `sunset schedule`, `api versioning`, `breaking api change`, `バックエンド`, `エンドポイント設計`, `認証フロー`, `スキーマ移行`, `백엔드`, `서버 개발`, `서버 api`, `api 설계`, `인증 흐름`, `권한 체크`, `디비 스키마`, `db 스키마`, `스키마 마이그레이션`, `엔드포인트 설계`, `后端`, `後端`, `接口设计`, `认证流程`, `数据库迁移`, `rancang API backend`, `buat kontrak endpoint`, `desain layanan sisi server`, `bantu rancang alur autentikasi backend`, `tentukan format respons API`, `susun penanganan error di backend`
 
 ## Catalog Metadata
 
@@ -70,20 +68,6 @@ Phase: `backend-design`
 Hermes role: `planner`
 Quality tier: `backend-contract-gated`
 Reasoning demand: `standard`
-
-## Existing editing and semantic-data review procedure
-
-1. Trace the real editor payload through its route and domain mutation to storage, change history, projection invalidation, and the next consuming request. Identify each record's authoritative owner and revision; a save callback or refresh request proves only its own stage.
-2. Classify edits before selecting a command: label/identity changes, instance relationship changes, personal condition values and scope/time, and shared schema or ontology extensions. Reuse the current owner for each class rather than duplicating a condition inside a relationship label, because duplicate stores can diverge.
-3. Keep natural-language input at the change-draft boundary. Bind the proposed target and base revision, operation, before/after meaning, scope, validity and provenance to a server-validated canonical command. Resolve only material ambiguities and show the actual change for confirmation; connect structured and sentence editors to the same mutation contract.
-4. Inspect composed mutations for partial success. An exclude-then-create sequence needs durable completion, idempotency and recovery of the combined operation; test failure after the first write and a repeated submission before claiming an atomic edit.
-5. Trace consumer eligibility explicitly: automatic selection versus explicit selection, feature gates, scope/time, authorization and frozen input revision. Preserve source statements, user corrections and historical decisions separately, because a displayed edit can coexist with an unchanged or ineligible model input.
-6. Exercise focused existing contracts, then specify the connected acceptance case: edit, save, projection, refresh/reentry, next relevant answer or decision, and withdrawal. Report implementation, local behavior and deployed behavior separately. When only a design review was approved, return the gaps and smallest complete implementation slice without changing runtime gates or production data.
-
-7. For a knowledge-generation lifecycle review, enumerate connected-source imports, live user messages, assistant outputs, completed decisions and manual edits separately. Trace each through extraction, admission, persistence, projection and later consumption; distinguish instance generation from ontology/schema evolution, because different producers can share a screen while retaining different authority and rollout gates. Compare inspected code with the serving revision and read narrowly allowlisted runtime configuration before describing a path as active. Follow the generation audit in `references/consumer-impact.md`.
-8. When the user asks to settle one stage first, inspect that stage's existing owner-scoped diagnostics and one actual authorized record before proposing another tracking system. Separate completed work, admitted entities, admitted relations, held candidates, publication and observed use. Inspect exclusion reasons and classified meanings before widening an admission policy, because a successful job or empty blocker field can coexist with no usable relationships. Keep bounded-list totals and sample coverage explicit.
-
-For consumer and projection details, extend the existing review with `references/consumer-impact.md`.
 
 Quality bar:
 
@@ -156,13 +140,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

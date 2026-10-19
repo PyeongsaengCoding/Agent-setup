@@ -1,6 +1,6 @@
 ---
-name: omh-frontend
-description: "Use when designing or polishing web or terminal UI. Prepare design-system-driven creation, redesign, accessibility, performance, and visual QA handoffs."
+name: "omh-frontend"
+description: "[omh] Building or polishing a web or terminal UI: prepare design-system-driven web and terminal (TUI) UI creation, redesign, polish, accessibility, performance, and visual QA handoffs. Use when the user says: frontend, front-end, front end, frontend skill, in the frontend, on the frontend, to the frontend, web ui."
 ---
 # Frontend
 
@@ -12,11 +12,11 @@ This is a Hermes-native `frontend` workflow skill.
 
 ## Do Not Use When
 
-- The user needs a broad premium-quality gate across web, deck, PDF, poster, or publishing outputs; use `design-quality-gate`.
-- The user wants a disposable wireframe or mocked interaction to settle one interaction question before planning; use `decision-prototype`.
-- The user only needs a file, deck, PDF, spreadsheet, HWP, or attachment package; use `materials-package` or `deliverable-package`.
-- The user only needs an image card or infographic prompt; use `img-summary`.
-- The user asks to mark a UI as visually passed without fresh rendered evidence; use `visual-qa` and keep PASS blocked until observed.
+- The user needs a broad premium-quality gate across web, deck, PDF, poster, or publishing outputs; use `omh-design-quality-gate`.
+- The user wants a disposable wireframe or mocked interaction to settle one interaction question before planning; use `omh-decision-prototype`.
+- The user only needs a file, deck, PDF, spreadsheet, HWP, or attachment package; use `omh-materials-package` or `omh-deliverable-package`.
+- The user only needs an image card or infographic prompt; use `omh-image-cards`.
+- The user asks to mark a UI as visually passed without fresh rendered evidence; use `omh-visual-qa` and keep PASS blocked until observed.
 
 ## Examples
 
@@ -42,21 +42,6 @@ Bad example:
 - The handoff names the executor/runtime owner and keeps code, browser, Lighthouse, accessibility, deployment, and visual QA evidence observed-only.
 - The next action is prepare_frontend_handoff, route to visual-qa, or report the missing evidence blocker.
 
-## Existing-product feature placement
-
-1. Resolve the product the user means before proposing menus or saving its design records. Match the requested feature against the product description and source; the session working directory may belong to a different product. If discovery leaves multiple plausible targets, ask one focused question.
-2. Read the current navigation component, visible-label source, and relevant feature view. Report the existing menu path and proposed insertion together, with source locations. A plausible menu tree alone leaves the user's actual placement question unanswered.
-3. Preserve the verified top-level navigation and propose the smallest fitting tab, section, or entry point first. Label proposed routes and menus explicitly; treat lesson pages and other unobserved screens as proposals until source or rendered evidence establishes them.
-4. Translate the user's practice goal into the screen's primary action. For this user's reference-based instrument practice, keep charts and diagrams visible while playing; add recall quizzes, answer hiding, scoring, or tests only when requested. An intention to memorize can be served by repeated visible practice.
-5. Separate selection dimensions before arranging tabs. For chord references, open and barre forms are alternative fingerings of the same chord; key and diatonic degree organize chord relationships. Put the key's chord names above the diagrams so the user can see and memorize their order, and render the selected chord's verified forms. Let available width determine simultaneous display or one-form paging. For this user's chord practice, implement comparison through the diagram layout itself and keep the screen free of a separate `두 개 비교` mode or toggle. Preserve teacher-provided forms and identify missing forms rather than inventing equivalents.
-6. When the user asks to record lesson content, save the supplied content and preserve attached source images in the verified product's record location before expanding the UX proposal. Distinguish confirmed lesson material, user requirements, and tentative design choices so a later session can resume accurately.
-7. When this user asks how a feature will look or requests alternatives, build a small interactive comparison using the existing product's visual tokens and entry point. Offer genuinely different arrangements of the same content, with alternative switching and a narrow-width view; attach actual rendered images so the user can choose visually. Keep the comparison isolated from production until the user selects a direction.
-8. For responsive alternatives, let available width determine side-by-side versus stacked placement. Check both the initial viewport and the scrolled primary task area before recommending an option: a diagram below the fold, a long vertical catalog, and a smaller diagram are distinct usability tradeoffs. Keep comparison controls separate from the proposed product controls so prototype overhead is excluded from the production layout.
-9. For chord diagrams, validate sounded pitch classes from tuning and frets against the named chord, then separately verify finger assignments, barre ranges, muted strings, and playability against instructional sources. Transposing open strings requires a new fingering or barre assignment; pitch-correct transposition alone does not establish a usable fingering. Show multiple verified forms when requested, and label teaching-source forms only after matching the supplied lesson images.
-10. Keep this user's practice surface focused on playing: show fret position on the diagram, use short shape labels, and keep provenance or raw-license panels out of the exercise screen. Preserve source provenance and required license notices in the appropriate internal records or distribution notices. Display the selected drill name in its drill selector. When top-level navigation already identifies the practice area, remove the repeated practice-title block and its reserved space; switching practice targets must leave only labels that describe the visible exercise. Keep audio controls beside the playback they govern and remove unrelated global sound toggles from the practice header.
-11. When a selector appears misordered on a device, inspect its initial opened state and its actual option order separately. Android native selects can open scrolled to the current choice, hiding preceding options; capture the opened list, scroll to its boundary, and verify the desired entry before changing the data order. Treat visibility on first open as a discoverability check even when the source order is correct.
-12. Verify the complete selection-to-content sequence in the final rendered screen: practice target, key, chord choices, then diagrams. Inspect parent flex/grid rules and each direct child's computed `order` before moving JSX, because a new child with default order zero can appear before a toolbar explicitly assigned order one. Measure selector bottom against diagram-section top at wide and narrow widths, then exercise target and chord changes to check scroll and focus stability. After removing a mode, delete its state and unused styles and update regression assertions and test-result messages to describe the remaining behavior.
-
 ## Recovery Notes
 
 - If the target surface is unclear, prepare the brief with a route/component gap instead of inventing pages.
@@ -66,13 +51,13 @@ Bad example:
 
 - Current lane: **Materials and visual summaries** (`design-orchestration`, `apple-design`, `design-quality-gate`, `award-bar-score`, `frontend`, `accessibility-audit`, `visual-qa`, `content-operator`, `+6 more`) - web, accessibility, visual QA, files, and packages.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should shape or improve a web/frontend or terminal (TUI) surface before implementation: layout, design system, responsive states, accessibility, performance, motion, and anti-generic visual quality.
 
-    Strong routing signals: `frontend`, `front-end`, `front end`, `frontend skill`, `in the frontend`, `on the frontend`, `to the frontend`, `web ui`, `ui ux`, `ui/ux`, `landing page`, `web app layout`, `responsive layout`, `responsive design`, `design system`, `component polish`, `layout polish`, `visual polish`, `styling`, `animation`, `motion design`, `smooth scroll`, `smooth scrolling`, `scroll animation`, `scroll animations`, `parallax scroll`, `parallax hero`, `parallax effect`, `accessibility`, `wcag`, `lighthouse`, `core web vitals`, `make it beautiful`, `make it premium`, `make it less ai`, `ai-looking ui`, `ai slop ui`, `generic ui`, `broken layout`, `layout broken`, `frontend qa`, `frontend layout`, `tui design`, `terminal ui design`, `tui layout`, `フロントエンド`, `ランディングページ`, `レスポンシブ対応`, `デザインシステム`, `画面のUI実装`, `スムーススクロール`, `スクロールアニメーション`, `パララックス`, `프론트엔드`, `웹 ui`, `웹 화면`, `랜딩페이지`, `레이아웃`, `레이아웃 깨짐`, `깨짐`, `디자인 자연스럽게`, `자연스러운 디자인`, `화려하게`, `고급스럽게`, `부드러운 스크롤`, `스크롤 부드럽게`, `스크롤 애니메이션`, `패럴랙스`, `ai 티`, `ai틱`, `ai 틱`, `반응형`, `접근성`, `前端`, `落地页`, `响应式布局`, `设计系统`, `平滑滚动`, `滚动动画`, `视差滚动`
+    Strong routing signals: `frontend`, `front-end`, `front end`, `frontend skill`, `in the frontend`, `on the frontend`, `to the frontend`, `web ui`, `ui ux`, `ui/ux`, `landing page`, `web app layout`, `responsive layout`, `responsive design`, `design system`, `component polish`, `layout polish`, `visual polish`, `styling`, `animation`, `motion design`, `smooth scroll`, `smooth scrolling`, `scroll animation`, `scroll animations`, `parallax scroll`, `parallax hero`, `parallax effect`, `chart styling`, `chart theming`, `chart colors`, `dashboard charts`, `style the charts`, `theme the charts`, `tooltip`, `footer design`, `better footer`, `site footer`, `website footer`, `neobrutalism`, `neobrutalism style`, `neobrutalist`, `neo brutalism`, `neo-brutalism`, `logo marquee`, `marquee animation`, `scrolling marquee`, `split text animation`, `split-text animation`, `shadcn`, `component registry`, `accessibility`, `wcag`, `lighthouse`, `core web vitals`, `make it beautiful`, `make it premium`, `make it less ai`, `ai-looking ui`, `ai slop ui`, `slop ui`, `looks like ai slop`, `look like ai slop`, `feels like ai slop`, `screams ai slop`, `generic ui`, `broken layout`, `layout broken`, `frontend qa`, `frontend layout`, `tui design`, `terminal ui design`, `tui layout`, `フロントエンド`, `ランディングページ`, `レスポンシブ対応`, `デザインシステム`, `画面のUI実装`, `スムーススクロール`, `スクロールアニメーション`, `パララックス`, `チャートのスタイル`, `チャートスタイル`, `フッターデザイン`, `ネオブルータリズム`, `ロゴマーキー`, `프론트엔드`, `웹 ui`, `웹 화면`, `랜딩페이지`, `레이아웃`, `레이아웃 깨짐`, `깨짐`, `디자인 자연스럽게`, `자연스러운 디자인`, `화려하게`, `고급스럽게`, `부드러운 스크롤`, `스크롤 부드럽게`, `스크롤 애니메이션`, `패럴랙스`, `ai 티`, `ai틱`, `ai 틱`, `반응형`, `접근성`, `차트 스타일`, `차트 스타일링`, `차트 테마`, `푸터 디자인`, `네오브루탈리즘`, `로고 마키`, `마키 애니메이션`, `스플릿 텍스트`, `前端`, `落地页`, `响应式布局`, `设计系统`, `平滑滚动`, `滚动动画`, `视差滚动`, `图表样式`, `页脚设计`, `新粗野主义`, `跑马灯`, `bangun antarmuka UI frontend`, `bantu bikin landing page`, `rapikan tampilan frontend`, `buat halaman yang responsif`, `implementasikan desain UI`, `rancang antarmuka terminal`, `tambahkan animasi scroll`, `desain ulang tampilan dashboard`
 
 ## Catalog Metadata
 
@@ -89,9 +74,10 @@ Quality bar:
 - Name the model's own default aesthetic before inheriting it — the editorial prior of cream grounds, serif display faces, and muted terracotta accents suits editorial, portfolio, and hospitality briefs and is a failure mode on dashboards, developer tools, fintech, and data-dense UIs. Treat a generic negation ("don't make it look AI", "make it minimal") as unactionable: an override counts only when it carries concrete tokens, a hex palette and a typeface stack recorded in DESIGN.md. Run the review prompts in `references/taste-foundations.md` over framework blue, glass and gradient surfaces, default UI typefaces, bounce easing, blanket shadows, eyebrow/title/description stuffing, uniform column grids, and CJK body under the 14px Korean floor.
 - When the target surface is a terminal UI (TUI), load `references/tui-craft.md` and hold the same bar there: default widgets are scaffolding, not finished UI; borders spent sparingly with spacing and a muted-color ladder doing the hierarchy; one named terminal aesthetic; verification rendered at 80x24 and 120x40 minimum with the pasted output as the screenshot-equivalent.
 - Use references and domain fit to avoid generic AI-looking frontend output; when the user supplies a visual reference, load `references/reference-token-extraction.md` and extract tokens into the contract instead of eyeballing.
-- Prepare a concrete design-system contract before implementation handoff: load `references/design-system-contract.md` and write DESIGN.md before the first component — no component code before the contract exists.
+- Prepare a concrete design-system contract before implementation handoff: load `references/design-system-contract.md` and write DESIGN.md before the first component — no component code before the contract exists. A new DESIGN.md is Google's DESIGN.md format (YAML token front matter, its sections in its order) plus OMH's own sections; a file in OMH's earlier numbered layout stays valid and is converted only when the user asks. When Hermes' bundled `design-md` skill is available, author, lint, diff, or export a file in the format through it, never a file in the earlier layout; lint is evidence only from a run that executed, otherwise `not_observed`.
 - Query the local design reference data before fixing tokens: `omh design data --kind palette|font|ux --context <product context>` returns curated palettes, font stacks with CJK notes, and UX guidelines offline. Those rows inform DESIGN.md; the contract, not the query, still gates the code.
 - Scroll-driven motion is a decision with a bill: load `references/scroll-motion-libraries.md`, take the native path (CSS `scroll-behavior`, scroll-driven animations, `IntersectionObserver`, scroll-snap) unless one interpolated scroll position feeds several consumers, and when a library is chosen (Lenis is the reviewed record) name its reduced-motion branch, anchors, nested scroll, teardown, and INP budget in the contract.
+- Copied component source is the project's to fix: before adopting from a shadcn-style registry, load `references/component-registry-adoption.md` (license, dependencies, reduced motion, ARIA, keyboard/touch, token mapping, one hero effect per view). Theme charts through tokens, not config literals: load `references/chart-styling.md`.
 - For first-time UI creation, name the initial generation branch, reference direction, reusable primitives, state coverage, and required visual QA path.
 - Cover responsive layout, empty/loading/error states, hover/focus/active states, CJK text, accessibility, and performance expectations.
 - State performance as a budget, not an adjective: load `references/web-vitals-budgets.md`, name one metric with its published bar (LCP, INP, CLS), the device and network class it is judged on, the route and load shape, and the baseline captured under that same profile - before the change. A budget chosen after seeing the result describes what happened instead of gating it.
@@ -151,6 +137,7 @@ Safety rules:
 - For greenfield UI, require an initial generation contract before implementation handoff so the first generated screen has tokens, references, primitives, states, and QA expectations.
 - Require fresh rendered evidence after the last UI edit before PASS.
 - Do not hand off a smooth-scroll integration without its reduced-motion branch, keyboard/anchor/nested-scroll behavior, and teardown named; a `respectReducedMotion` option covers the library own scroll, never the animations the project wrote.
+- Do not hand off a copied registry component or text effect without its license read at the source and its reduced-motion branch; decorative duplicates and split characters are `aria-hidden`, and a marquee gets a pause reachable by keyboard and touch.
 - Do not report a Core Web Vitals number without the device class, route, and load shape it was measured under; a figure from a different profile than the baseline is not a comparison.
 - For Korean/CJK text, clipped glyphs, awkward line breaks, orphan particles, tiny copy, and overflow block visual QA.
 - Do not call external design, image, browser, LLM, or network services from OMH core.
@@ -171,13 +158,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

@@ -1,25 +1,10 @@
 ---
-name: omh-report-package
-description: "[omh] Periodic report for executives: weekly/monthly reports, executive briefs, PPT-ready outlines, and upload packages."
+name: "omh-report-package"
+description: "[omh] Periodic report for executives: weekly/monthly reports, executive briefs, PPT-ready outlines, and upload packages. Use when the user says: report-package, report package, weekly report, monthly report, executive report, exec brief, leadership deck, status package."
 ---
 # Report Package
 
 This is a Hermes-native `report-package` workflow skill.
-
-## Executive development-status workflow
-
-Apply these steps to product development reports since a previous update, including company Loop pages. Write for an executive who needs to know what the product now does, what changed, which actual requests succeeded and what remains.
-
-1. **Read the baseline first.** Read the previous published report and cutoff, then inventory subsequent reports, execution records, scenario registries and relevant Git history across product repositories. Include adoption decisions and newly built capabilities; a recent-session summary can omit major changes.
-2. **Map claims to evidence.** For each item identify previous behavior, actual change, reason, concrete scenario result and verification boundary. Inspect code or diffs when the cause is unclear. Separate code deployment from a successful user request. Never generalize one failed example into the whole product's previous behavior.
-3. **Group by product capability.** Merge browser interaction, execution environment, condition entry, result reading, citations, evidence saving/reopening and associated search corrections into one feature section. Group mail lookup, background analysis and mail-status changes together. Keep a new provider identifiable. Preserve exhaustive changes within these groups rather than numbering every helper or correction separately.
-4. **Lead with the capability.** Explain what became possible before supporting implementation. Distinguish a newly built browser interaction feature from improved text collection. Preserve the actual trigger: describe automatic tool selection when the product decides the lookup method. Explain model-selected actions, server-enforced access rules and supervisor-enforced termination separately when relevant.
-5. **Write concrete Korean.** Use exact product feature names: write `판단` for a feature named `판단`. Replace '흐름 보완', '지원 범위', '조건과 근거 범위' and '직접 답하는 수정' with an actual action, missing input, changed screen or named unfinished test. Explain the question and reason before mentioning dates or values. Use '메일 내용' or '문서 내용'; reserve '원문' for a meaningful contrast with summaries or fresh retrieval. Explain technical limits in ordinary language, such as mail analysis using all concurrent AI calls and leaving questions waiting.
-6. **Describe data fixes precisely.** Distinguish changing lookup order from introducing a new kind of mail content. Distinguish sending the updated evidence list from introducing evidence delivery for the first time. For display cleanup, name the phrase deleted or sentence replacement removed. Keep cause and change short and factual.
-7. **Use measured scenario comparisons.** Retrieve both executions when before/after times are requested. Keep server time, first-answer time, completed-screen observation and substage duration separate. Include slower and failed outcomes. Omit unmeasured cases and empty metric columns from executive prose while retaining consequential failures and concrete follow-up checks. Follow [scenario timing comparison](references/scenario-timing-comparison.md).
-8. **Rewrite and deliver the artifact.** Apply corrections across related sections, summaries and tables. Preserve evidence links; validate figures programmatically. Present the finished rewrite rather than another outline or promise. A turn ending does not continue drafting unless a real background task was started.
-
-Before delivery, test each section: What feature changed? What can the user do? Which real question demonstrated it? What remains to make that question work? Merge repeated subitems and remove sentences needing a second explanation.
 
 ## Why This Exists
 
@@ -27,7 +12,7 @@ Before delivery, test each section: What feature changed? What can the user do? 
 
 ## Do Not Use When
 
-- The user needs SLO, incident, or error-budget review; use `reliability-review`.
+- The user needs SLO, incident, or error-budget review; use `omh-reliability-review`.
 - The user asks for a live `.pptx` deck file rather than a PPT-ready outline.
 - The request is meeting minutes, scrum history, or action-item tracking.
 
@@ -53,16 +38,16 @@ Bad example:
 
 ## Recovery Notes
 
-- If a material product result lacks evidence, name the concrete unfinished verification. Omit unmeasured metrics and incidental observation gaps from executive prose; retain them in evidence records. Never fabricate a report claim.
+- If input evidence is incomplete, mark the section as pending rather than fabricating a report claim.
 - If delivery or attachment is unavailable, keep the report package prepared_not_observed.
 
 ## Workflow Lane
 
 - Current lane: **Materials and visual summaries** (`design-orchestration`, `apple-design`, `design-quality-gate`, `award-bar-score`, `frontend`, `accessibility-audit`, `visual-qa`, `content-operator`, `+6 more`) - web, accessibility, visual QA, files, and packages.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should turn supplied inputs into a report, executive brief, PPT-ready outline, or upload package without claiming presentation delivery.
 
@@ -81,6 +66,9 @@ Quality bar:
 - Name audience, reporting period, sections, supplied facts, assumptions, and missing data.
 - Keep report packaging independent from reliability review unless explicitly requested.
 - Export only Markdown/JSON outlines unless a separate presentation tool produces a binary deck.
+- On Hermes, that tool can be the bundled `powerpoint` skill, and a deck it builds counts as generated from its read-back (`pptx_read.py --outline`).
+- On Hermes, a rung taken from a bundled document skill is observed only from that skill's result for that exact file, judged by its field, not its exit code: `"rendered": false` or `"recalculated": false` exits 0 yet leaves that rung not observed, blocked on the missing tools it names; other observed evidence for a rung still counts.
+- On Hermes, `powerpoint` gives `slide_count` (`pptx_read.py --outline`) and `render_screenshot` (`pptx_render.py` into a fresh directory, its image count matching `slide_count`, since it lists every image already in that directory). Images that exist are not a render pass until each one has been inspected.
 
 Handoff policy:
 
@@ -126,13 +114,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

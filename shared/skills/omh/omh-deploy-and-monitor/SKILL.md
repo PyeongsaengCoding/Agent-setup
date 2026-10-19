@@ -1,6 +1,6 @@
 ---
-name: omh-deploy-and-monitor
-description: "Use when monitoring a production release. Verify rollout, health signals, rollback gates, and post-deploy status."
+name: "omh-deploy-and-monitor"
+description: "[omh] Release rollout needing health signals: release checklist, deploy decision, health signals, rollback gate, and post-deploy status. Use when the user says: deploy-and-monitor, deploy and monitor, deploy monitor, deployment monitoring, release monitor, post deploy, post-deploy, rollback."
 ---
 # Deploy And Monitor
 
@@ -12,9 +12,9 @@ This is a Hermes-native `deploy-and-monitor` workflow skill.
 
 ## Do Not Use When
 
-- An incident has already been declared and the work is commanding it -- severity, commander, running timeline, recovery verification -- rather than watching a release; use `live-incident-response`.
-- The ask is deciding a release before it ships -- what goes in, its version and tag, the canary stages, or which command rolls it back; use `release-cut`, which writes the rollback trigger down before it is needed.
-- The change is to declared infrastructure itself -- a Terraform plan, a Kubernetes manifest, a Helm chart -- and needs its drift, blast radius, and cost delta read before it is applied; use `iac-change`.
+- An incident has already been declared and the work is commanding it -- severity, commander, running timeline, recovery verification -- rather than watching a release; use `omh-live-incident-response`.
+- The ask is deciding a release before it ships -- what goes in, its version and tag, the canary stages, or which command rolls it back; use `omh-release-cut`, which writes the rollback trigger down before it is needed.
+- The change is to declared infrastructure itself -- a Terraform plan, a Kubernetes manifest, a Helm chart -- and needs its drift, blast radius, and cost delta read before it is applied; use `omh-iac-change`.
 
 ## Examples
 
@@ -40,21 +40,14 @@ Bad example:
 
 - If required context is missing, ask one blocking question or route back to the narrower workflow.
 - If runtime or wrapper evidence is unavailable, keep the status as not_observed and expose the next observable action.
-- For a requested highest platform-supported stable runtime, check the platform catalog against official GA/preview announcements; exclude previews and do not substitute the newest global language release.
-- Treat build-service SDK download failures as deployment-path failures, not proof that a supported runtime cannot run. Preserve the requested version; package matching Linux ABI wheels when appropriate, and verify the platform configuration, actual running patch version, HTTPS responses, and authenticated storage access separately. Do not silently downgrade the runtime to evade build errors.
-
-## Observed release checks
-
-- When parallel runs deploy the same commit, read each outcome, the failed run's reason, and the live revision. Use the successful verified deployment as the release result and retain canceled duplicates in the evidence. Re-run only when an unmet acceptance criterion requires it.
-- Verify asynchronous results at separate boundaries: job completion, automatic result card, exact saved-version detail, refresh, and required/completed terminal projection steps. An available card alone proves only that card's display.
 
 ## Workflow Lane
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare or narrate a release operation with deploy checklist, health signals, rollback criteria, and post-deploy status without pretending to run infrastructure.
 
@@ -73,6 +66,8 @@ Quality bar:
 - Name release scope, target environment, health signals, rollback criteria, and evidence owner.
 - Show pre-deploy, deploy decision, monitor, rollback, and post-deploy as distinct stages.
 - Mark health and rollback status unknown until observed evidence arrives.
+- On Hermes, a watchlist that must keep running after this turn is prepared as a native blueprint through `automation-blueprint` (a cron job whose `monitor` source, a health URL or a script whose output carries no timestamps, is the user's source, never one OMH writes), activated by the user or Hermes and never by OMH.
+- On Hermes, the first monitor tick runs against a baseline with nothing to diff, so it is not a detected change; a silent tick says only that nothing was delivered (a no_change run, or an agent run that answered `[SILENT]`) and never that the release is healthy; a source that failed is an error, not a change; and what the job finds enters the post-deploy status only from its recorded runs (`hermes cron runs <job_id>`) and its open `hermes cron incidents`.
 
 Handoff policy:
 
@@ -127,13 +122,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

@@ -1,6 +1,6 @@
 ---
-name: omh-sales-pipeline-review
-description: "[omh] CRM pipeline or sales forecast to review: turn a supplied CRM export or pipeline snapshot into an evidence-bound pipeline health, forecast, and follow-up review."
+name: "omh-sales-pipeline-review"
+description: "[omh] CRM pipeline or sales forecast to review: turn a supplied CRM export or pipeline snapshot into an evidence-bound pipeline health, forecast, and follow-up review. Aliases: pipeline-review, forecast-review, deal-review. Use when the user says: sales-pipeline-review, sales pipeline review, pipeline review, pipeline health, pipeline coverage, deal review, deal health, sales forecast review."
 ---
 # Sales Pipeline Review
 
@@ -8,9 +8,9 @@ Required: supplied snapshot and as-of time, definitions, prior outcomes, and own
 
 **HOLD:** Missing inputs or failed contract gates. Prepared OMH routing is not execution or approval. **Completion:** Follow the full-contract checklist.
 
-Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-Agent/operator: `omh runtime workflow-artifact sales-pipeline-review prepare --input <json-file-or->` prepares bounded metadata only. Shared operator reference: `omh-routing/references/workflow-artifacts.md`.
+Agent/operator: `omh runtime workflow-artifact sales-pipeline-review prepare --input <json-file-or->` prepares bounded metadata only. Shared operator reference: `skill_view(name='omh-routing', file_path='references/workflow-artifacts.md')`.
 
 Contract: `references/full-contract.md`. Procedure: `references/procedure.md`.
 
@@ -28,12 +28,3 @@ Contract: `references/full-contract.md`. Procedure: `references/procedure.md`.
 ## Workflow Lane
 
 advisory local context
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-

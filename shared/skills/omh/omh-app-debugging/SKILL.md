@@ -1,6 +1,6 @@
 ---
-name: omh-app-debugging
-description: "[omh] Application code misbehaves -- a wrong value, a flaky test, a lost update: reproduce it first, form competing hypotheses, discriminate them with the cheapest observation, and only then fix the demonstrated root cause."
+name: "omh-app-debugging"
+description: "[omh] Application code misbehaves -- a wrong value, a flaky test, a lost update: reproduce it first, form competing hypotheses, discriminate them with the cheapest observation, and only then fix the demonstrated root cause. Use when the user says: app-debugging, app debugging, application debugging, root cause, root-cause, find the root cause, root cause analysis, flaky test."
 ---
 # App Debugging
 
@@ -12,27 +12,16 @@ This is a Hermes-native `app-debugging` workflow skill.
 
 ## First Steps
 
-1. Pin the expected user-visible behavior and the acceptance criteria before interpreting an error. For answer-producing applications, distinguish execution outcome, requirement coverage, and response presentation.
-2. Recover the relevant saved execution and inspect the actual request, claim, provider, validation, storage, and replay boundaries. Reproduce the smallest failing boundary with the application's own entry point and record its output before naming a cause.
-3. Compare competing causes using the cheapest observation. For logging overhead, partial answers, or unstarted durable jobs, load [Execution logs and partial results](references/execution-logs-and-partial-results.md).
-4. Carry the demonstrated reproduction into a regression test, apply the smallest authorized fix, and rerun the same path. Exercise saved-result replay and the connected consumer as well as the helper.
-5. After parallel producers finish, run verification against the integrated files; keep actual model quality, browser behavior, operating load, and deployment evidence separate.
-
-## Answer and judgment debugging contract
-
-- Preserve this user's two response modes when debugging AI answer flows: ordinary answers use natural conversational prose, answer the question directly, and scale comparison or explanation to the question; explicit judgments present the result, option/criterion comparison, reasons and evidence, then material conditions or unknowns.
-- Treat partial-result preservation as delivery plus durable replay: show the validated useful answer, save it, and recover the same content on authorized reentry. When only source excerpts are available, show them with the specific conclusion gap.
-- Separate execution failure from scenario nonfulfillment. A persisted response can be execution-complete while requested facts remain unknown; missing required content, unsupported claims, presentation mismatch, or inconsistent replay remain scenario defects.
-- Preserve useful conditional answers when some personal details are missing. Ask only for conditions needed to make a useful answer or decision; express access and capability limitations concretely.
-- Keep internal failure codes, coverage checks, and stage receipts in diagnostics. In user-facing answers, explain the relevant missing fact or condition in the response's own style rather than adding a fixed diagnostic report.
-- Preserve cancellation, revoked authority, changed source bindings, and unknown paid-call outcomes as explicit guarded states; partial-result fallback must pass the same current authority checks as normal delivery.
+- Ask for, or plan, the one command that shows the wrong behaviour, and record its observed output before naming a cause.
+- Refuse to prepare a fix while the reproduction reads not_observed; plan the observation that would establish it instead.
 
 ## Do Not Use When
 
-- The fault is a crash, memory corruption, or core dump in a compiled native binary that needs a debugger session; use `native-debugging`.
-- The build, compile, or CI job fails the same way on every run; use `build-failure-triage`.
-- The subject is an agent or workflow run that misbehaved rather than the application code; use `agent-debug`.
-- The cause is already demonstrated and the request is to judge whether the fix is proven; use `verification-gate`.
+- The fault is a crash, memory corruption, or core dump in a compiled native binary that needs a debugger session; use `omh-native-debugging`.
+- The build, compile, or CI job fails the same way on every run; use `omh-build-failure-triage`.
+- The subject is an agent or workflow run that misbehaved rather than the application code; use `omh-agent-debug`.
+- The cause is already demonstrated and the request is to judge whether the fix is proven; use `omh-verification-gate`.
+- Hermes' bundled `systematic-debugging` skill is already loaded for this bug; follow its phases instead of loading this one too, unless the reproduction, the rival hypotheses, and the observation that separated them must be kept as a record.
 
 ## Examples
 
@@ -65,9 +54,9 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when application code -- a Python, TypeScript, Go, or JVM service, library, or test -- behaves wrongly and the cause is unknown: a wrong value, an intermittent or order-dependent test, a race or lost update, or a bug that moves when observed. The work is a demonstrated root cause: an observed reproduction, competing hypotheses, the cheapest observation that separates them, and only then a fix.
 
@@ -88,8 +77,8 @@ Quality bar:
 - Load `references/hypothesis-and-race-method.md` for the hypothesis table, flaky-test tactics, and race patterns instead of improvising them.
 - Pick the next observation by cost and by how many hypotheses its result eliminates, and record the eliminations.
 - Keep reproduction, root cause, fix, and verification as separate observed states.
-- Before changing a helper dependency, inspect tests that extract function bodies with `eval` or construct hand-written call adapters. Run both the actual module import and those adapters, then supply the real dependency to the adapter; a missing test-injected symbol can fail a full suite while the production import remains correct. Preserve behavioral assertions instead of substituting an always-successful stub.
-- When a suite fails only in an isolated worktree, inspect the failing traceback and resolve its fixture paths before changing application code. Reproduce the same test in the original checkout and the candidate with identical non-secret fixtures, because workspace-relative evidence outside Git can disappear from the candidate. Record the original failure and the focused rerun separately.
+- Count a fix as failed when an executed run of the same reproduction command still shows the original symptom or shows a new symptom the fix caused rather than unmasked; planned runs and other commands do not count. After the third failed fix, prepare no fourth; re-examine the architecture assumptions every fix shared, per the method reference, and offer the user the next step as a question.
+- When Hermes' bundled `systematic-debugging` skill is loaded for the same bug, follow its phases and write this skill's records at each; a breakpoint read through `python-debugpy` or `node-inspect-debugger` is one discriminating observation. Load `references/debugging-skill-composition.md` for the mapping.
 
 Handoff policy:
 
@@ -144,13 +133,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

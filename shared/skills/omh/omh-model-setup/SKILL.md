@@ -1,6 +1,6 @@
 ---
-name: omh-model-setup
-description: "[omh] Model and provider configuration changes: diagnose role-slot model configuration, guide provider connection, and apply changes only after diff approval."
+name: "omh-model-setup"
+description: "[omh] Model and provider configuration changes: diagnose role-slot model configuration, guide provider connection, and apply changes only after diff approval. Use when the user says: model-setup, hermes model setup, set up my models, set up my model, configure my models, configure model provider, connect my model provider, set up model role slots."
 ---
 # Model Setup
 
@@ -45,16 +45,16 @@ Bad example:
 - If a preferred Kimi, Claude, OpenAI, GLM, Grok, Gemini, or Qwen candidate is missing, preserve it as inactive and try the next confirmed-active compatible editorial candidate; do not substitute for an explicit unavailable choice.
 - If no compatible model is confirmed active, record owner_default, finish applicable OMH setup without a model-config write, and name the relevant Hermes-native provider/auth or user-override next action.
 - If the diagnosed Hermes config cannot be read, report the read failure and stop before proposing a diff; if the config digest changes or the user rejects the diff, do not apply it.
-- If an OAuth provider (OpenAI Codex/ChatGPT, Anthropic, Qwen OAuth) needs login or an account switch, know that the TUI `/model` picker only handles inline API-key entry and is a no-op for OAuth: guide the user to `/setup` inside the TUI (it suspends the TUI and runs the interactive wizard, including provider login) or to `hermes model` in another terminal (interactive provider selection with browser OAuth), then `/model --refresh` back in the TUI.
+- If an OAuth provider (OpenAI Codex/ChatGPT, Anthropic, Qwen OAuth) needs login or an account switch, guide the user to `hermes model` in another terminal (interactive provider selection with browser OAuth), which works whichever surface they chat in, then `/model --refresh` back in the session. In Hermes' own terminal (`hermes --tui`), `/setup` also runs the interactive wizard, including provider login, and the `/model` picker there handles only inline API-key entry, not OAuth; the OMH TUI refuses `/setup`, and its bare `/model` lists the models Hermes offers this session and switches to the one picked, with no login step.
 - If a provider hit its quota or rate limit, guide Hermes pooled credentials instead of abandoning the provider: `hermes auth add` registers an additional account for the same provider, `hermes auth status` shows which credential is exhausted, and `hermes auth reset` clears recorded exhaustion after limits recover; delegation lanes can also route around the exhausted ecosystem via the category chains' cross-provider tails.
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when the user wants Hermes to inspect metadata-only model history, confirm active models, configure Hermes-native role aliases or providers, review editable recommendations for an external coding handoff, or switch a session model through the prerequisite-check, diagnose, guide, diff-approved apply, and verify contract.
 
@@ -77,7 +77,7 @@ Quality bar:
 - Verify: re-inspect the allowlisted Hermes config metadata and report a completion checklist covering every applicable item.
 - Chain interview: when the user wants the per-category model chains changed, first show the current state (`omh model-chains show`), then interview one category at a time with numbered options — 1) keep current, 2) shipped default, 3) Ultrafast tier, 4) custom entry (직접 입력) — and apply each outcome with `omh model-chains set <category> "model[:effort], ..."` or by editing ~/.omh/routing/model-chains.json directly; close by re-reading the file and showing the resulting chains with their origins.
 - Treat each Hermes role slot (main, realtime-search, design), semantic category, and external owner as an independent prerequisite/diagnose/recommend/apply unit instead of one combined change.
-- Explain the shipped recommendations as editable editorial defaults, not benchmarks or allowlists: ultrabrain uses GPT-6 Astra; deep uses GPT-6.1 Sol then DeepSeek Flash (V4.1); architect prefers Claude Fable 5.1, GPT-6 Astra, then Kimi K3 at xhigh; unspecified-high prefers Kimi K3 then Claude Opus 5.5; unspecified-low prefers GLM-5.3, DeepSeek Flash (V4.1), then Claude Opus 5.5 at low; quick prefers GLM-5.3 Flash, Kimi K3, GPT-6 Luna, then Claude Fable 5.1 at low; writing prefers Kimi K3, Qwen3-Coder, then Gemini 3.1 Pro; visual-engineering prefers Claude Fable 5.1 then Kimi K3; artistry prefers Gemini 3.1 Pro, Claude Fable 5.1, then Kimi K3; capable prefers Claude Fable 5.1, Claude Opus 5.5, Kimi K3, then GLM-5.3 at medium; simple-work prefers GPT-6 Luna, DeepSeek Flash (V4.1), then Claude Haiku 4.5 at low; and deep-work uses GPT-6 Astra at high. Each chain names the current generation of a model line; a superseded generation (Fable 5, Opus 5, GLM 5.2, DeepSeek V3.2, GPT-5.6 Luna, GPT-5.6 Sol, GPT-5.6 Terra, GPT-6 Sol) is kept only by a machine-level chain override. Chain customization is a config edit: a category written into ~/.omh/routing/model-chains.json (mixture_chain_overrides/v1, seeded by omh setup) replaces that chain for routing, fallback, and HUD labels without touching code. The interactive omh setup also records which providers the machine holds and whether it has a Claude Code subscription in ~/.omh/routing/providers.json (provider_entitlements/v1); every chain is then reordered so served entries lead, nothing is removed, and the Claude Code subscription only seeds the Maestro lane's --model preference because Hermes cannot spend it.
+- Explain the shipped recommendations as editable editorial defaults, not benchmarks or allowlists: ultrabrain uses GPT-6 Astra; deep prefers Claude Opus 5.5, GPT-6.1 Sol, then Kimi K3 at high; architect prefers Claude Opus 5.5, GPT-6 Astra, Claude Fable 5.1, then Kimi K3 at xhigh; unspecified-high prefers GPT-6.1 Sol, Claude Opus 5.5, then Kimi K3; unspecified-low prefers GLM-5.3, DeepSeek V4.1 Flash, GPT-6.1 Sol, then Claude Sonnet 5.5 at low; quick prefers GLM-5.3 Flash, GPT-6 Luna, Claude Haiku 5.5, then Kimi K3 at low; writing prefers Claude Opus 5.5, Claude Sonnet 5.5, Kimi K3, then Gemini 3.1 Pro; visual-engineering prefers Claude Opus 5.5, Claude Fable 5.1, Gemini 3.1 Pro, then Kimi K3; artistry prefers Gemini 3.1 Pro, Claude Opus 5.5, Claude Fable 5.1, then Kimi K3; capable prefers Claude Opus 5.5, GPT-6.1 Sol, Claude Fable 5.1, then Kimi K3 at medium; simple-work prefers GPT-6 Luna, Claude Haiku 5.5, then DeepSeek V4.1 Flash at low; and deep-work prefers Claude Opus 5.5 then GPT-6.1 Sol at max. Each chain names the current generation of a model line; a superseded generation (Fable 5, Opus 5, GLM 5.2, DeepSeek V3.2, GPT-5.6 Luna, GPT-5.6 Sol, GPT-5.6 Terra, GPT-6 Sol, Claude Haiku 4.5) or a retired line (Qwen3-Coder) is kept only by a machine-level chain override. Chain customization is a config edit: a category written into ~/.omh/routing/model-chains.json (mixture_chain_overrides/v1, seeded by omh setup) replaces that chain for routing, fallback, and HUD labels without touching code. The interactive omh setup also records which providers the machine holds and whether it has a Claude Code subscription in ~/.omh/routing/providers.json (provider_entitlements/v1); every chain is then reordered so served entries lead, nothing is removed, and the Claude Code subscription only seeds the Maestro lane's --model preference because Hermes cannot spend it.
 - For X/Twitter scraping or trend analysis, keep x_platform_data as a domain affinity rather than a role alias: prefer confirmed-active Grok, then Kimi K3, then Gemini, without removing the rest of the route or overriding an explicit model.
 - When a recommendation head is missing, choose the first confirmed-active owner-compatible candidate in that chain. Only after every selected category, role-slot, and domain chain is exhausted, consult the shared final order Claude Opus 5.5 then GPT-6.1 Sol. If no candidate is confirmed active anywhere, keep the selector on its owner's native default model and let the rest of OMH setup finish without a model-config write.
 - Give provider-specific native next actions without claiming provider readiness: use installed Hermes flows for OpenAI OAuth/OpenAI Codex, Anthropic or an existing Claude provider, Qwen OAuth or Alibaba, Gemini/Google/Vertex, Grok/xAI, Kimi, GLM/Z.AI, or an already-working custom provider; preserve working alternatives.
@@ -132,13 +132,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

@@ -60,15 +60,6 @@ that shows it, cropped or annotated when the defect is small. Triage
 orders the fixing and, when a loop is cut short, states exactly what
 remains at which severity.
 
-## Comparing isolated layout alternatives
-
-1. Use the same content and product tokens in each alternative; vary the arrangement that the user is deciding. Include a direct switch between alternatives and an explicit selection action.
-2. Render at a measured desktop and narrow viewport. A CSS class that narrows a wrapper demonstrates stacking but does not exercise viewport media queries; use a real resized viewport or an explicitly sized iframe for responsive evidence.
-3. Capture the initial viewport, then scroll the primary task region into view and capture again. Inspect the diagrams or controls the user actually needs, because a top-of-page screenshot can leave them outside the captured area.
-4. Exercise a meaningful selection through pointer or locator input, and read back the changed content and selected styling. Keep programmatically dispatched state tests separate from pointer evidence.
-5. Save each original capture and its measured viewport beside the comparison sheet. Crop using the observed screenshot dimensions and frame bounds; inspect individual originals when a wide contact sheet is downscaled enough to hide labels.
-6. Deliver the interactive comparison with the captured alternatives and a short recommendation based on visible tradeoffs. Identify prototype-only controls and unimplemented product behavior explicitly. Treat user selection, responsive rendering, production integration, and physical-device verification as separate results.
-
 ## Where visual-qa takes over
 
 This loop is the builder's inner iteration, not the QA verdict. The

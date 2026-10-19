@@ -1,6 +1,6 @@
 ---
-name: omh-localization-review
-description: "[omh] Translated product or content release: make a product or content release locale-ready with terminology, cultural-fit, and quality-review guidance."
+name: "omh-localization-review"
+description: "[omh] Translated product or content release: make a product or content release locale-ready with terminology, cultural-fit, and quality-review guidance. Use when the user says: localization review, translation QA, locale glossary, 현지화 검토, 번역 QA, 용어집."
 ---
 # Localization Review
 
@@ -12,10 +12,10 @@ This is a Hermes-native `localization-review` workflow skill.
 
 ## Do Not Use When
 
-- The request is a short sentence or word translation or rewrite with no product or locale QA context; answer directly or use `content-operator`.
-- The user needs fresh rendered UI evidence, clipping checks, or a visual PASS/REVISE/BLOCK verdict; use `visual-qa`.
-- The user asks to edit locale files, push a translation-management-system job, publish strings, or configure localization settings; use `workspace-file-operator` or `connector-operator` with explicit target and authority.
-- The request asks for a regulatory or contractual conclusion about translated legal text; use `legal-compliance-review`.
+- The request is a short sentence or word translation or rewrite with no product or locale QA context; answer directly or use `omh-content-operator`.
+- The user needs fresh rendered UI evidence, clipping checks, or a visual PASS/REVISE/BLOCK verdict; use `omh-visual-qa`.
+- The user asks to edit locale files, push a translation-management-system job, publish strings, or configure localization settings; use `omh-files` or `omh-apps` with explicit target and authority.
+- The request asks for a regulatory or contractual conclusion about translated legal text; use `omh-legal-compliance-review`.
 
 ## Examples
 
@@ -46,9 +46,9 @@ Bad example:
 
 - Current lane: **Materials and visual summaries** (`design-orchestration`, `apple-design`, `design-quality-gate`, `award-bar-score`, `frontend`, `accessibility-audit`, `visual-qa`, `content-operator`, `+6 more`) - web, accessibility, visual QA, files, and packages.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when multiple strings, a product surface, a market release, or a locale-sensitive document needs terminology, context, consistency, cultural-fit, and QA guidance beyond one-off translation.
 
@@ -115,13 +115,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

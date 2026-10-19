@@ -2,7 +2,7 @@
 
 ## 모델 역할
 
-이 문서의 표가 모든 프로젝트의 분류·모델 계열·추론 수준 정본이다. [OMH 원본의 12개 분류·추론](https://github.com/rlaope/oh-my-hermes/blob/c8b94d0431db3b49d5df040acd7f29a241065ff0/README.md#recommended-models)을 따르고, 모델 계열은 Codex에서 사용하는 Astra·Sol·Luna로 매핑했다. 실제 모델 식별자는 `{{CODEX_HOME}}/models.json`에 둔다. 스킬과 프로젝트 지침은 표를 복제하지 않고 이 문서를 참조한다. 제품이 사용하는 API 모델은 별도다.
+이 문서의 표가 모든 프로젝트의 분류·모델 계열·추론 수준 정본이다. [OMH v4.0.0 원본의 12개 분류·추론](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/README.md#recommended-models)을 따르고, 모델 계열은 Codex에서 사용하는 Astra·Sol·Luna로 매핑했다. 실제 모델 식별자는 `{{CODEX_HOME}}/models.json`에 둔다. 스킬과 프로젝트 지침은 표를 복제하지 않고 이 문서를 참조한다. 제품이 사용하는 API 모델은 별도다.
 
 | 분류 | 계열 | 추론 | 적용 |
 |---|---|---|---|
@@ -18,6 +18,8 @@
 | `capable` | `sol` | `medium` | 일반 실행 |
 | `simple-work` | `luna` | `low` | 단순 실행 |
 | `deep-work` | `astra` | `high` | 복합 실행 |
+
+`deep-work`는 OMH v4.0.0에서 Claude Opus 5.5 → GPT-6.1 Sol, `max`로 바뀌었다. Codex 값은 사용자 결정 전까지 `astra`/`high`를 유지한다.
 
 사용자가 모델을 지정하면 그 지시가 우선한다. 지정 조합을 사용할 수 없으면 제약을 보고하고 임의 대체하지 않는다. 최신 버전은 공식 모델 목록과 계정 지원을 확인해 `{{CODEX_HOME}}/models.json`을 갱신하고 각 계열/추론 조합을 실행 검증한다. 실행할 때마다 무조건 최신 버전을 다운로드하지 않는다.
 

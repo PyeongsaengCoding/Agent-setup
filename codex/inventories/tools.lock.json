@@ -10,13 +10,13 @@
     "package": "global-memory-mcp",
     "version": "0.1.7",
     "source": "https://github.com/ozankasikci/global-agent-memory",
-    "commit": "53480fd2906b41c9921326f1c61e4c42fe8d5134",
+    "commit": "845581c523248248fe95dad270fd832e30ca5a6a",
     "install_method": "uv_tool_git_commit",
     "published_package_version_verified": false
   },
   "omh": {
     "source": "https://github.com/rlaope/oh-my-hermes",
-    "commit": "c8b94d0431db3b49d5df040acd7f29a241065ff0",
+    "commit": "36e96feb432068cd27eecf5b434acdf1328341b4",
     "runtime_installed": false
   }
 }

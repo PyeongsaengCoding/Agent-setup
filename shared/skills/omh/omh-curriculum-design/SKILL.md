@@ -1,6 +1,6 @@
 ---
-name: omh-curriculum-design
-description: "[omh] Team training or course that needs a syllabus: turn a learning goal into a teachable curriculum, assessment plan, and learner-ready sequence."
+name: "omh-curriculum-design"
+description: "[omh] Team training or course that needs a syllabus: turn a learning goal into a teachable curriculum, assessment plan, and learner-ready sequence. Use when the user says: curriculum design, learning objectives, assessment plan, 커리큘럼 설계, 학습 목표, 평가 계획."
 ---
 # Curriculum Design
 
@@ -12,10 +12,10 @@ This is a Hermes-native `curriculum-design` workflow skill.
 
 ## Do Not Use When
 
-- The user wants an explanation of a supplied academic paper rather than a teachable sequence; use `paper-learning`.
-- The user needs a deck, workbook, PDF, or other exported learning artifact; route packaging to `materials-package` after the curriculum is accepted.
-- The user asks to create or publish an LMS course, enroll students, grade work, or change course settings; use `connector-operator` with explicit authorization and observed evidence.
-- The user needs only a short rewrite or one isolated worksheet prompt, not curriculum structure; use `content-operator`.
+- The user wants an explanation of a supplied academic paper rather than a teachable sequence; use `omh-paper-learning`.
+- The user needs a deck, workbook, PDF, or other exported learning artifact; route packaging to `omh-materials-package` after the curriculum is accepted.
+- The user asks to create or publish an LMS course, enroll students, grade work, or change course settings; use `omh-apps` with explicit authorization and observed evidence.
+- The user needs only a short rewrite or one isolated worksheet prompt, not curriculum structure; use `omh-content-operator`.
 
 ## Examples
 
@@ -44,11 +44,11 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+20 more`) - research, signals, ops, and briefings.
+- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+21 more`) - research, signals, ops, and briefings.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when an educator or enablement owner needs outcomes, scope and sequence, lesson/module design, assessment criteria, and differentiation assumptions.
 
@@ -117,13 +117,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

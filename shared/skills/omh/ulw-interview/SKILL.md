@@ -1,6 +1,6 @@
 ---
-name: ulw-interview
-description: "[omh] Vague, underspecified request: one-question-at-a-time clarification."
+name: "ulw-interview"
+description: "[omh] Vague, underspecified request: one-question-at-a-time clarification. Use when the user says: deep-interview, interview me, clarify, feature shaping, ambiguous product request, one question, 要件を詰めて, 曖昧な要求."
 ---
 # Deep Interview
 
@@ -15,8 +15,8 @@ This is a Hermes-native `deep-interview` workflow skill.
 - The request already has concrete scope, acceptance criteria, and verification commands.
 - The missing information is discoverable from the repository or local artifacts without asking the user.
 - The user asked for immediate read-only analysis and the ambiguity does not change the answer.
-- The ambiguity is specifically repository terminology or project-language alignment; use `context` and its direct-lookup/frontier boundary.
-- The open question is answerable by a small reversible experiment rather than another interview round; use `decision-prototype`.
+- The ambiguity is specifically repository terminology or project-language alignment; use `ulw-context` and its direct-lookup/frontier boundary.
+- The open question is answerable by a small reversible experiment rather than another interview round; use `omh-decision-prototype`.
 
 ## Examples
 
@@ -47,11 +47,13 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
 ## Interview Round Protocol
 
 This interview is bounded: at most 6 rounds, one question per round.
+
+A yes to an idea approves only the idea; a later plan, handoff, or change is accepted at its own gate.
 
 Before each question, find the most recent round header you emitted in this thread and add 1.
 If there is no header, you are at Round 1. If you have already asked questions here but cannot
@@ -86,24 +88,31 @@ mid-interview check now and continue from Round 4.
 
 **Answer options — every question ships with candidates.**
 
-After the question sentence, offer the likely answers as a short numbered list: two to four
-real candidates, then one final free-input entry. Each candidate is an answer the user could
-actually pick — drawn from the request, repo evidence, or the tradeoff the question is really
-about, never filler to reach a count, and never a candidate whose text is itself a bare number
-(it would collide with reply-by-number). The last entry is always the open door, in the user's
-language — for example English `N) Something else — type your answer`, Korean `N) 기타 — 직접 입력`.
+Give every question two to four real candidates, the one you recommend first: answers the user
+could actually pick, drawn from the request, repo evidence, or the tradeoff the question is
+really about, never filler to reach a count, and never a candidate whose text is itself a bare
+number (a reply by number would collide with it, in the list below and in a messaging picker).
 
+- **With Hermes' `clarify` tool**, when `clarify` is in your tool list or tool_search finds it: keep the header in your
+  message and ask through `clarify` — one `questions` entry, the sentence as `question`, the
+  candidates as `choices`. Add no free-input row of your own and keep the candidates out of the
+  question sentence: the picker marks the recommendation and adds its own typed-answer row.
+- **Without it**: after the question sentence, a short numbered list of the candidates, then one
+  final free-input entry in the user's language — for example English
+  `N) Something else — type your answer`, Korean `N) 기타 — 직접 입력`.
 - A number, an option's own words, or a completely different free-text answer are all valid;
   free text is always accepted, even when it matches no option. Never re-ask because the reply
   was not a listed option.
 - Options mirror the user's language, like the header and the question.
 - The list is an answer palette, not extra questions; it does not break the one-question rule.
+  Put a second question in the same `clarify` call only when neither answer could change the
+  other, which an interview rarely has.
 
 **Mid-interview check — this is not a stop rule.**
 
 Before asking the question that would be Round 4, offer the choice instead: say where
 things stand and ask whether to keep going or plan now — your own words, the user's language,
-one short sentence, with the same option shape: keep going / plan now / free input.
+one short sentence, with the same option shape: keep going / plan now.
 The check is not a round: emit it without a header. If the user chooses to continue, the next
 question is Round 4; if they choose to plan, stop rule 2 applies.
 
@@ -120,11 +129,11 @@ question is Round 4; if they choose to plan, stop rule 2 applies.
 These are stop rules you follow, not caps OMH enforces. When torn between one more question and
 stopping, stop and plan.
 
-## Use When
+## When to Use
 
 Use before planning or execution when requirements are materially ambiguous.
 
-    Strong routing signals: `deep-interview`, `$deep-interview`, `interview me`, `don't assume`, `clarify`, `feature shaping`, `ambiguous product request`, `one question`, `要件を詰めて`, `曖昧な要求`, `一問一答で確認`, `オンボーディング`, `온보딩`, `부드럽게`, `모호한 제품 요청`, `기획자`, `개발자 사이`, `澄清需求`, `需求不明确`, `一次问一个问题`
+    Strong routing signals: `deep-interview`, `$deep-interview`, `interview me`, `don't assume`, `clarify`, `feature shaping`, `ambiguous product request`, `one question`, `要件を詰めて`, `曖昧な要求`, `一問一答で確認`, `オンボーディング`, `온보딩`, `부드럽게`, `모호한 제품 요청`, `기획자`, `개발자 사이`, `澄清需求`, `需求不明确`, `一次问一个问题`, `perjelas kebutuhan fitur ini`, `bantu gali kebutuhan sebelum bikin solusi`, `urai kebutuhan yang masih ambigu`, `klarifikasi permintaan ini lewat tanya jawab`
 
 ## Catalog Metadata
 
@@ -184,13 +193,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

@@ -8,7 +8,7 @@
 | Codex | ChatGPT·Codex(GPT)만 쓴다 | macOS (Windows는 WSL2) | [codex/INSTALL_FOR_AGENTS.md](codex/INSTALL_FOR_AGENTS.md) |
 | Hermes | Hermes Desktop에서 GPT·Claude를 함께 쓴다 | Apple Silicon Mac | [hermes/INSTALL_FOR_AGENTS.md](hermes/INSTALL_FOR_AGENTS.md) |
 
-**바로 보기:** [네 가지 라우팅 비교](docs/model-routing-comparison.md) · [Codex 라우팅](#codex--gpt-전용) · [Claude Code 라우팅](#claude-code--claudegpt-혼합) · [Hermes 라우팅](#hermes--omh-분류별-위임) · [설치 요청](#ai에게-보낼-요청) · [설치 구성](#설치되는-것)
+**바로 보기:** [네 가지 라우팅 비교](docs/model-routing-comparison.md) · [Hermes에서 Agent-setup과 OMH 역할](hermes/docs/omh-and-agent-setup.md) · [Codex 라우팅](#codex--gpt-전용) · [Claude Code 라우팅](#claude-code--claudegpt-혼합) · [Hermes 라우팅](#hermes--omh-분류별-위임) · [설치 요청](#ai에게-보낼-요청) · [설치 구성](#설치되는-것)
 
 ## 모델 라우팅
 
@@ -124,7 +124,7 @@ Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각�
 | 항목 | Claude Code | Codex | Hermes |
 |---|---|---|---|
 | 모델 라우팅 | 12개 분류별 Claude 하위 에이전트 + GPT는 Codex 플러그인 | 12개 분류별 GPT 모델·추론 | OMH 프리셋 |
-| 스킬 | 229개 (공통 49 + OMH 142 + codex + 외부 37) | 228개 (공통 49 + OMH 142 + 외부 37) | 128개 (공식 57 + 공통 34 + 외부 37) + OMH 142 |
+| 스킬 | 231개 (공통 49 + OMH 144 + codex + 외부 37) | 230개 (공통 49 + OMH 144 + 외부 37) | 128개 (공식 57 + 공통 34 + 외부 37) + OMH 144 |
 | 전역 지침 | `~/.claude/AGENTS.md` | `~/.codex/AGENTS.md` | `SOUL.md` 관리 구간 |
 | 코드 탐색 | CodeGraph | CodeGraph | CodeGraph |
 | 기억 | GAM | GAM | GAM + Hermes 메모리 |
@@ -140,12 +140,27 @@ Hermes는 **분류별 후보 순서**와 **실행 중 공통 fallback**을 각�
 | 작업 원칙 | 16 | coding-plan·coding-work·coding-handoff·coding-status·coding-research·coding-repair·coding-code-review·coding-verification·coding-design-review·coding-failure-audit·coding-debt-audit·coding-ai-slop-review·diagnosing-bugs·tdd·ponytail·product-design-review | ✅ | ✅ | OMH가 같은 일 |
 | 도구·글쓰기·디자인 | 11 | codegraph-context·gam-memory·coding-maintenance·agent-setup-maintenance·aside-browser·humanize-korean·humanizer·writing-for-agents·shadcn·shadcn-lint·logo-design | ✅ | ✅ | ✅ (writing-for-agents 제외) |
 | Hermes 작업 교훈 | 22 | 운영 실패 진단·관리 API 일괄 작업·서비스 인프라 설계·읽기 모델 성능·SQLite 시험 기록·서브프로세스 기한·미디어 제작·모바일 앱 베타·Android 기기 검증·참고 링크 도입 검토 등 | ✅ | ✅ | ✅ |
-| OMH 워크플로 | 142 | 계획(planner 19)·검토(reviewer 22)·운영(operator 38)·안내(guide 20)·추적(tracker 18)·ultrawork 9·조사(researcher 8)·기억(memory-keeper 5)·인계(handoff-guide 3) | ✅ 사본 | ✅ 사본 | ✅ OMH 설치기 |
+| OMH 워크플로 | 144 | 계획(planner 19)·검토(reviewer 23)·운영(operator 38)·안내(guide 21)·추적(tracker 18)·ultrawork 9·조사(researcher 8)·기억(memory-keeper 5)·인계(handoff-guide 3) | ✅ 사본 | ✅ 사본 | ✅ OMH 설치기 |
 | 외부 업무 | 37 | Azure·Entra 26, Azure 비용 4, 마케팅 5 (seo-audit·aso·analytics·cro·copywriting), archify, iterative-retrieval | ✅ | ✅ | ✅ |
 | Hermes 공식 | 57 | Hermes 내장 도구용 스킬 (메일·문서·미디어·연구 등) | — | — | ✅ |
 | 실행기 전용 | 1 | codex: GPT 항목을 Codex 플러그인으로 넘기고 결과 회수 | ✅ | — | — |
 
 Claude Code·Codex의 전역 지침은 OMH 스킬이 쓰는 Hermes 도구 이름(`omh_todo`, `omh_memory`, `delegate_task` 등)을 각 실행기의 할 일 목록·GAM·위임으로 대응시킨다.
+
+## Hermes에서 Agent-setup과 OMH가 함께 동작하는 방식
+
+Hermes에는 Agent-setup이 설치한 구성과 OMH가 설치한 구성이 함께 있다. Agent-setup은 작업 원칙·스킬·모델 정책·도구 연결을, OMH는 작업 분류·워크플로 스킬·분류별 위임 모델을 맡는다. Claude Code·Codex는 OMH를 실행하지 않고 OMH 스킬 사본만 쓴다. 상세는 [역할 나눔](hermes/docs/omh-and-agent-setup.md)에 있다.
+
+| 영역 | Agent-setup에만 | OMH에만 | 둘 다 있을 때 |
+|---|---|---|---|
+| 스킬 | 공식 57·공통·외부 스킬, 작업 중 만든 스킬 (`~/.hermes/skills`) | 워크플로 144개 (`~/.local/share/omh/current/skills`) | 같은 이름이면 `프로젝트 → ~/.hermes/skills → 외부 폴더(OMH)` 순서로 Agent-setup 쪽을 쓴다. 역할만 겹치면 요청에 맞는 쪽을 고른다 |
+| 지침 | `SOUL.md`의 공통 원칙·Aside·문서 전달 | 매 턴 분류 힌트, 프로젝트 `AGENTS.md`의 OMH 구간 | 사용자 지시 → 프로젝트 `AGENTS.md` → 전역 지침 순서. 말투·언어는 `SOUL.md` |
+| 모델 라우팅 | 설치 프리셋, 메인 대화 기본 모델 | 분류별 기본 체인, 실행값 `~/.omh/routing/model-chains.json` | 프리셋을 넣은 분류는 `override`로 OMH 기본값보다 우선하고 업데이트 뒤에도 유지된다. 하위 에이전트에만 적용되고 메인 대화·cron은 Hermes 기본 모델 |
+| 기억 | GAM: 프로젝트 결정·해결 경험 | OMH 기억: Hermes 작업 교훈 | 프로젝트 지식은 GAM에 두어 세 AI가 함께 쓴다 |
+| 코드 탐색·브라우저 | CodeGraph, Aside 조작 규칙 | 색인 갱신·브라우저 범위 안내 워크플로 | 실제 도구는 CodeGraph·Aside, 범위 확인은 OMH 안내를 함께 따른다 |
+| 플러그인·본체 | 사용량 표시·웹 검색 중계·Discord 보고, Hermes 본체 호환 패치 | `omh` 플러그인 | 이름이 달라 함께 등록된다. 본체 수정은 업데이트 때 보관 후 다시 적용한다 |
+| 프로젝트 식별 | 없음 | Git 원격 주소로 프로젝트 자동 식별 | 프로젝트마다 할 초기화는 없다. `omh memory project-identity show`가 `unresolved`인 프로젝트만 `omh memory project-identity init`을 실행한다. OMH 4.0.0에는 `omh init` 명령이 없다 |
+| 업데이트 | 외부 구성요소를 최신 정식 릴리스로 고정, `scripts/check_releases.py`로 확인 | `omh update`가 자기 패키지·스킬 갱신 | [업데이트 절차](hermes/docs/model-routing.md#업데이트) 한 블록으로 함께 올린다 |
 
 ## 저장 데이터 보존
 

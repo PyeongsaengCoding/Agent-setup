@@ -85,7 +85,7 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 - `~/.hermes/skills/aside-browser`에 개인 Aside 프로필 이름이 들어 있다. 공개 원본에는 `shared/skills/core/aside-browser`를 쓴다.
 - OMH는 전체 프로필(142개)로 설치되어 있다. OMH 공식 core 프로필(`omh skill-profile reconcile --to core`)로 줄이면 매 요청에 올라가는 스킬 목록이 줄어든다.
 - OMH 관리 스킬 7개에 기존 작업에서 추가한 로컬 지침이 있다. v3.0.1 업데이트 때 병합해 유지했으며 대상과 처리 결과는 [업데이트 점검](../reports/2026-10-09-omh-3.0.1-review.md)에 기록했다.
-- Claude Code·Codex의 화면 스킬은 OMH `main` 41de9dc의 프론트엔드 세부 기준을 참조한다. Hermes에 설치된 OMH v3.0.1의 스킬 내용은 해당 릴리스 상태로 유지한다.
+- Claude Code·Codex의 화면 스킬은 OMH v4.0.0(36e96fe)의 프론트엔드 세부 기준을 참조한다. Hermes에 설치된 OMH의 스킬 내용은 설치한 정식 릴리스 상태로 유지한다.
 
 ## 4. AGENTS.md 구성
 

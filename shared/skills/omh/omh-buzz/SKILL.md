@@ -1,6 +1,6 @@
 ---
-name: omh-buzz
-description: "[omh] Buzz community agent setup or relay trouble: connect and operate Hermes as a native Buzz community agent, deliver local media with verified relay receipts, or diagnose a self-hosted Buzz relay without inventing transport evidence."
+name: "omh-buzz"
+description: "[omh] Buzz community agent setup or relay trouble: connect and operate Hermes as a native Buzz community agent, deliver local media with verified relay receipts, or diagnose a self-hosted Buzz relay without inventing transport evidence. Aliases: omh-buzz. Use when the user says: connect Hermes to Buzz, Buzz community agent, Buzz gateway setup, Buzz media attachment, Buzz relay self-hosting, Buzz connection diagnostics, 버즈 커뮤니티 연결, Buzz 메시지 첨부."
 ---
 # Buzz
 
@@ -48,9 +48,9 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
 ## Choose One Internal Lane
 
@@ -73,7 +73,7 @@ and outbound CLI invocation. OMH owns this operator workflow, the `buzz`
 platform identity layered over source `hermes`, safe evidence boundaries, and
 progressive guidance. Block's Buzz relay and CLI own their runtime semantics.
 
-## Use When
+## When to Use
 
 Use when the user wants to configure or troubleshoot Hermes' native Buzz gateway, attach local media to the active Buzz conversation, or inspect a self-hosted Buzz relay. Select the setup, media, or self-host reference from the request's meaning after this single public skill is selected.
 
@@ -132,13 +132,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

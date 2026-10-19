@@ -126,7 +126,7 @@ omh model-chains show --json
 
 ## 업데이트
 
-Hermes와 OMH는 아래 블록 하나로 함께 갱신한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다.
+Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱신한다. Hermes 공식 설치본은 `stable` 채널(최신 `vX.Y.Z` 릴리스 커밋)을 따르고, `hermes update --check`의 `Update channel: stable`로 확인한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다.
 
 ```bash
 (
@@ -139,8 +139,10 @@ Hermes와 OMH는 아래 블록 하나로 함께 갱신한다. 실행 중인 Herm
   printf '\n[2/5] Hermes 백업·업데이트·로컬 수정 재적용\n'
   hermes update --backup
 
-  printf '\n[3/5] OMH 업데이트\n'
-  omh update
+  printf '\n[3/5] OMH 최신 정식 릴리스로 업데이트\n'
+  OMH_LATEST=$(curl -fsSL https://api.github.com/repos/rlaope/oh-my-hermes/releases/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)["tag_name"].lstrip("v"))')
+  printf 'OMH %s\n' "$OMH_LATEST"
+  omh update --channel stable --version "$OMH_LATEST"
 
   printf '\n[4/5] 설치 상태 점검\n'
   omh doctor
@@ -158,7 +160,8 @@ Hermes와 OMH는 아래 블록 하나로 함께 갱신한다. 실행 중인 Herm
 
 - `hermes update --backup`은 설정·대화 백업을 만들고, Hermes 본체의 로컬 수정을 stash에 보관한 뒤 새 버전 위에 재적용한다. 재적용 질문에는 사용자가 동의한다. 재적용 충돌이 나면 멈추고 stash를 보존한 채 충돌 파일을 검토한다.
 - `--keep-stash`는 재적용을 건너뛰고 수정을 stash에 남긴다. 로컬 수정을 새 버전에 맞춰 직접 다시 합칠 때만 쓴다.
-- `omh update`는 설치 기록에 남은 패키지 주소로 명령 패키지와 워크플로를 함께 갱신한다. `~/.omh/routing/model-chains.json`의 사용자 지정 분류는 유지되고, 기본값을 쓰는 분류는 새 기본 체인을 따른다.
+- `omh update --channel stable --version <최신>`은 GitHub 최신 정식 릴리스의 wheel로 명령 패키지와 워크플로를 함께 갱신하고 설치 기록을 `stable` 채널로 남긴다. 옵션 없는 `omh update`는 설치 기록의 패키지 주소를 다시 쓰므로, 기록이 main 브랜치 zip이면 preview 빌드를 받는다. `~/.omh/routing/model-chains.json`의 사용자 지정 분류는 유지되고, 기본값을 쓰는 분류는 새 기본 체인을 따른다.
+- 갱신 뒤 Agent-setup 루트에서 `python3 scripts/check_releases.py`로 저장소 고정값이 최신 정식 릴리스와 같은지 확인한다. `behind`가 나온 항목은 고정값·사본·문서를 함께 올린다.
 - 점검 경고 중 선택 기능(Docker, OpenRouter, image_gen 등)의 `⚠`와 OMH doctor의 `plugin_loader_observed`·`plugin_runtime_observed`는 터미널 점검에서 Hermes 실행을 관측하지 못했다는 표시다. 재시작 후 Desktop 새 세션에서 OMH 도구 호출이 되면 정상이다. `차단` 항목과 실패한 명령은 해결한 뒤 진행한다.
 
 갱신 후 `omh model-chains show --json`으로 12개 분류의 `origin`과 체인을 [라우팅 비교표](../../docs/model-routing-comparison.md)와 대조하고, Hermes 설정의 fallback·스킬 폴더 등록을 확인한다. 소스 호환 패치 두 개는 미리보기로 확인하고 필요한 경우에만 적용한다. Hermes Desktop 새 세션에서 플러그인 로딩, 실제 위임 모델, 계정 선택·사용량 표시를 확인한다.

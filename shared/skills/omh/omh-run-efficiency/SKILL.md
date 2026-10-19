@@ -1,6 +1,6 @@
 ---
-name: omh-run-efficiency
-description: "[omh] Run efficiency and context usage report: report supplied local run efficiency while provider and host data stay unobserved."
+name: "omh-run-efficiency"
+description: "[omh] Run efficiency and context usage report: report supplied local run efficiency while provider data stays unobserved. Use when the user says: run-efficiency, run efficiency report, local run efficiency, context utilization, tool duration report, 실행 효율 리포트, 컨텍스트 사용량, 도구 지연 시간."
 ---
 # Run Efficiency
 
@@ -8,13 +8,13 @@ This is a Hermes-native `run-efficiency` workflow skill.
 
 ## Why This Exists
 
-`run-efficiency` exists so Hermes users can ask for this workflow in chat and get a structured, checkable answer instead of an improvised one.
+`run-efficiency` exists so a question about how a run spent its time, tools, and context gets the supplied timings and context budget, plus what Hermes itself recorded for a named session's tokens and cost, instead of figures a model guesses.
 
 ## Do Not Use When
 
-- The request is already handled by a narrower explicit skill with stronger evidence.
-- The user asks OMH to secretly run external platforms, connectors, schedulers, file exports, or runtime agents.
-- The only safe answer is to ask for missing authority, credentials, target, or observed evidence first.
+- The user asks only what this Hermes conversation has used or cost so far; Hermes' /usage shows this session's tokens and context, /insights estimates cost across recent sessions, and the omh_run_summary tool relays this conversation's recorded tokens and cost.
+- The user wants service latency, uptime, error rates, or supplied metric-provider figures; use `omh-ops-observability-card`.
+- The user wants a provider invoice or quota truth; no OMH report observes either, so name the provider's own console as the source.
 
 ## Examples
 
@@ -33,7 +33,7 @@ Bad example:
 ## Completion Checklist
 
 - The run ID, context budget, surfaces, and supplied observations are explicit.
-- Provider billing, cron, and host claims remain not_observed unless separately recorded.
+- Host usage is Hermes' recorded accounting for the named session, observed only when it recorded tokens; provider billing and cron stay not_observed.
 - The report does not intercept, route, or execute provider or host work.
 
 ## Recovery Notes
@@ -43,13 +43,13 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
-Use for a bounded local efficiency report from supplied metadata with provider and host gaps explicit.
+Use for a bounded local efficiency report from supplied metadata with provider gaps explicit.
 
     Strong routing signals: `run-efficiency`, `run efficiency report`, `local run efficiency`, `context utilization`, `tool duration report`, `실행 효율 리포트`, `컨텍스트 사용량`, `도구 지연 시간`
 
@@ -82,16 +82,18 @@ Expected outputs:
 
 - run_efficiency_report/v1
 - context utilization
-- not_observed provider and host gaps
+- host_usage: Hermes' recorded usage for a named session, or not_observed
+- not_observed provider and billing gaps
 
 Artifact expectations:
 
 - run_efficiency_report/v1 metadata-only report
 - supplied `session_activity_receipt/v1` when available; unavailable metrics stay unavailable, never zero
+- `host_usage` from the Hermes-accounted part of the cost receipt `omh_run_summary` returns (the session, its delegated children, and its kanban workers; `--hermes-session`, and a local Hermes terminal holds the id in `$HERMES_SESSION_ID`): observed only when Hermes recorded tokens for it; no session row or no tokens stays not_observed, never zero
 
 Safety rules:
 
-- Run efficiency is supplied OMH-local metadata, not provider, billing, cron, or host evidence.
+- Run efficiency is supplied OMH-local metadata plus, for a named Hermes session, Hermes' own recorded usage; it is not provider billing, cron, or host-load evidence.
 - Do not claim connector, gateway, runtime, file generation, memory mutation, or host automation evidence from prepared guidance.
 
 ## Runtime Evidence
@@ -110,13 +112,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

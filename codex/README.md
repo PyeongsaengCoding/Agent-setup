@@ -25,7 +25,7 @@ Claude가 같은 사용자 계정에서 Codex CLI를 실행하면 **Codex CLI �
 | 영역 | 구성 | 확인 방법 |
 |---|---|---|
 | 작업 방식 | 현재 대화의 주 에이전트가 팀장으로 목표·담당·파일 소유권·검증을 관리 | 앱에서 실제 배정·결과 회수·통합 과제 |
-| 모델 라우팅 | [OMH 원본 12개 분류·추론](https://github.com/rlaope/oh-my-hermes/blob/c8b94d0431db3b49d5df040acd7f29a241065ff0/README.md#recommended-models)을 [Codex 모델·추론 표](11-working-method.md#모델-역할)에 매핑 | 담당별 모델·추론 요청과 실행 결과 |
+| 모델 라우팅 | [OMH v4.0.0 원본 12개 분류·추론](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/README.md#recommended-models)을 [Codex 모델·추론 표](11-working-method.md#모델-역할)에 매핑 | 담당별 모델·추론 요청과 실행 결과 |
 | 코드 이해 | CodeGraph 앱 직접 도구·로컬 색인 | 실제 저장소 탐색과 변경 반영 |
 | 장기기억 | GAM MCP·독립 Vault·Ollama 임베딩 | 후보·승인·범위·키워드와 의미 검색 검사 |
 | 스킬 63개 | 계획·구현·검토와 Azure·마케팅 등 [전체 목록](03-skills.md#스킬도구-전체-목록)을 모두 설치 | 관련 작업에서만 선택·행동 평가 |

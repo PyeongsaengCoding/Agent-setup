@@ -1,6 +1,6 @@
 ---
-name: omh-long-document-reading
-description: "[omh] Huge PDF or document to read in full: read a very large PDF, contract, manual, or report through Hermes in page-anchored ranges with a coverage ledger."
+name: "omh-long-document-reading"
+description: "[omh] Huge PDF or document to read in full: read a very large PDF, contract, manual, or report through Hermes in page-anchored ranges with a coverage ledger. Use when the user says: long-document-reading, long document reading, summarize this pdf, read this pdf, process this pdf, go through this pdf, summarize this document, read this document."
 ---
 # Long Document Reading
 
@@ -12,10 +12,10 @@ This is a Hermes-native `long-document-reading` workflow skill.
 
 ## Do Not Use When
 
-- The document is a research paper and the user wants it explained by level; use `paper-learning`.
-- The request asks to convert, export, split into a new file, compare two PDFs, or extract tables into CSV; use `materials-package`.
-- The input is an image, screenshot, receipt, audio, or video rather than a document; use `media-input-operator`.
-- The user is still looking for the document or its download link; use `source-finder`.
+- The document is a research paper and the user wants it explained by level; use `omh-paper-learning`.
+- The request asks to convert, export, split into a new file, compare two PDFs, or extract tables into CSV; use `omh-materials-package`.
+- The input is an image, screenshot, receipt, audio, or video rather than a document; use `omh-media-input`.
+- The user is still looking for the document or its download link; use `omh-source-finder`.
 - The document fits one read (under about 60 pages of prose); read it directly and answer.
 
 ## Examples
@@ -50,15 +50,15 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+20 more`) - research, signals, ops, and briefings.
+- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+21 more`) - research, signals, ops, and briefings.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes must read a supplied document that does not fit one read: a contract, manual, annual report, specification, or any PDF past about 60 pages. The skill plans page ranges sized to the `read_file` budget, keeps a page-anchored chunk ledger with covered / next / missing state, and delegates ranges when there are more than 4, so a compacted or resumed session continues instead of restarting.
 
-    Strong routing signals: `long-document-reading`, `long document reading`, `summarize this pdf`, `read this pdf`, `process this pdf`, `go through this pdf`, `summarize this document`, `read this document`, `process this document`, `read this whole document`, `summarize this manual`, `read this manual`, `summarize this contract`, `read this contract`, `summarize this annual report`, `read this annual report`, `read the whole pdf`, `chunk this pdf`, `pdf in chunks`, `pdf too big`, `pdf too large`, `このpdfを要約`, `この文書を要約`, `この契約書を要約`, `マニュアルを要約`, `긴 문서 읽기`, `이 pdf 요약해줘`, `이 pdf 읽어줘`, `이 문서 요약해줘`, `이 문서 읽어줘`, `계약서 요약해줘`, `매뉴얼 요약해줘`, `연간 보고서 요약해줘`, `pdf 전체 읽어`, `문서 전체 읽어`, `总结这个pdf`, `总结这份文档`, `总结这份合同`, `总结这本手册`
+    Strong routing signals: `long-document-reading`, `long document reading`, `summarize this pdf`, `read this pdf`, `process this pdf`, `go through this pdf`, `summarize this document`, `read this document`, `process this document`, `read this whole document`, `summarize this manual`, `read this manual`, `summarize this contract`, `read this contract`, `summarize this annual report`, `read this annual report`, `read the whole pdf`, `chunk this pdf`, `pdf in chunks`, `pdf too big`, `pdf too large`, `このpdfを要約`, `この文書を要約`, `この契約書を要約`, `マニュアルを要約`, `긴 문서 읽기`, `이 pdf 요약해줘`, `이 pdf 읽어줘`, `이 문서 요약해줘`, `이 문서 읽어줘`, `계약서 요약해줘`, `매뉴얼 요약해줘`, `연간 보고서 요약해줘`, `pdf 전체 읽어`, `문서 전체 읽어`, `总结这个pdf`, `总结这份文档`, `总结这份合同`, `总结这本手册`, `baca seluruh dokumen ini`, `rangkum PDF panjang ini`, `tolong baca laporan ini sampai selesai`, `ringkas dokumen ini tanpa melewatkan bagian`, `baca manual ini dari awal sampai akhir`, `bantu rangkum seluruh isi PDF ini`
 
 ## Catalog Metadata
 
@@ -79,7 +79,7 @@ Quality bar:
 
 Handoff policy:
 
-Keep document reading in Hermes: `read_file`, the built-in `pdf` skill scripts, `delegate_task` range children, and `vision_analyze` for scanned pages. Route file export to `materials-package`, paper tutoring to `paper-learning`, and source acquisition to `source-finder`.
+Keep document reading in Hermes: `read_file`, the built-in `pdf` skill scripts, `delegate_task` range children, and `vision_analyze` for scanned pages. Route file export to `omh-materials-package`, paper tutoring to `omh-paper-learning`, and source acquisition to `omh-source-finder`.
 
 Required inputs:
 
@@ -147,13 +147,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

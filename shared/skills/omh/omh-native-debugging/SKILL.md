@@ -1,6 +1,6 @@
 ---
-name: omh-native-debugging
-description: "[omh] Native program crashes or corrupts memory: prepare hypothesis-driven debugging of native binaries and instruct the executor to drive a DAP debugger instead of printf."
+name: "omh-native-debugging"
+description: "[omh] Native program crashes or corrupts memory: prepare hypothesis-driven debugging of native binaries and instruct the executor to drive a DAP debugger instead of printf. Use when the user says: native-debugging, native debugging, native binary, segfault, segmentation fault, core dump, stack corruption, memory corruption."
 ---
 # Native Debugging
 
@@ -12,11 +12,11 @@ This is a Hermes-native `native-debugging` workflow skill.
 
 ## Do Not Use When
 
-- The failure is a build or CI failure rather than a runtime fault in a binary; use `build-failure-triage`.
-- The subject is an agent or workflow misbehaving rather than a native binary; use `agent-debug`.
-- The wrong result, flaky test, or lost update is in application code such as a Python or TypeScript service and needs its root cause reproduced; use `app-debugging`.
-- The change is Rust source work whose risk is `unsafe` or UB discipline; use `rust`.
-- The request is to judge whether a fix is verified rather than to find the fault; use `verification-gate`.
+- The failure is a build or CI failure rather than a runtime fault in a binary; use `omh-build-failure-triage`.
+- The subject is an agent or workflow misbehaving rather than a native binary; use `omh-agent-debug`.
+- The wrong result, flaky test, or lost update is in application code such as a Python or TypeScript service and needs its root cause reproduced; use `omh-app-debugging`.
+- The change is Rust source work whose risk is `unsafe` or UB discipline; use `omh-rust`.
+- The request is to judge whether a fix is verified rather than to find the fault; use `omh-verification-gate`.
 
 ## Examples
 
@@ -49,13 +49,13 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare low-level debugging of a native binary, crash, or memory fault: competing hypotheses, the distinguishing observation for each, and a DAP-driven evidence plan for the executor.
 
-    Strong routing signals: `native-debugging`, `native debugging`, `native binary`, `segfault`, `segmentation fault`, `core dump`, `stack corruption`, `memory corruption`, `heap corruption`, `use after free`, `null pointer dereference`, `stripped binary`, `disassembly`, `lldb`, `gdb`, `dap debugger`, `breakpoint`, `watchpoint`, `backtrace`, `セグメンテーション違反`, `コアダンプ`, `メモリ破壊`, `ヒープ破壊`, `解放後使用`, `逆アセンブル`, `네이티브 디버깅`, `세그폴트`, `코어 덤프`, `메모리 손상`, `역어셈블`, `중단점`, `段错误`, `核心转储`, `内存破坏`, `释放后使用`, `反汇编`
+    Strong routing signals: `native-debugging`, `native debugging`, `native binary`, `segfault`, `segmentation fault`, `core dump`, `stack corruption`, `memory corruption`, `heap corruption`, `use after free`, `null pointer dereference`, `stripped binary`, `disassembly`, `lldb`, `gdb`, `dap debugger`, `breakpoint`, `watchpoint`, `backtrace`, `セグメンテーション違反`, `コアダンプ`, `メモリ破壊`, `ヒープ破壊`, `解放後使用`, `逆アセンブル`, `네이티브 디버깅`, `세그폴트`, `코어 덤프`, `메모리 손상`, `역어셈블`, `중단점`, `段错误`, `核心转储`, `内存破坏`, `释放后使用`, `反汇编`, `bantu debug segfault ini`, `analisis core dump`, `telusuri penyebab use after free`, `debug crash pada binary native`
 
 ## Catalog Metadata
 
@@ -130,13 +130,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

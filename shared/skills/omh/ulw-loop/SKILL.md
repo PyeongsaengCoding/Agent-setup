@@ -1,6 +1,6 @@
 ---
-name: ulw-loop
-description: "[omh] Ambitious project goal needing many build cycles: agentic interviewer -> planner -> researcher -> builder -> reviewer cycles until a real gate."
+name: "ulw-loop"
+description: "[omh] Ambitious project goal needing many build cycles: agentic interviewer -> planner -> researcher -> builder -> reviewer cycles until a real gate. Use when the user says: loop, goal loop, long horizon goal, never stop, research plan goal feedback, token exhaustion resume, permission profile, star 10k."
 ---
 # Loop
 
@@ -12,12 +12,15 @@ This is a Hermes-native `loop` workflow skill.
 
 ## Do Not Use When
 
-- The user asks for one bounded delivery cycle; use `ultrawork`'s delivery-boundary capability instead.
-- Scope and milestones are already known and only durable checkpoint/resume tracking is needed; use `ultrawork`'s durable-checkpoint capability.
+- The user asks for one bounded delivery cycle; use `ulw-work`'s delivery-boundary capability instead.
+- Scope and milestones are already known and only durable checkpoint/resume tracking is needed; use `ulw-work`'s durable-checkpoint capability.
 - The user gives only a north-star outcome such as revenue, stars, or adoption and has not accepted a bounded first loop goal.
 - The goal is too vague to name an observable problem, next artifact, verification signal, or stop condition.
 - The goal depends mainly on external waiting, adoption, revenue, or community response without observable local next actions.
 - The permission profile does not allow repeated research, handoff, queue, or feedback cycles.
+- The request is a check repeated on a timer inside this session, such as polling CI, a deploy, or a queue every few minutes until it changes; that is Hermes' native `/loop` (an interval plus `--until` or `--times`), which only the user can start, so name the command instead of opening a goal loop.
+- The work must run unattended on a schedule that outlives this session, such as hourly or nightly; use `omh-automation-blueprint`, which settles overlap, missed runs, retries, and failure pauses before a Hermes cron job is created.
+- The request is one objective with a stated done condition that needs no interviewer, planner, researcher, or reviewer cycles; native `/goal` keeps the session on it (`/goal draft` writes its completion contract), and this skill keeps the long-horizon loop engineering.
 
 ## Examples
 
@@ -55,9 +58,9 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when the user starts a high-level goal or invokes loop. Direct loop invocation means start/continue through interviewer, planner, researcher, builder, reviewer, and loop-controller lanes until a real gate stops it.
 
@@ -90,6 +93,7 @@ Quality bar:
 - Use cheap inner-loop checks frequently and expensive outer-loop checks sparingly.
 - Keep the practical small-loop recipe visible: test as stop signal, plan -> execute -> verify, one task at a time.
 - Surface verification_gap, comprehension_debt, and cognitive_surrender as warnings before a loop starts looking self-steering.
+- Before a loop launches, or when asked whether one will hold, load `references/loop-design-review.md`: a finish line written beside the fence of files the loop may not edit, a judge other than the builder, and the pre-launch failure check.
 - Session-bound host_observed resumable_goal plus explicit coding ownership prepares one executor goal. Otherwise use native `/goal` and `/goal gate add`. Never prepare two controllers.
 - Ingest bounded snapshots via `omh loop goal-driver-observe`. External state guides recovery, not checkpoint decisions; native turns still require activation and contiguous same-session evidence.
 - Treat ticks as preparation only. Advance one legal role phase through loop_phase_transition/v1 only after its named gate has observed evidence.
@@ -102,9 +106,10 @@ Quality bar:
 - When the goal is measurable, declare the evaluation contract before the first attempt - exact command, metric name, direction, and the rule that the loop may not modify the scoring harness - and bind every keep or discard decision to it; when no such contract exists, say the goal is unmeasured instead of scoring it by judgement.
 - Run a measurable cycle as attempt, commit, measure, then keep or reset; a reset is the normal discard, and rewinding to an older commit is for a run of discards that traces to one bad ancestor.
 - For a measurable loop, keep a human-scannable ledger the loop itself appends to - one tab-separated line per cycle carrying commit, metric, cost, keep or discard or crash, and a one-line description - beside the JSON loop artifacts.
-- Send long-running cycle output to a log file and pull only the declared metric and error lines into context; read the whole log only when the cycle crashed.
+- Log a long-running cycle to a file and pull only the declared metric and error lines into context; read the whole log only when the cycle crashed.
 - Choose the wait strategy before starting long-running work and bind it to a completion signal the host exposes, never to a status loop: a command that fits one tool call runs once in the foreground with a duration-sized timeout; a longer terminal command runs in the background with completion notification armed and no process-status polling; a delegated lane relies on its delivered result while the parent continues independent work or ends the turn; a CI, PR, deploy, file, port, log-line, or external-session condition uses the host's monitor when observed, else exactly ONE bounded watcher or adaptive backoff outside model turns. Record the handle and observation mode at dispatch; every armed wait needs a hard deadline, a cancellation path, and a fallback naming the missing capability. Each wait closes in one terminal state with bounded evidence; an unbounded idle or busy-wait is a defect and a lost notification times out. One decision-changing midpoint peek and any user-requested status check stay allowed; neither is the wait mechanism. Ladder and terminal states: shared rail.
 - On an equal metric keep the simpler change, always keep an improvement achieved by deletion, and do not let a small gain buy added complexity.
+- After the judge passes, run an `ai-slop-cleaner` pass scoped to the `changed_files` the cycle's `loop_subagent_result_contract/v1` results reported, never wider; the loop's own verification then reruns and must not regress - on a measured loop neither may the metric - or the cleaner's edits are reverted. When the linked goal carries AC-SLOP (a loop allowed `repo_edit` arms it), the goal refuses completion until an outcome record made with `omh runtime record --skill ai-slop-cleaner --harness coding-handling --status completed --cleanup-outcome passed|skipped|reverted --goal <linked goal id> --outputs-summary <what changed, or why skipped>` is cited by `omh goal checkpoint --goal <goal_id> --summary <outcome> --criterion AC-SLOP --evidence-ref run:<run_id>`; one accepted record satisfies AC-SLOP for the goal, so later cycles need no new one. A user's skip, or a cycle that reported no `changed_files`, is an explicit `skipped`, and a reverted pass is `reverted`, never `passed`; a missing record is never read as nothing to clean.
 
 Handoff policy:
 
@@ -163,6 +168,7 @@ Safety rules:
 - Do not let unattended loop progress bypass verification; missing or failed verification returns to plan/research or waits for evidence.
 - Do not let comprehension debt or cognitive surrender hide behind green-looking loop status.
 - Do not claim a goal is complete because the upstream judge said done, the turn budget ran out, or a gate paused the loop.
+- A loop step that would move money -- a purchase, a renewal, a top-up, or a transfer -- goes through `omh-spend-gate` before it runs, and the loop carries on around it. An agent run on a schedule never spends: a cycle nobody can answer, such as a queued tick or a delegated subagent, only prepares the card for the person's next interactive turn. A no-agent script that pays is a spend set up now, so its card, typed yes, and cap come before the script exists.
 
 ## Goal Driver Ownership
 
@@ -210,13 +216,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

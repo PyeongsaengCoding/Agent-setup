@@ -1,6 +1,6 @@
 ---
-name: omh-design-orchestration
-description: "[omh] Entire product design problem to delegate: prepare a bounded design direction, existing-lane composition, and executor-neutral handoff."
+name: "omh-design-orchestration"
+description: "[omh] Entire product design problem to delegate: prepare a bounded design direction, existing-lane composition, and executor-neutral handoff. Use when the user says: design-orchestration, design orchestration, design ownership, handle this product design, take on the design, デザインを任せる, デザイン全体を任せ, プロダクトデザインを任せ."
 ---
 # Design Orchestration
 
@@ -12,10 +12,10 @@ This is a Hermes-native `design-orchestration` workflow skill.
 
 ## Do Not Use When
 
-- The request is directly about premium multi-format quality or publishing; use `design-quality-gate`.
-- The request is directly about frontend implementation, layout, responsive behavior, or a design system; use `frontend`.
-- The request is directly about WCAG, keyboard, screen-reader, or semantic accessibility; use `accessibility-audit`.
-- The request is directly about screenshots, visual regression, pixel diff, rendered layout, or a verdict; use `visual-qa`.
+- The request is directly about premium multi-format quality or publishing; use `omh-design-quality-gate`.
+- The request is directly about frontend implementation, layout, responsive behavior, or a design system; use `omh-frontend`.
+- The request is directly about WCAG, keyboard, screen-reader, or semantic accessibility; use `omh-accessibility-audit`.
+- The request is directly about screenshots, visual regression, pixel diff, rendered layout, or a verdict; use `omh-visual-qa`.
 
 ## Examples
 
@@ -46,13 +46,13 @@ Bad example:
 
 - Current lane: **Materials and visual summaries** (`design-orchestration`, `apple-design`, `design-quality-gate`, `award-bar-score`, `frontend`, `accessibility-audit`, `visual-qa`, `content-operator`, `+6 more`) - web, accessibility, visual QA, files, and packages.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should take broad ownership of a design problem before a narrower quality, frontend, accessibility, or visual-QA lane is known.
 
-    Strong routing signals: `design-orchestration`, `design orchestration`, `design ownership`, `handle this product design`, `take on the design`, `デザインを任せる`, `デザイン全体を任せ`, `プロダクトデザインを任せ`, `디자인 맡겨`, `디자인 맡겨줘`, `디자인 전체 맡겨`, `프로덕트 디자인 맡겨`, `设计交给你`, `整体设计交给你`, `产品设计交给你`
+    Strong routing signals: `design-orchestration`, `design orchestration`, `design ownership`, `handle this product design`, `take on the design`, `デザインを任せる`, `デザイン全体を任せ`, `プロダクトデザインを任せ`, `디자인 맡겨`, `디자인 맡겨줘`, `디자인 전체 맡겨`, `프로덕트 디자인 맡겨`, `设计交给你`, `整体设计交给你`, `产品设计交给你`, `tangani desain produk ini secara menyeluruh`, `koordinasikan seluruh proses desain`, `bantu urus desain produk dari awal`, `siapkan arahan desain untuk tim eksekusi`, `susun handoff desain produk`
 
 ## Catalog Metadata
 
@@ -120,13 +120,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

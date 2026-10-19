@@ -1,6 +1,6 @@
 ---
-name: ulw-perf
-description: "[omh] Software slowness, memory leaks, or cost spikes: find where a system is actually slow, leaking, or expensive across runtime, memory, token cost, storage, rendering, inference, CI, and query domains, then fix one measured hot path at a time behind a regression budget."
+name: "ulw-perf"
+description: "[omh] Software slowness, memory leaks, or cost spikes: find where a system is actually slow, leaking, or expensive across runtime, memory, token cost, storage, rendering, inference, CI, and query domains, then fix one measured hot path at a time behind a regression budget. Use when the user says: ultraperf, ulw-perf, performance audit, performance bottleneck, find the bottleneck, profile the hot path, memory leak investigation, token cost hotspot."
 ---
 # Ultraperf
 
@@ -12,9 +12,8 @@ This is a Hermes-native `ultraperf` workflow skill.
 
 ## Do Not Use When
 
-- Metric, baseline, budget, and benchmark command are already declared for one measurable goal; use `performance-goal`.
-- The ask is to judge code quality, structure, or correctness rather than measured cost; use `code-review`.
-- The ask is to score model or agent output quality on a task suite; use `agent-evaluation`.
+- The ask is to judge code quality, structure, or correctness rather than measured cost; use `omh-code-review`.
+- The ask is to score model or agent output quality on a task suite; use `omh-agent-evaluation`.
 - The request is a settings-only change, one bounded edit that is explicitly low-risk and has a direct owner and verification path, or one already-identified slow query or hotspot fix; handle it directly instead of opening a performance loop.
 
 ## Examples
@@ -28,7 +27,7 @@ Good example:
 Bad example:
 
 - Prompt: $ultraperf make the recommender p95 under 200ms; baseline 340ms, benchmark is 'make bench'
-- Expected behavior: Route to `performance-goal`, which owns a declared metric/baseline/budget/benchmark goal.
+- Expected behavior: Skip the discovery audit: record 340ms as the baseline and `make bench` as the evaluator command, then hand the fix to the selected executor and re-measure against the 200ms target.
 - Why: A single declared measurable goal does not need a discovery loop.
 
 ## Completion Checklist
@@ -40,11 +39,6 @@ Bad example:
 
 ## Recovery Notes
 
-- Distinguish an existing UI timeout, a diagnostic abort setting, and an explicitly approved latency target. Do not promote the first two into user-approved performance goals. When the user withdraws time targets, stop goal-driven optimization, remove its acceptance thresholds from active handoffs/status, and retain measured durations only as observations; postpone severity prioritization if requested.
-- For concurrent database-reader optimizations, include the real provider adapter's locks and iterator lifetime in the evaluator. A delayed store double without a process-wide query lock can overstate the gain; record query-lock wait, actual SDK query duration, and completed real HTTP time separately. Do not infer full client thread-safety from a session-token lock alone or change Session/client semantics merely to remove contention.
-- Reconstruct missing replay inputs only from the approved exact scope's existing application metadata and bounded point reads. Do not launch a broad census or substitute a saved execution actor for the current authenticated viewer. Compare publication/reference counts before claiming a before/after delta, and keep an incomplete staged replay distinct from a completed HTTP baseline.
-- For conversational latency, instrument submit, first substantive answer, preview, final answer and saved-result availability separately. Trace both the provider transport and preview callback before describing buffering: an already-complete first answer shown during later refinement differs from token-by-token delivery, and either can coexist with asynchronous formal judgment.
-- Treat code-observed sequential stages as latency hypotheses until per-stage measurements establish their contribution. Preserve the agreed model and reasoning effort while comparing pipeline changes; a shared setting name does not establish excessive effort or a measured bottleneck. Compare answer quality and useful-source discovery as well as elapsed time, because skipping retrieval can make a personalized product faster by removing its value.
 - If no evaluator command exists, stop the loop and produce one before touching code.
 - If the re-measure does not move, revert the change and re-rank hypotheses instead of stacking fixes.
 - If the goal turns out to be one declared metric with a budget, keep the loop and start from that baseline instead of profiling for a hot path.
@@ -53,9 +47,9 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when performance problems are suspected but not yet localized, or when several cost hotspots across domains need a measured inspect-and-fix loop.
 
@@ -128,13 +122,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

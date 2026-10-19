@@ -1,6 +1,6 @@
 ---
-name: omh-apps
-description: "[omh] Email, Slack, or Jira action to perform: external app actions - email, Slack, Discord, Notion, Linear, Jira, CRM, and similar providers, scoped with auth, payload, confirmation, and result-evidence gates."
+name: "omh-apps"
+description: "[omh] Email, Slack, or Jira action to perform: external app actions - email, Slack, Discord, Notion, Linear, Jira, CRM, and similar providers, scoped with auth, payload, confirmation, and result-evidence gates. Use when the user says: connector-operator, connector operator, external app action, external connector action, saas action, api action, send email, email customer."
 ---
 # Connector Operator
 
@@ -8,13 +8,12 @@ This is a Hermes-native `connector-operator` workflow skill.
 
 ## Why This Exists
 
-`connector-operator` exists so Hermes users can ask for this workflow in chat and get a structured, checkable answer instead of an improvised one.
+`connector-operator` exists because an email sent, a ticket written, or an invite delivered cannot be taken back: it scopes the provider, target, and payload, takes a missing connection to the host's own connection setup and respects a skip, and reports delivery only from a provider receipt.
 
 ## Do Not Use When
 
-- The request is already handled by a narrower explicit skill with stronger evidence.
-- The user asks OMH to secretly run external platforms, connectors, schedulers, file exports, or runtime agents.
-- The only safe answer is to ask for missing authority, credentials, target, or observed evidence first.
+- Only the reply or thread policy of a Discord, Slack, or Telegram conversation is in question; use `omh-gateway-intent-card`.
+- The user is choosing or adopting a new provider, MCP server, or integration rather than acting through one; use `omh-external-connector-readiness`.
 
 ## Examples
 
@@ -30,34 +29,26 @@ Bad example:
 - Expected behavior: Report the missing observed evidence or authority instead of claiming the external step happened.
 - Why: Prepared OMH guidance is not platform, runtime, connector, file, memory, or delivery evidence.
 
-## Customer follow-up email drafting
-1. When the user references a sent message, verify the requested mailbox account and read the exact subject/thread before writing. Use the observed latest relevant message to establish recipient titles, To/CC, prior commitments and what the customer has already been told. Scope page reads to the target conversation to avoid loading unrelated mail.
-2. Redact login passwords, tokens and unrelated signature/contact details before printing or saving mail snapshots. Retain only the addressing and message context needed for the draft; an earlier email can contain credentials inside ordinary body text.
-3. Reconcile the proposed update with current work evidence. Separate existing production features, new local development, local acceptance/storage tests, actual source comparisons and remaining implementation. Attribute a sample's match count to that sample and field scope; do not turn it into a company-wide accuracy or full-compatibility claim.
-4. For generated test inputs, explain that they came from the independent submitted input and were compared with separate evidence. Identify material fields still absent from the test input; successful workflow tests do not cover those fields.
-5. Recommend replying in the existing thread with its observed recipients as the default, while preserving any recipient changes the user explicitly requests. Draft only the new information, concrete verified results and next work or decisions; avoid repeating earlier access instructions or adding delivery dates and completion promises without support.
-6. For a request to suggest wording without sending, present one ready-to-use draft in chat. Keep mailbox state unchanged unless the user explicitly requests saving an Outlook/provider draft. Sending remains a separate authorized action. Avoid automatically attaching internal logs, raw customer evidence or engineering reports; prepare a customer-facing summary when an attachment is requested.
-7. Apply the relevant humanizer to the draft, keep Korean business wording direct and reader-focused, and give only a short framing recommendation outside the email. State accurately whether a provider draft was saved or the text exists only in chat.
-
 ## Completion Checklist
 
 - Provider, target object, allowed action, payload summary, authority, confirmation policy, and stop condition are explicit.
-- Credentials, missing connector setup, external writes, sends, ticket mutations, calendar invites, CRM updates, and webhook delivery are gated or marked missing.
+- Credentials, missing connector setup, external writes, sends, ticket mutations, calendar invites, CRM updates, and webhook delivery are gated, or marked missing and not run.
+- With nobody to answer the confirmation (a scheduled job, a one-shot run, a webhook run), an irreversible or externally visible action is not run: it is handed to a person's turn and its confirmation is recorded as missing.
 - Message ids, ticket ids, provider responses, delivery receipts, and API effects are reported only from observed connector evidence.
 
 ## Recovery Notes
 
-- If the connector, credentials, or permission is missing, route to toolbelt-readiness before preparing action success claims.
+- If the connector, credentials, or permission is missing: on Hermes, when `manage_connections` is in your tool list or tool_search finds it, use it for the app the user named (`status`, then `connect`) and take each app's answer as given: `connected` proceeds, `skipped` means continue without that app or ask in chat, never calling it again on your own or reaching the app another way, and `not_connected` stays a named gap. Otherwise route to toolbelt-readiness before preparing action success claims.
 - If the request is only chat thread delivery policy for Discord, Slack, or Telegram, route to gateway-intent-card instead.
-- If the external app action would create, send, invite, mutate, or delete provider state, require an explicit confirmation gate.
+- If the external app action would create, send, invite, mutate, or delete provider state, require an explicit confirmation gate in chat before the call. Hermes asks the person before such a call only in some configurations (a write-capable tool on an MCP server set to `trust: untrusted`, or a plugin hook that escalates the call), so a host prompt that does appear is recorded as additional evidence and never replaces the chat confirmation.
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare or supervise a provider-backed external app action without claiming connector availability, credentials, API mutation, delivery, or success.
 
@@ -102,7 +93,7 @@ Artifact expectations:
 
 - connector_task_card/v1 metadata-only wrapper card when prepared
 - connector_scope/v1 with provider, target object, allowed action, payload summary, and stop condition
-- connector_auth_boundary/v1 separating missing connector, missing credentials, user-supplied authority, and credential-use prohibition
+- connector_auth_boundary/v1 separating missing connector, missing credentials, user-supplied authority, and credential-use prohibition, with the host's own connection answer per app (`connected`, `skipped`, or `not_connected` on Hermes) when recorded
 - connector_confirmation_gate/v1 for sending, ticket mutation, external write, webhook delivery, CRM/database update, or irreversible provider action
 - connector_result_manifest/v1 only when provider response, message id, ticket id, API transcript, or delivery receipt is observed
 
@@ -127,13 +118,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

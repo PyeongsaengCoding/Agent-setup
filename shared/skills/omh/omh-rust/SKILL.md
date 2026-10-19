@@ -1,6 +1,6 @@
 ---
-name: omh-rust
-description: "[omh] Rust ownership, lifetime, or unsafe trouble: prepare Rust changes with ownership, error, and API discipline, and escalate any unsafe, FFI, or lock-free change to the UB checklist."
+name: "omh-rust"
+description: "[omh] Rust ownership, lifetime, or unsafe trouble: prepare Rust changes with ownership, error, and API discipline, and escalate any unsafe, FFI, or lock-free change to the UB checklist. Use when the user says: rust, rust code, rust skill, rustlang, borrow checker, lifetime error, ownership error, trait bound."
 ---
 # Rust
 
@@ -12,9 +12,9 @@ This is a Hermes-native `rust` workflow skill.
 
 ## Do Not Use When
 
-- The request is a server, API, or schema design that happens to mention a Rust stack; use `backend` for the contract and name Rust as the stack.
-- The request is debugging a stripped or source-less native binary; use `native-debugging`.
-- The request is a general code review of finished Rust; use `code-review`.
+- The request is a server, API, or schema design that happens to mention a Rust stack; use `omh-backend` for the contract and name Rust as the stack.
+- The request is debugging a stripped or source-less native binary; use `omh-native-debugging`.
+- The request is a general code review of finished Rust; use `omh-code-review`.
 - The request is a Rust vocabulary or concept question with no change to prepare; answer it directly.
 
 ## Examples
@@ -49,13 +49,13 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare a Rust change: ownership and lifetime shape, error and API types, cargo/clippy gates, and the mandatory UB escalation when the change touches unsafe, raw pointers, FFI, MaybeUninit, or lock-free primitives.
 
-    Strong routing signals: `rust`, `rust code`, `rust skill`, `rustlang`, `borrow checker`, `lifetime error`, `ownership error`, `trait bound`, `cargo build`, `cargo clippy`, `clippy lint`, `unsafe rust`, `unsafe block`, `raw pointer`, `maybeuninit`, `rust ffi`, `extern c`, `undefined behavior`, `miri`, `loom`, `ボローチェッカー`, `所有権エラー`, `ライフタイムエラー`, `トレイト境界`, `러스트`, `러스트 코드`, `빌림 검사기`, `소유권 에러`, `라이프타임 에러`, `언세이프`, `미정의 동작`, `借用检查器`, `所有权错误`, `生命周期错误`, `特征约束`
+    Strong routing signals: `rust`, `rust code`, `rust skill`, `rustlang`, `borrow checker`, `lifetime error`, `ownership error`, `trait bound`, `cargo build`, `cargo clippy`, `clippy lint`, `unsafe rust`, `unsafe block`, `raw pointer`, `maybeuninit`, `rust ffi`, `extern c`, `undefined behavior`, `miri`, `loom`, `ボローチェッカー`, `所有権エラー`, `ライフタイムエラー`, `トレイト境界`, `러스트`, `러스트 코드`, `빌림 검사기`, `소유권 에러`, `라이프타임 에러`, `언세이프`, `미정의 동작`, `借用检查器`, `所有权错误`, `生命周期错误`, `特征约束`, `bantu atasi error borrow checker`, `perbaiki masalah ownership Rust`, `jelaskan error lifetime Rust`, `tolong beresin error cargo clippy`, `tinjau blok unsafe Rust ini`
 
 ## Catalog Metadata
 
@@ -132,13 +132,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

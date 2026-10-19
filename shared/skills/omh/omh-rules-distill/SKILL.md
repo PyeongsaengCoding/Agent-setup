@@ -1,6 +1,6 @@
 ---
-name: omh-rules-distill
-description: "[omh] Turn repeated lessons into written rules: extract repeated principles from skills, prompts, traces, reviews, and failures into reviewed rule candidates without auto-mutating guidance."
+name: "omh-rules-distill"
+description: "[omh] Turn repeated lessons into written rules: extract repeated principles from skills, prompts, traces, reviews, and failures into reviewed rule candidates without auto-mutating guidance. Use when the user says: rules-distill, rules distill, distill rules, rule distillation, principle distill, skill principles, extract agent rules, turn traces into rules."
 ---
 # Rules Distill
 
@@ -12,10 +12,10 @@ This is a Hermes-native `rules-distill` workflow skill.
 
 ## Do Not Use When
 
-- The user wants a single workflow route regression; use `workflow-learning`.
-- The user wants durable factual project memory; use `wiki` or memory curation.
+- The user wants a single workflow route regression; use `omh-workflow-learning`.
+- The user wants durable factual project memory; use `omh-wiki` or memory curation.
 - The user already approved a concrete code/doc change; use the implementation workflow.
-- The ask is writing or keeping current the file an agent reads at startup -- AGENTS.md, CLAUDE.md, a Cursor rule; use `agent-instructions`, which updates only its marked region.
+- The ask is writing or keeping current the file an agent reads at startup -- AGENTS.md, CLAUDE.md, a Cursor rule; use `omh-agent-instructions`, which updates only its marked region.
 
 ## Examples
 
@@ -44,11 +44,11 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should turn repeated workflow lessons, skill behavior, review comments, or failure traces into candidate rules that humans can review before docs or catalog changes.
 
@@ -68,6 +68,7 @@ Quality bar:
 - Deduplicate against existing guidance and name conflicts or narrower scopes.
 - Use imperative, testable wording and include non-goals for each candidate.
 - Require review approval before any patch handoff or generated-skill update.
+- On Hermes, read a curator run report (`logs/curator/<run>/REPORT.md` and `run.json` under the active profile's Hermes home) as a source like a review or a trace: it records which skills the curator consolidated, archived, or created in that run, and one report is one observation, never repeated evidence by itself.
 
 Handoff policy:
 
@@ -100,6 +101,7 @@ Safety rules:
 - Do not silently mutate skills, prompts, AGENTS.md, docs, memory, or catalog data from a distillation result.
 - Do not promote one-off preferences, weak anecdotes, or stale traces into global rules.
 - Keep observed sources, inferred principles, candidate wording, review state, and implementation patches separate.
+- On Hermes, when the destination is the user's own Hermes skills, an approved candidate lands through `skill_manage`: report it landed only from a result that succeeded without `staged: true`, with the matching skill audit ledger entry as its record while the ledger is on, and report a staged write as waiting in `/skills pending` for the person's own `/skills approve <id>` under their `skills.write_approval` setting. OMH-managed skills are generated from OMH's catalog and are never the destination; a lesson about one goes to `omh-workflow-learning`. An OMH-managed skill is one OMH installed, under a label OMH's catalog renders such as `omh-plan` or `ulw-work`; a companion skill the person or an agent created is theirs, whatever its name.
 
 ## Runtime Evidence
 
@@ -117,13 +119,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

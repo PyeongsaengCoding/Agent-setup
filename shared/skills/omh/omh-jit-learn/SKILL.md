@@ -1,6 +1,6 @@
 ---
-name: omh-jit-learn
-description: "[omh] Blocked on a project by a knowledge gap: just-in-time learning workflow: select and confirm an immediate learning target, research credible sources, and prepare an application-first brief without popularity ranking."
+name: "omh-jit-learn"
+description: "[omh] Blocked on a project by a knowledge gap: just-in-time learning workflow: select and confirm an immediate learning target, research credible sources, and prepare an application-first brief without popularity ranking. Use when the user says: jit-learn, learn next, learn now, blocker-specific learning target, highest-leverage learning target, immediate learning payoff, immediately applicable learning brief, source-backed learning brief."
 ---
 # Jit Learn
 
@@ -12,11 +12,11 @@ This is a Hermes-native `jit-learn` workflow skill.
 
 ## Do Not Use When
 
-- The user asks OMH to learn from workflow outcomes, missed routes, or evaluation traces; use `workflow-learning`.
-- The learning goal is already chosen and the user wants a multi-week syllabus, instructional sequence, or assessment plan; use `curriculum-design`.
-- The user supplied a paper, PDF, arXiv entry, or excerpt and wants it explained; use `paper-learning`.
-- The requested output is a typed source candidate inventory or acquisition status rather than a fitted learning brief; use `source-finder`.
-- The research question and target are already scoped and the user wants current facts, citations, or source synthesis rather than choosing what to learn; use `research`.
+- The user asks OMH to learn from workflow outcomes, missed routes, or evaluation traces; use `omh-workflow-learning`.
+- The learning goal is already chosen and the user wants a multi-week syllabus, instructional sequence, or assessment plan; use `omh-curriculum-design`.
+- The user supplied a paper, PDF, arXiv entry, or excerpt and wants it explained; use `omh-paper-learning`.
+- The requested output is a typed source candidate inventory or acquisition status rather than a fitted learning brief; use `omh-source-finder`.
+- The research question and target are already scoped and the user wants current facts, citations, or source synthesis rather than choosing what to learn; use `ulw-research`.
 
 ## Examples
 
@@ -50,11 +50,11 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+20 more`) - research, signals, ops, and briefings.
+- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+21 more`) - research, signals, ops, and briefings.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when selecting the highest-leverage immediate learning target for an active blocker before preparing a source-backed Markdown brief for direct application.
 
@@ -166,13 +166,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

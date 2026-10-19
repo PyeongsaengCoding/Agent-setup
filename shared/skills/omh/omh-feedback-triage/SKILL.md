@@ -1,6 +1,6 @@
 ---
-name: omh-feedback-triage
-description: "[omh] Unsorted customer feedback and bug reports: cluster customer signals and choose the next workflow."
+name: "omh-feedback-triage"
+description: "[omh] Unsorted customer feedback and bug reports: cluster customer signals and choose the next workflow. Use when the user says: feedback-triage, customer-feedback-triage, feedback triage, customer feedback, feedback cluster, bug or feature, feature request triage, payment failure feedback."
 ---
 # Feedback Triage
 
@@ -15,8 +15,8 @@ This is a Hermes-native `feedback-triage` workflow skill.
 - The request already contains an accepted product decision and asks for implementation.
 - There are no feedback items, source boundary, or product area to classify.
 - The user wants current market research rather than triage of supplied signals.
-- The triage result asks for a retention or activation intervention rather than another cluster; use `lifecycle-growth`.
-- The supplied material is opportunity records and the request is portfolio health or forecast review; use `sales-pipeline-review`.
+- The triage result asks for a retention or activation intervention rather than another cluster; use `omh-lifecycle-growth`.
+- The supplied material is opportunity records and the request is portfolio health or forecast review; use `omh-sales-pipeline-review`.
 
 ## Examples
 
@@ -45,11 +45,11 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+20 more`) - research, signals, ops, and briefings.
+- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+21 more`) - research, signals, ops, and briefings.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should classify feedback, bug reports, and feature asks before deciding whether research, planning, or coding handoff is needed.
 
@@ -113,13 +113,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

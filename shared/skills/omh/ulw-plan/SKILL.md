@@ -1,6 +1,6 @@
 ---
-name: ulw-plan
-description: "[omh] High-stakes technical proposal needing approval: consensus planning with review gates."
+name: "ulw-plan"
+description: "[omh] High-stakes technical proposal needing approval: consensus planning with review gates. Use when the user says: ralplan, consensus plan, reviewed plan, issue to PR, acceptance criteria, verification command, reviewable PR, risky planning."
 ---
 # Ralplan
 
@@ -12,17 +12,17 @@ This is a Hermes-native `ralplan` workflow skill.
 
 ## First Steps
 
-- Initialize the plan todo before the first planning step: declare the planning stages as `omh_todo` items (todo init) — repo facts and evidence check, options and tradeoffs, risk review, acceptance criteria and verification commands, plan record and acceptance — keep exactly one item active, and when the evidence check reveals a gap rewrite the list (`omh_todo` action=set) to insert the research stage; update the list as stages complete so the HUD todo panel shows plan progress as a bounded checklist, and treat items as declarations, never execution evidence. Phase names and task titles are written in English — short, operator-legible labels — even when the conversation runs in another language, since the HUD todo checklist is an operator surface under the repo's English-by-default output contract.
+- Initialize the plan todo before the first planning step: declare the planning stages as `omh_todo` items (todo init), never also in `todo_list` — repo facts and evidence check, options and tradeoffs, risk review, acceptance criteria and verification commands, plan record and acceptance — keep exactly one item active, and when the evidence check reveals a gap rewrite the list (`omh_todo` action=set) to insert the research stage; update the list as stages complete so the HUD todo panel shows plan progress as a bounded checklist, and treat items as declarations, never execution evidence. Phase names and task titles are written in English — short, operator-legible labels — even when the conversation runs in another language, since the HUD todo checklist is an operator surface under the repo's English-by-default output contract.
 
 ## Do Not Use When
 
-- The request is still too ambiguous to name requirements, non-goals, or acceptance criteria; use `deep-interview` first.
-- The user asks for one full research-plan-implementation-review-PR cycle; use `ultrawork` (its `delivery_boundary` capability) and keep ralplan as the planning stage.
-- The change is a small local refactor or cleanup with no architectural or regression risk; use `ultrawork`, or `ai-slop-cleaner` when observable behavior must stay identical.
-- The refactor's direction is already decided and what is missing is its execution shape - which files move in which phase, what verifies each phase, where each phase rolls back to; use `refactor-plan`.
-- One plan-blocking choice still needs behavior evidence rather than argument; run `decision-prototype` first and consume its decision receipt without transcript replay.
+- The request is still too ambiguous to name requirements, non-goals, or acceptance criteria; use `ulw-interview` first.
+- The user asks for one full research-plan-implementation-review-PR cycle; use `ulw-work` (its `delivery_boundary` capability) and keep ralplan as the planning stage.
+- The change is a small local refactor or cleanup with no architectural or regression risk; use `ulw-work`, or `omh-ai-slop-cleaner` when observable behavior must stay identical.
+- The refactor's direction is already decided and what is missing is its execution shape - which files move in which phase, what verifies each phase, where each phase rolls back to; use `omh-refactor-plan`.
+- One plan-blocking choice still needs behavior evidence rather than argument; run `omh-decision-prototype` first and consume its decision receipt without transcript replay.
 - The user wants a pure source lookup, citation check, or paper explanation with no implementation plan.
-- The unresolved work is repository terminology alignment or a project-language decision frontier; use `context` before planning.
+- The unresolved work is repository terminology alignment or a project-language decision frontier; use `ulw-context` before planning.
 
 ## Examples
 
@@ -44,6 +44,7 @@ Bad example:
 - Observed repo facts and source/web evidence gaps are named.
 - At least two options or one chosen option plus rejected alternatives are recorded.
 - Risks, acceptance criteria, and verification commands are testable or explicitly blocked.
+- Every target-state difference has a `Success criteria` row with a task and a verification scenario or is recorded as a user-excluded non-goal, and the `Target-state coverage` check left none unmapped.
 - The plan exists as a recorded file-backed artifact, not only as chat narration.
 - The implementation handoff is prepared only after plan acceptance and remains prepared_not_observed.
 - The follow-on engine or executor path was started only after the user's explicit go-ahead in this conversation, never from plan acceptance alone.
@@ -58,9 +59,9 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when requirements are clear enough for planning but architecture, evidence, alternatives, risks, or tests need a reviewed plan before execution.
 
@@ -80,9 +81,15 @@ Quality bar:
 - Include planner view, critic/risk review, alternative paths, rejected options, and a testability check before handoff.
 - Produce testable acceptance criteria and exact verification commands or explain why they are not yet knowable.
 - List every lane of the accepted plan in node-prompt shape - `TASK`, `DELIVERABLE`, `SCOPE`, `VERIFY`, `STOP WHEN` - with `depends_on` per lane, so `ultrawork` can prepare board rows from the plan without re-planning; planning itself stays a bounded in-session lane.
+- Before comparing options, write the target state: name each consumer of the result (a person, a maintainer, or a program reading its output), their current workflow on this surface, the state in which that workflow keeps working with no new friction or loss, and every difference between current and target, each with why it matters.
+- Record a `Success criteria` table with columns `Criterion | Task | Verification scenario`, one row per target-state difference naming its owning task and the scenario that shows the difference closed; these rows are the acceptance criteria above, extended to the target state.
+- End with a `Target-state coverage` check: a difference with no owning task or no verification scenario is added to the plan as its own task, unless the user excluded it, in which case the plan records it as a non-goal with that reason; a difference blocked on missing evidence stays in the evidence-gap record below instead.
+- Never shrink scope on your own: plan an MVP or a first phase only when the user requested one, plan a split or phasing the user requested as given, and when the target state exceeds what was literally asked, state that in one sentence and plan the full target state.
+- Size each task as one band, never as hours or days: `XS` (one small edit), `S` (one file and its test), `M` (several files in one module), `L` (several modules or one contract change), `XL` (crosses subsystems; split it into smaller tasks).
 - Record unresolved tradeoffs and evidence gaps instead of flattening uncertainty.
 - When plan-shaping evidence is missing — current external behavior, contested claims, or unstudied reference implementations — run the `research` workflow as a bounded in-plan stage (not an exhaustive deep-research run) before comparing options, record its dossier the way the `research` artifact contract requires, and consume it instead of planning on assumptions.
 - Consume a recorded `research` dossier when one exists: plan options and rejected alternatives should cite its decision drivers and verified claims.
+- Take plan acceptance only from the answer the user gave — the response status and value the question tool returns, or the user's own reply — never from the wording of the question you asked: when the acceptance question times out, is dismissed, or returns with no answer, the plan stays unaccepted, so record no acceptance, prepare no handoff, and start nothing; a missing answer is not a refusal either, so ask again later or report the plan as awaiting acceptance.
 - End with a selected executor/runtime handoff shape only after the plan is accepted.
 - Plan acceptance approves the plan content, not execution: after acceptance, recommend the follow-on path that fits the work's shape — `ultrawork` durable checkpoints for progress that must survive sessions as a checkpointed ledger, `ultrawork` coordinated lanes for an accepted plan split into disjoint parallel lanes, `ultrawork` single-owner persistence for one already-scoped task with a single owner, `ultrawork` for one bounded delivery cycle, or a direct selected executor/runtime handoff for a single prepared coding change — state the fit reason in one line, and start it only after the user's explicit go-ahead.
 - Do not implement directly from consensus planning.
@@ -138,13 +145,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

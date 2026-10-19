@@ -1,6 +1,6 @@
 ---
-name: omh-product-brief
-description: "[omh] PRD or roadmap priorities to decide: turn product evidence into a decision-ready PRD, prioritization frame, and roadmap brief."
+name: "omh-product-brief"
+description: "[omh] PRD or roadmap priorities to decide: turn product evidence into a decision-ready PRD, prioritization frame, and roadmap brief. Use when the user says: product requirements document, PRD, roadmap prioritization, 제품 요구사항 문서, 제품 기획서, 로드맵 우선순위."
 ---
 # Product Brief
 
@@ -12,12 +12,12 @@ This is a Hermes-native `product-brief` workflow skill.
 
 ## Do Not Use When
 
-- The input is unprocessed feedback, bug reports, or feature asks that first need clustering and evidence boundaries; use `feedback-triage`.
-- The product evidence is unvalidated, synthetic, or a founder belief and the problem gate has not returned validated; use `product-discovery-validation` before a PRD.
-- The input is a growth hypothesis that still needs an experiment and readout before it becomes a product requirement; use `lifecycle-growth`.
-- The user needs a company or product strategy decision across high-level options rather than a requirements or roadmap artifact; use `strategy-brief`.
-- The request is an accepted, code-ready change with repository constraints and verification needs; use `ralplan` or `ultrawork` rather than recreating a PRD.
-- The user asks to create or update Jira, Linear, Aha!, or a roadmap system directly; use `connector-operator` with explicit target, approval, and observed evidence.
+- The input is unprocessed feedback, bug reports, or feature asks that first need clustering and evidence boundaries; use `omh-feedback-triage`.
+- The product evidence is unvalidated, synthetic, or a founder belief and the problem gate has not returned validated; use `omh-product-discovery-validation` before a PRD.
+- The input is a growth hypothesis that still needs an experiment and readout before it becomes a product requirement; use `omh-lifecycle-growth`.
+- The user needs a company or product strategy decision across high-level options rather than a requirements or roadmap artifact; use `omh-decide`.
+- The request is an accepted, code-ready change with repository constraints and verification needs; use `ulw-plan` or `ulw-work` rather than recreating a PRD.
+- The user asks to create or update Jira, Linear, Aha!, or a roadmap system directly; use `omh-apps` with explicit target, approval, and observed evidence.
 
 ## Examples
 
@@ -32,17 +32,6 @@ Bad example:
 - Prompt: Implement the accepted onboarding PRD and open a PR.
 - Expected behavior: Route to `ultrawork` or `ralplan`, not `product-brief`.
 - Why: Accepted implementation work should move into planning or delivery rather than recreate a PRD.
-
-## Product-purpose procedure
-
-1. Read the current product contract and implemented user actions before defining a troubled feature's purpose; this prevents proposing an existing capability as new work.
-2. Define the automatic system benefit and the user-facing surface benefit separately. For knowledge or ontology products, describe what accumulated context improves in answers and decisions, then identify the concrete reason a user would voluntarily open a map or explorer.
-3. Keep connection, updating, and routine cleanup with the automation when the product promises them. Offer inspection or correction as an optional user action only when a demonstrated task needs it; presenting every inferred link for review transfers the product's work to the user.
-4. State one proposed definition, its supporting evidence, and its untested usefulness. Compare a graph with search, a list, or a timeline on the same user task; node counts and technical sophistication do not establish user value.
-5. When the user challenges a feature's purpose, return to the unmet user task and consider retaining, reducing, making optional, or removing the surface. Propose alerts, risk discovery, and other new capabilities only when their own need and implementation scope are established; adding speculative benefits can conceal the original purpose gap.
-6. Distinguish the current approved direction from discussion hypotheses before proposing defaults or implementation. Keep the user's product-specific decision workflow central and use competitor references for reusable experience patterns.
-7. Attribute confirmation to the user's explicit decision and preserve its scope: a feature's agreed meaning, its implementation proposal and the whole product purpose are separate decisions. Use supplied calls, meeting notes and transcripts to interpret intent, and distinguish speakers' proposals from the user's authorization, because persuasive source material can otherwise become an unapproved product commitment.
-8. Bind a short proceed instruction to the immediately preceding agreed action and completion condition. If implementation was accepted, carry the result into executable delivery rather than silently stopping at another brief; if review was accepted, report the concrete review and remaining implementation boundary. Name whether work is actually running when asked, because a document or checklist does not establish ongoing execution.
 
 ## Completion Checklist
 
@@ -59,9 +48,9 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when a product owner needs a problem frame, user/outcome definition, PRD, prioritization/roadmap options, dependencies, acceptance shape, and decision record before delivery planning.
 
@@ -128,13 +117,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

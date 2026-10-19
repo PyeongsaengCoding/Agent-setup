@@ -1,6 +1,6 @@
 ---
-name: omh-browser
-description: "[omh] Browser login, click, or form task: policy overlay for browser tasks - add auth, confirmation, and observed-trace gates after preferring the native browser for ordinary URL, click, login, and form actions."
+name: "omh-browser"
+description: "[omh] Browser login, click, or form task: policy overlay for browser tasks - add auth, confirmation, and observed-trace gates after preferring the native browser for ordinary URL, click, login, and form actions. Use when the user says: browser-operator, browser operator, browser task, browser operation, browser automation, browser session, webpage operation, web page operation."
 ---
 # Browser Operator
 
@@ -8,13 +8,14 @@ This is a Hermes-native `browser-operator` workflow skill.
 
 ## Why This Exists
 
-`browser-operator` exists so Hermes users can ask for this workflow in chat and get a structured, checkable answer instead of an improvised one.
+`browser-operator` exists because native browser tools act on a live page with no scope, sign-in boundary, or trace requirement of their own: it fixes the URL, allowed actions, and stop condition, sends sign-ins and saved cards to Hermes' credential vault so secrets never pass through chat, and counts only observed page evidence.
 
 ## Do Not Use When
 
-- The request is already handled by a narrower explicit skill with stronger evidence.
-- The user asks OMH to secretly run external platforms, connectors, schedulers, file exports, or runtime agents.
-- The only safe answer is to ask for missing authority, credentials, target, or observed evidence first.
+- An ordinary read of a public page with no sign-in, form, or purchase; use the native browser tools directly unless OMH's browser adapter bridge is enabled, which blocks them.
+- The question is whether a page looks right at each viewport; use `omh-visual-qa`.
+- A web lookup or a cited answer rather than an interaction with a page; use `omh-web-research`.
+- A page step that moves money -- a checkout, a payment, a booking deposit, a top-up; use `omh-spend-gate`, which shows the pre-spend card and takes the person's typed yes even when Hermes prompts on its own.
 
 ## Examples
 
@@ -33,9 +34,11 @@ Bad example:
 ## Completion Checklist
 
 - Specify URL, allowed/prohibited actions, auth boundary, stop condition.
-- Gate credentials/login/payment/purchase/destruction/scraping/export; observed traces only.
+- Gate credentials/login/destruction/scraping/export; a payment or purchase step waits for `omh-spend-gate`'s card and typed yes; observed traces only.
+- With nobody to answer the confirmation (a scheduled job, a one-shot run, a webhook run), an irreversible or externally visible action is not run: it is handed to a person's turn and its confirmation is recorded as missing.
 - Host request admission (not enablement/adapter presence) gates schemas/context/callbacks/writes. Refuse foreign/stale/expired/released/ambiguous targets; no index fallback.
 - omh_browser blocks native browser_*; inert by default. Opted-in effects need exact approval: docs/BROWSER-EFFECTS.md.
+- Sign-ins, one-time codes, and saved cards go through `browser_vault` when `browser_vault` is in your tool list or tool_search finds it (`list` first; `fill` for a saved login, card, or address; `enter_code` for a one-time code after the password; `save_login` when nothing is saved for the site, so the user types it into Hermes' masked prompt; Hermes asks the user before it fills a card and refuses that in a headless run, and that answer sits beside `omh-spend-gate`'s typed yes, never in place of it): no password, card number, card security code, or one-time code is asked for, typed, or echoed in chat; record only its `success` and `filled_fields`, and never retry a `payment_declined`. Without it, the sign-in is the user's own step and a named gap.
 
 ## Recovery Notes
 
@@ -44,14 +47,15 @@ Bad example:
 - Host receipt BLOCK: production click/submit, retry after auth/4xx/assertion/mutation failure, or over two transient read-only retries.
 - POSIX native agent-browser collector: cold-desktop anonymous read-only Chromium only; other engine/profile/fixture/locale/timezone: named blocker (unsupported_browser_engine_webkit), never substitution.
 - Trace drift: `promotion status` unlinks only managed SKILL.md, keeps generations/receipts; no autoheal/watch/global fallback.
+- With OMH's browser adapter bridge enabled (`browser_adapter.enabled`), OMH's own hook blocks every native `browser_*` tool, the credential vault included: report the vault as blocked by the bound `omh_browser` lifecycle and never fall back to credentials in chat.
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare or supervise a browser/page interaction request such as opening a URL, clicking, logging in, filling forms, or capturing page blockers without claiming browser execution.
 
@@ -125,13 +129,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

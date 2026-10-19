@@ -1,6 +1,6 @@
 ---
-name: omh-data-pipelines
-description: "[omh] Data pipeline work -- an ETL or streaming job, a backfill or replay, duplicate events, a schema change downstream, a lineage question, a data-quality regression: make every rerun idempotent, bound every replay, and gate each load on observed checks."
+name: "omh-data-pipelines"
+description: "[omh] Data pipeline work -- an ETL or streaming job, a backfill or replay, duplicate events, a schema change downstream, a lineage question, a data-quality regression: make every rerun idempotent, bound every replay, and gate each load on observed checks. Use when the user says: data-pipelines, data pipeline, data pipelines, etl, elt, etl pipeline, etl job, etl backfill."
 ---
 # Data Pipelines
 
@@ -17,10 +17,10 @@ This is a Hermes-native `data-pipelines` workflow skill.
 
 ## Do Not Use When
 
-- The ask is a service's own database migration, API, or queue design; use `backend`.
-- The ask is analyzing, charting, or summarizing a dataset that was handed over; use `data-analysis`.
-- The ask is a slow query, an index, or DDL locking a live table; use `relational-db`.
-- The ask is remembering or syncing what the assistant knows about the user; use `memory-sync`.
+- The ask is a service's own database migration, API, or queue design; use `omh-backend`.
+- The ask is analyzing, charting, or summarizing a dataset that was handed over; use `omh-data-analysis`.
+- The ask is a slow query, an index, or DDL locking a live table; use `omh-relational-db`.
+- The ask is remembering or syncing what the assistant knows about the user; use `omh-memory-sync`.
 
 ## Examples
 
@@ -53,9 +53,9 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when a batch or streaming data pipeline needs planning or repair: an ETL, ELT, Airflow, dbt, Spark or Kafka job; a backfill or a replay of past events; duplicate or missing rows; a schema change whose downstream readers are unknown; a lineage question; or a data-quality regression. The output is the lineage, the schema change's downstream impact, an idempotency contract, a bounded replay or backfill plan, and the data-quality gate each load must pass; OMH runs no job and reads no warehouse.
 
@@ -129,13 +129,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

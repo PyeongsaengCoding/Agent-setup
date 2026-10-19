@@ -1,6 +1,6 @@
 ---
-name: omh-docs
-description: "[omh] Explaining OMH itself: current-source-first documentation for OMH itself: product identity, public capability catalog, model routing, local state, and long-term memory."
+name: "omh-docs"
+description: "[omh] Explaining OMH itself: current-source-first documentation for OMH itself: product identity, public capability catalog, model routing, local state, and long-term memory. Use when the user says: product-docs, OMH documentation, oh-my-hermes documentation, what is OMH, what is oh-my-hermes, how does OMH work, OMH capability catalog, OMH skill catalog."
 ---
 # OMH Docs
 
@@ -87,7 +87,7 @@ before mutation unless that separate action is authorized.
 - Current lane: **Research and company ops**. Stay read-only and return to the
   router when the request belongs to another workflow.
 - Shared product, routing, compatibility, and evidence rules:
-  `omh-routing/references/skill-common-rail.md`.
+  `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
 ## Completion Checklist
 
@@ -109,12 +109,3 @@ before mutation unless that separate action is authorized.
   evidence.
 - If local metadata is absent, report that scoped absence without expanding
   into private content or mutation.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-

@@ -1,12 +1,12 @@
 ---
-name: omh-jev-done-check
-description: "[omh] Completion claim tested by Jev: Jev done check: does the gathered evidence support the completion claim? It can only object."
+name: "omh-jev-done-check"
+description: "[omh] Completion claim tested by Jev: Jev done check: does the gathered evidence support the completion claim? It can only object. Use when the user says: jev-done-check, jev done check, ask jev if this is done, jev evidence check."
 ---
 # Jev Done Check
 
 Required: each completion claim, observed evidence, and the goal. Output: objections per claim, or no_objection.
 
-Read `omh-routing/references/jev-rail.md` before the first ask: consent, what leaves the machine, limits, and non-answer statuses. Prepared OMH routing is not execution or approval. Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+Read `skill_view(name='omh-routing', file_path='references/jev-rail.md')` before the first ask: consent, what leaves the machine, limits, and non-answer statuses. Prepared OMH routing is not execution or approval. Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
 Contract: `references/full-contract.md`. Preset: `references/preset.md`.
 
@@ -30,12 +30,3 @@ Contract: `references/full-contract.md`. Preset: `references/preset.md`.
 ## Workflow Lane
 
 advisory local context
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-

@@ -1,6 +1,6 @@
 ---
-name: omh-product-discovery-validation
-description: "[omh] Unvalidated early product idea: test whether a customer problem, segment, and business hypothesis deserve product investment, ending in kill, pivot, persevere, or inconclusive before any PRD."
+name: "omh-product-discovery-validation"
+description: "[omh] Unvalidated early product idea: test whether a customer problem, segment, and business hypothesis deserve product investment, ending in kill, pivot, persevere, or inconclusive before any PRD. Use when the user says: product-discovery-validation, product discovery validation, product discovery, customer discovery, customer discovery plan, zero to one validation, validate the problem before building, problem solution interview."
 ---
 # Product Discovery Validation
 
@@ -8,9 +8,9 @@ Required: problem, segment/evidence, owner, learning budget, and criteria. Outpu
 
 **HOLD:** Missing inputs or failed contract gates. Prepared OMH routing is not execution or approval. **Completion:** Follow the full-contract checklist.
 
-Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-Agent/operator: `omh runtime workflow-artifact product-discovery-validation build --input <json-file-or->` builds bounded metadata only. Shared operator reference: `omh-routing/references/workflow-artifacts.md`.
+Agent/operator: `omh runtime workflow-artifact product-discovery-validation build --input <json-file-or->` builds bounded metadata only. Shared operator reference: `skill_view(name='omh-routing', file_path='references/workflow-artifacts.md')`.
 
 Contract: `references/full-contract.md`. Procedure: `references/procedure.md`.
 
@@ -28,12 +28,3 @@ Contract: `references/full-contract.md`. Procedure: `references/procedure.md`.
 ## Workflow Lane
 
 advisory local context
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-

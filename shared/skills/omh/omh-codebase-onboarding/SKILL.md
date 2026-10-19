@@ -1,6 +1,6 @@
 ---
-name: omh-codebase-onboarding
-description: "[omh] Unfamiliar repository needing a guided tour: create a repo map, reading path, glossary, risk map, and first-task runway for unfamiliar codebases."
+name: "omh-codebase-onboarding"
+description: "[omh] Unfamiliar repository needing a guided tour: create a repo map, reading path, glossary, risk map, and first-task runway for unfamiliar codebases. Use when the user says: codebase-onboarding, codebase onboarding, repo onboarding, repository onboarding, codebase tour, code tour, new repo orientation, understand this repo."
 ---
 # Codebase Onboarding
 
@@ -12,9 +12,9 @@ This is a Hermes-native `codebase-onboarding` workflow skill.
 
 ## Do Not Use When
 
-- The user already named a concrete implementation task and acceptance criteria; use `ultrawork` or `idea-to-deploy`.
-- The user needs a whole-workspace capability inventory; use `workspace-audit`.
-- The user wants a code diff review; use `code-review`.
+- The user already named a concrete implementation task and acceptance criteria; use `ulw-work` or `omh-idea-to-deploy`.
+- The user needs a whole-workspace capability inventory; use `omh-workspace-audit`.
+- The user wants a code diff review; use `omh-code-review`.
 
 ## Examples
 
@@ -45,9 +45,9 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should help an operator or coding executor understand an unfamiliar repository before planning implementation.
 
@@ -105,7 +105,7 @@ Safety rules:
 
 ## Structural Code Search
 
-When the target is a syntactic shape rather than a string, load `omh-routing/references/structural-code-search.md` before searching. If ast-grep is not on PATH, use grep/ripgrep exactly as today. Cap exploration to a few bounded, targeted queries before reading a full file, escalate to a wider query only when a bounded pass finds nothing or stays ambiguous, and stop once the target is found.
+When the target is a syntactic shape rather than a string, load `skill_view(name='omh-routing', file_path='references/structural-code-search.md')` before searching. If ast-grep is not on PATH, use grep/ripgrep exactly as today. Cap exploration to a few bounded, targeted queries before reading a full file, escalate to a wider query only when a bounded pass finds nothing or stays ambiguous, and stop once the target is found.
 
 ## Runtime Evidence
 
@@ -123,13 +123,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

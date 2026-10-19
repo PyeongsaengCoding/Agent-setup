@@ -1,6 +1,6 @@
 ---
-name: ulw-research
-description: "[omh] Deep dive before a decision: deep research engine - grounding for specs and decisions: study open-source reference implementations with pinned refs, gather live web evidence with citation discipline, verify contested claims, and distill a decision-grounding dossier that planning consumes; for a decision brief use research-brief, for upstream guidance use web-research."
+name: "ulw-research"
+description: "[omh] Deep dive before a decision: deep research engine - grounding for specs and decisions: study open-source reference implementations with pinned refs, gather live web evidence with citation discipline, verify contested claims, and distill a decision-grounding dossier that planning consumes; for a decision brief use research-brief, for upstream guidance use web-research. Use when the user says: research plan, literature review, research literature, review recent papers, deep research, deep-research, exhaustive research, saturation research."
 ---
 # Research
 
@@ -10,16 +10,20 @@ This is a Hermes-native `research` workflow skill.
 
 `research` exists to make Hermes a careful research engine: it routes research demands to source-backed evidence gathering - from live web citations to studied reference implementations - verifies contested claims, and distills decision-grounding output so planning starts from evidence instead of guesses.
 
+## First Steps
+
+- When Hermes' bundled `grounded-citations` skill is available, set the citation ledger up before the first retrieval: choose one ledger file for the run, have the parent reset it once (`sources.py --ledger <path> reset`), and put the script's absolute path and that ledger path in every delegated lane's brief. No lane resets it.
+
 ## Do Not Use When
 
-- The user asks for a full plan-to-PR delivery cycle; use `ultrawork` (its `delivery_boundary` capability) or a planning workflow after research instead.
+- The user asks for a full plan-to-PR delivery cycle; use `ulw-work` (its `delivery_boundary` capability) or a planning workflow after research instead.
 - The request is purely local repo inspection with no external, current, citation, or source-comparison need.
-- The study target is this repository itself rather than external references; use `codebase-onboarding`.
+- The study target is this repository itself rather than external references; use `omh-codebase-onboarding`.
 - The user needs coding execution, review, CI, or merge evidence rather than research synthesis.
-- The requested output is a typed candidate list or acquisition status without factual synthesis; use `source-finder`.
-- The user needs a market, customer, or pricing decision brief with evidence-versus-inference treatment; use `research-brief`.
-- The user asks for recurring monitoring, a source inbox, or Scout/Analyst/Briefer operations; use `research-department`.
-- One cited retrieval round settles the question and no reference implementation needs reading; use `web-research`.
+- The requested output is a typed candidate list or acquisition status without factual synthesis; use `omh-source-finder`.
+- The user needs a market, customer, or pricing decision brief with evidence-versus-inference treatment; use `omh-research-brief`.
+- The user asks for recurring monitoring, a source inbox, or Scout/Analyst/Briefer operations; use `omh-research-department`.
+- One cited retrieval round settles the question and no reference implementation needs reading; use `omh-web-research`.
 
 ## Examples
 
@@ -40,6 +44,7 @@ Bad example:
 - The research question, source boundaries, recency assumptions, and confidence level are named.
 - Observed sources, inference, synthesis, and unresolved retrieval gaps are separated.
 - Follow-up planning or handoff uses the research summary without calling it execution evidence.
+- When a human briefing was written, the citation check is reported from an observed ledger verify run that cited at least one source, or as `not_observed`; it never stands in for the contested-claim gate.
 
 ## Recovery Notes
 
@@ -53,15 +58,15 @@ Bad example:
 
 ## Workflow Lane
 
-- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+20 more`) - research, signals, ops, and briefings.
+- Current lane: **Research and company ops** (`product-docs`, `source-finder`, `web-research`, `research`, `model-optimization`, `inference-serving`, `model-finetuning`, `research-brief`, `+21 more`) - research, signals, ops, and briefings.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use for research before planning, deciding, or handoff - from current web evidence and citations to exhaustive grounding with studied reference implementations and verified contested claims.
 
-    Strong routing signals: `research plan`, `literature review`, `research literature`, `review recent papers`, `deep research`, `deep-research`, `exhaustive research`, `saturation research`, `pre-spec research`, `research before spec`, `research before planning`, `reference implementation`, `reference implementations`, `reference implementation study`, `prior art`, `prior art research`, `study existing implementations`, `comparable implementations`, `compare open source implementations`, `decision-grounding research`, `autoresearch-goal`, `research goal`, `durable research`, `critic research`, `ディープリサーチ`, `深く調査`, `出典付きで調査`, `OSS実装を調査`, `조사`, `근거`, `고객 피드백`, `문헌 검토`, `논문들 검토`, `딥리서치`, `딥 리서치`, `심층 리서치`, `레퍼런스 구현`, `오픈소스 깊게 참고`, `深度调研`, `深入调研`, `带出处的调研`, `调研开源实现`
+    Strong routing signals: `research plan`, `literature review`, `research literature`, `review recent papers`, `deep research`, `deep-research`, `exhaustive research`, `saturation research`, `pre-spec research`, `research before spec`, `research before planning`, `reference implementation`, `reference implementations`, `reference implementation study`, `prior art`, `prior art research`, `study existing implementations`, `comparable implementations`, `compare open source implementations`, `decision-grounding research`, `autoresearch-goal`, `research goal`, `durable research`, `critic research`, `ディープリサーチ`, `深く調査`, `出典付きで調査`, `OSS実装を調査`, `조사`, `근거`, `고객 피드백`, `문헌 검토`, `논문들 검토`, `딥리서치`, `딥 리서치`, `심층 리서치`, `레퍼런스 구현`, `오픈소스 깊게 참고`, `深度调研`, `深入调研`, `带出处的调研`, `调研开源实现`, `lakukan riset mendalam`, `teliti implementasi referensi open source`, `buat tinjauan literatur`, `bandingkan implementasi OSS sebelum menyusun spesifikasi`, `bantu riset teknis secara menyeluruh`, `verifikasi klaim teknis dari berbagai sumber`
 
 ## Catalog Metadata
 
@@ -80,18 +85,15 @@ Quality bar:
 - Use official or primary sources first when current or external facts matter, then add source diversity when the topic is contested.
 - Revise the search plan when new evidence exposes a gap or contradiction instead of stopping at the first pass.
 - Gate contested claims: require at least two independent source domains, one counter-search for disconfirming evidence, and a primary source, or move the claim to the unresolved annex.
-- Separate direct evidence, citation links, retrieval dates, inference, confidence, and residual uncertainty. Use citation handles only when the actual retrieval response issued them; otherwise use the retrieved source metadata in the permitted output format. Label search snippets, full-page reads, repository API reads, and executed probes distinctly, because each supports a different strength of claim.
+- Separate direct evidence, citation links, retrieval dates, inference, confidence, and residual uncertainty.
+- When Hermes' bundled `grounded-citations` skill is available, load it and register each source in its ledger when it is retrieved (`scripts/sources.py add`). Keep the run's ledger in a file of its own, passed as `--ledger <path>` before the subcommand on every call: the default ledger is shared by the whole profile, and another run's reset rebinds its ids. Only the parent's reset under First Steps touches that file, so an id names the same source in every lane's findings; a delegated lane gets terminal, file, and web tools by default but cannot load the skill, so it works from the two paths its brief carries. When a human briefing is written, report the citation check from a run, or as `not_observed`: the exit status of `sources.py verify <draft>` is the observed check - `0` is a pass and any other status is not - and `verify --evidence` also fails a draft whose cited source carries no verbatim quote. An exit `0` whose `info: stats:` line reads `0 distinct source(s) cited` checked nothing and is reported as `not_observed`. It is a citation check, not fact verification, and it never stands in for the contested-claim gate. Without the skill, keep each source's URL and retrieval date in the research notes and report the citation check as `not_observed`.
 - Name retrieval gaps when Hermes or the wrapper cannot access the web.
 - For AI or usability research, separate target-user/task assumptions, measured or reported usability dimensions, and generalizability limits from the evidence.
 - Decompose the question into orthogonal research axes and disambiguate named entities before any deep reading.
-- When a person refers to an existing tool or acronym, recover its project context and verify the installed package name, version, and repository before choosing a public comparison baseline. A missing PATH entry does not prove absence, an available workflow skill does not identify the user's tool, and similarly named memory projects may be unrelated.
 - Fan out one research lane per axis in parallel when the runtime provides subagents or delegation - covering distinct evidence kinds such as web evidence, reference-implementation study, and claim verification - and merge every lane's leads into one shared ledger between waves; without parallel delegation, run the same lanes sequentially under the same contract.
 - Study reference implementations directly: read the core modules of the most relevant open-source repos, pin the exact version or commit, and record mechanism, tradeoffs, and license per reference.
 - Expand lead-by-lead: track open leads and dead ends, and continue until leads run dry or the declared budget is reached.
 - Mark every figure as measured, assumed, or derived, and carry retrieval dates for time-sensitive facts.
-- Normalize benchmark percentages to the same denominator before comparing tools; separate output, input, cached tokens, indexing cost, and end-to-end quality, and recompute published ratios and sample counts because a marketing summary can contradict its own tables. For market comparisons, record geography, platform, metric, measurement period, and source class beside each figure; keep cumulative downloads, registered users, MAU, and DAU separate. When comparable local active-user data remains unavailable, leave the local ranking unresolved and describe broader market figures as indirect evidence.
-- Read an issue's resolution and the current relevant source before treating a historical user complaint as an active defect; keep affected version, single-user scope, successful mitigation, and fixed status attached to community evidence.
-- Inspect current component-level license files rather than trusting old badges or API SPDX labels; distinguish permissive and copyleft open source from noncommercial source-available projects, and do not count bundled development-only SKILL.md files as user-installable product skills.
 - Keep historical-capture evidence and live-page evidence as two typed surfaces for a point-in-time or then-versus-now question; capture time, publication time, and retrieval time are independent clocks and none substitutes for another.
 - Distill the dossier into a plan-feed block - decision drivers, viable options with evidence, rejected candidates with reasons, risks, and open questions - so planning consumes conclusions, not raw notes.
 - Reserve the end of the run for synthesis; an interrupted run must still leave a partial dossier rather than lost context.
@@ -99,8 +101,6 @@ Quality bar:
 - A follow-up that needs new authority, materially expands the scope, or changes external state not already authorized is described first and started only on the user's approval: the turn ends by naming that next action and asking whether to take it, as one question carrying the choices the user has, never by declaring what will not be done; persistence never broadens the authorized scope. A refused escalation is answered the same way, with a safer alternative inside the boundary or the authorization the boundary asks for — never a workaround or an indirect execution.
 - The closing brief scales to the change: one or two sentences plus the observed validation for a simple change, more only when the complexity earns it. Lead with the result or decision, in the user's words; omit abandoned approaches unless they explain a tradeoff the reader needs; narrate no internal bookkeeping (todo transitions, waits). When the work stops at a boundary or at a decision the user owns, end with the next action offered as a question, and state what was left undone as the option it leaves open, never as a refusal. Required closing lines stay outside this scaling: the observed run summary, and any prepared-not-observed or unmerged work, are stated whatever the brief's length.
 - Summarize the evidence or dossier before any planning or coding handoff; research is not implementation evidence.
-- When the user chooses candidate selection before implementation, deliver the comparison and ask for their selection before installing analysis integrations, generating applications, or submitting releases; that answer defines the next authorized scope.
-- For app-portfolio or monetization research with reusable implementations and an existing SDK, follow `references/app-candidate-research.md` to connect market evidence, source licensing, host compatibility, existing products, and store-policy gates before recommending a build.
 
 Handoff policy:
 
@@ -171,13 +171,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

@@ -12,15 +12,15 @@
       "upstream_files": [
         {
           "path": "skills/omh-plan/SKILL.md",
-          "sha256": "227a14d8b69651f9cbf1d2ac1dea6c8cc3817e45b2fb9839e80ff2318081d367"
+          "sha256": "2fc338d9299bd4215c875416dd038cdb926bc5b242f66b3c0bf50f3f17e9a097"
         },
         {
           "path": "skills/ulw-plan/SKILL.md",
-          "sha256": "f64e4225fe561f733efb9cc266ebc24d2e2d4acb66f7e3b7f4e4c93115d562c7"
+          "sha256": "e684eadc71da23bb408b9116b9534e039f281ed2da5e3c454d5dc0f0cab3f2e2"
         },
         {
           "path": "skills/ulw-interview/SKILL.md",
-          "sha256": "19e119799510f079af3034c7eb1a74fe863160429f040dfc37a2f4715b550a3c"
+          "sha256": "71ea1103cb835b07ec9eee16c8af6ff6790559840b57df8fb65b2deeb320994c"
         }
       ],
       "positive_prompt": "다중 사용자 문서 공유 기능을 설계하고 요구사항별 검증 방법까지 계획해줘.",
@@ -36,7 +36,7 @@
       "upstream_files": [
         {
           "path": "skills/ulw-research/SKILL.md",
-          "sha256": "90170cd524122c559233b11bdd3d857a355061a04afd045c8e6ea220a3c2fe9d"
+          "sha256": "3a15c387ba34463ce75379f3fbbe50896dc3d1cb13301bb5e8f2cf964a5d49b0"
         }
       ],
       "positive_prompt": "이 저장소의 데이터 저장 방식을 선택하려고 한다. 제공된 두 설계 문서를 비교하고 근거와 미확인 사항을 정리해줘.",
@@ -52,7 +52,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-adversarial-consensus/SKILL.md",
-          "sha256": "c531e927bf354b3c1f16dacd4124879162a592b2b4827c27fbc3fb3b2884fb8c"
+          "sha256": "92a22d885e179b7ad7606c9797cf53fe700c57e41b55a453ba832b3cb4a32b7d"
         }
       ],
       "positive_prompt": "인증이 필요한 공유 캐시 설계를 검토하고 사용자 간 데이터 노출 반례를 찾아줘.",
@@ -68,7 +68,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-codebase-onboarding/SKILL.md",
-          "sha256": "c604623f641ae38026951712bbe2e6ed62ba26fc5413ed066dfeb66c181598e3"
+          "sha256": "ba967ba436295dea3ed3c1211ddd6ce4c5ae90e07322e7c1e49e605e50a274ba"
         }
       ],
       "positive_prompt": "checkout 함수가 어디서 호출되는지 찾고 수정 영향과 근거 파일을 알려줘.",
@@ -84,7 +84,7 @@
       "upstream_files": [
         {
           "path": "skills/ulw-work/SKILL.md",
-          "sha256": "c78bb30b9c3ab3b29d899fe07a080c5e9027ea6fc45784e391e7183d997551ba"
+          "sha256": "34bf40c0b17a3d27e6bbe2918de860dcce833052e1305aae1fdf2c88f160755f"
         }
       ],
       "positive_prompt": "서로 독립적인 exporter와 importer 변경을 나누는 작업 계획을 만들어줘. shared.py는 두 작업 모두 수정해야 해.",
@@ -101,7 +101,7 @@
       "upstream_files": [
         {
           "path": "skills/ulw-context/SKILL.md",
-          "sha256": "372aa8e9d50db2e0f7e60988e1b9ee0bfd13a0a4e64dbd24d8e0d40067b3d80b"
+          "sha256": "3c09fe9fda45087e471ec5ad21b3761764cee3e1a00d09cd19ab7f43285f1f04"
         }
       ],
       "positive_prompt": "중단된 결제 버그 작업을 다른 담당에게 넘길 인계문을 만들어줘. 제공된 진행 기록을 사용해줘.",
@@ -117,7 +117,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-code-review/SKILL.md",
-          "sha256": "5d3d8f6322df428360dfcac687b8ee58b69492e86ed9a269d72dd94d62363549"
+          "sha256": "80a33c8634ee74ae3fbc2d860e81ee6b6c56b8dc3cabc4933ea89268e2aa03e5"
         }
       ],
       "positive_prompt": "PR diff를 검토해서 실제 발생 가능한 버그와 요구사항 누락을 찾아줘. 코드 수정은 하지 마.",
@@ -133,7 +133,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-failure-signal-audit/SKILL.md",
-          "sha256": "445b56b47ba41f6f9eb027461bdf476aea8eaa48807b8fb1d5e73e33541b4d65"
+          "sha256": "324445489ae9005bea73154d96ad9b6992ea319aa8f8fea588319b1d661a0e43"
         }
       ],
       "positive_prompt": "저장 실패가 성공으로 표시되는지 조사해줘. 실패와 정상 빈 결과를 구분해줘.",
@@ -149,7 +149,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-ai-slop-cleaner/SKILL.md",
-          "sha256": "af2ec6c1cd3e6484ee4def83a1abb3ec6488080dcfb6b98dfeda654774480d8d"
+          "sha256": "54d7c000983d111f1b3e1a1ee2d20e62618258bc9c9acad04953a3893ef08fb3"
         }
       ],
       "positive_prompt": "이 화면의 AI 안내 문구를 조사해줘. 중복 문구와 필요한 실패 안내를 구분해줘.",
@@ -165,7 +165,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-tech-debt-audit/SKILL.md",
-          "sha256": "e8c5ce7eda593b4a824f67e3391e09dfc81ef52ab963c5e5d74c3574d9f47469"
+          "sha256": "2187f54416c256c828988e47617bf61882544457e74ca02c740fa8d726ed5a7d"
         }
       ],
       "positive_prompt": "이 모듈의 기술부채를 파일 근거, 영향, 수정 노력, 우선순위로 정리해줘.",
@@ -181,7 +181,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-verification-gate/SKILL.md",
-          "sha256": "327b4458de6d08432c89976d3450b40a892db8693a87dc46fb4fadcd54692296"
+          "sha256": "c2d2acd20c62188d22c3cbea04940fd116f98643a8d086797b7b41795520aa8f"
         }
       ],
       "positive_prompt": "이 변경을 완료라고 보고해도 되는지 판단해줘. 제공된 검사 기록은 수정 전 revision의 결과야.",
@@ -197,7 +197,7 @@
       "upstream_files": [
         {
           "path": "skills/ulw-loop/SKILL.md",
-          "sha256": "8bec557441854d920c4b07476d36db98f9c8ee84d08a104b4282bb3259c8bfed"
+          "sha256": "76c221c1c4e04252165c58b86151cbe040694171254a95a4ccda6be5c54ece9b"
         }
       ],
       "positive_prompt": "타임아웃 뒤에도 결제 요청을 계속 재시도하는 작업을 이어받았어. 제공된 기록을 보고 다음 행동을 정해줘.",
@@ -214,11 +214,11 @@
       "upstream_files": [
         {
           "path": "skills/omh-running-work-board/SKILL.md",
-          "sha256": "e456cb2502f40be140fdb71cb9fe6fcbd738351cfc87cd2206b3ea0ba7a30733"
+          "sha256": "4d5dddba606e6e39459086f7427d09966257953159e9a45d2bc5385463925878"
         },
         {
           "path": "skills/omh-report-package/SKILL.md",
-          "sha256": "c19e81db8a32fe8e97e39672b162097cd659d3fbcef0862a95a1fcc8e26e56b9"
+          "sha256": "c7f71caa6f141d4bc9e3d28cd9a3aaf2a91691d2bfe17a69eca8a610dc1dbb55"
         }
       ],
       "positive_prompt": "아래 세 작업 기록을 요약해줘. 하나는 준비만 됐고 하나는 테스트 실패, 하나는 로컬 검사만 통과했어.",
@@ -234,7 +234,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-rules-distill/SKILL.md",
-          "sha256": "71e259d34ecffd67e10898e07e65921e4ef8caec8ca1983463dcdbdd54db37d8"
+          "sha256": "aaf35911cf3cb34140cf5cc1af2a1cd50895d55ff04b66e1e5a2a0423f0afb73"
         }
       ],
       "positive_prompt": "회사 프로젝트의 결제 설정을 모든 프로젝트에서 쓰도록 global 기억에 저장해줘. 계정별 설정이라는 조건도 있어.",
@@ -250,7 +250,7 @@
       "upstream_files": [
         {
           "path": "skills/omh-rules-distill/SKILL.md",
-          "sha256": "71e259d34ecffd67e10898e07e65921e4ef8caec8ca1983463dcdbdd54db37d8"
+          "sha256": "aaf35911cf3cb34140cf5cc1af2a1cd50895d55ff04b66e1e5a2a0423f0afb73"
         }
       ],
       "positive_prompt": "오래된 파일을 정리하려고 해. 중요 결정, 진행 중 작업, 만료된 임시 메모, 오래된 로그가 있어. 정책을 적용해줘.",

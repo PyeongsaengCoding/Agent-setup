@@ -7,7 +7,7 @@ quoted `description`, and records the OMH version in shared/skills/omh/SOURCE.js
 Hermes keeps using its own OMH plugin and does not install this copy.
 
   python3 scripts/import_omh_skills.py                 # from ~/.omh/skills
-  python3 scripts/import_omh_skills.py --source DIR --version 3.0.2
+  python3 scripts/import_omh_skills.py --source DIR --version 4.0.0
 """
 import argparse
 import json

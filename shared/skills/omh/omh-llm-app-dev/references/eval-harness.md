@@ -86,16 +86,7 @@ Run the regression **before** the swap, not after it.
 - **Report per-case movement.** Which cases newly pass, which newly fail. A net-positive run that broke a case someone reported last month is not an improvement.
 - **Missing telemetry stays null.** If the harness did not report tokens, latency, or cost, the field is null and the report says the harness did not report it. Never reconstruct a token count from a pricing table or a character count; an estimate presented beside observed numbers reads as observed.
 
-## 7. Deployed Conversational Journeys
-
-1. Recover the original registry and preserve each exact prompt, case ID, chat-versus-judgment action, account, Workspace and source scope. Check the prompt-set hash before submission and the actual composer text after filling it; Unicode input errors otherwise evaluate a different question.
-2. Record frontend and backend deployed revisions independently before the run. Start the candidate comparison after its prompt bytes are deployed, because a local prompt edit leaves the browser exercising the old behavior.
-3. Submit through the real UI and record answer quality separately from task completion. Evaluate directness, sufficient explanation, factual support and requested-condition coverage; retain truthful missing-data responses as partial or failed outcomes when the requested information remains unavailable.
-4. Carry source-backed answers through citation opening, same-conversation follow-up and refresh/reentry. For judgment cases, also open the saved detailed result immediately after completion and after reload; a successful briefing can coexist with a broken version-bound detail link.
-5. Keep exact submissions, typo runs, follow-ups, cancellation probes and retries in separate attempt classes. Calculate totals from recorded attempts and keep private mail content in restricted evidence, because a summary count must describe the actual work without publishing source material.
-6. Close each observed defect with a regression, an identified deployed revision and a rerun of the same failed journey. Inspect intermediate responsive widths as well as mobile and desktop endpoints; grid/sidebar breakpoints can compress the usable content only in the middle range.
-
-## 8. What A Result Is Not
+## 7. What A Result Is Not
 
 - A designed comparison is not a result.
 - A committed fixture is not a run. Restoring runtime state proves the case is replayable, not that it was replayed. Until the run happened and its output was observed, every number is absent, not zero.

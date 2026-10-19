@@ -1,6 +1,6 @@
 ---
-name: omh-adversarial-consensus
-description: "[omh] Technical proposal facing adversarial scrutiny: independent perspectives attack a proposal, then distill into a bundle a separate planner consumes."
+name: "omh-adversarial-consensus"
+description: "[omh] Technical proposal facing adversarial scrutiny: independent perspectives attack a proposal, then distill into a bundle a separate planner consumes. Use when the user says: adversarial-consensus, adversarial planning, adversarial plan review, red team this plan, red-team this plan, red team the proposal, multi-perspective review, multiple perspectives."
 ---
 # Adversarial Consensus
 
@@ -12,10 +12,10 @@ This is a Hermes-native `adversarial-consensus` workflow skill.
 
 ## Do Not Use When
 
-- The user wants the plan itself, with options, acceptance criteria, and verification commands; use `ralplan`, which this workflow feeds.
-- The request is still too ambiguous to state the proposal being attacked; use `deep-interview` first.
-- The user wants completed code reviewed for defects rather than a proposal attacked before it is built; use `code-review`.
-- The user wants hostile runtime scenarios against a built change; use `ultraqa`.
+- The user wants the plan itself, with options, acceptance criteria, and verification commands; use `ulw-plan`, which this workflow feeds.
+- The request is still too ambiguous to state the proposal being attacked; use `ulw-interview` first.
+- The user wants completed code reviewed for defects rather than a proposal attacked before it is built; use `omh-code-review`.
+- The user wants hostile runtime scenarios against a built change; use `ulw-qa`.
 - One perspective would do: a small local change with no contested decision does not earn three rounds.
 
 ## Examples
@@ -52,13 +52,13 @@ Bad example:
 
 - Current lane: **Intent -> plan** (`oh-my-hermes`, `meta-router`, `deep-interview`, `context`, `plan`, `ralplan`, `adversarial-consensus`, `codebase-onboarding`, `+8 more`) - clarify, plan, ship, or loop goals.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when a proposal, plan, or direction needs independent perspectives to attack it before a plan is written, and the distilled result is meant as input to planning rather than as the plan.
 
-    Strong routing signals: `adversarial-consensus`, `$adversarial-consensus`, `adversarial planning`, `adversarial plan review`, `red team this plan`, `red-team this plan`, `red team the proposal`, `multi-perspective review`, `multiple perspectives`, `independent perspectives`, `attack this proposal`, `poke holes in this`, `hyperplan`, `敵対的レビュー`, `多角的レビュー`, `レッドチームレビュー`, `この計画に反論`, `穴を探して`, `적대적 검토`, `다관점 검토`, `여러 관점에서 검토`, `레드팀 검토`, `이 계획 반박`, `허점 찾아`, `对抗式评审`, `多视角评审`, `红队评审`, `反驳这个方案`, `找出漏洞`
+    Strong routing signals: `adversarial-consensus`, `$adversarial-consensus`, `adversarial planning`, `adversarial plan review`, `red team this plan`, `red-team this plan`, `red team the proposal`, `multi-perspective review`, `multiple perspectives`, `independent perspectives`, `attack this proposal`, `poke holes in this`, `hyperplan`, `敵対的レビュー`, `多角的レビュー`, `レッドチームレビュー`, `この計画に反論`, `穴を探して`, `적대적 검토`, `다관점 검토`, `여러 관점에서 검토`, `레드팀 검토`, `이 계획 반박`, `허점 찾아`, `对抗式评审`, `多视角评审`, `红队评审`, `反驳这个方案`, `找出漏洞`, `kritisi proposal ini dari berbagai sudut pandang`, `cari kelemahan proposal teknis ini`, `uji rencana ini dengan pendekatan red team`, `minta pendapat independen untuk menguji proposal`, `bantu bantah asumsi dalam rancangan ini`, `tinjau proposal secara adversarial`
 
 ## Catalog Metadata
 
@@ -81,7 +81,7 @@ Quality bar:
 
 Handoff policy:
 
-Keep every round in Hermes as prepared prompt contracts. The distilled bundle is planning input: hand it to `ralplan` or `plan` for the plan itself, and prepare a selected executor/runtime handoff only after that separate planning pass produces an accepted plan.
+Keep every round in Hermes as prepared prompt contracts. The distilled bundle is planning input: hand it to `ulw-plan` or `omh-plan` for the plan itself, and prepare a selected executor/runtime handoff only after that separate planning pass produces an accepted plan.
 
 Required inputs:
 
@@ -127,13 +127,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

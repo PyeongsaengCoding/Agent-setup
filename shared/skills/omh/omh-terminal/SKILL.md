@@ -1,6 +1,6 @@
 ---
-name: omh-terminal
-description: "[omh] Shell command or test-suite execution: policy overlay for terminal commands - add cwd, environment, safety, and result-evidence gates after preferring native shell tools for ordinary CLI, package-manager, and test runs."
+name: "omh-terminal"
+description: "[omh] Shell command or test-suite execution: policy overlay for terminal commands - add cwd, environment, safety, and result-evidence gates after preferring native shell tools for ordinary CLI, package-manager, and test runs. Use when the user says: command-operator, command operator, terminal command, terminal task, shell command, shell task, cli command, command execution."
 ---
 # Command Operator
 
@@ -8,13 +8,13 @@ This is a Hermes-native `command-operator` workflow skill.
 
 ## Why This Exists
 
-`command-operator` exists so Hermes users can ask for this workflow in chat and get a structured, checkable answer instead of an improvised one.
+`command-operator` exists because a host's own approval gate flags only some commands and can approve one with nobody asked: it fixes the working directory, environment, timeout, and stop condition, confirms every irreversible or externally visible command in chat whether or not the host flags it, records the host's own approval answer beside that confirmation, and reports results only from what the run returned.
 
 ## Do Not Use When
 
-- The request is already handled by a narrower explicit skill with stronger evidence.
-- The user asks OMH to secretly run external platforms, connectors, schedulers, file exports, or runtime agents.
-- The only safe answer is to ask for missing authority, credentials, target, or observed evidence first.
+- An ordinary read-only or test command with a known working directory and nothing to gate; run it with the native terminal tool.
+- The user pasted a failed command's output and asks for the cause; use `omh-build-failure-triage`, or `omh-agent-debug` when the agent itself is stuck.
+- The user wants a command blocked for the agent from now on; use `omh-security-safety-review`, which prepares a proposed deny-glob list for the user to apply.
 
 ## Examples
 
@@ -33,22 +33,25 @@ Bad example:
 ## Completion Checklist
 
 - Command text, working directory, environment assumptions, timeout, safety level, and stop condition are explicit.
-- Destructive, credential, network, filesystem mutation, install, deploy, and production commands are gated or marked missing.
+- Destructive, credential, network, filesystem mutation, install, deploy, and production commands are confirmed in chat before the run, or marked missing and not run; a native approval note is recorded beside that confirmation, never in place of it.
+- With nobody to answer the confirmation (a scheduled job, a one-shot run, a webhook run), an irreversible or externally visible action is not run: it is handed to a person's turn and its confirmation is recorded as missing.
 - Exit codes, stdout/stderr, test results, package-manager effects, and filesystem mutations are reported only from observed command evidence.
 
 ## Recovery Notes
 
 - If command text or working directory is missing, ask for the smallest missing scope needed before preparing the command task.
-- If the command is destructive, credentialed, networked, install/deploy-oriented, or production-affecting, require an explicit confirmation gate.
+- If the command is irreversible or externally visible, require an explicit confirmation gate in chat before the run, whether or not the host flags it: deleting or overwriting user data, discarding history or force-pushing, deleting a remote branch, dropping, deleting from, truncating, or flushing a database, a credentialed or networked mutation, device actuation, an install, a deploy, a production change, or an external send.
+- On Hermes, record the terminal result's `approval` note beside that confirmation as additional evidence, never in place of it: a note that the command "was approved by the user" is the person's answer to Hermes' own prompt for that command, while "auto-approved by smart approval" or no note at all is not a person's consent, and a `pending_approval` status means the command has not run and will not run on its own (Hermes stores it without running it, and `/approve` resumes only a run that is still waiting on an approval), so it is never re-run or reworded and goes to a person's turn.
+- On Hermes, a cron job, a one-shot `-q` run, or a webhook run denies a flagged command by default (`approvals.cron_mode`, `approvals.single_query_mode`, `approvals.unattended_mode`): record the block as the gate's outcome and hand the command to a person's turn, never rephrase it to get past the gate. Nobody can answer the chat confirmation in those runs either, so an irreversible or externally visible command that Hermes does not flag is not run: it is handed to a person's turn and its confirmation is recorded as missing.
 - If the user supplied failed command output and asks for root cause, route to build-failure-triage or agent-debug instead of preparing a fresh command.
 
 ## Workflow Lane
 
-- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+39 more`) - schedules, status, health, and ops review.
+- Current lane: **Automation and status** (`achievements`, `workspace-audit`, `production-audit`, `live-incident-response`, `automation-blueprint`, `github-event-ops`, `github-issue-intake`, `buzz`, `+40 more`) - schedules, status, health, and ops review.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when Hermes should prepare or supervise terminal/CLI command execution without claiming the command ran or succeeded.
 
@@ -68,11 +71,6 @@ Quality bar:
 - Separate prepared guidance from observed platform, runtime, connector, file, memory, or delivery evidence.
 - Expose missing tools, credentials, targets, or observations as user-visible gaps.
 - Choose the wait strategy before starting long-running work and bind it to a completion signal the host exposes, never to a status loop: a command that fits one tool call runs once in the foreground with a duration-sized timeout; a longer terminal command runs in the background with completion notification armed and no process-status polling; a delegated lane relies on its delivered result while the parent continues independent work or ends the turn; a CI, PR, deploy, file, port, log-line, or external-session condition uses the host's monitor when observed, else exactly ONE bounded watcher or adaptive backoff outside model turns. Record the handle and observation mode at dispatch; every armed wait needs a hard deadline, a cancellation path, and a fallback naming the missing capability. Each wait closes in one terminal state with bounded evidence; an unbounded idle or busy-wait is a defect and a lost notification times out. One decision-changing midpoint peek and any user-requested status check stay allowed; neither is the wait mechanism. Ladder and terminal states: shared rail.
-
-## Background notification handling
-- Prefer a completion-only notification for bounded batch extraction, downloads and audits. Add heartbeats only when intermediate output can change an execution decision; routine progress can otherwise flood the conversation after the task has finished.
-- Deduplicate notifications by process handle and retain the consumed terminal result. After an observed exit has been incorporated into the deliverable, suppress replies to older queued heartbeats and duplicate completion notices; do not restart work or repeat the final briefing for them.
-- Advance work from new actionable output, not notification arrival order. If a late message contradicts the retained result and could affect the answer, perform one scoped state/result check; otherwise preserve the completed report and wait for the user's next request.
 
 Handoff policy:
 
@@ -98,7 +96,7 @@ Artifact expectations:
 
 - command_task_card/v1 metadata-only wrapper card when prepared
 - command_scope/v1 with command text, working directory, environment assumptions, timeout, and stop condition
-- command_safety_gate/v1 separating read-only, write/mutation, network, credential, and destructive-risk commands
+- command_safety_gate/v1 separating read-only, write/mutation, network, credential, and destructive-risk commands, holding the chat confirmation for each irreversible or externally visible command and, on Hermes, the terminal result's `approval` note or its `blocked` or `pending_approval` status as additional observed evidence
 - command_result_manifest/v1 only when exit code, stdout/stderr, logs, or terminal transcript are observed
 
 Safety rules:
@@ -122,13 +120,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.

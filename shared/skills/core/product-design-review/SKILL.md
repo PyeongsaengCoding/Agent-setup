@@ -21,4 +21,4 @@ description: Create or change user-facing screens and flows using the product's 
 - 조작이 있는 화면은 주요 클릭 경로, 키보드 포커스, 오류·빈 상태와 필요한 모션 상태를 확인한다. 성능 수치는 측정한 환경과 경로를 함께 기록한다.
 - 구현, 코드 검사, 브라우저 동작, 접근성, 렌더 확인, 배포 상태를 실제 관찰한 근거에 맞춰 각각 보고한다. 화면 검수만 요청받은 경우 발견 사항과 근거를 전달한다.
 
-OMH 출처: [omh-frontend](https://github.com/rlaope/oh-my-hermes/blob/41de9dc5d00956f052e1863d8e1b58eaeef544cb/skills/omh-frontend/SKILL.md), [omh-visual-qa](https://github.com/rlaope/oh-my-hermes/blob/41de9dc5d00956f052e1863d8e1b58eaeef544cb/skills/omh-visual-qa/SKILL.md). 프론트엔드 세부 기준은 2026-10-09의 OMH `main` 커밋을 따른다. Hermes 전용 실행 기록과 전달 형식은 Claude Code·Codex의 직접 작업 흐름에 맞게 바꾼다.
+OMH 출처: [omh-frontend](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/skills/omh-frontend/SKILL.md), [omh-visual-qa](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/skills/omh-visual-qa/SKILL.md). 프론트엔드 세부 기준은 2026-10-09의 OMH `main` 커밋을 따른다. Hermes 전용 실행 기록과 전달 형식은 Claude Code·Codex의 직접 작업 흐름에 맞게 바꾼다.

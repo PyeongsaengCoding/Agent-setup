@@ -1,6 +1,6 @@
 ---
-name: omh-agent-instructions
-description: "[omh] Agent instruction file for a repo -- AGENTS.md, CLAUDE.md, a Cursor rule: write or update what an agent cannot derive from the code, inside a marked region, with every command verified or marked unverified and no counts that drift."
+name: "omh-agent-instructions"
+description: "[omh] Agent instruction file for a repo -- AGENTS.md, CLAUDE.md, a Cursor rule: write or update what an agent cannot derive from the code, inside a marked region, with every command verified or marked unverified and no counts that drift. Use when the user says: agent-instructions, agents.md, claude.md, gemini.md, copilot-instructions.md, .cursorrules, cursor rules, cursor rule."
 ---
 # Agent Instructions
 
@@ -17,10 +17,10 @@ This is a Hermes-native `agent-instructions` workflow skill.
 
 ## Do Not Use When
 
-- The ask is distilling repeated lessons into reviewed rule candidates; use `rules-distill`.
-- The ask is a reading path through the codebase for a new engineer; use `codebase-onboarding`.
-- The ask is project terminology alignment -- reviewing the terms this project uses and correcting inconsistent vocabulary; use `context`.
-- The ask is user-facing product documentation; use `product-docs`.
+- The ask is distilling repeated lessons into reviewed rule candidates; use `omh-rules-distill`.
+- The ask is a reading path through the codebase for a new engineer; use `omh-codebase-onboarding`.
+- The ask is project terminology alignment -- reviewing the terms this project uses and correcting inconsistent vocabulary; use `ulw-context`.
+- The ask is user-facing product documentation; use `omh-docs`.
 
 ## Examples
 
@@ -53,9 +53,9 @@ Bad example:
 
 - Current lane: **Coding handoff** (`idea-to-deploy`, `llm-app-dev`, `cto-loop`, `deploy-and-monitor`, `code-review`, `build-failure-triage`, `verification-gate`, `security-safety-review`, `+28 more`) - coding owners, handoffs, review, CI, and merge evidence.
 - If intent belongs to another lane, hand back to `oh-my-hermes` or name the adjacent workflow.
-- Shared product, routing, compatibility, and evidence rules: `omh-routing/references/skill-common-rail.md`.
+- Shared product, routing, compatibility, and evidence rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`.
 
-## Use When
+## When to Use
 
 Use when the repository's agent instruction file is being written or kept current: AGENTS.md, CLAUDE.md, GEMINI.md, a Cursor rule, or a Copilot instructions file. The output is the build and test commands each marked verified or unverified, the generated-file map with its regenerate command and gate, the byte-exact gates, and the pitfalls that cost time, written inside a marker-delimited region so hand-written sections survive.
 
@@ -127,13 +127,4 @@ Reply in the user's own words and the host's own voice: its SOUL.md persona owns
 
 Use Hermes-native subagent/delegation features when available: native subagents -> Hermes delegation when available, otherwise sequential lanes.
 
-Shared product, compatibility, topology, memory, harness, and execution rules: `omh-routing/references/skill-common-rail.md`. Load it when applicable; otherwise name an unavailable capability.
-
-## Hermes Compatibility Contract
-
-This skill was imported by `omh` from a local skill source.
-
-- Keep the upstream workflow intent, but adapt runtime behavior to Hermes Agent.
-- Do not require runtime features that Hermes Agent does not expose.
-- Use Hermes `skills_list`, `skill_view`, file tools, terminal tools, and Hermes delegation when available.
-
+Shared product, compatibility, topology, memory, harness, and execution rules: `skill_view(name='omh-routing', file_path='references/skill-common-rail.md')`. Load it when applicable; otherwise name an unavailable capability.
