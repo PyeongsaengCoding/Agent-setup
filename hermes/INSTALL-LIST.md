@@ -19,7 +19,7 @@
 | 예약 스크립트 | discord-project-hygiene | 3일 경과 스레드·Desktop 채팅 삭제(그룹별 최근 3개 유지) | 선택; Discord 사용 시 no-agent cron | `H/scripts/discord-project-hygiene.py` | 원본 `discord/scripts/`; 봇 스레드 관리 권한 |
 | Hermes UI 확장 | OMH Desktop·TUI | 상태·작업 표시 | OMH setup에서 선택한 UI 연결 | `H/desktop-plugins/omh/`; `H/tui-widgets/omh-status.mjs` | 설치 여부·표시는 별도 확인 |
 | 프로젝트 지침 | AGENTS.md | 저장소 작업 규칙 | Agent-setup 루트와 Hermes 폴더 지침 | `Agent-setup/AGENTS.md`, `Agent-setup/hermes/AGENTS.md` | 다른 프로젝트는 각 프로젝트 루트 |
-| 전역 규칙 | 공통 작업 원칙, Aside 브라우저 직접 조작, 문서 전달 | 작업 원칙·표현·프로젝트 지침·CodeGraph; Aside `repl` 직접 조작; 문서 전달 시 폴더 카드 제공·앱 자동 실행 금지 | `scripts/install_global_rules.py`로 중복 없이 추가; 기존 규칙 충돌 시 보존·확인 | `H/SOUL.md` | 원본 `templates/common-rules.md`(Agent-setup `shared/rules/`에서 생성), `templates/aside-browser.md`, `templates/document-delivery.md`; 브라우저 프로필은 프로젝트 규칙 |
+| 전역 규칙 | 공통 작업 원칙, OMH 워크플로 사용, Aside 브라우저 직접 조작, 문서 전달 | 작업 원칙·표현·프로젝트 지침·CodeGraph; 개인 스킬이 다루지 않는 단계에 OMH 스킬·위임 전 OMH 라우팅; Aside `repl` 직접 조작; 문서 전달 시 폴더 카드 제공·앱 자동 실행 금지 | `scripts/install_global_rules.py`로 중복 없이 추가; 기존 규칙 충돌 시 보존·확인 | `H/SOUL.md` | 원본 `templates/common-rules.md`(Agent-setup `shared/rules/`에서 생성), `templates/omh-workflow.md`, `templates/aside-browser.md`, `templates/document-delivery.md`; 브라우저 프로필은 프로젝트 규칙 |
 | 스킬 | apple-notes | Apple 메모 읽기·검색·작성 | 공식 원본; memo; macOS Automation 승인 | `H/skills/apple/apple-notes/` | `$(brew --prefix)/bin/memo` |
 | 스킬 | apple-reminders | Apple 미리 알림 관리 | 공식 원본; remindctl; 미리 알림 승인 | `H/skills/apple/apple-reminders/` | `$(brew --prefix)/bin/remindctl` |
 | 스킬 | findmy | 나의 찾기 기기·AirTag 확인 | 공식 원본; 나의 찾기·iCloud; 화면 권한 | `H/skills/apple/findmy/` | macOS 기본 앱 |

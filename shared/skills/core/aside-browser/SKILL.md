@@ -45,7 +45,8 @@ REPL의 `page`·`openTab` API는 Playwright 문법을 따르는 Aside 자체 경
 
 - Claude Code·Codex는 설치된 `aside repl` CLI나 연결된 Aside MCP의 `repl` 도구를 쓴다. 오래 이어진 세션에서 도구 목록이 Aside 설정보다 먼저 만들어졌으면 도구 목록을 다시 조회해 `repl` 도구를 찾는다.
 - Hermes에서는 설정한 `aside` MCP의 `repl` 도구를 쓰고, 내장 브라우저나 다른 브라우저로 넘어가지 않는다. 프로필·workstream별 Aside 프로세스를 유지하는 bridge를 쓰는 경우의 진단은 다음과 같다.
-  - `16 live contexts reached`처럼 컨텍스트가 가득 차면 먼저 끝난 작업의 같은 프로필 workstream을 재사용한다. 남은 `aside repl --account …` 프로세스 수를 보고하고, 다른 작업이 쓰는지 확인한 뒤 종료 승인을 받는다. CLI 프로세스를 정리해도 bridge 자신의 프로세스 안의 풀은 그대로이므로, 오류가 남으면 bridge 서버 프로세스를 재시작하고 새 프로세스가 뜬 뒤 한 번 재시도한다.
+  - 브라우저 작업을 마치면 직접 연 탭을 닫고, 직접 띄운 `aside repl` 프로세스를 종료한다. 쓰지 않는 컨텍스트(세션 기록에 최근 성공 호출이 없는 bridge의 `aside mcp` 자식, 중복된 bridge 서버 프로세스, 끝난 세션이 남긴 `aside repl` 프로세스)를 발견하면 바로 정리한다. 진행 중인 세션·하위 작업이 쓰는 프로세스만 남긴다.
+  - `16 live contexts reached`처럼 컨텍스트가 가득 차면 위 기준으로 정리한다. CLI 프로세스를 정리해도 bridge 자신의 프로세스 안의 풀은 그대로이므로, 오류가 남으면 bridge 서버 프로세스를 재시작하고 새 프로세스가 뜬 뒤 한 번 재시도한다.
   - 정상 탭에서 `page.screenshot`이 반복해서 CDP 시간 초과를 내면 bridge 서버 프로세스가 중복됐는지 확인하고 하나로 정리한 뒤 재시도한다.
   - bridge를 재시작하기 전에 다른 하위 작업이 같은 프로필을 쓰는지 확인한다. 쓰고 있으면 다른 프로필이나 workstream으로 진행하고, 그 작업이 끝난 뒤 재시작한다.
   - `No browser window is open for account uN`은 프로필 연결과 열린 브라우저 창을 나눠 확인한다. 오류 문구의 프로필 이름과 실제 디렉터리가 다를 수 있으므로 확인한 UUID·경로 바인딩을 유지하고, 창이 열린 뒤 새 탭 열기 → snapshot → 닫기로 복구를 확인한다. 앞으로 띄우기와 공유 프로세스 재시작은 승인을 받는다.

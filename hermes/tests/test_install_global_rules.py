@@ -79,11 +79,21 @@ class GlobalRulesTests(unittest.TestCase):
 
     def test_retired_unmarked_rule_is_preserved(self):
         retired = '## User intent and course correction\nPersonal existing rule.\n'
-        existing = (installer.common_policy() + '\n\n' + installer.browser_policy() + '\n\n' + retired + '\n'
+        existing = (installer.common_policy() + '\n\n' + installer.omh_policy() + '\n\n'
+                    + installer.browser_policy() + '\n\n' + retired + '\n'
                     + installer.delivery_policy() + '\n')
         self.seed(existing)
         self.assertEqual(installer.install(self.home, apply=True)['status'], 'unchanged')
         self.assertEqual(self.target.read_text(), existing)
+
+    def test_omh_workflow_policy_installed_once(self):
+        installer.install(self.home, apply=True)
+        installer.install(self.home, apply=True)
+        content = self.target.read_text()
+        self.assertEqual(content.count(installer.OMH_START), 1)
+        body = installer.omh_policy()
+        self.assertTrue(body.startswith(installer.OMH_HEADING))
+        self.assertIn('omh_delegate_route', body)
 
     def test_retired_managed_rule_is_not_validated_or_changed(self):
         existing = '<!-- hermes-setup:user-intent:begin -->\nPersonal edit.\n<!-- hermes-setup:user-intent:end -->\n'

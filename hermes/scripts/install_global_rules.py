@@ -18,6 +18,13 @@ DELIVERY_HEADING = '## Document delivery in Hermes Desktop'
 COMMON_START = '<!-- agent-setup:common:begin -->'
 COMMON_END = '<!-- agent-setup:common:end -->'
 COMMON_HEADING = '## 작업 원칙'
+OMH_START = '<!-- agent-setup:omh-workflow:begin -->'
+OMH_END = '<!-- agent-setup:omh-workflow:end -->'
+OMH_HEADING = '## OMH 워크플로 사용'
+
+
+def omh_policy():
+    return (ROOT / 'templates/omh-workflow.md').read_text(encoding='utf-8').strip()
 
 
 def browser_policy():
@@ -62,6 +69,7 @@ def install(home, apply=False):
     existing = target.read_bytes().decode('utf-8') if target.exists() else ''
     policies = (
         (common_policy(), COMMON_START, COMMON_END, COMMON_HEADING),
+        (omh_policy(), OMH_START, OMH_END, OMH_HEADING),
         (browser_policy(), BROWSER_START, BROWSER_END, BROWSER_HEADING),
         (delivery_policy(), DELIVERY_START, DELIVERY_END, DELIVERY_HEADING),
     )

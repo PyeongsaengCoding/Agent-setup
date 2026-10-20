@@ -7,6 +7,7 @@
 - 배포 원본: [공통 작업 원칙](../templates/common-rules.md). Agent-setup `shared/rules/common.md`에서 `scripts/build_rules.py`로 생성하며 Claude Code·Codex 전역 지침과 같은 내용이다. 관리 마커는 `agent-setup:common`이다.
 - 배포 원본: [Aside 브라우저 규칙](../templates/aside-browser.md).
 - 배포 원본: [문서 전달 규칙](../templates/document-delivery.md). 실제 문서 폴더를 선택 가능한 카드로 제공하며 Finder·편집기·미리보기를 자동 실행하지 않는다.
+- 배포 원본: [OMH 워크플로 규칙](../templates/omh-workflow.md). 작업을 단계로 나눠 개인 스킬이 다루지 않는 단계에 OMH 스킬을 쓰고, 위임 전 `omh_delegate_route`, 세 단계 이상 작업에 `omh_todo`를 쓴다.
 - 적용 파일: 선택한 Hermes 프로필의 `SOUL.md`.
 - 기본 홈: `${HERMES_HOME:-$HOME/.hermes}`. 이름 있는 프로필은 해당 프로필 홈을 명시한다.
 
