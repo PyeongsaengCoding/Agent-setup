@@ -154,7 +154,7 @@ Hermes에는 Agent-setup이 설치한 구성과 OMH가 설치한 구성이 함�
 | 영역 | Agent-setup에만 | OMH에만 | 둘 다 있을 때 |
 |---|---|---|---|
 | 스킬 | 공식 57·공통·외부 스킬, 작업 중 만든 스킬 (`~/.hermes/skills`) | 워크플로 144개 (`~/.local/share/omh/current/skills`) | 같은 이름이면 `프로젝트 → ~/.hermes/skills → 외부 폴더(OMH)` 순서로 Agent-setup 쪽을 쓴다. 역할만 겹치면 요청에 맞는 쪽을 고른다 |
-| 지침 | `SOUL.md`의 공통 원칙·Aside·문서 전달 | 매 턴 분류 힌트, 프로젝트 `AGENTS.md`의 OMH 구간 | 사용자 지시 → 프로젝트 `AGENTS.md` → 전역 지침 순서. 말투·언어는 `SOUL.md` |
+| 지침 | `SOUL.md`의 공통 원칙·OMH 워크플로 사용(사용자 스킬이 비는 단계는 OMH, 위임 전 OMH 라우팅)·Aside·문서 전달 | 매 턴 분류 힌트, 프로젝트 `AGENTS.md`의 OMH 구간 | 사용자 지시 → 프로젝트 `AGENTS.md` → 전역 지침 순서. 말투·언어는 `SOUL.md` |
 | 모델 라우팅 | 설치 프리셋, 메인 대화 기본 모델 | 분류별 기본 체인, 실행값 `~/.omh/routing/model-chains.json` | 프리셋을 넣은 분류는 `override`로 OMH 기본값보다 우선하고 업데이트 뒤에도 유지된다. 하위 에이전트에만 적용되고 메인 대화·cron은 Hermes 기본 모델 |
 | 기억 | GAM: 프로젝트 결정·해결 경험 | OMH 기억: Hermes 작업 교훈 | 프로젝트 지식은 GAM에 두어 세 AI가 함께 쓴다 |
 | 코드 탐색·브라우저 | CodeGraph, Aside 조작 규칙 | 색인 갱신·브라우저 범위 안내 워크플로 | 실제 도구는 CodeGraph·Aside, 범위 확인은 OMH 안내를 함께 따른다 |
