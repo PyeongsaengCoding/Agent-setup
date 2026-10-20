@@ -16,7 +16,7 @@
 | 사용량 플러그인 | `PhoeniXAbhisheK/hermes-plugin-provider-usage` 고정 ref `023e7e54d6f6c5ec55314f7603ed5b80af81cd54`, GPT·Claude만 표시, 수정 묶음 `patches/provider-usage/<태그>.patch` 적용 | [사용량 표시](docs/provider-usage.md), `scripts/configure_provider_usage.py` |
 | 본체 수정 묶음 | 최신 정식 Hermes 체크아웃에 `patches/hermes-agent/<태그>.patch`(계정 선택·사용량 표시·모델별 계정 쿨다운·턴 복구) 적용 | `scripts/apply_local_patches.py` (기본 보고, `--apply`로 적용) |
 | MCP | CodeGraph, GAM | 공통 기준 |
-| 브라우저 | Aside 설치, 사용자가 고른 프로필 가져오기, Hermes에서 `repl` 직접 조작 | [브라우저](docs/browsers.md), [배포 규칙](templates/aside-browser.md) |
+| 브라우저 | Aside 설치, 사용자가 고른 프로필 가져오기, Aside 연결 장치 설치(`scripts/install_aside_bridge.py`), Hermes에서 `repl` 직접 조작 | [브라우저](docs/browsers.md), [배포 규칙](templates/aside-browser.md) |
 | Discord (선택) | 사용자가 Discord를 쓰면 프로젝트별 채널·결과 보고 플러그인·매일 정리 작업 구성 | [Discord 연동](docs/discord.md), `discord/` |
 
 제공된 설치·호환 패치 스크립트와 안내 문서는 참고 자료다. 기존 파일과 충돌하면 차이를 확인해 처리한다. 스킬이 쓰는 Python 라이브러리는 프로젝트 `.venv/`에 둔다.

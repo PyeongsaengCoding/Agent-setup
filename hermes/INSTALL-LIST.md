@@ -9,6 +9,7 @@
 | 앱·CLI | Hermes | 주 작업 에이전트 | 필수; 공식 Desktop/CLI 설치 | `H/` | Desktop 앱은 `/Applications/`; 소스 방식 checkout은 `H/hermes-agent/` |
 | Desktop 설정 | UI 크기 맞춤 | 기존 ChatGPT·Claude 앱의 창·글자·UI 크기 반영 | 기존 앱이 있으면 확인·적용·화면 비교; 두 앱이 다르면 기준 확인 | Hermes Desktop 창·Appearance 설정 | [적용 기준](docs/desktop-ui.md); 기존 앱·포커스 보존 |
 | 앱 | Aside | 로그인 브라우저 작업·프로필 가져오기 | 필수; 공식 앱·CLI·자신의 로그인 | `/Applications/Aside.app` | CLI는 공식 설치기 경로 확인; macOS 프로필은 `~/Library/Application Support/Aside/` |
+| MCP 연결 | Aside 연결 장치 | 프로필별 `repl` 도구 하나, 안 쓰는 연결 15분 뒤 자동 종료 | 필수; `scripts/install_aside_bridge.py --apply` | `H/integrations/aside-browser/` | 원본 `integrations/aside-browser/`; `mcp_servers.aside`에 등록 |
 | 앱 | Chrome·Edge·Safari | 기존 로그인 브라우저 활용 | 사용하는 브라우저만; 프로필 가져오기는 지원 여부 확인 | `/Applications/` | `~/Library/Application Support/Google/Chrome/`, `~/Library/Application Support/Microsoft Edge/`, Safari는 OS 관리 |
 | 확장·스킬팩 | OMH | 작업 분류·라우팅·검증 지침 | 필수; 공식 install·setup | `~/.omh/`; `~/.local/share/omh/` | Hermes 등록 `H/plugins/omh/`; 스킬 실제 경로는 `skills.external_dirs` 확인 |
 | 런타임 호환 패치 | 자식 fallback 순서·추론 | GPT 시작 자식의 Opus 마지막 순서와 작업별 추론 유지 | 설치본에 순서·추론 보완이 필요할 때만 미리보기·적용·새 프로세스 검증 | 실제 소스의 `agent/chat_completion_helpers.py`, `tools/delegate_tool_config.py` | `scripts/configure_delegation_reasoning.py`, `scripts/configure_gpt_fallback.py`; [적용 기준](docs/model-routing.md) |

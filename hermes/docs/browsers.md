@@ -14,12 +14,17 @@ Hermes의 격리 브라우저와 사용자가 로그인한 브라우저는 다�
 
 CLI와 MCP 연결 중 필요한 경로를 선택한다. MCP에서는 JavaScript를 실행하는 `repl` 도구만 허용하고 에이전트 위임 도구는 노출하지 않는다. 가능하면 서버의 include 필터를 `[repl]`로 제한하고 실제 등록된 도구를 확인한다.
 
+Hermes는 Aside 연결 장치(`integrations/aside-browser/`)로 MCP에 붙인다. Aside 공식 MCP는 한 번에 한 계정만 다루므로, 이 장치가 프로필 이름을 받아 해당 Aside 계정의 `aside mcp`를 프로필·workstream별로 띄운다. 도구 목록의 프로필 이름은 Aside `Local State`에서 시작할 때 읽는다(가져온 프로필의 `Chrome · ` 접두어는 뺀다). 15분 동안 쓰지 않은 연결은 스스로 닫고, 16자리가 다 차면 가장 오래 쉰 연결을 닫는다.
+
 ```sh
 aside --help
-aside repl "const page = await openTab('https://example.com'); console.log(await page.title())"
-hermes mcp add aside --command aside --args mcp
+python3 scripts/install_aside_bridge.py            # 미리 보기
+python3 scripts/install_aside_bridge.py --apply    # 복사·mcp_servers.aside 등록·내장 browser 끄기
 hermes mcp test aside
+<Hermes python> -I ~/.hermes/integrations/aside-browser/test_bridge.py   # 프로필 연결·자동 닫힘 실제 확인
 ```
+
+설치 후 기존 연결 장치 프로세스(`aside-browser/server.py`)를 끄거나 새 세션을 열어야 새 장치가 뜬다. 프로필 이름 목록은 세션이 시작될 때 정해지므로 프로필을 추가하거나 이름을 바꾸면 새 세션에서 반영된다.
 
 CLI가 PATH에 없다면 `command -v aside`로 실행 경로를 확인한다. 기존 MCP는 비교 후 연결하며, `repl` 오류는 연결·프로필·호출 코드를 진단해 복구한다. 자체 AI로 우회하지 않는다.
 
