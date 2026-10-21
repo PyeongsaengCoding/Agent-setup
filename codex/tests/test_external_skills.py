@@ -1,9 +1,11 @@
 import json
+import os
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'scripts'))
 from install_external_skills import install, source_folder
@@ -150,6 +152,33 @@ class WorkPackInstallTests(unittest.TestCase):
             self.assertFalse((target/'.git').exists())
             self.assertEqual(install(['alpha'], catalog=catalog, home=home, state=state, refresh=True),
                              {'alpha':'up_to_date'})
+
+    def test_source_with_lfs_media_installs_without_git_lfs(self):
+        # A source repository may keep media in Git LFS. The checkout keeps LFS pointer
+        # files, so a machine whose Git config names a missing git-lfs program still installs.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            gitconfig = root/'gitconfig'
+            gitconfig.write_text('')
+            with patch.dict(os.environ, {'GIT_CONFIG_GLOBAL': str(gitconfig), 'GIT_CONFIG_NOSYSTEM': '1'}):
+                source = root/'source'
+                folder = source/'skills/alpha'
+                folder.mkdir(parents=True)
+                (folder/'SKILL.md').write_text('---\nname: alpha\ndescription: fixture\n---\n')
+                (source/'media').mkdir()
+                (source/'media/clip.mp4').write_text('media bytes')
+                (source/'.gitattributes').write_text('media/** filter=lfs diff=lfs merge=lfs -text\n')
+                subprocess.run(['git','init','-q',str(source)], check=True)
+                subprocess.run(['git','-C',str(source),'add','.'], check=True)
+                subprocess.run(['git','-C',str(source),'-c','user.name=Fixture',
+                                '-c','user.email=fixture@example.invalid','commit','-qm','fixture'], check=True)
+                gitconfig.write_text('[filter "lfs"]\n\tprocess = missing-git-lfs filter-process\n'
+                                     '\tsmudge = missing-git-lfs smudge -- %f\n\trequired = true\n')
+                catalog = root/'catalog.json'
+                catalog.write_text(json.dumps({'skills': {'alpha': {'sourceUrl': str(source),
+                                                                  'skillPath': 'skills/alpha/SKILL.md'}}}))
+                self.assertEqual(install(['alpha'], catalog=catalog, home=root/'home', state=root/'state'),
+                                 {'alpha': 'installed'})
 
     def test_rejects_path_escape(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -371,7 +371,29 @@
       "skillPath": ".github/plugins/azure-cost/skills/cost-optimization/SKILL.md",
       "releaseTag": "v1.2.95",
       "ref": "cf79ce8778ad063eeac19dbe8bf982d71b466ce0"
+    },
+    "motion-design": {
+      "source": "nexu-io/open-design",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nexu-io/open-design.git",
+      "skillPath": "skills/motion-design/SKILL.md",
+      "releaseTag": "open-design-v0.26.0",
+      "ref": "bfee093942f8578c8b6ec7f26862e96f81026a89",
+      "skillFolderHash": "b22ac335b1b5e6f8127fe5122598feebbfffb035",
+      "installedAt": "2026-10-21T06:15:12.000Z",
+      "updatedAt": "2026-10-21T06:15:12.000Z"
+    },
+    "hyperframes-animation": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/heygen-com/hyperframes.git",
+      "skillPath": "skills/hyperframes-animation/SKILL.md",
+      "releaseTag": "v0.8.181",
+      "ref": "ae02e5aceff4742e5d72c20f0859eb3e6b449035",
+      "skillFolderHash": "284a8f10bb196a6087d52ff6e0e13827602d10ed",
+      "installedAt": "2026-10-21T06:15:12.000Z",
+      "updatedAt": "2026-10-21T06:15:12.000Z"
     }
   },
-  "note": "ref is the full commit of releaseTag (latest stable GitHub release, no drafts or pre-releases); scripts/check_releases.py compares it with the newest release. releaseTag null means the source publishes no releases, so the installer follows its default branch. skillFolderHash is installer metadata."
+  "note": "ref is the full commit of releaseTag (latest stable GitHub release, no drafts or pre-releases); scripts/check_releases.py compares it with the newest release. releaseTag null means the source publishes no releases, so the installer follows its default branch. skillFolderHash is installer metadata: the Git tree SHA of the skill folder (git rev-parse <commit>:<folder>) at the entry's installedAt/updatedAt time; the installer does not read it."
 }

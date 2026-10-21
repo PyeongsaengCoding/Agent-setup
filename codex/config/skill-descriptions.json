@@ -30,5 +30,6 @@
   "microsoft-foundry/models/deploy-model/capacity/SKILL.md": "Compare Azure OpenAI model capacity and availability across regions or projects before deployment. Discovery only.",
   "microsoft-foundry/models/deploy-model/customize/SKILL.md": "Deploy Azure OpenAI models with explicit version, SKU, capacity, content-filter, or advanced settings; use preset for automatic region selection.",
   "microsoft-foundry/models/deploy-model/preset/SKILL.md": "Deploy Azure OpenAI models with automatic capacity-based region selection; use customize for explicit version, SKU, or capacity choices.",
+  "motion-design/SKILL.md": "Use when planning or improving motion graphics, promo videos, shorts, kinetic typography, or UI/video motion craft: brief, beat map, visual continuity, typography, pacing, and timeline. Outside Open Design, the project's own HyperFrames or renderer procedure owns rendering and export.",
   "python-appservice-deploy/SKILL.md": "Deploy Flask, Django, or FastAPI code to Azure App Service Linux. Excludes infrastructure provisioning, Functions, and Container Apps."
 }

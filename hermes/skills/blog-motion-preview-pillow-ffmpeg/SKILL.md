@@ -5,6 +5,10 @@ description: "Use when making a short silent GIF/MP4 motion for a blog."
 
 # Short silent motion preview (5–8s) with Pillow + ffmpeg
 
+## Tool choice
+
+HyperFrames is the default tool for blog body motions: compose the motion in HTML/CSS/GSAP, render MP4, then make the GIF with the palette command in Workflow step 5. Install HyperFrames project-local in the project that publishes the post. Use the Pillow route below only when HyperFrames cannot run, and record which tool produced each file. Motion direction (easing, staging, pacing) follows the `motion-design` skill and HyperFrames timelines follow `hyperframes-animation`, both kept within calm body-motion rules: one comparison per motion, ease-out entrances with a short stagger, one emphasis change, readable mid frames, and the final all-info state held for at least 1.5s; leave out shorts-style cuts, camera moves, flashing and shake. Color, on-screen text, verification and insertion rules below apply to both routes.
+
 Render Korean-labelled frames with Pillow, encode with ffmpeg, verify by decoding the output.
 
 ## Workflow

@@ -8,8 +8,8 @@
 |---|---|---|
 | Hermes | Desktop 또는 CLI 설치, 사용자가 GPT·Claude 계정 로그인. 인증 파일은 로컬에만 | [공식 설치 안내](https://hermes-agent.nousresearch.com/docs/getting-started/installation) |
 | Desktop UI 크기 | 기존 ChatGPT·Claude 앱이 있으면 창·글자·UI 크기를 맞춤 | [UI 크기](docs/desktop-ui.md) |
-| 스킬 | [스킬 표](../docs/skills.md)의 Hermes 열 (Hermes 공식 57개 + 공통 32개 + 외부 37개). 공식 스킬은 `manifest.json`의 고정 커밋 원본 그대로 | [설치 목록](INSTALL-LIST.md), `scripts/install_skills.py` |
-| 외부 스킬 | Codex·Claude와 같은 Azure·마케팅 등 37개를 `$HERMES_HOME/skills/`에. 같은 설명 조정 적용 | `../codex/inventories/external-skills.json`, `../codex/config/skill-descriptions.json` |
+| 스킬 | [스킬 표](../docs/skills.md)의 Hermes 열 (Hermes 공식 57개 + 공통 34개 + 외부 39개). 공식 스킬은 `manifest.json`의 고정 커밋 원본 그대로 | [설치 목록](INSTALL-LIST.md), `scripts/install_skills.py` |
+| 외부 스킬 | Codex·Claude와 같은 Azure·마케팅·모션 디자인 등 39개를 `$HERMES_HOME/skills/`에. 같은 설명 조정 적용 | `../codex/inventories/external-skills.json`, `../codex/config/skill-descriptions.json` |
 | OMH | `manifest.json`의 v4.0.0 참조 커밋 기준으로 설치·setup, 연결한 GPT·Claude 제공자 반영 | [OMH 공식 안내](https://github.com/rlaope/oh-my-hermes/blob/36e96feb432068cd27eecf5b434acdf1328341b4/INSTALL_FOR_AGENTS.md) |
 | 모델 라우팅 | Claude 넉넉형 (사용자가 원하면 GPT 넉넉형), 필요한 호환 패치 | [모델 라우팅](docs/model-routing.md) |
 | 전역 규칙 | 선택한 프로필의 `SOUL.md`에 공통 작업 원칙·Aside·문서 전달 구간 | [전역 규칙](docs/global-rules.md), `scripts/install_global_rules.py` |
@@ -23,7 +23,7 @@
 
 ## 적용 범위
 
-선택한 Hermes 프로필의 실제 홈에 구성한다. 이름 있는 프로필은 `~/.hermes/profiles/<이름>/`을 대상으로 한다. 공식 스킬 57개는 `manifest.json`의 고정 원본과, 공통 스킬은 루트 `shared/skills/`와 일치해야 한다. 외부 스킬 37개는 Codex와 같은 목록과 설명 조정을 사용한다. [라우팅](docs/model-routing.md)·[사용량 표시](docs/provider-usage.md)·[브라우저](docs/browsers.md)·[UI 크기](docs/desktop-ui.md)는 선택한 프로필에 적용한다. 검사 기준은 [검증 안내](docs/verification.md)를 따른다.
+선택한 Hermes 프로필의 실제 홈에 구성한다. 이름 있는 프로필은 `~/.hermes/profiles/<이름>/`을 대상으로 한다. 공식 스킬 57개는 `manifest.json`의 고정 원본과, 공통 스킬은 루트 `shared/skills/`와 일치해야 한다. 외부 스킬 39개는 Codex와 같은 목록과 설명 조정을 사용한다. [라우팅](docs/model-routing.md)·[사용량 표시](docs/provider-usage.md)·[브라우저](docs/browsers.md)·[UI 크기](docs/desktop-ui.md)는 선택한 프로필에 적용한다. 검사 기준은 [검증 안내](docs/verification.md)를 따른다.
 
 설치 결과에는 선택한 프로필, 적용 원본과 관리 구간, 충돌, 새 세션 검증 결과를 기록한다. 제품의 AGENTS·디자인·코드·lint·CI 설정은 해당 제품 저장소의 생성·적용 절차에서 관리한다.
 

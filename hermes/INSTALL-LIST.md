@@ -112,6 +112,6 @@
 | 스킬 | clock-fenced-offline-integration | 시각 기준 오프라인 통합 확인 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/clock-fenced-offline-integration/` | — |
 | 스킬 | future-effective-memory-tdd | 미래 시점 적용 기억 갱신을 TDD로 수정 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/future-effective-memory-tdd/` | — |
 | 스킬 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | Agent-setup 공통 스킬(Hermes 작업 교훈 공개본) | `H/skills/project-reference-adoption/` | — |
-| 외부 스킬 | Azure·Entra 26, Azure 비용 4, 마케팅 5, archify, iterative-retrieval (37개) | Codex·Claude Code와 같은 업무 스킬 | Agent-setup 외부 목록 `codex/inventories/external-skills.json`의 고정 원본(원본별 최신 정식 릴리스 태그의 커밋); 설명 조정 `codex/config/skill-descriptions.json` | `H/skills/<스킬명>/` | 설치 기록은 Agent-setup 상태 경로의 별도 잠금 파일 |
+| 외부 스킬 | Azure·Entra 26, Azure 비용 4, 마케팅 5, 모션 디자인 2(motion-design·hyperframes-animation), archify, iterative-retrieval (39개) | Codex·Claude Code와 같은 업무 스킬 | Agent-setup 외부 목록 `codex/inventories/external-skills.json`의 고정 원본(원본별 최신 정식 릴리스 태그의 커밋); 설명 조정 `codex/config/skill-descriptions.json` | `H/skills/<스킬명>/` | 설치 기록은 Agent-setup 상태 경로의 별도 잠금 파일 |
 
 출처와 설치 기준은 [manifest.json](manifest.json), 실행 방법은 [설치 안내](INSTALL_FOR_AGENTS.md)에 있다. Hermes 기본 내장 플러그인을 전부 복제하지 않는다.

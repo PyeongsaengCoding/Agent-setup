@@ -13,7 +13,7 @@ OMH 참조 커밋은 Codex·Claude·Hermes 모두 OMH v4.0.0의 36e96fe다.
 외부 공개 전에 확인할 항목:
 
 - Codex-Setup 자체의 최상위 라이선스
-- codex/inventories/external-skills.json 외부 스킬 37개의 라이선스
+- codex/inventories/external-skills.json 외부 스킬 39개의 라이선스 (2026-10-21 추가한 motion-design·hyperframes-animation은 원본 저장소 LICENSE가 Apache-2.0)
 - Hermes provider-usage 플러그인의 라이선스
 
 루트의 README·AGENTS·CLAUDE·docs/·scripts/check.py·tests/는 Agent-setup에서 작성했다.

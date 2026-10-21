@@ -6,7 +6,7 @@
 |---|---|---|
 | Codex 설정 | `$CODEX_HOME/config.toml`, 기본 `~/.codex/config.toml` | 비공개 사용자 설정 |
 | 모델 분담·식별자 | `$CODEX_HOME/working-method.md`, `$CODEX_HOME/models.json` | 설치 후 로컬에서 읽는 작업 기준 |
-| 스킬 63개 | `~/.agents/skills/<스킬명>/` | 핵심·외부 스킬 모두 독립 복사본; 항목별 원본은 [전체 표](03-skills.md); 잠금 기록은 `~/Library/Application Support/codex-setup/` |
+| 스킬 66개 | `~/.agents/skills/<스킬명>/` | 핵심·외부 스킬 모두 독립 복사본; 항목별 원본은 [전체 표](03-skills.md); 잠금 기록은 `~/Library/Application Support/codex-setup/` |
 | 설치 상태·실행 기록·백업 | `~/Library/Application Support/codex-setup/` | `installation.json`, `tools.json`, `managed-backups/`, `backups/` 등; Git 밖 비공개 |
 | GAM 실행 파일 | `$(uv tool dir --bin)/global-memory-mcp` | 공식 `uv tool install`이 관리 |
 | GAM 프로그램 환경 | `$(uv tool dir)/global-memory-mcp/` | `uv` 기본 도구 경로, Setup이 경로를 지정하지 않음 |

@@ -10,7 +10,7 @@ Agent-setup 전체 체크아웃을 사용한다. 이 문서의 `scripts/`, `conf
 |---|---|
 | Codex | 앱 또는 CLI 설치·로그인 상태 |
 | 모델 라우팅 | 12개 분류별 GPT 모델·추론 (`working-method.md`, `models.json`) |
-| 스킬 | [스킬 표](../docs/skills.md)의 Codex 열 (공통 26개 + 외부 37개), `~/.agents/skills/` |
+| 스킬 | [스킬 표](../docs/skills.md)의 Codex 열 (공통 49개 + OMH 144개 + 외부 39개), `~/.agents/skills/` |
 | 전역 지침 | `$CODEX_HOME/AGENTS.md` (기본 `~/.codex/AGENTS.md`) |
 | MCP | CodeGraph, GAM (`~/.codex/config.toml`, 다른 설정 키 보존) |
 | Aside | 공통 기준대로 |

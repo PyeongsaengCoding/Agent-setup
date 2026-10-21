@@ -4,9 +4,9 @@
 
 | AI | 기본 설치 | 구성 |
 |---|---|---|
-| Claude Code | 231 | 공통 49 + OMH 144 + codex + 외부 37 |
-| Codex | 230 | 공통 49 + OMH 144 + 외부 37 |
-| Hermes | 128 + OMH 144 | Hermes 공식 57 + 공통 34 + 외부 37 + OMH 144 |
+| Claude Code | 233 | 공통 49 + OMH 144 + codex + 외부 39 |
+| Codex | 232 | 공통 49 + OMH 144 + 외부 39 |
+| Hermes | 130 + OMH 144 | Hermes 공식 57 + 공통 34 + 외부 39 + OMH 144 |
 
 ## 1. 공통 스킬과 AI 전용 스킬 (51)
 
@@ -64,7 +64,7 @@
 | 50 | 조사 | project-reference-adoption | 참고 링크의 프로젝트 도입 검토 | ✅ | ✅ | ✅ | 세 AI 같은 내용. Hermes에서 작업 중 만든 교훈을 공개용으로 정리 | Agent-setup | — |
 | 51 | 디자인 | logo-design | 로고·브랜드 마크의 브리프·컨셉·SVG 제작·16px 시험·전달 파일 (kaankiziltug/logo-design-skill @ 0ecf52e) | ✅ | ✅ | ✅ | 세 AI 같은 파일. 상표 로고 SVG 묶음은 MIT 밖이라 제외하고 메타데이터 catalog로 검색 | Agent-setup | 제품 브랜드·아이콘 결정은 해당 프로젝트 문서에 둠 |
 
-## 2. 외부 스킬 (37)
+## 2. 외부 스킬 (39)
 
 업무별 외부 원본에서 받는다. 세 AI 모두 같은 원본·같은 설명 조정. 세 AI 비교: 파일이 같고 설치 위치만 다름 (`~/.claude/skills`, `~/.agents/skills`, `$HERMES_HOME/skills`).
 
@@ -107,6 +107,8 @@
 | 35 | cost-estimation | 계획 중인 Azure 사용료 추정 | ✅ | ✅ | ✅ | Agent-setup | — |
 | 36 | cost-governance | Azure 예산·알림·정책 관리 | ✅ | ✅ | ✅ | Agent-setup | — |
 | 37 | cost-optimization | 실행 중인 Azure 리소스 비용 최적화 | ✅ | ✅ | ✅ | Agent-setup | — |
+| 38 | motion-design | 모션 그래픽·홍보 영상·쇼츠·키네틱 타이포의 연출 설계와 개선 (Open Design open-design-v0.26.0). Open Design 밖에서는 렌더링·내보내기를 프로젝트의 HyperFrames·렌더러 절차로 | ✅ | ✅ | ✅ | Agent-setup | 영상 형식·렌더러·검수 기준은 해당 프로젝트 문서에 둠 |
+| 39 | hyperframes-animation | HyperFrames 애니메이션 규칙·장면 청사진·전환·런타임 어댑터 (HeyGen HyperFrames v0.8.181 공식 스킬) | ✅ | ✅ | ✅ | Agent-setup | HyperFrames 설치와 나머지 공식 스킬(`hyperframes-core` 등)은 사용하는 프로젝트에 설치 |
 
 ## 3. Hermes 공식 스킬 (57)
 

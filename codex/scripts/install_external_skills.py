@@ -3,6 +3,11 @@ import argparse, datetime, hashlib, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path, PurePosixPath
 from setup_runtime import ROOT, state_root, write_json
 
+# Source checkouts run with the Git LFS filter turned off. LFS-tracked files stay as pointer
+# files, so a source repository with LFS media downloads no media and clones even where the
+# Git config names an LFS program that is not installed.
+GIT = ('git','-c','filter.lfs.process=','-c','filter.lfs.smudge=','-c','filter.lfs.required=false')
+
 
 def source_folder(checkout, raw_path):
     path = PurePosixPath(raw_path)
@@ -69,15 +74,15 @@ def install(names, *, catalog, home, state, refresh=False, replace_existing=Fals
             key = (item['sourceUrl'], revision)
             if key not in checkouts:
                 checkout = Path(temp)/str(len(checkouts))
-                subprocess.run(['git','clone','--quiet','--depth','1',item['sourceUrl'],str(checkout)],check=True)
+                subprocess.run([*GIT,'clone','--quiet','--depth','1',item['sourceUrl'],str(checkout)],check=True)
                 if revision:
-                    subprocess.run(['git','-C',str(checkout),'fetch','--quiet','--depth','1','origin',revision],check=True)
-                    subprocess.run(['git','-C',str(checkout),'checkout','--quiet','--detach',revision],check=True)
+                    subprocess.run([*GIT,'-C',str(checkout),'fetch','--quiet','--depth','1','origin',revision],check=True)
+                    subprocess.run([*GIT,'-C',str(checkout),'checkout','--quiet','--detach',revision],check=True)
                 checkouts[key] = checkout
             checkout = checkouts[key]
             source = source_folder(checkout,item['skillPath'])
             target_root.mkdir(parents=True,exist_ok=True)
-            commit = subprocess.check_output(['git','-C',str(checkout),'rev-parse','HEAD'],text=True).strip()
+            commit = subprocess.check_output([*GIT,'-C',str(checkout),'rev-parse','HEAD'],text=True).strip()
             next_lock = {'source':item['sourceUrl'],'commit':commit,'path':item['skillPath'],
                          'sha256':hashlib.sha256((source/'SKILL.md').read_bytes()).hexdigest()}
             if target.exists():
@@ -97,9 +102,9 @@ def install(names, *, catalog, home, state, refresh=False, replace_existing=Fals
                     old_key = (recorded['source'],recorded['commit'])
                     if old_key not in checkouts:
                         old_checkout = Path(temp)/str(len(checkouts))
-                        subprocess.run(['git','clone','--quiet','--depth','1',recorded['source'],str(old_checkout)],check=True)
-                        subprocess.run(['git','-C',str(old_checkout),'fetch','--quiet','--depth','1','origin',recorded['commit']],check=True)
-                        subprocess.run(['git','-C',str(old_checkout),'checkout','--quiet','--detach',recorded['commit']],check=True)
+                        subprocess.run([*GIT,'clone','--quiet','--depth','1',recorded['source'],str(old_checkout)],check=True)
+                        subprocess.run([*GIT,'-C',str(old_checkout),'fetch','--quiet','--depth','1','origin',recorded['commit']],check=True)
+                        subprocess.run([*GIT,'-C',str(old_checkout),'checkout','--quiet','--detach',recorded['commit']],check=True)
                         checkouts[old_key] = old_checkout
                     old_source = source_folder(checkouts[old_key],recorded['path'])
                     if current != folder_snapshot(old_source,source=True):

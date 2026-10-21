@@ -26,9 +26,9 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 
 ### 원칙
 
-- OMH 스킬 142개는 Hermes에서는 OMH 설치기로, Claude Code·Codex에서는 `shared/skills/omh/` 사본으로 설치한다. 사본은 `scripts/import_omh_skills.py`가 설치된 OMH에서 가져와 frontmatter만 정리하고 버전을 `SOURCE.json`에 남긴다. Claude Code·Codex 전역 지침의 `OMH 워크플로 스킬` 절이 `omh_*` 도구를 각 실행기의 할 일 목록·GAM·위임·CodeGraph·파일 기록으로 대응시킨다. 화면 작업의 `product-design-review`는 OMH frontend·visual-qa를 기준으로 직접 구현·검증한다. 레지스트리·차트·스타일 세부 기준은 OMH `main`의 2026-10-09 고정 커밋을 참고한다.
+- OMH 스킬 144개는 Hermes에서는 OMH 설치기로, Claude Code·Codex에서는 `shared/skills/omh/` 사본으로 설치한다. 사본은 `scripts/import_omh_skills.py`가 설치된 OMH에서 가져와 frontmatter만 정리하고 버전을 `SOURCE.json`에 남긴다. Claude Code·Codex 전역 지침의 `OMH 워크플로 스킬` 절이 `omh_*` 도구를 각 실행기의 할 일 목록·GAM·위임·CodeGraph·파일 기록으로 대응시킨다. 화면 작업의 `product-design-review`는 OMH frontend·visual-qa를 기준으로 직접 구현·검증한다. 레지스트리·차트·스타일 세부 기준은 OMH `main`의 2026-10-09 고정 커밋을 참고한다.
 - 공통 스킬 원본은 `shared/skills/core/` 한 곳이다. Claude 설치기와 Codex 설치기가 같은 원본을 설치하고, 실행기마다 다른 내용은 전역 AGENTS.md의 `모델 라우팅` 구간이 맡는다.
-- 직접 관리하는 선택 스킬은 `shared/skills/packs/`에, 외부 스킬 목록은 실행기별 manifest에 둔다. 현재 설치기는 외부 스킬 37개를 기본 대상으로 처리한다. 선택 설치로 바꾸는 작업은 7절의 예정 항목이다.
+- 직접 관리하는 선택 스킬은 `shared/skills/packs/`에, 외부 스킬 목록은 실행기별 manifest에 둔다. 현재 설치기는 외부 스킬 39개를 기본 대상으로 처리한다. 선택 설치로 바꾸는 작업은 7절의 예정 항목이다.
 
 ### 공통 핵심 49개 (`shared/skills/core/`, Claude Code·Codex·Hermes)
 
@@ -57,10 +57,10 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | 실행기 | 위치 | 스킬 |
 |---|---|---|
 | Claude Code | `claude/skills/` | `codex`: GPT 항목·사용자 지정·독립 리뷰 때 Codex 플러그인으로 넘기고 결과 회수, 실패 시 다음 항목 |
-| Codex | — | 전용 스킬 없음 (공통 49개 + OMH 142개 + 외부 37개) |
+| Codex | — | 전용 스킬 없음 (공통 49개 + OMH 144개 + 외부 39개) |
 | Hermes | `hermes/manifest.json` | Hermes 공식 스킬 57개 + 공통 34개(도구·기준 12개와 Hermes 작업 교훈 공개본 22개), OMH |
 
-설치 결과: Claude Code 229개(공통 49 + OMH 142 + codex + 외부 37), Codex 228개(공통 49 + OMH 142 + 외부 37), Hermes 128개(공식 57 + 공통 34 + 외부 37) + OMH 142개. 스킬별 표는 [스킬 표](skills.md).
+설치 결과: Claude Code 233개(공통 49 + OMH 144 + codex + 외부 39), Codex 232개(공통 49 + OMH 144 + 외부 39), Hermes 130개(공식 57 + 공통 34 + 외부 39) + OMH 144개. 스킬별 표는 [스킬 표](skills.md).
 
 ### 선택 묶음
 
@@ -69,10 +69,11 @@ Agent-setup은 **AI 작업 환경** 설치 원본이다. 처음 쓰는 사람이
 | mac | desktop-app-provisioning (`shared/skills/packs/mac/`) | 세 실행기 |
 | azure | Azure·Entra·cost 외부 스킬 30개 | 세 AI 기본 설치 (외부 manifest) |
 | marketing | aso, seo-audit, cro, copywriting, analytics | 세 AI 기본 설치 (외부 manifest) |
+| motion | motion-design, hyperframes-animation | 세 AI 기본 설치 (외부 manifest) |
 | 기타 | archify, iterative-retrieval | 세 AI 기본 설치 (외부 manifest) |
 | Hermes 공식 묶음 | office, research, productivity, creative 등 | Hermes |
 
-세 AI 모두 외부 37개(Azure·마케팅 등)를 기본 설치 대상으로 둔다. 외부 스킬을 묶음별 선택 설치로 바꾸는 것과 선택 묶음을 요청으로 설치하는 방법은 다음 단계에서 정한다.
+세 AI 모두 외부 39개(Azure·마케팅·모션 디자인 등)를 기본 설치 대상으로 둔다. 외부 스킬을 묶음별 선택 설치로 바꾸는 것과 선택 묶음을 요청으로 설치하는 방법은 다음 단계에서 정한다.
 
 ### 설치 범위
 
