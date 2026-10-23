@@ -1,6 +1,6 @@
 ---
 name: agent-setup-maintenance
-description: 이 컴퓨터의 AI 작업 환경(Claude Code·Codex·Hermes의 전역 지침, 모델 라우팅, 공통 스킬, CodeGraph·Aside 연결)을 추가·변경·재설치·제거할 때 Agent-setup 원본과 설치 기록을 기준으로 처리한다.
+description: 이 컴퓨터의 AI 작업 환경(Claude Code·Codex·Hermes의 전역 지침, 모델 라우팅, 공통 스킬, CodeGraph·Aside 연결)을 추가·변경·재설치·제거하거나 Hermes·OMH 업데이트 명령을 안내할 때 Agent-setup 원본과 설치 기록을 기준으로 처리한다.
 ---
 
 # AI 작업 환경 변경
@@ -32,3 +32,8 @@ description: 이 컴퓨터의 AI 작업 환경(Claude Code·Codex·Hermes의 전
 
 - Aside CLI 업데이트는 `~/.claude/skills/aside-browser`·`~/.agents/skills/aside-browser`를 Aside 공식 진입 스킬로 덮어쓴다. 설치기 충돌이 나면 백업 후 공통 원본으로 다시 설치한다.
 - Claude Code·Codex의 OMH 스킬은 `shared/skills/omh/` 사본이다. OMH를 올린 뒤 `scripts/import_omh_skills.py`로 다시 가져온다. 보존 정리는 `scripts/retention.py`(정책 `shared/retention/policy.json`, launchd 주간 작업)다. Hermes 왼쪽 채팅 목록 정리 기준은 같은 정책의 `hermes_desktop_chats`이고, 실행은 `hermes/discord/scripts/discord-project-hygiene.py`(Hermes cron 매일 04:30)다. 기준을 바꾸면 두 파일을 함께 고치고 `tests/test_retention.py`로 일치를 확인한 뒤 Hermes 홈의 `scripts/`에 복사한다.
+
+## 업데이트 명령 안내
+
+- 사용자가 업데이트를 묻거나 Hermes가 새 정식 버전을 알리면(Desktop 알림, `hermes update --check`, `omh update --dry-run`) `hermes/docs/model-routing.md` "업데이트" 절의 블록을 파일에서 읽어 그대로 한 복사 블록으로 준다. Hermes(stable 채널)와 OMH(`--channel stable --version <최신 태그>`)를 항상 함께 최신 정식 릴리스로 올린다. 기억으로 재구성한 짧은 블록이나 옵션 없는 `omh update`(설치 기록이 main zip이면 preview를 받음)는 주지 않는다.
+- 블록 앞에 `hermes update --check`와 OMH 최신 태그로 확인한 현재→새 버전을 한 줄로 적는다. 새 Hermes 태그용 패치가 `hermes/patches/hermes-agent/`에 없으면 4단계 `no_patch`에서 멈춘다고 미리 알린다.

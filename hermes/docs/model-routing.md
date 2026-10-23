@@ -126,7 +126,7 @@ omh model-chains show --json
 
 ## 업데이트
 
-Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱신하고, Hermes 본체·provider-usage에는 이 사용자의 수정 묶음(`hermes/patches/`)을 다시 적용한다. Hermes 공식 설치본은 `stable` 채널(최신 `vX.Y.Z` 릴리스 커밋)을 따르고, `hermes update --check`의 `Update channel: stable`로 확인한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다.
+Hermes와 OMH는 아래 블록 하나로 함께 최신 정식 릴리스로 갱신하고, Hermes 본체·provider-usage에는 이 사용자의 수정 묶음(`hermes/patches/`)을 다시 적용한다. Hermes 공식 설치본은 `stable` 채널(최신 `vX.Y.Z` 릴리스 커밋)을 따르고, `hermes update --check`의 `Update channel: stable`로 확인한다. 실행 중인 Hermes 작업이 끝난 뒤 Hermes Desktop을 ⌘Q로 종료하고 터미널에 한 번에 붙여넣는다. `set -e`는 괄호 안에만 적용되어 실패한 단계에서 멈춘다. Hermes나 OMH에 새 정식 버전이 나오면 AI가 이 블록을 그대로 안내한다(옵션 없는 `omh update`로 줄이지 않는다).
 
 ```bash
 (
